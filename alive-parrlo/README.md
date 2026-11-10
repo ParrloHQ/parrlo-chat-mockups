@@ -2,7 +2,7 @@
 
 Макет поведения маскота Parrlo Chat — **не прод-код**. Образ 1 (SPEC §23), разобранный на части, и правила, по которым он двигается: покой, «думает», «ищет», радость, «говорит», «слушает». Сделано по образцу живого Paddy из Padelada (build 107, `src/features/paddy/alive/`, PR #782).
 
-**Превью:** https://muratpod.github.io/parrlo-chat-mockups/alive-parrlo/
+**Превью:** https://parrlohq.github.io/parrlo-chat-mockups/alive-parrlo/
 
 | Файл | Что внутри |
 |---|---|
