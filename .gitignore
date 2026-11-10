@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.env
+.env.*
+!.env.example
+
+node_modules/
+__pycache__/
+*.py[cod]
+*.log
+
+.idea/
+.vscode/
+*.swp
+*~

@@ -1,6 +1,6 @@
 # Парло — кликабельный прототип (alive-parrlo-proto)
 
-**Открыть:** https://muratpod.github.io/parrlo-chat-mockups/alive-parrlo-proto/. На iPhone прототип занимает весь экран, на компьютере показан в рамке 402×874.
+**Открыть:** https://parrlohq.github.io/parrlo-chat-mockups/alive-parrlo-proto/. На iPhone прототип занимает весь экран, на компьютере показан в рамке 402×874.
 
 Прототип: **ответы заранее заготовлены**. Сервера и микрофона нет, всё симуляция. Помогает выбрать между вариантами из [alive-parrlo-front](../alive-parrlo-front/).
 

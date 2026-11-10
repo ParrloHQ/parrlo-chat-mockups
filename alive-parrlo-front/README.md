@@ -2,7 +2,7 @@
 
 Варианты объёмного Парло в анфас: он смотрит на собеседника, когда говорит и слушает. Это макет для выбора, **не прод-код**. Продолжение [alive-parrlo](../alive-parrlo/) (Парло в профиль; ту папку не трогали).
 
-**Превью:** https://muratpod.github.io/parrlo-chat-mockups/alive-parrlo-front/
+**Превью:** https://parrlohq.github.io/parrlo-chat-mockups/alive-parrlo-front/
 
 | Файл | Что внутри |
 |---|---|
