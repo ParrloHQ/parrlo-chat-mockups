@@ -103,7 +103,7 @@
   "group-successor-delete": "mvp",
   "group-successor-error": "mvp",
   "hero": "svc",
-  "home-chats": "mvp",
+  "home-chats": "post",
   "home-empty": "mvp",
   "home-menu": "mvp",
   "home-reminder": "post",
@@ -177,6 +177,7 @@
   "group-syslines": "mvp",
   "web-provider-not-allowed": "mvp2",
   "ob-name": "mvp",
-  "settings-name": "mvp"
+  "settings-name": "mvp",
+  "home-chats-mvp": "mvp"
  }
 }
