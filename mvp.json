@@ -178,6 +178,11 @@
   "web-provider-not-allowed": "mvp2",
   "ob-name": "mvp",
   "settings-name": "mvp",
-  "home-chats-mvp": "mvp"
+  "home-chats-mvp": "mvp",
+  "err-reject-blocked": "mvp",
+  "err-reject-suspended": "mvp",
+  "err-reject-toolong": "mvp",
+  "err-reject-notmember": "mvp",
+  "home-requests": "mvp"
  }
 }
