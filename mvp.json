@@ -183,6 +183,9 @@
   "err-reject-suspended": "mvp",
   "err-reject-toolong": "mvp",
   "err-reject-notmember": "mvp",
-  "home-requests": "mvp"
+  "home-requests": "mvp",
+  "err-reject-msggone": "mvp",
+  "err-reject-chatgone": "mvp",
+  "group-syslines-2": "mvp"
  }
 }
