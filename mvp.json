@@ -170,6 +170,13 @@
   "usage-reset": "post",
   "voice-18": "post",
   "web-404": "mvp2",
-  "web-session-expired": "mvp2"
+  "web-session-expired": "mvp2",
+  "account-banned": "mvp",
+  "account-suspended": "mvp",
+  "msg-unsupported": "mvp",
+  "group-syslines": "mvp",
+  "web-provider-not-allowed": "mvp2",
+  "ob-name": "mvp",
+  "settings-name": "mvp"
  }
 }
