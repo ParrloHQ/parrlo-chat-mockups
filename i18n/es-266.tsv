@@ -1,0 +1,267 @@
+n	area	ru	en	es	note
+1	C	 · Вы	 · You	 · Tú	
+2	C	 — чтобы перевод правильно обращался к нему и правильно передавал его слова: 	 — so the translation addresses them correctly and conveys their words correctly: 	 — para que la traducción se dirija a esa persona y transmita bien sus palabras:	
+3	X	%@ с	%@ s	%@ s	секунды
+4	D	5 окт	Oct 5	5 oct	
+5	C	@имя — необязательно	@username — optional	@usuario — opcional	
+6	D	Andrés: Здравствуйте, я по объявлению о квартире…	Andrés: Hi, I’m calling about the flat ad…	Andrés: Hola, llamo por el anuncio del piso…	
+7	X	Parrlo	Parrlo	Parrlo	
+8	D	Perfecto. Llevo un grifo nuevo por si acaso.	Perfect. I’ll bring a new tap just in case.	Perfecto. Llevo un grifo nuevo por si acaso.	исходно испанский; EN добавлен
+9	C	QR-код приглашения в чат	Chat invitation QR code	Código QR de invitación al chat	
+10	X	RU	RU	RU	код языка, не переводится
+11	X	ru	ru	ru	код языка, не переводится
+12	T	Автоотправка	Auto-send	Envío automático	
+13	C	Аккаунт	Account	Cuenta	
+14	C	Без звука	Mute	Silenciar	
+15	T	Без номера WhatsApp спросит, кому отправить.	Without a number, WhatsApp will ask who to send it to.	Sin número, WhatsApp te preguntará a quién enviarlo.	
+16	C	Без оскорблений и угроз	No insults or threats	Sin insultos ni amenazas	
+17	C	Без откровенного контента	No explicit content	Sin contenido explícito	
+18	C	Без спама и мошенничества	No spam or scams	Sin spam ni estafas	
+19	T	Бесплатно, без интернета	Free, works offline	Gratis y sin internet	
+20	T	Бесплатные облачные сообщения на сегодня закончились	Free cloud messages for today are used up	Se han agotado los mensajes gratis en la nube de hoy	
+21	T	Бесплатные облачные фразы на сегодня закончились	You’re out of free cloud phrases for today	Se han agotado las frases gratis en la nube de hoy	
+22	C	Брань	Swearing	Palabrotas	
+23	D	Буду в четверг после обеда	I’ll come Thursday afternoon	Iré el jueves por la tarde	
+24	D	Буду в четверг после обеда, около четырёх.	I’ll come Thursday afternoon, around four.	Iré el jueves por la tarde, sobre las cuatro.	
+25	C	В группу можно добавить тех, с кем уже есть чат. Сначала пригласите собеседников по ссылке или QR.	You can add people you already chat with. Invite them first by link or QR.	Puedes añadir al grupo a personas con las que ya tienes un chat. Antes, invítalas con un enlace o un código QR.	
+26	C	Войти с Apple	Sign in with Apple	Iniciar sesión con Apple	
+27	C	Войти с Google	Continue with Google	Continuar con Google	EN «Continue» ≠ RU «Войти» — по правилам Google так можно; проверить единообразие с п.26
+28	C	Вставить	Paste	Pegar	
+29	T	Встроен	Built in	Integrado	
+30	T	Встроена	Built in	Integrada	
+31	T	Встроен в приложение	Built into the app	Integrado en la app	
+32	D	Вы выиграли поездку! Перейдите по ссылке…	You’ve won a trip! Follow the link…	¡Has ganado un viaje! Entra en el enlace…	пример спама
+33	C	Выбрать фото	Choose photo	Elegir foto	
+34	V	Голос iPhone	iPhone voice	Voz del iPhone	
+35	V	Голос моих голосовых	Voice for my voice notes	Voz de mis mensajes de voz	
+36	C	Голосовое	Voice message	Mensaje de voz	
+37	C	Голосовое 	Voice message 	Mensaje de voz 	с пробелом в конце
+38	V	Голосовой профиль удалится у ElevenLabs. Ваши голосовые снова будут звучать голосом iPhone.	Your voice profile will be deleted from ElevenLabs. Your voice messages will use the iPhone voice again.	Tu perfil de voz se eliminará de ElevenLabs. Tus mensajes de voz volverán a sonar con la voz del iPhone.	
+39	V	⚠ Голосовой профиль хранится у ElevenLabs в ЕС|Удаляется одной кнопкой|Сообщения помечены «ИИ-голос»|Только для 18+	Voice profile stored by ElevenLabs (USA)|Delete with one tap|Messages are labelled “AI voice”|18+ only	Perfil de voz guardado en ElevenLabs (EE. UU.)|Se elimina con un botón|Los mensajes llevan la etiqueta «Voz IA»|Solo para mayores de 18	ПЕРЕПИСАТЬ RU: «Голосовой профиль хранится у ElevenLabs (США)|…». «в ЕС» запрещено; ElevenLabs — США, SCC. Юрист проверит
+40	C	Голосовые	Voice messages	Mensajes de voz	
+41	C	Группа	Group	Grupo	
+42	D	Да, примерно 60 евро вместе с работой.	Yes, about 60 euros including labour.	Sí, unos 60 euros con la mano de obra.	
+43	C	Давайте переписываться в Parrlo — каждый на своём языке.	Let’s chat on Parrlo — each in our own language.	Hablemos por Parrlo, cada uno en su idioma.	
+44	D	Добрый день! Завтра в 10 приду посмотреть кран.	Good afternoon! I’ll come tomorrow at 10 to look at the tap.	¡Buenas tardes! Mañana a las 10 paso a ver el grifo.	
+45	C	Другой смысл	Different meaning	Otro significado	отметка неточного перевода
+46	C	Дружески	Friendly	Amistoso	
+47	T	Ждём собеседника…	Waiting for the other person…	Esperando a la otra persona…	
+48	C	Заблокирован	Blocked	Bloqueado	
+49	C	Заблокировать	Block	Bloquear	
+50	C	Заблокировать %@?	Block %@?	¿Bloquear a %@?	
+51	T	Завершить разговор	End conversation	Terminar conversación	
+52	D	Завтра отключат воду с 9 до 12	Water will be off tomorrow from 9 to 12	Mañana cortan el agua de 9 a 12	
+53	D	Завтра отключат воду с 9 до 12. Наберите заранее.	Water will be off tomorrow from 9 to 12. Fill up in advance.	Mañana cortan el agua de 9 a 12. Llenad agua con antelación.	
+54	X	Загрузка	Loading	Cargando	
+55	X	Закрыть меню	Close menu	Cerrar menú	
+56	T	Заметка	Note	Nota	
+57	V	Записать образец	Record sample	Grabar muestra	
+58	C	Запросы	Requests	Solicitudes	
+59	C	Здесь будут ваши чаты	Your chats will appear here	Aquí aparecerán tus chats	
+60	D	Здравствуйте, я по объявлению о квартире…	Hello, I’m calling about the flat listing…	Hola, llamo por el anuncio del piso…	
+61	V	ИИ-голос	AI voice	Voz IA	
+62	T	Из WhatsApp · голосовое	From WhatsApp · voice message	De WhatsApp · mensaje de voz	
+63	T	Из WhatsApp · голосовое 0:12	From WhatsApp · voice 0:12	De WhatsApp · mensaje de voz 0:12	
+64	X	Изменить	Edit	Editar	
+65	C	Имя	Name	Nombre	
+66	C	Ищем по именам и тексту на обоих языках.	We search names and text in both languages.	Buscamos en nombres y textos en los dos idiomas.	
+67	C	Каждый участник прочитает на своём языке.	Everyone reads it in their own language.	Cada participante lo leerá en su idioma.	
+68	C	Как вас зовут?	What’s your name?	¿Cómo te llamas?	
+69	V	Как я звучу	How I sound	Cómo sueno	
+70	C	Качество перевода	Translation quality	Calidad de la traducción	
+71	X	Клавиатура	Keyboard	Teclado	
+72	C	Кто получит ссылку, сможет читать этот чат.	Anyone with the link can read this chat.	Quien tenga el enlace podrá leer este chat.	
+73	C	Латиницей — для собеседников	In Latin letters — for your contacts	En alfabeto latino, para tus contactos	
+74	X	Меню	Menu	Menú	
+75	T	Модели встроены в приложение — перевод работает без интернета	Models are built into the app — translation works offline	Los modelos están integrados en la app: la traducción funciona sin internet	
+76	T	Модели на месте	Models ready	Modelos listos	
+77	T	Модель	Model	Modelo	
+78	C	Мой QR и ссылка	My QR and link	Mi QR y enlace	
+79	V	Мой голос	My voice	Mi voz	
+80	V	Мой голос включён	My voice is on	Mi voz activada	
+81	C	Мой род	My gender	Mi género gramatical	EN лучше «My grammatical gender»
+82	X	Мой язык	My language	Mi idioma	
+83	C	Мошенничество	Scam	Estafa	
+84	D	Мурат	Murat	Murat	
+85	T	Нажмите «Завершить разговор» после разговора — он сохранится на этом телефоне.	Tap “End conversation” afterwards — it will be saved on this phone.	Al acabar, toca «Terminar conversación»: se guardará en este teléfono.	
+86	X	Назад	Back	Atrás	
+87	C	Название группы	Group name	Nombre del grupo	
+88	T	Написать в WhatsApp	Message on WhatsApp	Escribir por WhatsApp	
+89	C	Нарушителей блокируем	Violators are blocked	Bloqueamos a quien incumple las normas	
+90	C	Настройки чатов	Chat settings	Ajustes de los chats	
+91	T	Начало — разговор по QR, 10 октября	Started with a QR conversation, October 10	Empezó con una conversación por QR, el 10 de octubre	
+92	T	Начните с разговора по QR — собеседник сохранится сам.	Start with a QR conversation — the contact is saved automatically.	Empieza con una conversación por QR: el contacto se guarda solo.	
+93	X	Не нужно	No thanks	No, gracias	
+94	C	Не отвечать	Don’t reply	No responder	
+95	C	Не отправлено. Повторить	Not sent. Retry	No enviado. Reintentar	
+96	C	Не получилось войти. 	Couldn’t sign in. 	No se ha podido iniciar sesión. 	с пробелом в конце
+97	V	Не получилось создать голос. Попробуйте ещё раз.	Couldn’t create the voice. Please try again.	No se ha podido crear la voz. Inténtalo de nuevo.	
+98	C	Не получилось удалить аккаунт. Проверьте связь и попробуйте ещё раз.	Couldn’t delete the account. Check your connection and try again.	No se ha podido eliminar la cuenta. Revisa la conexión e inténtalo de nuevo.	
+99	X	Не сейчас	Not now	Ahora no	
+100	C	Не тот род	Wrong gender	Género incorrecto	отметка неточного перевода
+101	C	Не тот стиль	Wrong style	Estilo incorrecto	
+102	C	Не удалось отправить жалобу. Попробуйте ещё раз.	Couldn’t send the report. Please try again.	No se ha podido enviar la denuncia. Inténtalo de nuevo.	
+103	C	Не удалось создать группу. Проверьте связь и попробуйте ещё раз.	Couldn’t create the group. Check your connection and try again.	No se ha podido crear el grupo. Revisa la conexión e inténtalo de nuevo.	
+104	X	Нет доступа к микрофону. Разрешите его в Настройках.	No microphone access. Allow it in Settings.	Sin acceso al micrófono. Permítelo en Ajustes.	
+105	C	Нет связи с сервером чатов — попробуйте позже	Can’t reach the chat server — try again later	No hay conexión con el servidor de chats. Inténtalo más tarde	
+106	C	Нет сети — отправим, когда появится	No connection — we’ll send when it’s back	Sin conexión: lo enviaremos cuando vuelva	
+107	C	Нет сети — отправим, когда появится (NBSP)	No connection — we’ll send when it’s back	Sin conexión: lo enviaremos cuando vuelva	второй ключ с неразрывным пробелом — лучше свести к одному
+108	C	Ничего не нашлось	No results	No hay resultados	
+109	C	Новая группа	New group	Nuevo grupo	
+110	C	Новый чат	New chat	Nuevo chat	
+111	T	Номер, например +34 600 000 000	Number, e.g. +34 600 000 000	Número, por ejemplo +34 600 000 000	
+112	T	Нужно ещё %@ ГБ свободного места. Перевод пока работает через облако.	%@ GB more free space needed. Translation works via the cloud for now.	Faltan %@ GB de espacio libre. Mientras tanto, la traducción funciona en la nube.	
+113	T	Облако без ограничений	Unlimited cloud	Nube sin límites	
+114	T	Облако сегодня	Cloud today	Nube hoy	
+115	C	Обращение	Form of address	Trato	tú/usted
+116	T	Около 3 минут, один раз после установки и после обновлений. Не закрывайте приложение.	About 3 minutes, once after installing and after updates. Don’t close the app.	Unos 3 minutos, una vez tras instalar y tras cada actualización. No cierres la app.	
+117	C	Он	He	Él	
+118	C	Она	She	Ella	
+119	C	Оригинал	Original	Original	
+120	C	Оригинал:	Original:	Original:	
+121	C	Оскорбления	Abuse	Insultos	
+122	C	Ответ на: 	Reply to: 	Respuesta a: 	с пробелом в конце
+123	C	Ответить	Reply	Responder	
+124	D	Отлично, буду дома. Код подъезда 4512.	Great, I’ll be home. The door code is 4512.	Perfecto, estaré en casa. El código del portal es 4512.	
+125	D	Отлично. Захвачу новый смеситель на всякий случай.	Great. I’ll bring a new mixer tap just in case.	Perfecto. Llevo un grifo nuevo por si acaso.	
+126	C	Отмечено как неточное	Flagged as inexact	Marcado como inexacto	
+127	C	Отозвать	Revoke	Revocar	
+128	C	Отозвать ссылку?	Revoke the link?	¿Revocar el enlace?	
+129	C	Отправили приглашение собеседнику	Invitation sent	Invitación enviada	
+130	T	Отправить в WhatsApp	Send to WhatsApp	Enviar por WhatsApp	
+131	C	Отправить жалобу	Send report	Enviar denuncia	
+132	T	Отправлено через WhatsApp	Sent via WhatsApp	Enviado por WhatsApp	
+133	C	Отправляем…	Sending…	Enviando…	
+134	T	Пауза перед отправкой	Pause before sending	Pausa antes de enviar	
+135	T	Переведено на телефоне — облачные фразы на сегодня закончились	Translated on the phone — cloud phrases for today are used up	Traducido en el teléfono: se han agotado las frases en la nube de hoy	
+136	T	Переведено на телефоне	Translated on the phone	Traducido en el teléfono	
+137	T	Перевод звучит сам, без кнопки «Произнести». Автоотправка: замолчали — телефон вибрирует и отправляет фразу сам. Офлайн-переводчик уже в приложении — работает без интернета.	The translation plays by itself, no “Speak” button needed. Auto-send: when you stop talking, the phone vibrates and sends the phrase. The offline translator is built in and works without internet.	La traducción suena sola, sin el botón «Pronunciar». Envío automático: cuando dejas de hablar, el teléfono vibra y envía la frase. El traductor sin conexión ya está en la app y funciona sin internet.	
+138	T	Перевод работает без интернета	Translation works offline	La traducción funciona sin internet	
+139	T	Переводим на телефоне. Лучшее качество — с подпиской.	Translating on the phone. Best quality with a subscription.	Traducimos en el teléfono. La mejor calidad, con suscripción.	
+140	T	Переводчик работает и без входа.	The translator works without signing in.	El traductor funciona también sin iniciar sesión.	
+141	T	Переводчик работает и без входа. (NBSP)	The translator works without signing in.	El traductor funciona también sin iniciar sesión.	второй ключ с неразрывным пробелом
+142	T	Перевожу	Translating	Traduciendo	
+143	T	Перед отправкой	Before sending	Antes de enviar	
+144	C	Переписка удалится с этого телефона. У собеседника она останется.	The chat will be deleted from this phone. The other person keeps it.	El chat se eliminará de este teléfono. La otra persona lo conservará.	ПРОВЕРИТЬ: история хранится на сервере (решение 13.11) — удаляется ли чат и с сервера для меня?
+145	C	Переподключаю…	Reconnecting…	Reconectando…	
+146	C	⚠ Пишите и говорите по-русски — собеседник читает по-испански. Сообщения шифруются на телефонах.	Write and speak in your language — the other person reads it in theirs.	Escribe y habla en tu idioma: la otra persona lo lee en el suyo.	ПЕРЕПИСАТЬ RU: «Пишите и говорите на своём языке — собеседник читает на своём.» Фразу про шифрование убрать: E2E нет
+147	C	⚠ Пишите или говорите по-русски	Write or speak in %@	Escribe o habla en %@	ПЕРЕПИСАТЬ: язык не вшивать в ключ. RU «Пишите или говорите %@» (по-русски / по-испански…). Сейчас EN «in English» ≠ RU «по-русски»
+148	C	Пишут люди, которых нет в ваших чатах. Пока вы не примете запрос, они не видят, что вы прочитали.	People who aren’t in your chats. Until you accept, they won’t see that you’ve read it.	Te escriben personas que no están en tus chats. Hasta que aceptes la solicitud, no verán que lo has leído.	
+149	X	Поделиться	Share	Compartir	
+150	D	Подтверждаю запись на пятницу в 10:30	Confirming the appointment on Friday at 10:30	Confirmo la cita del viernes a las 10:30	
+151	C	Пожаловаться	Report	Denunciar	
+152	C	Пожаловаться на сообщение	Report message	Denunciar mensaje	
+153	C	Позвать по QR	Invite by QR	Invitar con QR	
+154	C	Показать код	Show code	Mostrar código	
+155	C	Показать мой QR	Show my QR	Mostrar mi QR	
+156	C	Показать раньше · %d	Show earlier · %d	Ver anteriores · %d	
+157	C	Пол собеседника	Partner’s gender	Género de la otra persona	
+158	C	Пол собеседника: что это	Partner’s gender: what is it	Género de la otra persona: qué es	
+159	X	Понятно	Got it	Entendido	
+160	X	Попробовать ещё раз	Try again	Intentar de nuevo	
+161	C	Правила общения	Community rules	Normas de la comunidad	
+162	C	Правила полностью	Full rules	Normas completas	
+163	T	При интернете фразы переводит облако — точнее. Бесплатно 10 облачных фраз в день, дальше переводит телефон. «Только телефон» — бесплатно и без интернета.	Online, the cloud translates — more accurately. 10 free cloud phrases a day, then the phone translates. “Phone only” is free and works offline.	Con internet, las frases se traducen en la nube, con más precisión. 10 frases gratis al día en la nube; después traduce el teléfono. «Solo teléfono»: gratis y sin internet.	
+164	V	Привет! Так звучат мои голосовые сообщения.	Hi! This is how my voice messages sound.	¡Hola! Así suenan mis mensajes de voz.	
+165	C	Пригласить по ссылке или QR	Invite by link or QR	Invitar con enlace o QR	
+166	C	Принимаю	I agree	Acepto	
+167	C	Принять	Accept	Aceptar	
+168	C	Продолжим переписку здесь — Parrlo переводит:	Let’s keep chatting here — Parrlo translates:	Sigamos hablando aquí, Parrlo traduce:	
+169	C	Пропущены слова	Missing words	Faltan palabras	
+170	V	Прослушать пример	Play sample	Escuchar ejemplo	
+171	V	Прочитайте вслух	Read aloud	Lee en voz alta	
+172	C	Прочитано	Read	Leído	
+173	T	Разговор	Conversation	Conversación	
+174	T	Разговор станет началом чата. Собеседник тоже должен согласиться.	The conversation becomes the start of a chat. Your partner must agree too.	La conversación será el inicio de un chat. La otra persona también tiene que aceptar.	
+175	C	Реакция 	Reaction 	Reacción 	с пробелом в конце
+176	C	Свой стиль	My style	Mi estilo	
+177	C	Связь прервалась	Connection lost	Se ha perdido la conexión	
+178	T	⚠ Сейчас бесплатно: перевод на телефоне без ограничений и 10 облачных фраз в день. Подписка с облаком без ограничений появится скоро.	Free now: unlimited on-phone translation and 10 cloud phrases a day.	Ahora gratis: traducción en el teléfono sin límites y 10 frases al día en la nube.	ПЕРЕПИСАТЬ RU: убрать «Подписка … появится скоро» («скоро» запрещено)
+179	C	Сервер чатов недоступен. Повторяем…	Chat server unavailable. Retrying…	El servidor de chats no está disponible. Reintentando…	
+180	T	Скачивать ничего не нужно: модели перевода и распознавания уже на этом телефоне.	Nothing to download: translation and speech models are already on this phone.	No hace falta descargar nada: los modelos de traducción y reconocimiento ya están en este teléfono.	
+181	X	Скопировать	Copy	Copiar	
+182	C	Скопировать перевод	Copy translation	Copiar traducción	
+183	T	⚠ Скоро	—	—	ПЕРЕПИСАТЬ: «Скоро» запрещено. Убрать метку или заменить на «Пока недоступно» / «Not available yet» / «Aún no disponible»
+184	C	Скрыть оригинал	Hide original	Ocultar original	
+185	V	Слишком коротко — нужно хотя бы 30 секунд	Too short — at least 30 seconds needed	Demasiado corto: hacen falta al menos 30 segundos	
+186	V	Слишком тихо — поднесите телефон ближе	Too quiet — bring the phone closer	Demasiado bajo: acerca el teléfono	
+187	C	Сначала показать	Review first	Revisar antes	
+188	T	Со звуком	Sound on	Con sonido	
+189	C	Собеседник больше не сможет читать и писать по этой ссылке.	The other person will no longer be able to read or write with this link.	La otra persona ya no podrá leer ni escribir con este enlace.	
+190	T	Собеседник вышел	Partner left	La otra persona ha salido	
+191	T	Собеседник говорит	Partner speaks	Habla la otra persona	
+192	T	Собеседник на связи	The other person is connected	La otra persona está conectada	
+193	C	Собеседник наводит камеру на код или открывает ссылку — и пишет вам на своём языке.	They point the camera at the code or open the link — and write to you in their own language.	La otra persona apunta la cámara al código o abre el enlace, y te escribe en su idioma.	
+194	T	Собеседник по QR	Talk by QR	Conversación por QR	
+195	V	Собеседник услышит ваши голосовые вашим голосом — на своём языке.	Your contact hears your voice notes in your voice — in their language.	La otra persona oirá tus mensajes de voz con tu voz, en su idioma.	
+196	V	Согласен на обработку голоса (биометрические данные)	I consent to voice processing (biometric data)	Acepto el tratamiento de mi voz (datos biométricos)	юрист проверит
+197	C	Создать группу	Create group	Crear grupo	
+198	C	Создать чат	Create chat	Crear chat	
+199	V	Создаём голос…	Creating voice…	Creando la voz…	
+200	C	⚠ Сообщения защищены сквозным шифрованием	—	—	ПЕРЕПИСАТЬ: E2E нет — строку убрать. Если нужна строка о хранении: «История чатов хранится на сервере Parrlo» / «Your chat history is stored on the Parrlo server» / «El historial de chats se guarda en el servidor de Parrlo» (юрист проверит)
+201	X	Сохранить	Save	Guardar	
+202	T	Сохранить собеседника?	Save this contact?	¿Guardar este contacto?	
+203	C	Спам	Spam	Spam	
+204	D	Спасибо за фото, всё получила	Thanks for the photos, got everything	Gracias por las fotos, lo he recibido todo	
+205	D	Спасибо! А лифт тоже отключат?	Thanks! Will the lift be off too?	¡Gracias! ¿También cortan el ascensor?	
+206	D	Спасибо! Сколько примерно будет стоить?	Thanks! Roughly how much will it cost?	¡Gracias! ¿Cuánto costará más o menos?	
+207	D	Спасибо, до четверга!	Thanks, see you Thursday!	¡Gracias, hasta el jueves!	
+208	D	Спасибо, что предупредили!	Thanks for letting us know!	¡Gracias por avisar!	
+209	C	Ссылка активна	Link active	Enlace activo	
+210	C	Ссылка отозвана	Link revoked	Enlace revocado	
+211	C	Ссылка отозвана — собеседник больше не видит этот чат	Link revoked — the other person no longer sees this chat	Enlace revocado: la otra persona ya no ve este chat	
+212	C	Стиль «Официально» не подключился. Остался прежний.	The “Formal” style didn’t load. The previous one stays.	No se ha podido aplicar el estilo «Formal». Se mantiene el anterior.	
+213	D	Тогда до завтра, спасибо!	See you tomorrow then, thanks!	Entonces hasta mañana, ¡gracias!	
+214	D	Тогда жду вас завтра в десять. Спасибо!	Then I’ll expect you tomorrow at ten. Thanks!	Entonces le espero mañana a las diez. ¡Gracias!	
+215	T	Только телефон	Phone only	Solo teléfono	
+216	C	УЖЕ В PARRLO	ALREADY ON PARRLO	YA EN PARRLO	
+217	C	УЧАСТНИКИ	MEMBERS	PARTICIPANTES	
+218	C	Уважайте собеседников. Жалобы рассматриваем в течение 24 часов.	Be respectful. We review reports within 24 hours.	Respeta a los demás. Revisamos las denuncias en 24 horas.	
+219	D	Увидимся на падле в субботу!	See you at padel on Saturday!	¡Nos vemos en el pádel el sábado!	
+220	C	Удалить аккаунт	Delete account	Eliminar cuenta	
+221	V	Удалить голос	Delete voice	Eliminar voz	
+222	V	Удалить голос?	Delete the voice?	¿Eliminar la voz?	
+223	C	Удалить чат	Delete chat	Eliminar chat	
+224	C	Удалить чат?	Delete chat?	¿Eliminar el chat?	
+225	C	Удаляются аккаунт чатов на сервере, переписка и ключи на этом телефоне и «Мой голос». Переводчик продолжит работать.	Deletes your chat account on the server, chats and keys on this phone, and “My voice”. The translator keeps working.	Se eliminan tu cuenta de chats en el servidor, los chats y las claves de este teléfono y «Mi voz». El traductor seguirá funcionando.	ПРОВЕРИТЬ: при истории на сервере (13.11) надо сказать, что удаляется и история на сервере; «ключи» — не намёк ли на E2E? Юрист проверит
+226	X	Українська	Ukrainian	Ucraniano	в списке языков обычно самоназвание: «Українська»
+227	D	Утро в Валенсии начинается с кофе и шума рынка. Я люблю гулять у моря и говорить с людьми.	Morning in Valencia starts with coffee and the noise of the market. I love walking by the sea and talking to people.	La mañana en Valencia empieza con café y el bullicio del mercado. Me encanta pasear junto al mar y hablar con la gente.	текст для записи образца голоса
+228	C	Участник	Member	Participante	
+229	C	Чат	Chat	Chat	
+230	C	Чат по ссылке защищён ключом в ссылке	The link chat is protected by the key in the link	—	ПРОВЕРИТЬ: похоже на обещание шифрования; при хранении на сервере может быть неверно. Нужна верная формулировка от parrlo-back, перевод — после
+231	C	Чат по ссылке создан	Link chat created	Chat por enlace creado	
+232	C	Чаты	Chats	Chats	
+233	C	Чаты на вашем языке	Chats in your language	Chats en tu idioma	
+234	C	Чаты на вашем языке (NBSP)	Chats in your language	Chats en tu idioma	второй ключ с неразрывным пробелом
+235	T	Через WhatsApp · перевод Parrlo	Via WhatsApp · translated by Parrlo	Por WhatsApp · traducido por Parrlo	
+236	C	Числа или даты	Numbers or dates	Números o fechas	отметка неточного перевода
+237	C	Этот формат пока не поддерживается.	This format isn’t supported yet.	Este formato aún no es compatible.	
+238	C	ЯЗЫК СОБЕСЕДНИКА	THEIR LANGUAGE	IDIOMA DE LA OTRA PERSONA	
+239	C	без обработки	unchanged	sin cambios	
+240	T	без ограничений	unlimited	sin límites	
+241	X	включён	on	activado	
+242	C	владелец	owner	propietario	
+243	X	вчера	Yesterday	ayer	с маленькой, как в RU
+244	X	выключен	off	desactivado	
+245	D	завтра в десять.	tomorrow at ten.	mañana a las diez.	
+246	C	на «вы»	polite	de usted	
+247	C	на «вы», для документов и сервисов	polite, for paperwork and services	de usted, para trámites y servicios	
+248	C	на «ты»	casual	de tú	
+249	C	на «ты», тепло, коротко	casual, warm, short	de tú, cercano y breve	
+250	C	опишите словами	describe it in words	descríbelo con palabras	
+251	T	осталось %d из %d	%d of %d left	quedan %d de %d	
+252	T	осталось 7 из 10	7 of 10 left	quedan 7 de 10	
+253	C	отправлять сразу	send right away	enviar al momento	
+254	C	передавать как есть	keep as is	transmitir tal cual	
+255	X	пн	Mon	lun	
+256	X	по-испански	in Spanish	en español	
+257	X	по-каталански	in Catalan	en catalán	
+258	X	по-русски	in Russian	en ruso	
+259	T	подключается…	connecting…	conectando…	
+260	C	проверьте перевод	check the translation	revisa la traducción	
+261	D	сантехник	plumber	fontanero	
+262	D	сантехник Валенсия	plumber Valencia	fontanero Valencia	
+263	C	смягчать	soften	suavizar	
+264	C	сначала показывать	review first	revisar antes	
+265	C	ссылка	link	enlace	
+266	C	✓ Неточно	✓ Inaccurate	✓ Inexacto	
