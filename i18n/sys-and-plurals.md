@@ -87,3 +87,16 @@ ES и EN проверены. В испанском прошедшее время
 | sys.renamed_noactor_noname | Название группы удалено | Se ha quitado el nombre del grupo | The group name was removed |
 
 Если у группы нет названия, в шапке и в списке чатов вместо названия стоят имена участников («Лена, Marco и ещё 3»). Отдельного ключа для этого здесь нет: это общий формат клиента.
+
+## «О вас»: форма в переводе (14.11)
+
+Экран `settings-me`. По умолчанию выбрана нейтральная форма. Значение получает только приложение собеседника в личном чате, на экране оно не показывается.
+
+| ключ | RU | ES | EN |
+|---|---|---|---|
+| me.title | О вас | Sobre ti | About you |
+| me.gender.label | Форма в переводе | Forma en la traducción | Form in translation |
+| me.gender.m | Мужская | Masculina | Masculine |
+| me.gender.f | Женская | Femenina | Feminine |
+| me.gender.n | Нейтральная (не указывать) | Neutra (no indicar) | Neutral (don’t specify) |
+| me.gender.hint | Нужно только для перевода: чтобы окончания были правильными («я рад / я рада»). Видит только приложение собеседника в личном чате, на экране не показывается. Можно не указывать. | Solo sirve para la traducción: para que las terminaciones sean correctas («estoy contento / estoy contenta»). Solo la recibe la app de la otra persona en el chat privado; no se muestra en pantalla. Puedes no indicarla. | Used only for translation, so word endings come out right (in Russian, “я рад / я рада” — “I’m glad”). Only the other person’s app in a private chat receives it; it isn’t shown on screen. You can leave it unspecified. |
