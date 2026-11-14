@@ -186,6 +186,18 @@
   "home-requests": "mvp",
   "err-reject-msggone": "mvp",
   "err-reject-chatgone": "mvp",
-  "group-syslines-2": "mvp"
+  "group-syslines-2": "mvp",
+  "new-chat": "mvp",
+  "new-chat-empty": "mvp",
+  "new-chat-error": "mvp",
+  "invite-link": "mvp",
+  "invite-link-copied": "mvp",
+  "invite-link-qr": "mvp",
+  "invite-link-reset": "mvp",
+  "invite-link-error": "mvp",
+  "group-add": "mvp",
+  "group-add-limit": "mvp",
+  "group-add-error": "mvp",
+  "group-add-partial": "mvp"
  }
 }
