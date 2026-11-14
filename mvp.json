@@ -186,6 +186,8 @@
   "home-requests": "mvp",
   "err-reject-msggone": "mvp",
   "err-reject-chatgone": "mvp",
-  "group-syslines-2": "mvp"
+  "group-syslines-2": "mvp",
+  "ob-signin-turnstile": "mvp2",
+  "ob-signin-turnstile-error": "mvp2"
  }
 }
