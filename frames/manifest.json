@@ -104920,5 +104920,170 @@
 "W": 951,
 "H": 669,
 "duo": true
+},
+{
+"lang": "ru",
+"screen": "web-reactivated",
+"dev": "w360",
+"ts": "n",
+"id": "web-reactivated__w360-n",
+"page": "ru-web-reactivated.html",
+"W": 360,
+"H": 667,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "web-reactivated",
+"dev": "w390",
+"ts": "n",
+"id": "web-reactivated__w390-n",
+"page": "ru-web-reactivated.html",
+"W": 390,
+"H": 874,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "web-reactivated",
+"dev": "d13",
+"ts": "n",
+"id": "web-reactivated__d13-n",
+"page": "ru-web-reactivated.html",
+"W": 1280,
+"H": 800,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "web-reactivated",
+"dev": "d13",
+"ts": "ax5",
+"id": "web-reactivated__d13-ax5",
+"page": "ru-web-reactivated.html",
+"W": 1280,
+"H": 800,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "web-reactivated",
+"dev": "d14",
+"ts": "n",
+"id": "web-reactivated__d14-n",
+"page": "ru-web-reactivated.html",
+"W": 1440,
+"H": 900,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "web-reactivated",
+"dev": "w360",
+"ts": "n",
+"id": "web-reactivated__w360-n",
+"page": "es-web-reactivated.html",
+"W": 360,
+"H": 667,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "web-reactivated",
+"dev": "w390",
+"ts": "n",
+"id": "web-reactivated__w390-n",
+"page": "es-web-reactivated.html",
+"W": 390,
+"H": 874,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "web-reactivated",
+"dev": "d13",
+"ts": "n",
+"id": "web-reactivated__d13-n",
+"page": "es-web-reactivated.html",
+"W": 1280,
+"H": 800,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "web-reactivated",
+"dev": "d13",
+"ts": "ax5",
+"id": "web-reactivated__d13-ax5",
+"page": "es-web-reactivated.html",
+"W": 1280,
+"H": 800,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "web-reactivated",
+"dev": "d14",
+"ts": "n",
+"id": "web-reactivated__d14-n",
+"page": "es-web-reactivated.html",
+"W": 1440,
+"H": 900,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "web-reactivated",
+"dev": "w360",
+"ts": "n",
+"id": "web-reactivated__w360-n",
+"page": "en-web-reactivated.html",
+"W": 360,
+"H": 667,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "web-reactivated",
+"dev": "w390",
+"ts": "n",
+"id": "web-reactivated__w390-n",
+"page": "en-web-reactivated.html",
+"W": 390,
+"H": 874,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "web-reactivated",
+"dev": "d13",
+"ts": "n",
+"id": "web-reactivated__d13-n",
+"page": "en-web-reactivated.html",
+"W": 1280,
+"H": 800,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "web-reactivated",
+"dev": "d13",
+"ts": "ax5",
+"id": "web-reactivated__d13-ax5",
+"page": "en-web-reactivated.html",
+"W": 1280,
+"H": 800,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "web-reactivated",
+"dev": "d14",
+"ts": "n",
+"id": "web-reactivated__d14-n",
+"page": "en-web-reactivated.html",
+"W": 1440,
+"H": 900,
+"duo": false
 }
 ]
