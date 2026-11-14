@@ -2,12 +2,12 @@
 
 Заказ оркестратора (14.11). Человек получил предупреждение, что неактивный аккаунт удалят через 30 дней, и вошёл в веб-чат: на главном экране под сценой Парло (место баннера-напоминания `home-reminder`) показывается информационный баннер с крестиком. Кнопок действий нет — делать ничего не нужно. Тёмная тема. Кадры: веб 360 и 390 px, десктоп 1280 (normal, AX5) и 1440. HTML, без PNG.
 
-Тексты — на «ты» / «tú», без рода (никаких «вернулся/вернулась»). Формулировки не утверждены (RG сравнивает с черновиком parrlo-chat-web PR 21). Ключи — как в коде (`ra.h`, `ra.b`).
+Тексты — на «ты» / «tú», без рода (никаких «вернулся/вернулась»). RG PASS 14.11 (en `ra.b` — в редакции RG). Ключи — как в коде (`ra.h`, `ra.b`).
 
 | Ключ | ru | es | en |
 |---|---|---|---|
 | `ra.h` | Аккаунт сохранён | Tu cuenta sigue activa | Your account is still active |
-| `ra.b` | Удаление из-за неактивности отменено. Больше ничего делать не нужно. | Hemos cancelado la eliminación por inactividad. No tienes que hacer nada más. | We’ve cancelled the deletion for inactivity. There’s nothing else you need to do. |
+| `ra.b` | Удаление из-за неактивности отменено. Больше ничего делать не нужно. | Hemos cancelado la eliminación por inactividad. No tienes que hacer nada más. | We’ve cancelled the inactivity deletion. You don’t need to do anything else. |
 | `close` (aria-label крестика) | Закрыть | Cerrar | Close |
 
 - Баннер — `role="status"` (не `alert`): новость хорошая, перебивать чтение экрана не нужно.
