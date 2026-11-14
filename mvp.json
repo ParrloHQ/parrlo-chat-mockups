@@ -197,6 +197,7 @@
   "invite-link-error": "mvp",
   "group-add": "mvp",
   "group-add-limit": "mvp",
-  "group-add-error": "mvp"
+  "group-add-error": "mvp",
+  "group-add-partial": "mvp"
  }
 }
