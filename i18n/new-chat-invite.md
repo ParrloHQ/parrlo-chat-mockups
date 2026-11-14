@@ -20,7 +20,7 @@
 | `il` | Пригласить по ссылке | Invitar con un enlace | Invite with a link |
 | `ilLead` | Любой, у кого есть эта ссылка, сможет написать тебе. Отправляй её только тем, кому доверяешь. | Cualquiera que tenga este enlace podrá escribirte. Envíalo solo a personas de confianza. | Anyone with this link can message you. Only send it to people you trust. |
 | `ilLbl` | Твоя ссылка | Tu enlace | Your link |
-| `ilNote` | Ссылка работает 30 дней или пока ты её не сбросишь. Уже начатые чаты останутся. | El enlace funciona 30 días o hasta que lo restablezcas. Los chats ya empezados se mantienen. | The link works for 30 days or until you reset it. Chats you’ve already started stay. |
+| `ilNote` | Ссылка работает 30 дней или пока ты её не сбросишь. Уже начатые чаты останутся. | El enlace funciona 30 días o hasta que lo restablezcas. Los chats ya empezados se mantienen. | The link works for 30 days or until you reset it. Chats you’ve already started stay. |
 | `copy` | Скопировать ссылку | Copiar enlace | Copy link |
 | `share` | Поделиться | Compartir | Share |
 | `qr` | Показать QR-код | Mostrar código QR | Show QR code |
@@ -45,8 +45,8 @@
 | `gaLimB` | Вместе с выбранными в группе будет максимум участников. Сними выбор с кого-нибудь, чтобы выбрать другого. | Con las personas elegidas, el grupo llega al máximo. Quita a alguien de la selección para elegir a otra persona. | With the people you’ve chosen, the group is full. Unselect someone to choose another person. |
 | `gaErrT` | Не удалось добавить участников | No se ha podido añadir a los participantes | Couldn’t add members |
 | `gaErrB` | Проверь соединение и попробуй ещё раз. | Comprueba la conexión y vuelve a intentarlo. | Check your connection and try again. |
-| `partial` | Добавлено {a} из {b} | Se ha añadido a {a} de {b} | {a} of {b} added |
+| `partial` | Добавлено {a} из {b} | Se ha añadido a {a} de {b} | {a} of {b} added |
 | `newGroup` | Новая группа | Nuevo grupo | New group |
 | `chatSearch` | Поиск в чате | Buscar en el chat | Search in chat |
 
-Плейсхолдеры: `{g}` — название группы, `{n}` — число выбранных, `{a}`/`{b}` — добавлено / выбрано.
+Плейсхолдеры: `{g}` — название группы, `{n}` — число выбранных, `{a}`/`{b}` — добавлено / выбрано. Между числом и словом («30 дней», «{a} из {b}») — неразрывный пробел.
