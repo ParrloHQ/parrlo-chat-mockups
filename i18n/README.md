@@ -1,6 +1,6 @@
 # ES для строк приложения (13.11)
 
-`es-266.tsv` — испанский для 266 строк без ES из `App/MiloBenchApp/Localizable.xcstrings` (parrlo-app, ветка `task/chat-integration` @ c4530a6). Ключ = русский текст.
+`es-266.tsv` — испанский для 266 строк без ES из `Localizable.xcstrings` приложения (parrlo-app, ветка `task/chat-integration` @ c4530a6). Ключ = русский текст.
 
 Колонки: `n`, `area`, `ru`, `en`, `es`, `note`.
 
