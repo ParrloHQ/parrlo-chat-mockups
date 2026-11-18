@@ -563,6 +563,13 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 @keyframes pcspin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.pc-spin{animation:none}}
 .pc-banner--err{background:var(--err-bg);align-items:flex-start}.pc-banner--err .ico{color:var(--err)}
 .pc-linkrow{display:flex;flex-wrap:wrap;gap:0 4px;margin:4px 0 0 -12px}
+/* ob-signin*: «Условия использования» и «Политика конфиденциальности» — столбиком, между подписями 8 px (space.2); цель каждой ≥44: у первой запас сверху, у второй снизу, зоны не перекрываются; переносы без висячих слов */
+.pc-app[data-screen^="ob-signin"] .pc-linkrow{flex-direction:column;align-items:flex-start;gap:0;margin:-8px 0 0 -6px}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text{padding:4px 6px;text-align:left;justify-content:flex-start}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text:first-child{align-items:flex-end}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text:last-child{align-items:flex-start}
+.pc-frame[data-ts=xl] .pc-app[data-screen^="ob-signin"] .pc-prov{padding-left:16px;padding-right:16px;gap:8px}.pc-app[data-screen^="ob-signin"] :is(.pc-title,.pc-banner h3,.pc-prov span){text-wrap:balance}.pc-app[data-screen^="ob-signin"] :is(.pc-lead,.pc-small,.pc-ph,.pc-banner p){text-wrap:pretty}
+/* баннер ошибки входа: текст — pretty; плашка «формулировка» — отдельной строкой, чтобы pretty видел конец фразы */
+.pc-app[data-screen^="ob-signin"] .pc-banner p>.pc-tbd{display:table;margin-top:6px}
+/* AX5: в строке 1–2 слова, pretty Chrome не снимает «сироту» в конце — текст баннера выравнивается по строкам (balance) */
+.pc-frame[data-ts=ax5] .pc-app[data-screen^="ob-signin"] .pc-banner p{text-wrap:balance}
 .pc-pers{gap:12px}.pc-pers .pc-persona{--s:calc(48px*(1 + (var(--ts-i) - 1)*.3))}
 .pc-valrow .ic{width:calc(22px*var(--ts-i));height:calc(22px*var(--ts-i));flex:none;color:var(--muted)}
 
