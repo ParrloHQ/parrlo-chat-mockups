@@ -110695,5 +110695,137 @@
 "W": 1440,
 "H": 900,
 "duo": false
+},
+{
+"lang": "ru",
+"screen": "walkie-save",
+"dev": "se",
+"ts": "n",
+"id": "walkie-save__se-n",
+"page": "ru-walkie-save.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "walkie-save",
+"dev": "se",
+"ts": "xl",
+"id": "walkie-save__se-xl",
+"page": "ru-walkie-save.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "walkie-save",
+"dev": "pro",
+"ts": "n",
+"id": "walkie-save__pro-n",
+"page": "ru-walkie-save.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "walkie-save",
+"dev": "pro",
+"ts": "xl",
+"id": "walkie-save__pro-xl",
+"page": "ru-walkie-save.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "walkie-save",
+"dev": "se",
+"ts": "n",
+"id": "walkie-save__se-n",
+"page": "es-walkie-save.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "walkie-save",
+"dev": "se",
+"ts": "xl",
+"id": "walkie-save__se-xl",
+"page": "es-walkie-save.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "walkie-save",
+"dev": "pro",
+"ts": "n",
+"id": "walkie-save__pro-n",
+"page": "es-walkie-save.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "walkie-save",
+"dev": "pro",
+"ts": "xl",
+"id": "walkie-save__pro-xl",
+"page": "es-walkie-save.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "walkie-save",
+"dev": "se",
+"ts": "n",
+"id": "walkie-save__se-n",
+"page": "en-walkie-save.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "walkie-save",
+"dev": "se",
+"ts": "xl",
+"id": "walkie-save__se-xl",
+"page": "en-walkie-save.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "walkie-save",
+"dev": "pro",
+"ts": "n",
+"id": "walkie-save__pro-n",
+"page": "en-walkie-save.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "walkie-save",
+"dev": "pro",
+"ts": "xl",
+"id": "walkie-save__pro-xl",
+"page": "en-walkie-save.html",
+"W": 402,
+"H": 874,
+"duo": false
 }
 ]
