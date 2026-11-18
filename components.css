@@ -822,4 +822,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
  .pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-set .pc-onb-scroll{margin:0;flex:1 1 auto;min-height:0}
  .pc-set .pc-onb-zone-a{margin-top:0}
  .pc-set .pc-set-del{margin-top:24px;color:#FF8C80;flex:none}
+ /* кнопки экрана — сразу после содержимого, без закрепления внизу и без градиента (как в вебе) */
+ .pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-set .pc-set-acts{padding:24px 0 0;margin:0}
+ .pc-set .pc-set-acts::before{display:none}
 }
