@@ -16,7 +16,7 @@
 | Карточка: подпись над переводом (`%1$@` = имя, `%2$@` = язык; в ru язык в предложном падеже) | `chat.preview.recipient_sees` | Marco увидит на испанском | Marco lo verá en ruso | Marco will see it in Spanish | `web-compose-preview`, `-loading`, `web-voice-preview` |
 | Карточка: стиль перевода (кнопка, открывает список; общий ключ с голосом, см. `voice-web.md`) | `voice.preview.style.literary` | Литературно | Literario | Literary | `web-compose-preview`, `web-voice-preview` |
 | Карточка: стиль перевода (aria-label, `%@` = стиль; общий ключ с голосом) | `voice.preview.style.a11y` | Стиль перевода: Литературно | Estilo de traducción: Literario | Translation style: Literary | `web-compose-preview`, `web-voice-preview` |
-| Список стилей: варианты (в кадрах список не открыт) | `voice.preview.style.as_is` / `.literary` / `.formal` | Как есть / Литературно / Официально | ? / Literario / Formal (?) | ? / Literary / Formal (?) | список у чипа стиля |
+| Список стилей: варианты (в кадрах список не открыт) | `voice.preview.style.as_is` / `.literary` / `.formal` | Как есть / Литературно / Официально | Tal cual / Literario / Formal | As is / Literary / Formal | список у чипа стиля |
 | Карточка: основная кнопка | `chat.preview.send` | Отправить | Enviar | Send | `web-compose-preview`, `-loading` (неактивна) |
 | Карточка: вторичная кнопка, вернуться к тексту | `chat.preview.edit` | Изменить | Editar | Edit | `web-compose-preview` |
 | Карточка: ссылка под кнопками, ведёт в настройку | `chat.preview.dont_show` | Не показывать | No mostrar | Don’t show | `web-compose-preview`, `web-voice-preview` |
@@ -33,6 +33,6 @@
 
 Пример текста в кадрах (не строки интерфейса): ru «Конечно, бери Джулию! Тогда нужно три билета.» → es «¡Claro, trae a Giulia! Entonces hacen falta tres entradas.»; в es-кадрах наоборот (Marco читает по‑русски); в en-кадрах «Sure, bring Giulia! Then we need three tickets.» → es.
 
-**Стиль перевода.** Чип стиля общий с голосовым предпросмотром, ключи `voice.preview.style.*` из `voice-web.md` (отдельных `chat.preview.style.*` нет). Варианты в списке: «Как есть», «Литературно», «Официально» (18.11 «Как сказал» переименован в «Как есть»). es/en для «Как есть» в репозитории нет, нужен перевод; «Formal» для «Официально» взят из строки 212 `es-266.tsv`, не утверждён. В `-loading` и `-error` чипа нет: у голоса таких состояний нет, сравнивать не с чем.
+**Стиль перевода.** Чип стиля общий с голосовым предпросмотром, ключи `voice.preview.style.*` из `voice-web.md` (отдельных `chat.preview.style.*` нет). Варианты в списке: «Как есть», «Литературно», «Официально» (18.11 «Как сказал» переименован в «Как есть»). Переводы вариантов решены: «Как есть» — «Tal cual» / «As is», «Литературно» — «Literario» / «Literary», «Официально» — «Formal» / «Formal». В `-loading` и `-error` чипа нет: у голоса таких состояний нет, сравнивать не с чем.
 
 **Кнопка-аватар в списке чатов** (`.pc-me`, «МП») ведёт в «Настройки», поэтому её aria-label «Настройки» / «Ajustes» / «Settings» (было «Профиль» / «Perfil» / «Profile»; исправлено во всех `*-web-*` кадрах).
