@@ -1,6 +1,6 @@
 # «Изменить контакт» — строки (handoff-v2, iOS)
 
-Экраны: `contact-edit`, `contact-edit-filled`, `contact-edit-limit`, `contact-edit-reset`, `contact-edit-offline`, `contact-profile-note`. Открывается кнопкой `contact.card.edit` в карточке контакта (экран 37, `contact-profile`). Статус: **не утверждено**. Только тёмная тема.
+Экраны: `contact-edit`, `contact-edit-filled`, `contact-edit-limit`, `contact-edit-reset`, `contact-edit-offline`, `contact-profile-note`, `contact-edit-discard`. Открывается кнопкой `contact.card.edit` в карточке контакта (экран 37, `contact-profile`). Статус: **не утверждено**. Только тёмная тема.
 Обращение на «ты» / «tú», без рода собеседника и пользователя. Мягкие переносы в кадрах — только для XL, в ключах их нет. Неразрывные пробелы: «500 символов», «480 / 500».
 
 **Бот:** у бота экрана «Изменить контакт» нет, в карточке бота кнопки «Изменить» (`contact.card.edit`) нет — ни своего имени, ни заметки у бота.
@@ -25,6 +25,8 @@
 | `contact.edit.offline.title` | Сохранится, когда появится сеть | Se guardará cuando haya conexión | Will save when you’re back online | плашка .pc-banner--off в карточке после «Готово» без сети |
 | `contact.edit.offline.body` | Новое имя и заметка уже показаны здесь. | El nuevo nombre y la nota ya se ven aquí. | The new name and note already show here. | пояснение в плашке |
 | `contact.card.only_you` | Имя для контакта и заметку видишь только ты. | Solo tú ves el nombre que le pones al contacto y la nota. | Only you see the name you give this contact and the note. | строка внизу карточки вместо «Что есть в профиле…» |
+| `contact.edit.discard.confirm` | Не сохранять изменения | Descartar cambios | Discard Changes | `contact-edit-discard`: системный confirmationDialog (action sheet) без заголовка, кнопка destructive (красная); закрывает лист без сохранения; строка уже у разработки |
+| `contact.edit.discard.keep` | Продолжить правку | Seguir editando | Keep Editing | там же, роль cancel: отдельный блок снизу, полужирная; закрывает диалог, лист остаётся с правками; строка уже у разработки |
 
 ## Поведение (не утверждено)
 
@@ -32,7 +34,9 @@
 - Сброс к имени из профиля — **без подтверждения**: действие обратимо (в листе можно нажать «Отмена» или ввести имя снова), ничего не удаляет; HIG советует не ставить алерт на обратимые действия. Экран `contact-edit-reset` — состояние после сброса.
 - Счётчик заметки появляется с 450 символов (порог — допущение), предел 500. При 500 ввод и вставка обрезаются до 500.
 - Нет сети: «Готово» закрывает лист, правка сразу видна в карточке и встаёт в очередь, как сообщения; у имени значок часов (`contact.card.pending`) и плашка `contact.edit.offline.*`. Когда сеть появится, значок и плашка исчезают.
-- «Отмена» при несохранённых изменениях: по HIG нужен лист подтверждения «Не сохранять изменения» — в кадрах не нарисован, строки не заданы.
+- «Отмена» при несохранённых изменениях: системный confirmationDialog (action sheet) без заголовка — «Не сохранять изменения» (`contact.edit.discard.confirm`, destructive) и «Продолжить правку» (`contact.edit.discard.keep`, cancel, отдельным блоком снизу); фон листа затемнён. Экран `contact-edit-discard`.
+- Без правок «Отмена» закрывает лист сразу, без диалога.
+- Свайп вниз по листу с правками вызывает тот же диалог (лист не закрывается, пока не выбрано «Не сохранять изменения»).
 - Своё имя контакта показывается в списке чатов, шапке чата и карточке; имя из профиля — мелко под ним в карточке.
 
 ## Демо-данные (не строки)
