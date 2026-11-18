@@ -186,6 +186,7 @@
   "home-requests": "mvp",
   "err-reject-msggone": "mvp",
   "err-reject-chatgone": "mvp",
-  "group-syslines-2": "mvp"
+  "group-syslines-2": "mvp",
+  "settings-me": "mvp"
  }
 }
