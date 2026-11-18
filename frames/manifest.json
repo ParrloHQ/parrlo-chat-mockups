@@ -109738,5 +109738,137 @@
 "W": 402,
 "H": 874,
 "duo": false
+},
+{
+"lang": "ru",
+"screen": "contact-edit-discard",
+"dev": "se",
+"ts": "n",
+"id": "contact-edit-discard__se-n",
+"page": "ru-contact-edit-discard.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "contact-edit-discard",
+"dev": "se",
+"ts": "xl",
+"id": "contact-edit-discard__se-xl",
+"page": "ru-contact-edit-discard.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "contact-edit-discard",
+"dev": "pro",
+"ts": "n",
+"id": "contact-edit-discard__pro-n",
+"page": "ru-contact-edit-discard.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "ru",
+"screen": "contact-edit-discard",
+"dev": "pro",
+"ts": "xl",
+"id": "contact-edit-discard__pro-xl",
+"page": "ru-contact-edit-discard.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "contact-edit-discard",
+"dev": "se",
+"ts": "n",
+"id": "contact-edit-discard__se-n",
+"page": "es-contact-edit-discard.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "contact-edit-discard",
+"dev": "se",
+"ts": "xl",
+"id": "contact-edit-discard__se-xl",
+"page": "es-contact-edit-discard.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "contact-edit-discard",
+"dev": "pro",
+"ts": "n",
+"id": "contact-edit-discard__pro-n",
+"page": "es-contact-edit-discard.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "es",
+"screen": "contact-edit-discard",
+"dev": "pro",
+"ts": "xl",
+"id": "contact-edit-discard__pro-xl",
+"page": "es-contact-edit-discard.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "contact-edit-discard",
+"dev": "se",
+"ts": "n",
+"id": "contact-edit-discard__se-n",
+"page": "en-contact-edit-discard.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "contact-edit-discard",
+"dev": "se",
+"ts": "xl",
+"id": "contact-edit-discard__se-xl",
+"page": "en-contact-edit-discard.html",
+"W": 375,
+"H": 667,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "contact-edit-discard",
+"dev": "pro",
+"ts": "n",
+"id": "contact-edit-discard__pro-n",
+"page": "en-contact-edit-discard.html",
+"W": 402,
+"H": 874,
+"duo": false
+},
+{
+"lang": "en",
+"screen": "contact-edit-discard",
+"dev": "pro",
+"ts": "xl",
+"id": "contact-edit-discard__pro-xl",
+"page": "en-contact-edit-discard.html",
+"W": 402,
+"H": 874,
+"duo": false
 }
 ]
