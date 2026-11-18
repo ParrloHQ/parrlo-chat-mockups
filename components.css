@@ -748,14 +748,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
  .pc-frame .pc-app:not([data-pose])[data-view=detail] .pc-pane--list{display:none}
  .pc-frame .pc-app:not([data-pose])[data-view=detail] .pc-pane--detail{display:flex;border:0}
 }
-/* п.2: на десктопе (≥1024) при XL/AX5 список не схлопывается: список + деталь, как в обычном размере */
+/* п.2 (28.10) снят 18.11 по сверке с вебом: на десктопе при XL/AX5 — одна колонка, как на компакте (список 420 при крупном тексте тесный: строки в 3 строки, поиск налезает) */
 @container (min-width:1024px){
- .pc-frame[data-ts=xl] .pc-pane--list,.pc-frame[data-ts=ax5] .pc-pane--list,
- .pc-frame[data-ts=xl] .pc-app[data-view=detail] .pc-pane--list,.pc-frame[data-ts=ax5] .pc-app[data-view=detail] .pc-pane--list{display:flex;flex:0 0 var(--list-wide);max-width:none}
- .pc-frame[data-ts=xl] .pc-pane--detail,.pc-frame[data-ts=ax5] .pc-pane--detail,
- .pc-frame[data-ts=xl] .pc-app[data-view=detail] .pc-pane--detail,.pc-frame[data-ts=ax5] .pc-app[data-view=detail] .pc-pane--detail{display:flex;border-left:1px solid var(--line)}
- .pc-frame[data-ts=xl] .pc-split,.pc-frame[data-ts=ax5] .pc-split{justify-content:flex-start}
- .pc-frame[data-ts=xl] .pc-app[data-view=detail] .pc-pp-bar .back,.pc-frame[data-ts=ax5] .pc-app[data-view=detail] .pc-pp-bar .back{display:none}
  /* п.7: размеры контролов на десктопе: кнопка 44, строка 52, поле 48 (тач-размеры 56/60 остаются для компакта и Duo) */
  .pc-app{--btn-h:44px;--dock-btn:48px}
  .pc-setrow,.pc-radio,.pc-check,.pc-pkv li{min-height:max(var(--tap),calc(52px*(1 + (var(--ts-m) - 1)*.3)))}
