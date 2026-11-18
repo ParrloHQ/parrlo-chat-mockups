@@ -13,7 +13,7 @@
 | `photo.err.size` | Фото больше 10 МБ | La foto pesa más de 10 MB | Photo is over 10 MB | Ошибка: файл больше 10 МБ |
 | `photo.err.size.hint` | Можно отправить фото до 10 МБ. | Puedes enviar fotos de hasta 10 MB. | You can send photos up to 10 MB. | Пояснение под ошибкой размера |
 | `photo.err.format` | Этот формат не поддерживается | Este formato no es compatible | This format isn’t supported | Ошибка: формат не поддерживается |
-| `photo.err.format.hint` | Подойдут JPEG, PNG, WebP и HEIC. | Puedes usar JPEG, PNG, WebP o HEIC. | Use JPEG, PNG, WebP or HEIC. | Список форматов (уточнение менеджера: JPEG, PNG, WebP, HEIC; GIF и SVG — нет) |
+| `photo.err.format.hint` | iOS: Подойдут JPEG, PNG, WebP и HEIC. · Веб: Подойдут JPEG, PNG или WebP. | iOS: Puedes usar JPEG, PNG, WebP o HEIC. · Web: Puedes usar JPEG, PNG o WebP. | iOS: Use JPEG, PNG, WebP or HEIC. · Web: Use JPEG, PNG or WebP. | Сервер принимает JPEG, PNG, WebP; iOS сама переводит HEIC в JPEG, поэтому на iOS HEIC в списке; браузер HEIC не переводит — в вебе без HEIC (менеджер мессенджера, 18.11). GIF и SVG — нет. |
 | `photo.err.format.file` | Файл menu.gif | Archivo menu.gif | File menu.gif | Заглушка вместо превью неподдерживаемого файла |
 | `photo.err.net` | Не отправлено | No enviada | Not sent | Ошибка сети/таймаута |
 | `photo.err.net.hint` | Нет сети или соединение оборвалось. Попробуй ещё раз. | No hay conexión o se ha cortado. Vuelve a intentarlo. | No connection, or it dropped. Try again. | Пояснение под ошибкой сети |
