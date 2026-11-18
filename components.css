@@ -812,3 +812,14 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-row.is-ctx{background:var(--selected)}
 .pc-mb.is-ctx{box-shadow:0 0 0 2px var(--focus)}
 .pc-mem.is-ctx{background:var(--selected)}
+
+/* ================= Настройки на десктопе в раскладке веба (сверка с вебом 18.11, п.6) ================= */
+/* список чатов | деталь, в детали — меню разделов 232 + колонка 600; заголовок прижат к верху; «Назад» скрыта на разделах меню (.pc-root) */
+@container (min-width:1024px){
+ .pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-pane--detail.pc-set{display:grid;grid-template-columns:minmax(0,1fr) 232px minmax(0,600px) minmax(0,1fr);grid-template-rows:minmax(0,1fr);align-items:stretch}
+ .pc-set>.pc-setnav{display:flex;flex-direction:column;gap:2px;grid-column:2;grid-row:1;min-height:0;padding:72px 16px 0 0}
+ .pc-set>.pc-onb-col{grid-column:3;grid-row:1;max-width:none;margin:0;padding:0 24px;min-height:0}
+ .pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-set .pc-onb-scroll{margin:0;flex:1 1 auto;min-height:0}
+ .pc-set .pc-onb-zone-a{margin-top:0}
+ .pc-set .pc-set-del{margin-top:24px;color:#FF8C80;flex:none}
+}
