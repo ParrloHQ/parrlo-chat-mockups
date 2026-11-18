@@ -8,7 +8,7 @@
 | `photo.sheet.a11y` | Отправить фото | Enviar fotos | Send photos | Имя листа или поповера (aria-label) |
 | `photo.sheet.library` | Фото | Fotos | Photos | Пункт 1: выбрать из галереи |
 | `photo.sheet.camera` | Камера | Cámara | Camera | Пункт 2: iOS и телефонный веб (w360, w390) |
-| `photos.sheet.location` | Место | Ubicación | Location | Пункт 3, только iOS (se, pro): отправить своё местоположение. Подписи нет — у пунктов 1 и 2 её тоже нет, поэтому `photos.sheet.location.sub` не используется. Местоположение — уже в приложении; решение по месту в листе — 18.11, третья строка |
+| `photo.sheet.location` | Место | Ubicación | Location | Пункт 3, только iOS (se, pro): отправить своё местоположение. Подписи нет — у пунктов 1 и 2 её тоже нет, поэтому `photo.sheet.location.sub` не используется. Местоположение — уже в приложении; решение по месту в листе — 18.11, третья строка |
 | `photo.sheet.computer` | С компьютера | Desde el ordenador | From computer | Пункт 2, только десктопный веб (d14): выбор файла |
 | `photo.sheet.limits` | До 10 фото, каждое до 10 МБ | Hasta 10 fotos, cada una de hasta 10 MB | Up to 10 photos, each up to 10 MB | Подпись под пунктами |
 | `common.cancel` | Отмена | Cancelar | Cancel | Кнопка под листом (compact). На десктопе её нет, закрытие по Esc или щелчку мимо |
