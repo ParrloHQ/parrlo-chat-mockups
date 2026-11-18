@@ -820,3 +820,6 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
  .pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-set .pc-set-acts{padding:24px 0 0;margin:0}
  .pc-set .pc-set-acts::before{display:none}
 }
+
+/* пустой .pc-onb-body не участвует в раскладке: его padding-top 20 сдвигал центрированный блок на 10 px против веба (сверка 18.11, п.4). Позы Duo не затронуты — там тело занимает ячейку сетки */
+.pc-app:not([data-pose]) .pc-onb-body:empty{display:none}
