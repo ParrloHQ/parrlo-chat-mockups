@@ -1,4 +1,4 @@
-/* Парло — кликабельный прототип. Ответы заранее заготовлены, сервера и микрофона нет.
+/* Parrlo — кликабельный прототип. Ответы заранее заготовлены, сервера и микрофона нет.
    Риги: ../alive-parrlo-front (A, B, C) и ../alive-parrlo (профиль, как в TestFlight). */
 (() => {
   'use strict';
@@ -43,8 +43,8 @@
     <header class="pc-bar"><button class="pc-me" type="button" data-other aria-label="Профиль">МП</button><span class="sp"></span><button class="pc-ibtn" type="button" data-other aria-label="Новый чат">${I.plus}</button></header>
     <div class="pc-scroll">
       <div class="pc-stage" id="stage">
-        <span class="pw">${persona('p-home', 'Парло. Нажмите — он отреагирует')}<span class="pin" aria-hidden="true">${I.pin}</span></span>
-        <button class="open" type="button" id="open-chat" aria-label="Открыть чат с Парло"><span class="nm">Парло</span><span class="st" id="home-st"></span></button>
+        <span class="pw">${persona('p-home', 'Parrlo. Нажмите — он отреагирует')}<span class="pin" aria-hidden="true">${I.pin}</span></span>
+        <button class="open" type="button" id="open-chat" aria-label="Открыть чат с Parrlo"><span class="nm">Parrlo</span><span class="st" id="home-st"></span></button>
       </div>
       <ul class="pc-chats" aria-label="Чаты">
         ${row('П', 'g0', 0, 'Петя', '09:12', 'Завтра в 10 в офисе?', 2)}
@@ -59,15 +59,15 @@
   const sub = 'style="display:flex;flex-direction:column;flex:1;min-height:0"';
   $('#detail').innerHTML = `
     <div id="v-chat" ${sub}>
-      <header class="pc-pp-bar"><button class="pc-ibtn pc-ibtn--plain back" type="button" id="chat-back" aria-label="Назад">${I.back}</button>${persona('p-chat', 'Парло')}<div class="who"><b>Парло</b><span id="chat-st">На связи</span></div><button class="pc-ibtn pc-ibtn--plain" type="button" id="chat-call" aria-label="Голосом">${I.phone}</button></header>
+      <header class="pc-pp-bar"><button class="pc-ibtn pc-ibtn--plain back" type="button" id="chat-back" aria-label="Назад">${I.back}</button>${persona('p-chat', 'Parrlo')}<div class="who"><b>Parrlo</b><span id="chat-st">На связи</span></div><button class="pc-ibtn pc-ibtn--plain" type="button" id="chat-call" aria-label="Голосом">${I.phone}</button></header>
       <div class="pc-pp-body chat" id="chat-body"><div class="pc-pp-inner"><div class="pc-msgs" id="msgs"></div><div class="pc-chips" role="group" aria-label="Подсказки" id="chips"></div></div></div>
-      <div class="pc-composer pc-composer--v"><div class="pc-composer-in compose"><input id="inp" type="text" enterkeyhint="send" autocomplete="off" placeholder="Напишите Парло…" aria-label="Сообщение Парло"><button class="pc-ibtn pc-ibtn--send" type="button" id="send" aria-label="Отправить" disabled>${I.send}</button></div>
+      <div class="pc-composer pc-composer--v"><div class="pc-composer-in compose"><input id="inp" type="text" enterkeyhint="send" autocomplete="off" placeholder="Напишите Parrlo…" aria-label="Сообщение Parrlo"><button class="pc-ibtn pc-ibtn--send" type="button" id="send" aria-label="Отправить" disabled>${I.send}</button></div>
         <div class="pc-composer-in"><button class="pc-btn pc-btn--voice" type="button" id="to-voice">${I.mic}Нажмите и говорите</button></div></div>
     </div>
     <div id="v-voice" ${sub} hidden>
-      <header class="pc-pp-bar"><button class="pc-ibtn pc-ibtn--plain back" type="button" id="voice-back" aria-label="Назад">${I.back}</button>${persona('p-vhead', 'Парло')}<div class="who"><b>Парло</b><span id="voice-st">Голосом</span></div></header>
+      <header class="pc-pp-bar"><button class="pc-ibtn pc-ibtn--plain back" type="button" id="voice-back" aria-label="Назад">${I.back}</button>${persona('p-vhead', 'Parrlo')}<div class="who"><b>Parrlo</b><span id="voice-st">Голосом</span></div></header>
       <div class="pc-pp-body"><div class="pc-pp-inner"><div class="pc-voicearea">
-        ${persona('p-voice', 'Парло. Нажмите — он отреагирует')}
+        ${persona('p-voice', 'Parrlo. Нажмите — он отреагирует')}
         <h2 id="v-h"></h2><p id="v-p"></p>
         <div class="pc-wave" id="wave" aria-hidden="true">${'<i></i>'.repeat(14)}</div>
         <div class="pc-live subs" aria-live="polite" id="live"></div>
@@ -75,7 +75,7 @@
       <div class="pc-voiceacts"><button class="pc-btn pc-btn--voice holdbtn" type="button" id="hold">${I.mic}<span id="hold-l">Нажмите и говорите</span></button><button class="pc-btn pc-btn--text" type="button" id="voice-done" style="align-self:center">Вернуться в чат</button></div>
     </div>`;
 
-  /* ---------- экземпляры Парло ---------- */
+  /* ---------- экземпляры Parrlo ---------- */
   let inst = [];
   let svgProfile = null;
   let three = null;
@@ -143,7 +143,7 @@
     $('#v-chat').hidden = screen !== 'chat'; $('#v-voice').hidden = screen !== 'voice';
     if (screen === 'home') { setMode(homeMode()); renderHome(); }
     if (screen === 'chat') { if (!chat.started) startChat(); if (S.unread) { S.unread = false; renderHome(); renderPanel(); } setMode('idle'); }
-    if (screen === 'voice') { setMode('idle'); voiceUI('ready'); $('#live').innerHTML = '<span class="k">Субтитры</span><span style="color:#9AA4B2">Здесь появится то, что вы скажете, и ответ Парло.</span>'; }
+    if (screen === 'voice') { setMode('idle'); voiceUI('ready'); $('#live').innerHTML = '<span class="k">Субтитры</span><span style="color:#9AA4B2">Здесь появится то, что вы скажете, и ответ Parrlo.</span>'; }
     stat();
   }
   function renderHome() {
@@ -151,7 +151,7 @@
     $$('#home .pc-badge').forEach((b) => { b.style.display = S.unread ? '' : 'none'; });
   }
 
-  /* ---------- реакция на нажатие по Парло ---------- */
+  /* ---------- реакция на нажатие по Parrlo ---------- */
   function react() {
     if (S.busy) { toast(S.mode === 'listen' ? 'Слушаю вас' : 'Секунду, я занят'); return; }
     const back = S.mode;
@@ -198,7 +198,7 @@
     else if (/квартир|свет|лен/.test(t)) a = 'В «Квартире» 5 новых. Главное: Лена оплатила свет — 42,80 €, чек в чате.';
     else if (/мам|позвон|напомн/.test(t)) a = 'Хорошо, напомню вам позвонить маме сегодня в 19:00.';
     else if (/привет|здравств|добр/.test(t)) a = 'Здравствуйте! Могу ответить в чат, найти сообщение или напомнить о деле.';
-    else a = 'Понял вас. Это прототип, ответы заготовлены — в настоящем Парло здесь будет ответ по делу.';
+    else a = 'Понял вас. Это прототип, ответы заготовлены — в настоящем Parrlo здесь будет ответ по делу.';
     return { a, search };
   }
   function send(text) {
@@ -208,7 +208,7 @@
     const { a, search } = answerFor(text);
     setMode(search ? 'search' : 'think');
     const typ = document.createElement('div'); typ.className = 'pc-msg in';
-    typ.innerHTML = '<div class="pc-mb"><span class="typing" aria-label="Парло думает"><i></i><i></i><i></i></span></div>';
+    typ.innerHTML = '<div class="pc-mb"><span class="typing" aria-label="Parrlo думает"><i></i><i></i><i></i></span></div>';
     $('#msgs').appendChild(typ);
     later(search ? 2000 : 1600, () => {
       typ.remove(); const d = msgIn('', true); const tx = d.querySelector('.tx');
@@ -316,7 +316,7 @@
   $('#to-voice').addEventListener('click', () => go('voice'));
   $('#voice-back').addEventListener('click', () => go(S.from === 'chat' ? 'chat' : 'home'));
   $('#voice-done').addEventListener('click', () => go('chat'));
-  $$('[data-other]').forEach((b) => b.addEventListener('click', () => toast('В прототипе работает только Парло')));
+  $$('[data-other]').forEach((b) => b.addEventListener('click', () => toast('В прототипе работает только Parrlo')));
   $('#inp').addEventListener('input', () => { $('#send').disabled = !$('#inp').value.trim() || S.busy; });
   $('#inp').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); send($('#inp').value); } });
   $('#send').addEventListener('click', () => send($('#inp').value));
@@ -332,8 +332,8 @@
     const tg = (k, t, s) => `<label class="tg"><span>${t}${s ? `<small>${s}</small>` : ''}</span><input class="sw" type="checkbox" data-k="${k}"${S[k] ? ' checked' : ''}></label>`;
     const html = tg('reduce', 'Reduce Motion', 'Статичная поза, моргание прозрачностью')
       + tg('low', 'Экономия энергии', '15 кадров/с, без жестов')
-      + tg('unread', 'Непрочитанное', 'На главной Парло радуется')
-      + `<div class="tg"><span>Размер Парло<small>Главная и экран голоса</small></span><span class="mini">${[104, 80].map((n) => `<button type="button" data-size="${n}" aria-pressed="${S.size === n}">${n} pt</button>`).join('')}</span></div>`
+      + tg('unread', 'Непрочитанное', 'На главной Parrlo радуется')
+      + `<div class="tg"><span>Размер Parrlo<small>Главная и экран голоса</small></span><span class="mini">${[104, 80].map((n) => `<button type="button" data-size="${n}" aria-pressed="${S.size === n}">${n} pt</button>`).join('')}</span></div>`
       + tg('follow', 'Взгляд за пальцем', 'Иначе смотрит прямо на вас')
       + tg('tts', 'Озвучка браузера', 'Выключена по умолчанию');
     $$('[data-panel]').forEach((p) => { p.innerHTML = html; });

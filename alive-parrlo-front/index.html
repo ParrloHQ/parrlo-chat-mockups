@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Парло смотрит на вас — варианты анфас · Parrlo Chat</title>
+<title>Parrlo смотрит на вас — варианты анфас · Parrlo Chat</title>
 <style>
 @font-face{font-family:Inter;src:url(../fonts/Inter-Variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
 :root{--bg:#12161C;--surface:#1C2026;--surface-2:#242A31;--ink:#0E1116;--accent:#00875C;--green:#2BC48A;--muted:#9AA4B2;--line:rgba(255,255,255,.12);--beak:#FFC247}
@@ -80,8 +80,8 @@ code{font:13px ui-monospace,Menlo,monospace;background:rgba(255,255,255,.06);pad
 </head>
 <body>
 <main>
-  <h1>Парло смотрит на вас</h1>
-  <p class="lead">Три варианта объёмного Парло в анфас: два глаза, очки, клюв, хохолок, крылья с двух сторон. Цвета образа v1. Когда Парло говорит или слушает, он смотрит прямо на вас и моргает, клюв двигается по слогам. Зрачки следят за курсором или пальцем, если их нет — смотрят в центр. Макет для выбора, не прод-код. Прошлый живой Парло в профиль — <a href="../alive-parrlo/">alive-parrlo</a>.</p>
+  <h1>Parrlo смотрит на вас</h1>
+  <p class="lead">Три варианта объёмного Parrlo в анфас: два глаза, очки, клюв, хохолок, крылья с двух сторон. Цвета образа v1. Когда Parrlo говорит или слушает, он смотрит прямо на вас и моргает, клюв двигается по слогам. Зрачки следят за курсором или пальцем, если их нет — смотрят в центр. Макет для выбора, не прод-код. Прошлый живой Parrlo в профиль — <a href="../alive-parrlo/">alive-parrlo</a>.</p>
 
   <div class="bar" role="group" aria-label="Настройки для всех вариантов">
     <label class="sw"><input type="checkbox" id="rm"> Reduce Motion</label>
@@ -123,7 +123,7 @@ code{font:13px ui-monospace,Menlo,monospace;background:rgba(255,255,255,.06);pad
       <div class="phones" id="c-phones"></div>
     </div>
     <ul class="notes">
-      <li><b>Плюсы:</b> в покое Парло почти в профиль, как логотип (один глаз, дужка назад, клюв вперёд). Когда говорит или слушает — поворачивается к вам за 0.45 с. Связка «логотип → живой собеседник».</li>
+      <li><b>Плюсы:</b> в покое Parrlo почти в профиль, как логотип (один глаз, дужка назад, клюв вперёд). Когда говорит или слушает — поворачивается к вам за 0.45 с. Связка «логотип → живой собеседник».</li>
       <li><b>Минусы:</b> при полуповороте (думает, ищет) дальнее стекло очков выступает за силуэт; поворот надо выверить художнику.</li>
       <li><b>iOS:</b> средне. Тот же риг, что A; поворот — одно число <code>yaw</code> на режим (покой 50°, думает 36°, ищет 20°, радость 18°, говорит / слушает 0°).</li>
     </ul>
@@ -147,7 +147,7 @@ code{font:13px ui-monospace,Menlo,monospace;background:rgba(255,255,255,.06);pad
       <thead><tr><th>Что</th><th>Числа</th></tr></thead>
       <tbody>
         <tr><td>Моргание</td><td class="num">каждые 2.2–5.6 с, 18 % двойное (+0.29 с); закрыть 70 мс, держать 40 мс, открыть 110 мс</td></tr>
-        <tr><td>Взгляд за курсором / пальцем</td><td class="num">±1 = 420 px от центра Парло; зрачок до 4.2 ед. (1.8 pt при 104); голова до 12° вбок, 7° вверх-вниз; сглаживание: зрачки 70 мс, голова 180 мс; без движения 2.5 с — в центр</td></tr>
+        <tr><td>Взгляд за курсором / пальцем</td><td class="num">±1 = 420 px от центра Parrlo; зрачок до 4.2 ед. (1.8 pt при 104); голова до 12° вбок, 7° вверх-вниз; сглаживание: зрачки 70 мс, голова 180 мс; без движения 2.5 с — в центр</td></tr>
         <tr><td>Смена режима</td><td class="num">0.45 с, smoothstep</td></tr>
         <tr><td>Кадры</td><td class="num">30 к/с; покой без жеста — 15; экономия энергии — 15 (только моргание и дыхание); вне экрана и в фоне — 0</td></tr>
         <tr><td>Reduce Motion</td><td>статичная анфас-поза (в C тоже анфас); моргание — прозрачностью закрытого века раз в 6–10 с; смена режима — кроссфейд 0.25 с; точки «думает» и блик «ищет» — только прозрачностью; за курсором не следит</td></tr>
@@ -177,14 +177,14 @@ function phones(v) {
   box.innerHTML = `
     <figure><div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span>●●● 100 %</span></div>
       <div class="top"><div class="me">МП</div><div class="plus" aria-hidden="true">+</div></div>
-      <div class="stage" role="button" tabindex="0" aria-label="Парло, ИИ-секретарь. Открыть"><div class="pf" data-home style="width:104px;height:104px"></div><div class="nm">Парло</div><div class="st" data-st>${STATUS.idle}</div></div>
+      <div class="stage" role="button" tabindex="0" aria-label="Parrlo, ИИ-секретарь. Открыть"><div class="pf" data-home style="width:104px;height:104px"></div><div class="nm">Parrlo</div><div class="st" data-st>${STATUS.idle}</div></div>
       ${ROWS.map((r) => `<div class="row"><div class="av" style="background:${r[3]}">${r[0]}</div><div class="tx"><b>${r[1]}</b><span>${r[2]}</span></div></div>`).join('')}
-    </div></div><figcaption>Главная, iPhone 17 (402 pt) · Парло 104 pt · режим как у большого</figcaption></figure>
+    </div></div><figcaption>Главная, iPhone 17 (402 pt) · Parrlo 104 pt · режим как у большого</figcaption></figure>
     <figure><div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span>●●● 100 %</span></div>
-      <div class="voice"><div class="hd"><div class="back" aria-hidden="true">‹</div><b>Парло</b></div>
+      <div class="voice"><div class="hd"><div class="back" aria-hidden="true">‹</div><b>Parrlo</b></div>
         <div class="mid"><div class="pf" data-voice style="width:104px;height:104px"></div><div class="say" data-say>Слушаю…</div><div class="sub" data-sub>Говорите, я записываю</div><div class="wave" aria-hidden="true">${bars}</div></div>
         <div class="mic" role="button" aria-label="Остановить запись">${mic}</div></div>
-    </div></div><figcaption>Экран голоса · Парло 104 pt · «слушает» ↔ «говорит» каждые 4 с</figcaption></figure>`;
+    </div></div><figcaption>Экран голоса · Parrlo 104 pt · «слушает» ↔ «говорит» каждые 4 с</figcaption></figure>`;
   const home = make[v](box.querySelector('[data-home]'), 'idle');
   const voice = make[v](box.querySelector('[data-voice]'), 'listen');
   all.push(home, voice);

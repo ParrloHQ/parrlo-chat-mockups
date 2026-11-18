@@ -1,4 +1,4 @@
-/* Живой Парло — макет поведения (alive-parrlo). НЕ прод-код: справочная реализация для превью и для iOS-разработчика.
+/* Живой Parrlo — макет поведения (alive-parrlo). НЕ прод-код: справочная реализация для превью и для iOS-разработчика.
    Устроено как Paddy (MuratPod/padelada, src/features/paddy/alive/): поза — набор чисел, из позы считаются transform/opacity групп SVG.
    Анимируются ТОЛЬКО атрибуты transform и opacity у групп (<g>). d, fill, r и прочее не трогаются.
    Режимы: idle | think | search | joy | speak | listen. Уровни работы: full (30/15 к/с), lowPower (15 к/с, только фон и моргание),

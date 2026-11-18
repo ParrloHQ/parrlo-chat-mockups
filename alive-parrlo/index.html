@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Живой Парло — макет поведения · Parrlo Chat</title>
+<title>Живой Parrlo — макет поведения · Parrlo Chat</title>
 <meta name="robots" content="noindex">
 <style>
 @font-face{font-family:Inter;src:url(../fonts/Inter-Variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
@@ -91,8 +91,8 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
 <body>
 <main id="top">
   <span class="tag">Макет поведения · не прод-код</span><span class="tag">Образ 1 (SPEC §23)</span><span class="tag warn">Не утверждено</span>
-  <h1>Живой Парло</h1>
-  <p class="lead">Парло из образа 1, разобранный на части, и его поведение: покой, «думает», «ищет», радость, «говорит», «слушает». Сделано по образцу живого Paddy из Padelada (build 107): двигаются только <code>transform</code> и <code>opacity</code> групп, есть пауза вне экрана и в фоне, режим экономии энергии и вариант для «Уменьшения движения». Размер на главной: 104 pt на iPhone 17, 80 pt на iPhone SE.</p>
+  <h1>Живой Parrlo</h1>
+  <p class="lead">Parrlo из образа 1, разобранный на части, и его поведение: покой, «думает», «ищет», радость, «говорит», «слушает». Сделано по образцу живого Paddy из Padelada (build 107): двигаются только <code>transform</code> и <code>opacity</code> групп, есть пауза вне экрана и в фоне, режим экономии энергии и вариант для «Уменьшения движения». Размер на главной: 104 pt на iPhone 17, 80 pt на iPhone SE.</p>
   <p class="lead">Файлы: <a href="parrlo-rig.svg">parrlo-rig.svg</a> (части) · <a href="alive.js">alive.js</a> (справочная логика, формулы) · <a href="https://github.com/ParrloHQ/parrlo-chat-mockups/blob/main/alive-parrlo/README.md">README.md</a> (для iOS) · <a href="../">все макеты</a></p>
 
   <h2 id="preview">Превью</h2>
@@ -101,7 +101,7 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
       <div class="stage" id="stage">
         <div id="big" style="width:208px;height:208px"></div>
         <svg class="pivots" id="pivots" viewBox="0 0 240 240" style="width:208px;height:208px;position:absolute;left:50%;top:26px;transform:translateX(-50%)" aria-hidden="true"></svg>
-        <div class="nm">Парло</div>
+        <div class="nm">Parrlo</div>
         <div class="st" id="stText" aria-live="polite">Готов помочь</div>
       </div>
       <div class="sizes" aria-label="Реальные размеры">
@@ -112,7 +112,7 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
     </div>
     <div class="card">
       <h3 style="margin-top:0">Режим</h3>
-      <div class="seg" id="modes" role="group" aria-label="Режим Парло">
+      <div class="seg" id="modes" role="group" aria-label="Режим Parrlo">
         <button type="button" data-mode="idle" aria-pressed="true">Покой</button>
         <button type="button" data-mode="think" aria-pressed="false">Думает</button>
         <button type="button" data-mode="search" aria-pressed="false">Ищет</button>
@@ -122,8 +122,8 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
       </div>
       <label class="sw"><input type="checkbox" id="lowPower"><span class="tr"></span><span><b>Экономия энергии (lowPower)</b><small>Только моргание и фон (дыхание, взгляды), 15 кадров/с, без жестов и без движения режима.</small></span></label>
       <label class="sw"><input type="checkbox" id="reduce"><span class="tr"></span><span><b>Уменьшение движения (Reduce Motion)</b><small>Статичные позы, смена — плавной сменой прозрачности. Моргание, точки и дуги — только прозрачностью.</small></span></label>
-      <label class="sw"><input type="checkbox" id="bg"><span class="tr"></span><span><b>Имитация: приложение в фоне</b><small>Всё стоит, кадров нет. Настоящая вкладка в фоне тоже останавливает Парло.</small></span></label>
-      <label class="sw"><input type="checkbox" id="blur"><span class="tr"></span><span><b>Имитация: поверх открыт другой экран</b><small>Чат, лист «+» или настройки поверх главной — Парло стоит.</small></span></label>
+      <label class="sw"><input type="checkbox" id="bg"><span class="tr"></span><span><b>Имитация: приложение в фоне</b><small>Всё стоит, кадров нет. Настоящая вкладка в фоне тоже останавливает Parrlo.</small></span></label>
+      <label class="sw"><input type="checkbox" id="blur"><span class="tr"></span><span><b>Имитация: поверх открыт другой экран</b><small>Чат, лист «+» или настройки поверх главной — Parrlo стоит.</small></span></label>
       <label class="sw"><input type="checkbox" id="pv"><span class="tr"></span><span><b>Показать точки вращения</b><small>Точки в позе покоя; подписи — id групп.</small></span></label>
       <h3>Жесты покоя</h3>
       <p style="color:var(--muted);font-size:13px;margin:0">Сами запускаются раз в 3–8 с. Здесь можно запустить вручную (только в «Покое», без экономии и без Reduce Motion).</p>
@@ -133,7 +133,7 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
   </div>
 
   <h2 id="parts">Части рисунка</h2>
-  <p class="lead">Рисунок взят из <code>persona/v1/speak.svg</code>, <code>listen.svg</code>, <code>think.svg</code> без перерисовки: те же фигуры и цвета. Три позы v1 собираются из частей точно (сверка по пикселям: «говорит» — 0 отличий, «думает» — 0 пикселей с отличием больше 40/255, «слушает» — 3 пикселя на кончиках гребня). Парло нарисован в профиль: один глаз, одно крыло, лап и хвоста в рисунке нет — их не добавляли.</p>
+  <p class="lead">Рисунок взят из <code>persona/v1/speak.svg</code>, <code>listen.svg</code>, <code>think.svg</code> без перерисовки: те же фигуры и цвета. Три позы v1 собираются из частей точно (сверка по пикселям: «говорит» — 0 отличий, «думает» — 0 пикселей с отличием больше 40/255, «слушает» — 3 пикселя на кончиках гребня). Parrlo нарисован в профиль: один глаз, одно крыло, лап и хвоста в рисунке нет — их не добавляли.</p>
   <p class="lead">Координаты «фигуры» — внутри группы <code>#figure</code> (<code>translate(12 13.2) scale(0.9)</code>, как в v1). «viewBox 240» — те же точки во всём аватаре. <code>UnitPoint</code> — для SwiftUI, если каждая часть — слой во весь кадр диска 240×240; если части лежат в кадре фигуры, берите «точку (фигура) / 240» — см. README.</p>
   <div class="tw"><table>
     <thead><tr><th>id группы</th><th>Что это</th><th>Точка вращения (фигура)</th><th>viewBox 240</th><th>UnitPoint (кадр диска 240)</th><th>Что меняется</th></tr></thead>
@@ -171,11 +171,11 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
     <thead><tr><th>Режим</th><th>Когда</th><th>Ключевая поза</th><th>Движение (full, 30 к/с)</th></tr></thead>
     <tbody>
       <tr><td><b>Покой</b><br><code>idle</code></td><td>По умолчанию</td><td>Наклон 0°, гребень −14° / 2° / 18°, длина 34, клюв закрыт, веко открыто, без реквизита. В v1 такой позы нет — собрана из частей «говорит» и «слушает».</td><td class="num">Фон (ниже) ×1 + жесты покоя. 15 к/с, пока нет жеста; 30 к/с во время жеста.</td></tr>
-      <tr><td><b>Думает</b><br><code>busy-think</code></td><td>Парло готовит ответ</td><td>= v1 think.svg: наклон +4°, гребень −4° / 14° / 30°, длина 28, веко −15.1 (полу), три точки 0.55 / 0.77 / 0.99</td><td class="num">Голова −3° ± 1.5°, sin 3.3 с<br>Наклон ± 1.0°, sin 5.2 с<br>Взгляд вверх-вправо: x +1.5 ± 1.0 ед. (sin 4.3 с), y −1.5 ± 0.5 ед. (sin 2.9 с)<br>Перо 3 «постукивает» +3°, sin² 1.35 Гц<br>Точки: пульс 1.26 с, сдвиг фазы 1/3 периода (0.42 с) между точками; opacity база × 0.35…1, scale 0.85…1</td></tr>
-      <tr><td><b>Ищет</b><br><code>busy-search</code></td><td>Парло ищет по чатам/памяти</td><td>Наклон +6° (вперёд), голова +4°, гребень −10° / 6° / 22°, длина 32, взгляд +4 / +1.5 ед., блик на оправе 0.9. Новая поза.</td><td class="num">Голова ± 5°, сдвиг ± 3 ед. (1.17 pt), sin 2.4 с<br>Взгляд «перебегает» ± 4.5 ед. (1.76 pt): сглаженный меандр tanh(4·sin)/tanh(4), 2.4 с<br>Клевок: −1.5 ед. (0.59 pt) × |sin 1.2 с|<br>Гребень ± 3°, sin 0.6 с, фаза −0.5 рад на перо<br>Блик: поворот −100° → 0° за 1.2 с (smoothstep), по верху стекла, opacity пульс 1.2 с, макс 0.9</td></tr>
-      <tr><td><b>Радость</b><br><code>joy</code></td><td>Есть непрочитанное от Парло</td><td>Подъём −6 ед. (2.34 pt), гребень веером −24° / 0° / 24°, длина 39, клюв открыт (+4°), глаз-улыбка (нижнее веко −10), крыло +16° (поднято). Новая поза.</td><td class="num">Подскоки −7 ед. (2.73 pt) × |sin|, 1.1 Гц<br>Тело в воздухе: scaleY +2 %, scaleX −1 %<br>Качание ± 3°, sin 2.4 с<br>Крыло ± 10°, sin 2.2 Гц<br>Гребень ± 4°, 2.2 Гц, фаза −0.7 рад на перо<br>Подклювье ± 3°, 2.2 Гц</td></tr>
-      <tr><td><b>Говорит</b><br><code>speak</code></td><td>Парло озвучивает ответ</td><td>= v1 speak.svg: наклон 0°, клюв открыт, дуги справа 1 / 0.62</td><td class="num">«Слоги»: o = max(0, sin 4.2 Гц) × (0.6 + 0.4 sin 1.3 с)<br>Подклювье −3° + 13°·o (−3…+10°), надклювье −2.5°·o<br>Голова ± 1.5°, sin 2.1 Гц; наклон ± 0.6°, sin 3.1 с<br>Дуги: пульс 0.9 с, внешняя позже на 0.15 с; opacity 0.4…1 (внешняя ×0.62); scale 0.96…1.02 от 188, 126</td></tr>
-      <tr><td><b>Слушает</b><br><code>listen</code></td><td>Диктовка, Парло слушает</td><td>= v1 listen.svg: наклон −7°, гребень −22° / 0° / 22°, длина 40, зрачок ×1.125, дуги слева 1 / 0.62</td><td class="num">Голова −2° ± 1.2°, sin 2.8 с<br>Гребень ± 1.5°, sin 1.9 с, фаза −0.5 рад на перо<br>Дуги «к голове»: пульс 1.4 с, сначала внешняя, внутренняя через 0.28 с; opacity 0.4…1; scale 1.04…0.98 от 46, 112</td></tr>
+      <tr><td><b>Думает</b><br><code>busy-think</code></td><td>Parrlo готовит ответ</td><td>= v1 think.svg: наклон +4°, гребень −4° / 14° / 30°, длина 28, веко −15.1 (полу), три точки 0.55 / 0.77 / 0.99</td><td class="num">Голова −3° ± 1.5°, sin 3.3 с<br>Наклон ± 1.0°, sin 5.2 с<br>Взгляд вверх-вправо: x +1.5 ± 1.0 ед. (sin 4.3 с), y −1.5 ± 0.5 ед. (sin 2.9 с)<br>Перо 3 «постукивает» +3°, sin² 1.35 Гц<br>Точки: пульс 1.26 с, сдвиг фазы 1/3 периода (0.42 с) между точками; opacity база × 0.35…1, scale 0.85…1</td></tr>
+      <tr><td><b>Ищет</b><br><code>busy-search</code></td><td>Parrlo ищет по чатам/памяти</td><td>Наклон +6° (вперёд), голова +4°, гребень −10° / 6° / 22°, длина 32, взгляд +4 / +1.5 ед., блик на оправе 0.9. Новая поза.</td><td class="num">Голова ± 5°, сдвиг ± 3 ед. (1.17 pt), sin 2.4 с<br>Взгляд «перебегает» ± 4.5 ед. (1.76 pt): сглаженный меандр tanh(4·sin)/tanh(4), 2.4 с<br>Клевок: −1.5 ед. (0.59 pt) × |sin 1.2 с|<br>Гребень ± 3°, sin 0.6 с, фаза −0.5 рад на перо<br>Блик: поворот −100° → 0° за 1.2 с (smoothstep), по верху стекла, opacity пульс 1.2 с, макс 0.9</td></tr>
+      <tr><td><b>Радость</b><br><code>joy</code></td><td>Есть непрочитанное от Parrlo</td><td>Подъём −6 ед. (2.34 pt), гребень веером −24° / 0° / 24°, длина 39, клюв открыт (+4°), глаз-улыбка (нижнее веко −10), крыло +16° (поднято). Новая поза.</td><td class="num">Подскоки −7 ед. (2.73 pt) × |sin|, 1.1 Гц<br>Тело в воздухе: scaleY +2 %, scaleX −1 %<br>Качание ± 3°, sin 2.4 с<br>Крыло ± 10°, sin 2.2 Гц<br>Гребень ± 4°, 2.2 Гц, фаза −0.7 рад на перо<br>Подклювье ± 3°, 2.2 Гц</td></tr>
+      <tr><td><b>Говорит</b><br><code>speak</code></td><td>Parrlo озвучивает ответ</td><td>= v1 speak.svg: наклон 0°, клюв открыт, дуги справа 1 / 0.62</td><td class="num">«Слоги»: o = max(0, sin 4.2 Гц) × (0.6 + 0.4 sin 1.3 с)<br>Подклювье −3° + 13°·o (−3…+10°), надклювье −2.5°·o<br>Голова ± 1.5°, sin 2.1 Гц; наклон ± 0.6°, sin 3.1 с<br>Дуги: пульс 0.9 с, внешняя позже на 0.15 с; opacity 0.4…1 (внешняя ×0.62); scale 0.96…1.02 от 188, 126</td></tr>
+      <tr><td><b>Слушает</b><br><code>listen</code></td><td>Диктовка, Parrlo слушает</td><td>= v1 listen.svg: наклон −7°, гребень −22° / 0° / 22°, длина 40, зрачок ×1.125, дуги слева 1 / 0.62</td><td class="num">Голова −2° ± 1.2°, sin 2.8 с<br>Гребень ± 1.5°, sin 1.9 с, фаза −0.5 рад на перо<br>Дуги «к голове»: пульс 1.4 с, сначала внешняя, внутренняя через 0.28 с; opacity 0.4…1; scale 1.04…0.98 от 46, 112</td></tr>
     </tbody>
   </table></div>
 
@@ -208,39 +208,39 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
   </table></div>
   <p class="note">Паузы между жестами 3–8 с; первый жест через 2 с после появления на экране и после возврата из паузы; один жест не повторяется подряд. Огибающая жеста: вход 0.2 с, выход 0.3 с (smoothstep). Кривые ключей: out = 1 − (1 − u)², in = u², без пометки — quad in-out.</p>
 
-  <h2 id="where">Где стоит живой Парло</h2>
-  <p class="lead">Только там, где Парло крупный и стоит один — «сцена» <code>.pc-stage</code> над списком чатов на главной (сейчас 112 px, <code>--av-stage</code> в <code>tokens.css</code>). Маленькие аватары (32, 44, 48, 56, 64) остаются статичными SVG из <code>persona/v1/</code>.</p>
+  <h2 id="where">Где стоит живой Parrlo</h2>
+  <p class="lead">Только там, где Parrlo крупный и стоит один — «сцена» <code>.pc-stage</code> над списком чатов на главной (сейчас 112 px, <code>--av-stage</code> в <code>tokens.css</code>). Маленькие аватары (32, 44, 48, 56, 64) остаются статичными SVG из <code>persona/v1/</code>.</p>
   <div class="tw"><table>
-    <thead><tr><th>Экран (файлы)</th><th>Где Парло</th><th>Сейчас в макете</th><th>Живой</th><th>Режимы</th></tr></thead>
+    <thead><tr><th>Экран (файлы)</th><th>Где Parrlo</th><th>Сейчас в макете</th><th>Живой</th><th>Режимы</th></tr></thead>
     <tbody>
-      <tr><td><code>home-chats</code> · <code>frames/ru-home-chats.html</code> (+ es-, en-)</td><td>Сцена над списком</td><td class="num">112</td><td class="num"><b>104 pt</b> iPhone 17 (кадр pro 402) · <b>80 pt</b> SE (кадр se 375)</td><td>idle; joy, пока есть непрочитанное («3 новых · есть что рассказать»); think/search, пока Парло отвечает</td></tr>
+      <tr><td><code>home-chats</code> · <code>frames/ru-home-chats.html</code> (+ es-, en-)</td><td>Сцена над списком</td><td class="num">112</td><td class="num"><b>104 pt</b> iPhone 17 (кадр pro 402) · <b>80 pt</b> SE (кадр se 375)</td><td>idle; joy, пока есть непрочитанное («3 новых · есть что рассказать»); think/search, пока Parrlo отвечает</td></tr>
       <tr><td><code>home-empty</code></td><td>Сцена над пустым списком</td><td class="num">112</td><td class="num">104 / 80</td><td>idle / joy</td></tr>
       <tr><td><code>home-reminder</code>, <code>home-reminder-closed</code>, <code>home-reminder-hidden</code></td><td>Сцена</td><td class="num">112</td><td class="num">104 / 80</td><td>как home-chats</td></tr>
       <tr><td><code>err-offline-banner</code>, <code>limit-err-parrlo</code>, <code>limit-err-week</code></td><td>Сцена под баннером / над листом</td><td class="num">112</td><td class="num">104 / 80</td><td>idle (без joy и busy: офлайн / лимит); под листом — стоит</td></tr>
       <tr><td><code>home-menu</code></td><td>Сцена под листом «+»</td><td class="num">112</td><td>стоит (лист поверх)</td><td>заморожен</td></tr>
-      <tr><td><code>parrlo-voice</code></td><td>Зона диктовки <code>.pc-voicearea</code></td><td class="num">96</td><td>предложение: да, 96 pt как сейчас (на SE — 80)</td><td>listen во время записи; speak — если Парло озвучивает ответ</td></tr>
+      <tr><td><code>parrlo-voice</code></td><td>Зона диктовки <code>.pc-voicearea</code></td><td class="num">96</td><td>предложение: да, 96 pt как сейчас (на SE — 80)</td><td>listen во время записи; speak — если Parrlo озвучивает ответ</td></tr>
       <tr><td><code>ob-welcome</code></td><td>Герой <code>.pc-hero</code></td><td class="num">168</td><td>вопрос к Мурату — по умолчанию статичный</td><td>если да — только idle</td></tr>
-      <tr><td><code>parrlo</code> (чат с Парло), строки и шапки, <code>ob-parrlo-setup</code>, <code>settings-parrlo</code>, алерты <code>.pc-alert</code></td><td>Аватары 32–64</td><td class="num">32–64</td><td>нет — статичный SVG</td><td>—</td></tr>
+      <tr><td><code>parrlo</code> (чат с Parrlo), строки и шапки, <code>ob-parrlo-setup</code>, <code>settings-parrlo</code>, алерты <code>.pc-alert</code></td><td>Аватары 32–64</td><td class="num">32–64</td><td>нет — статичный SVG</td><td>—</td></tr>
     </tbody>
   </table></div>
   <p class="note">На планшете, Duo и десктопе (кадры tab, duo*, d13, d14) сцена стоит в левой панели; размер там — как сейчас (112), он в этой задаче не определялся. iPhone 17 в макетах — кадр «iPhone Pro 402» (402×874), SE — «iPhone SE 375» (375×667). Сам макет кадров не менялся: размер 104 / 80 — предложение для приложения и будущей правки <code>--av-stage</code>.</p>
 
-  <h3>Как в списке чатов: прокрутите список — Парло уйдёт за край и остановится</h3>
+  <h3>Как в списке чатов: прокрутите список — Parrlo уйдёт за край и остановится</h3>
   <div class="phones">
     <figure class="phone" style="margin:0">
       <div class="scr" id="ph17" style="width:402px;height:560px"></div>
-      <figcaption>iPhone 17 · 402 pt · Парло 104 pt</figcaption>
+      <figcaption>iPhone 17 · 402 pt · Parrlo 104 pt</figcaption>
     </figure>
     <figure class="phone" style="margin:0">
       <div class="scr" id="phSE" style="width:375px;height:480px"></div>
-      <figcaption>iPhone SE · 375 pt · Парло 80 pt</figcaption>
+      <figcaption>iPhone SE · 375 pt · Parrlo 80 pt</figcaption>
     </figure>
   </div>
 
   <h2 id="pause">Пауза, экономия энергии, Reduce Motion</h2>
   <div class="grid two">
     <div class="card">
-      <h3 style="margin-top:0">Когда Парло стоит (0 кадров)</h3>
+      <h3 style="margin-top:0">Когда Parrlo стоит (0 кадров)</h3>
       <ul>
         <li>Сцена целиком ушла за край прокрутки (видимая часть = 0). Как в Paddy: «ушёл за скролл больше чем на 100 % своей высоты».</li>
         <li>Приложение не активно: фон, шторка, переключатель приложений (<code>scenePhase != .active</code>).</li>
@@ -296,7 +296,7 @@ footer{color:var(--muted);font-size:13px;margin-top:48px}
     const scr = document.getElementById(id);
     const rows = ROWS.concat(ROWS).map((r) => `<div class="row"><div class="av" style="background:${r[3]}">${r[0]}</div><div class="tx"><b>${r[1]}</b><span>${r[2]}</span></div></div>`).join('');
     scr.innerHTML = `<span class="pill" data-pill>—</span><div class="top"><div class="me">МП</div><div class="plus" aria-hidden="true">+</div></div>
-      <div class="stage" role="button" tabindex="0" aria-label="Парло, ИИ-секретарь. Открыть"><div data-ava style="width:${size}px;height:${size}px"></div><div class="nm">Парло</div><div class="st" data-st>${STATUS.idle}</div></div>${rows}`;
+      <div class="stage" role="button" tabindex="0" aria-label="Parrlo, ИИ-секретарь. Открыть"><div data-ava style="width:${size}px;height:${size}px"></div><div class="nm">Parrlo</div><div class="st" data-st>${STATUS.idle}</div></div>${rows}`;
     const a = ParrloAlive.mount(scr.querySelector('[data-ava]'), svgText, { scrollRoot: scr });
     const pill = scr.querySelector('[data-pill]');
     a.onStatus((s) => { pill.textContent = s.run === 'frozen' ? 'стоит · ' + s.paused.map((p) => PAUSE[p]).join(', ') : `идёт · ${s.hz} к/с`; pill.classList.toggle('off', s.run === 'frozen'); });
