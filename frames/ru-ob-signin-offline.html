@@ -12,7 +12,11 @@ h1{font:800 18px Nunito,Inter;color:#E8ECF1;margin-bottom:16px}</style><style id
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-bar{position:sticky;top:0;z-index:2;background:var(--bg);order:0}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-bar::after{content:"";position:absolute;left:-12px;right:-12px;top:100%;height:12px;background:linear-gradient(var(--bg),rgba(18,22,28,0));pointer-events:none}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-zone-a{order:1}
-.pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err{display:block}.pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err .ico{float:left;margin:0 10px 0 0;line-height:1}
+.pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err{display:block}.pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err .ico{display:block;margin:0 0 6px;line-height:1}
+/* AX5: значок не отдельной строкой (место по высоте) и не float (balance/pretty рядом с float рвут строки) — абсолютно, заголовку отступ первой строки */
+.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err{position:relative}
+.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err .ico{position:absolute;left:16px;top:calc(14px + (var(--t-body)*1.25 - 22px*var(--ts-i))/2);margin:0}
+.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err h3{text-indent:calc(22px*var(--ts-i) + 10px)}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err{order:2;margin-top:20px;scroll-margin-top:68px}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-actions{order:3;padding:16px 0 0}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-actions::before{display:none}
