@@ -228,7 +228,7 @@ n	area	ru	en	es	note
 227	D	Утро в Валенсии начинается с кофе и шума рынка. Я люблю гулять у моря и говорить с людьми.	Morning in Valencia starts with coffee and the noise of the market. I love walking by the sea and talking to people.	La mañana en Valencia empieza con café y el bullicio del mercado. Me encanta pasear junto al mar y hablar con la gente.	текст для записи образца голоса
 228	C	Участник	Member	Participante	
 229	C	Чат	Chat	Chat	
-230	C	Чат по ссылке защищён ключом в ссылке	The link chat is protected by the key in the link	—	ПРОВЕРИТЬ: похоже на обещание шифрования; при хранении на сервере может быть неверно. Нужна верная формулировка от parrlo-back, перевод — после
+230	C	Ключ к чату — в ссылке: кто её получит, сможет читать переписку.	The chat key is in the link: anyone who has it can read the conversation.	La clave del chat está en el enlace: quien lo tenga podrá leer la conversación.	RG 14.11: обязательное предупреждение (link_chat.md); прежнее «Чат по ссылке защищён ключом в ссылке» снято — звучало как обещание шифрования
 231	C	Чат по ссылке создан	Link chat created	Chat por enlace creado	
 232	C	Чаты	Chats	Chats	
 233	C	Чаты на вашем языке	Chats in your language	Chats en tu idioma	
