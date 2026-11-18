@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Парло, образ 1: разобран на части" data-rig="parrlo-v1" data-rig-version="1">
-  <title>Парло, образ 1: разобран на части (alive-parrlo)</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Parrlo, образ 1: разобран на части" data-rig="parrlo-v1" data-rig-version="1">
+  <title>Parrlo, образ 1: разобран на части (alive-parrlo)</title>
   <!--
     Источник рисунка: persona/v1/speak.svg, listen.svg, think.svg (образ 1, SPEC §23). Формы и цвета перенесены 1:1, ничего не перерисовано.
     Система координат: viewBox 240×240 (= диск аватара). Фигура лежит в группе #figure: translate(12 13.2) scale(0.9) — как в v1.

@@ -37,7 +37,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-me{display:grid;place-items:center;width:var(--icon-btn);height:var(--icon-btn);border-radius:50%;background:#2A3340;color:var(--ink);font:var(--fw-semi) 15px/1 var(--font);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22);flex:none}
 .pc-me:focus-visible{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
 
-/* ---------- Парло (аватар) ---------- */
+/* ---------- Parrlo (аватар) ---------- */
 .pc-persona{width:var(--s,56px);height:var(--s,56px);flex:none;display:block;border-radius:50%}
 .pc-persona svg{width:100%;height:100%;display:block}
 .pc-av{width:var(--s,var(--i-av));height:var(--s,var(--i-av));border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;font:var(--fw-semi) calc(var(--s,var(--i-av))*.38)/1 var(--font)}
@@ -169,7 +169,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-menu button:focus-visible,.pc-menu button.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:-2px}
 .pc-menu .ico{width:calc(36px*var(--ts-i));height:calc(36px*var(--ts-i));border-radius:50%;background:var(--glass);display:grid;place-items:center;font-size:calc(19px*var(--ts-i));color:var(--acc);flex:none}
 .pc-menu .grab{width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.3);margin:4px auto 2px}
-/* панель Парло */
+/* панель Parrlo */
 .pc-pp-bar{display:flex;align-items:center;gap:12px;padding:8px var(--gutter);min-height:64px;flex:none;border-bottom:1px solid var(--line)}
 .pc-pp-bar .who{flex:1;min-width:0}.pc-pp-bar .who b{display:block;font:var(--fw-med) var(--t-row)/1.2 var(--font)}.pc-pp-bar .who span{display:block;font:var(--fw-reg) var(--t-small)/1.3 var(--font);color:var(--muted)}
 .pc-pp-bar .pc-persona{--s:44px}
@@ -557,7 +557,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-app[data-pose=hp] .pc-videoarea:has(.pc-lcard){justify-content:flex-end}
 @container (max-width:599px){.site-devs{zoom:.74;gap:20px}.site-hero{gap:24px}.site-foot{padding-top:12px}}
 
-/* ---------- пакет 3: вход и настройка Парло ---------- */
+/* ---------- пакет 3: вход и настройка Parrlo ---------- */
 .pc-prov{gap:12px}.pc-pv{width:calc(28px*var(--ts-i));height:calc(28px*var(--ts-i));border-radius:50%;background:var(--raised);color:var(--ink);display:grid;place-items:center;font:var(--fw-semi) 14px/1 var(--font);flex:none}
 .pc-spin{width:calc(24px*var(--ts-i));height:calc(24px*var(--ts-i));border-radius:50%;border:3px solid rgba(232,236,241,.25);border-top-color:var(--ink);flex:none;animation:pcspin .9s linear infinite}
 @keyframes pcspin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.pc-spin{animation:none}}
@@ -636,7 +636,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-msgs .pc-limline{margin:0;align-self:stretch}
 .pc-alert .pc-switchrow{flex-shrink:0}
 
-/* ===== Пакет B: профиль контакта, Парло в группе, участники и права, передача админа, вступление ===== */
+/* ===== Пакет B: профиль контакта, Parrlo в группе, участники и права, передача админа, вступление ===== */
 .pc-prof{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding-top:4px}
 .pc-prof .pc-av{--s:calc(96px*(1 + (var(--ts-i) - 1)*.4));font-size:calc(var(--s)*.4)}
 .pc-prof .pc-title{margin:12px 0 0}
