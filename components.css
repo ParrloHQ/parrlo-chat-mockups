@@ -829,4 +829,5 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 
 /* переносы только по словам (решение 19.11, как в iOS и вебе): без расстановки переносов и без разрывов внутри слова; плашки «не утверждено» не рвутся */
 .pc-frame{hyphens:none;-webkit-hyphens:none}
-.pc-tbd:not(.long){white-space:nowrap}
+.pc-row .pv{overflow-wrap:break-word}
+/* плашки: inline-block — переносятся на новую строку целиком, внутри рвутся только если шире всей колонки */
