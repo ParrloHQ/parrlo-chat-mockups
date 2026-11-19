@@ -7,7 +7,7 @@ button{cursor:pointer}
 svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 :focus{outline:none}
 .pc-frame{position:relative;width:var(--W,100%);height:var(--H,100%);background:var(--bg);color:var(--ink);font:var(--fw-reg) var(--t-body)/1.3 var(--font);
- overflow:hidden;container-type:inline-size;-webkit-font-smoothing:antialiased;hyphens:none;overflow-wrap:normal;word-break:normal;
+ overflow:hidden;container-type:inline-size;-webkit-font-smoothing:antialiased;hyphens:none;overflow-wrap:break-word;word-break:normal;
  --safe-t:0px;--safe-b:0px;--safe-l:0px;--safe-r:0px}
 .pc-app{position:absolute;inset:0;display:flex;padding:var(--safe-t) var(--safe-r) var(--safe-b) var(--safe-l)}
 .pc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
