@@ -1,0 +1,36 @@
+# Горизонтальные вылеты текста в кадрах (checks/hov.js). Падает, если в каком-то кадре текст выходит за край
+# кадра или обрезан по X. Ожидаемый результат — 0. GitHub-hosted раннер, без секретов.
+name: hov
+
+on:
+  pull_request:
+    paths:
+      - 'frames/**'
+      - '*.css'
+      - 'fonts/**'
+      - 'checks/hov.js'
+      - '.github/workflows/hov.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hov-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hov:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Playwright (Chromium)
+        run: |
+          npm install --no-save --no-package-lock playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: checks/hov.js — горизонтальных вылетов должно быть 0
+        run: node checks/hov.js
