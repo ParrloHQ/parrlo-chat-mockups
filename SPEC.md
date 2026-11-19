@@ -873,3 +873,14 @@ DOM-проверки (слова, края, горизонтальный скр�
 - **en:** `{n, plural, one {# day} other {# days}}`.
 
 N считать как полные сутки до `purge_at`, с округлением вверх: 29 суток и 2 часа → 30. Меньше суток → «сегодня». Между числом и словом — неразрывный пробел.
+
+## 25. 19.11.2026 — системные диалоги по логике Apple (вопросы parrlo-app #833)
+- **`contact-edit-discard` на iOS 26.** confirmationDialog показан поповером у «Отмена» в шапке листа. Внутри одна кнопка «Не сохранять изменения» (destructive, #FF453A), без заголовка. «Продолжить правку» (role cancel) система в поповере не рисует: касание вне поповера закрывает его, лист и правки остаются. Фон не затемняется. На iOS до 26 тот же диалог — action sheet снизу с «Продолжить правку» отдельным блоком; строка `contact.edit.discard.keep` в коде остаётся. Кадры нарисованы под iOS 26.
+- **«Удалить чат?»** — системный alert. Перенос по слогам в нём не отключается, поэтому текст короче, слова короче, без тире. Утверждено:
+
+| | ru | es | en |
+|---|---|---|---|
+| заголовок | Удалить чат? | ¿Eliminar el chat? | Delete chat? |
+| текст | Переписка удалится у тебя на всех устройствах. Чат вернётся, когда придёт новое сообщение. У собеседника всё останется. | La conversación se eliminará en todos tus dispositivos. El chat volverá cuando llegue un mensaje nuevo. La otra persona la conserva. | The conversation will be deleted on all your devices. The chat comes back when a new message arrives. The other person keeps it. |
+
+NBSP — по `scripts/nbsp_ios.py`. Кадра нет: это системный alert. Проверить на SE и при XL в симуляторе: если система всё же переносит слово по слогам, сообщить дизайну.
