@@ -846,4 +846,9 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* переносы только по словам (решение 19.11, как в iOS и вебе): без расстановки переносов и без разрывов внутри слова; плашки «не утверждено» переносятся целиком */
 .pc-frame{hyphens:none;-webkit-hyphens:none}
 .pc-row .pv{overflow-wrap:break-word}
+.pc-frame :is(div,p,span,h1,h2,h3,h4,b,strong,em,label,a,button,li){min-width:0}
+.pc-frame :is(p,h1,h2,h3,h4){max-width:100%}
+.pc-menu button,.pc-btn{overflow-wrap:anywhere}
+/* у кнопок текст — анонимный flex-элемент, min-width на него не поставить: слово шире кнопки рвётся только когда не помещается */
+/* при break-word текстовые блоки во flex-строках должны уметь сужаться (min-width:0), иначе длинное слово выталкивает блок за край */
 /* плашки: inline-block — переносятся на новую строку целиком, внутри рвутся только если шире всей колонки */
