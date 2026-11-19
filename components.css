@@ -855,3 +855,9 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* при break-word текстовые блоки во flex-строках должны уметь сужаться (min-width:0), иначе длинное слово выталкивает блок за край */
 .pc-tbd{max-width:100%}
 /* плашки: inline-block — переносятся на новую строку целиком, внутри рвутся только если шире всей колонки */
+
+/* AX5: выключатель под текстом, как в iOS при крупном шрифте — заголовок строки помещается целиком, без разрыва слова (решение 19.11). Только узкие колонки; на десктопе места хватает */
+@container (max-width:699px){
+ .pc-frame[data-ts=ax5] .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
+ .pc-frame[data-ts=ax5] .pc-switchrow>div{flex:1 1 100%}
+}
