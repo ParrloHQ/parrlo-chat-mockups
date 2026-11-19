@@ -562,9 +562,11 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-spin{width:calc(24px*var(--ts-i));height:calc(24px*var(--ts-i));border-radius:50%;border:3px solid rgba(232,236,241,.25);border-top-color:var(--ink);flex:none;animation:pcspin .9s linear infinite}
 @keyframes pcspin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.pc-spin{animation:none}}
 .pc-banner--err{background:var(--err-bg);align-items:flex-start}.pc-banner--err .ico{color:var(--err)}
-.pc-linkrow{display:flex;flex-wrap:wrap;gap:0 4px;margin:4px 0 0 -12px}
+.pc-linkrow{display:flex;flex-wrap:wrap;gap:0 16px;margin:4px 0 0 0}
+.pc-linkrow .pc-btn--text{padding-left:0;padding-right:0}
+/* ряд ссылок без отрицательного отступа: текст на той же линии, поле кнопки не выходит за колонку (было margin-left:-12 + поле 12) */
 /* ob-signin*: «Условия использования» и «Политика конфиденциальности» — столбиком, между подписями 8 px (space.2); цель каждой ≥44: у первой запас сверху, у второй снизу, зоны не перекрываются; переносы без висячих слов */
-.pc-app[data-screen^="ob-signin"] .pc-linkrow{flex-direction:column;align-items:flex-start;gap:0;margin:-8px 0 0 -6px}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text{padding:4px 6px;text-align:left;justify-content:flex-start}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text:first-child{align-items:flex-end}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text:last-child{align-items:flex-start}
+.pc-app[data-screen^="ob-signin"] .pc-linkrow{flex-direction:column;align-items:flex-start;gap:0;margin:-8px 0 0 0}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text{padding:4px 0;text-align:left;justify-content:flex-start}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text:first-child{align-items:flex-end}.pc-app[data-screen^="ob-signin"] .pc-linkrow .pc-btn--text:last-child{align-items:flex-start}
 .pc-frame[data-ts=xl] .pc-app[data-screen^="ob-signin"] .pc-prov{padding-left:16px;padding-right:16px;gap:8px}.pc-app[data-screen^="ob-signin"] :is(.pc-title,.pc-banner h3,.pc-prov span){text-wrap:balance}.pc-app[data-screen^="ob-signin"] :is(.pc-lead,.pc-small,.pc-ph,.pc-banner p){text-wrap:pretty}
 /* баннер ошибки входа: текст — pretty; плашка «формулировка» — отдельной строкой, чтобы pretty видел конец фразы */
 .pc-app[data-screen^="ob-signin"] .pc-banner p>.pc-tbd{display:table;margin-top:6px}
@@ -851,6 +853,7 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 .pc-menu button,.pc-btn{overflow-wrap:anywhere}
 /* у кнопок текст — анонимный flex-элемент, min-width на него не поставить: слово шире кнопки рвётся только когда не помещается */
 /* при break-word текстовые блоки во flex-строках должны уметь сужаться (min-width:0), иначе длинное слово выталкивает блок за край */
+.pc-tbd{max-width:100%}
 /* плашки: inline-block — переносятся на новую строку целиком, внутри рвутся только если шире всей колонки */
 
 /* AX5: выключатель под текстом, как в iOS при крупном шрифте — заголовок строки помещается целиком, без разрыва слова (решение 19.11). Только узкие колонки; на десктопе места хватает */
