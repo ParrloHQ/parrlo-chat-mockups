@@ -823,3 +823,6 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 
 /* пустой .pc-onb-body не участвует в раскладке: его padding-top 20 сдвигал центрированный блок на 10 px против веба (сверка 18.11, п.4). Позы Duo не затронуты — там тело занимает ячейку сетки */
 .pc-app:not([data-pose]) .pc-onb-body:empty{display:none}
+
+/* значок Parrlo/ИИ — монохромный попугай (ключ spark из site-v4/screens.js) вместо искры; решение 18.11 «без искр и знаков ИИ» */
+svg.ic.ic-parrot{fill:currentColor;stroke:none}
