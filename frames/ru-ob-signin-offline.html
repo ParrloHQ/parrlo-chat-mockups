@@ -3,7 +3,7 @@
 <style>html{background:#0A0C0F}body{padding:24px;margin:0;font:13px Inter,sans-serif;color:#9AA4B2}
 .grid{display:flex;flex-wrap:wrap;gap:36px 28px;align-items:flex-start}.fig figcaption{margin-top:8px;font-size:12px}
 .fig .pc-frame{box-shadow:0 0 0 1px #2a3038}body.ann .ovl{display:block!important}.ovl[hidden]{display:none}
-body>h1{font:800 18px Nunito,Inter;color:#E8ECF1;margin-bottom:16px}</style><style id="sie-css">/* ob-signin-*-error, -cancel, -offline, крупный шрифт (XL/AX5, где баннер иначе под кнопками): баннер должен быть виден — кнопки не закреплены,
+body>h1{font:800 18px Nunito,Inter;color:#E8ECF1;margin-bottom:16px}/* AX5: баннер компактнее — без значка (он декоративный, цвет и заголовок уже говорят об ошибке), поля 12/14; заголовок на всю ширину, без разрыва слова (19.11) */.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err{padding:12px}.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err h3{font-weight:var(--fw-semi)}</style><style id="sie-css">/* ob-signin-*-error, -cancel, -offline, крупный шрифт (XL/AX5, где баннер иначе под кнопками): баннер должен быть виден — кнопки не закреплены,
  идут сразу за баннером, юр. текст — после кнопок; колонка прокручена к баннеру, полоса «Назад + шаги» закреплена */
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-col{overflow-y:auto;scrollbar-width:none}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-col::-webkit-scrollbar{display:none}
@@ -15,8 +15,8 @@ body>h1{font:800 18px Nunito,Inter;color:#E8ECF1;margin-bottom:16px}</style><sty
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err{display:block}.pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err .ico{display:block;margin:0 0 6px;line-height:1}
 /* AX5: значок не отдельной строкой (место по высоте) и не float (balance/pretty рядом с float рвут строки) — абсолютно, заголовку отступ первой строки */
 .pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err{position:relative}
-.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err .ico{position:absolute;left:16px;top:calc(14px + (var(--t-body)*1.25 - 22px*var(--ts-i))/2);margin:0}
-.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err h3{text-indent:calc(22px*var(--ts-i) + 10px)}
+.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err .ico{display:none}
+.pc-frame.sie-xl[data-ts=ax5] .pc-app:not([data-pose]) .pc-banner--err h3{text-indent:0}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-banner--err{order:2;margin-top:20px;scroll-margin-top:68px}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-actions{order:3;padding:16px 0 0}
 .pc-frame.sie-xl .pc-app:not([data-pose]) .pc-onb-actions::before{display:none}
