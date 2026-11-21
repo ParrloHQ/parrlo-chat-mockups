@@ -580,7 +580,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-es .ico{width:calc(72px*(1 + (var(--ts-i) - 1)*.4));height:calc(72px*(1 + (var(--ts-i) - 1)*.4));border-radius:50%;background:var(--surface);color:var(--muted);display:grid;place-items:center}
 .pc-es .ico .ic{width:48%;height:48%}
 .pc-es h2{font:var(--fw-semi) var(--t-lead)/1.2 var(--font);color:var(--ink)}
-.pc-es p{font:var(--fw-reg) var(--t-body)/1.4 var(--font);color:var(--muted);max-width:32ch}
+.pc-es p{font:var(--fw-reg) var(--t-body)/1.4 var(--font);color:var(--muted);max-width:min(32ch,100%)}
 .pc-es .pc-btn{margin-top:8px;max-width:320px}
 .pc-onb-zone-a .pc-es{padding-top:48px}
 .pc-banner--off{background:var(--warn-bg);align-items:flex-start}.pc-banner--off .ico{color:var(--beak)}
@@ -848,9 +848,9 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* переносы только по словам (решение 19.11, как в iOS и вебе): без расстановки переносов и без разрывов внутри слова; плашки «не утверждено» переносятся целиком */
 .pc-frame{hyphens:none;-webkit-hyphens:none}
 .pc-row .pv{overflow-wrap:break-word}
-.pc-frame :is(div,p,span,h1,h2,h3,h4,b,strong,em,label,a,button,li){min-width:0}
-.pc-frame :is(p,h1,h2,h3,h4){max-width:100%}
-.pc-menu button,.pc-btn{overflow-wrap:anywhere}
+.pc-frame :where(div,p,span,h1,h2,h3,h4,b,strong,em,label,a,button,li){min-width:0}.pc-frame .ico{flex-shrink:0}
+.pc-frame :where(p,h1,h2,h3,h4){max-width:100%}
+.pc-menu button,.pc-btn{overflow-wrap:break-word;max-width:100%}
 /* у кнопок текст — анонимный flex-элемент, min-width на него не поставить: слово шире кнопки рвётся только когда не помещается */
 /* при break-word текстовые блоки во flex-строках должны уметь сужаться (min-width:0), иначе длинное слово выталкивает блок за край */
 .pc-tbd{max-width:100%}
