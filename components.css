@@ -376,6 +376,9 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-pp-body.chat>.pc-pp-inner{flex:none}
 .pc-pp-bar .pc-av{--s:44px;font-size:17px}
 .pc-pp-bar .who b,.pc-pp-bar .who span{overflow-wrap:break-word}
+/* шапка чата не растёт с размером текста выше 20/15 px — как заголовок навигации iOS; иначе при XL/AX5 имя рвётся внутри слова */
+.pc-pp-bar .who b{font-size:min(var(--t-row),20px)}
+.pc-pp-bar .who span{font-size:min(var(--t-small),15px)}
 /* чипы быстрых просьб */
 .pc-chips{display:flex;flex-wrap:wrap;gap:8px}
 .pc-chip{display:inline-flex;align-items:center;min-height:var(--tap);padding:8px 16px;border-radius:var(--r-pill);background:var(--glass);color:var(--ink);font:var(--fw-med) var(--t-small)/1.2 var(--font);text-align:left}
@@ -604,7 +607,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-setrow .ico .ic{width:60%;height:60%}
 .pc-setrow .t{flex:1 1 auto;min-width:0}
 /* подпись и значение строки не сжимаются уже самого длинного слова (иначе разрыв внутри слова); при XL/AX5 слово может быть шире строки — там остаётся перенос у края */
-.pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-setrow>:is(.t,.v){min-width:auto}.pc-setrow .s{display:block;font:var(--fw-reg) var(--t-small)/1.3 var(--font);color:var(--muted);margin-top:2px}
+.pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-setrow>:is(.t,.v){min-width:auto}
+.pc-setrow .s{display:block;font:var(--fw-reg) var(--t-small)/1.3 var(--font);color:var(--muted);margin-top:2px}
 .pc-setrow .v{flex:0 1 auto;color:var(--muted);font:var(--fw-reg) var(--t-preview)/1.2 var(--font);text-align:right;max-width:48%}
 .pc-setrow>.ic{width:calc(20px*var(--ts-i));height:calc(20px*var(--ts-i));color:var(--muted);flex:none}
 .pc-setrow--danger .t{color:#FF8C80}
@@ -862,8 +866,10 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* узкий экран (SE): у шапки чата зазор 8 — заголовок группы не рвётся внутри слова */
 @container (max-width:399px){.pc-pp-bar{gap:8px}}
 @container (max-width:699px){
- .pc-frame[data-ts=ax5] .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
- .pc-frame[data-ts=ax5] .pc-switchrow>div{flex:1 1 100%}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow>div{flex:1 1 100%}
+ /* баннер при AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
+ .pc-frame[data-ts=ax5] .pc-banner>.ico{display:none}
  /* строка настроек при AX5: значок отдельной строкой над текстом, текст на всю ширину */
  .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico){display:grid;grid-template-columns:minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:center;padding-block:12px}
  .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>.ico{grid-column:1/-1;justify-self:start}
