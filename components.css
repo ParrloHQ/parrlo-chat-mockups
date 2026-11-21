@@ -485,7 +485,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-mlist li span{flex:1;min-width:0;font:var(--fw-reg) var(--t-body)/1.3 var(--font);padding:8px 0;overflow-wrap:break-word}
 .pc-sech{font:var(--fw-semi) var(--t-small)/1.2 var(--font);color:var(--muted);margin-top:20px}
 /* диалог */
-.pc-alert{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;width:min(360px,calc(100% - 32px));max-height:calc(100% - 32px);overflow-y:auto;background:var(--surface);border-radius:var(--r-xl);padding:20px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px var(--line);display:flex;flex-direction:column;gap:10px;text-align:center;align-items:stretch}
+.pc-alert{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;width:min(calc(360px*var(--ts-i,1)),calc(100% - 32px));max-height:calc(100% - 32px);overflow-y:auto;background:var(--surface);border-radius:var(--r-xl);padding:20px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px var(--line);display:flex;flex-direction:column;gap:10px;text-align:center;align-items:stretch}
 .pc-alert .pc-persona{--s:calc(64px*(1 + (var(--ts-i) - 1)*.3));align-self:center}
 .pc-alert h2{font:var(--fw-semi) var(--t-lead)/1.2 var(--font)}
 .pc-alert p{font:var(--fw-reg) var(--t-preview)/1.4 var(--font);color:var(--muted)}
@@ -602,8 +602,10 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-setrow:hover{background:var(--raised)}.pc-setrow:focus-visible{outline:var(--focus-w) solid var(--focus);outline-offset:calc(var(--focus-off) * -1)}
 .pc-setrow .ico{width:calc(32px*var(--ts-i));height:calc(32px*var(--ts-i));border-radius:var(--r-sm);background:var(--raised);color:var(--acc);display:grid;place-items:center;flex:none}
 .pc-setrow .ico .ic{width:60%;height:60%}
-.pc-setrow .t{flex:1;min-width:0}.pc-setrow .s{display:block;font:var(--fw-reg) var(--t-small)/1.3 var(--font);color:var(--muted);margin-top:2px}
-.pc-setrow .v{color:var(--muted);font:var(--fw-reg) var(--t-preview)/1.2 var(--font);text-align:right;max-width:48%}
+.pc-setrow .t{flex:1 1 auto;min-width:0}
+/* подпись и значение строки не сжимаются уже самого длинного слова (иначе разрыв внутри слова); при XL/AX5 слово может быть шире строки — там остаётся перенос у края */
+.pc-frame:not([data-ts=xl]):not([data-ts=ax5]) .pc-setrow>:is(.t,.v){min-width:auto}.pc-setrow .s{display:block;font:var(--fw-reg) var(--t-small)/1.3 var(--font);color:var(--muted);margin-top:2px}
+.pc-setrow .v{flex:0 1 auto;color:var(--muted);font:var(--fw-reg) var(--t-preview)/1.2 var(--font);text-align:right;max-width:48%}
 .pc-setrow>.ic{width:calc(20px*var(--ts-i));height:calc(20px*var(--ts-i));color:var(--muted);flex:none}
 .pc-setrow--danger .t{color:#FF8C80}
 .pc-grpai{display:flex;align-items:flex-start;gap:8px;padding:6px var(--gutter);background:var(--surface);border-bottom:1px solid var(--line);flex:none}
@@ -708,7 +710,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 
 /* ================= АДАПТАЦИЯ 28.10 (пункт 2): Duo ================= */
 /* диалог в закрытом Duo / закрытом ландшафте (рейка 84 справа): центр — по безопасной области, не по кадру; не заходит на рейку и зону камеры (x ≥ 382, y < 174) */
-.pc-frame:has(.pc-app[data-rail]:not([data-pose])) > .pc-alert{left:calc((100% - 84px)/2);top:calc((100% - var(--safe-b))/2);width:min(360px,calc(100% - 84px - 32px));max-height:calc(100% - var(--safe-b) - 32px)}
+.pc-frame:has(.pc-app[data-rail]:not([data-pose])) > .pc-alert{left:calc((100% - 84px)/2);top:calc((100% - var(--safe-b))/2);width:min(calc(360px*var(--ts-i,1)),calc(100% - 84px - 32px));max-height:calc(100% - var(--safe-b) - 32px)}
 /* пока открыт диалог, рейка под скримом (не светится поверх затемнения); камера остаётся чёрной */
 .pc-frame:has(> .pc-scrim) > .pc-rail{z-index:19}
 /* полураскрытый портрет: старые элементы ленты, не помещающиеся целиком над полем, скрыты вместо обрезки на границе (аналог прокрутки к низу) */
@@ -857,6 +859,8 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* плашки: inline-block — переносятся на новую строку целиком, внутри рвутся только если шире всей колонки */
 
 /* AX5: выключатель под текстом, как в iOS при крупном шрифте — заголовок строки помещается целиком, без разрыва слова (решение 19.11). Только узкие колонки; на десктопе места хватает */
+/* узкий экран (SE): у шапки чата зазор 8 — заголовок группы не рвётся внутри слова */
+@container (max-width:399px){.pc-pp-bar{gap:8px}}
 @container (max-width:699px){
  .pc-frame[data-ts=ax5] .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
  .pc-frame[data-ts=ax5] .pc-switchrow>div{flex:1 1 100%}
