@@ -864,4 +864,9 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 @container (max-width:699px){
  .pc-frame[data-ts=ax5] .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
  .pc-frame[data-ts=ax5] .pc-switchrow>div{flex:1 1 100%}
+ /* строка настроек при AX5: значок отдельной строкой над текстом, текст на всю ширину */
+ .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico){display:grid;grid-template-columns:minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:center;padding-block:12px}
+ .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>.ico{grid-column:1/-1;justify-self:start}
+ .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>.t{grid-column:1;grid-row:2}
+ .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>:not(.ico,.t){grid-row:2}
 }
