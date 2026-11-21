@@ -870,9 +870,14 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow>div{flex:1 1 100%}
  /* баннер при AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
  .pc-frame[data-ts=ax5] .pc-banner>.ico{display:none}
- /* строка настроек при AX5: значок отдельной строкой над текстом, текст на всю ширину */
- .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico){display:grid;grid-template-columns:minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:center;padding-block:12px}
- .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>.ico{grid-column:1/-1;justify-self:start}
- .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>.t{grid-column:1;grid-row:2}
- .pc-frame[data-ts=ax5] .pc-setrow:has(>.ico)>:not(.ico,.t){grid-row:2}
+ /* строка настроек при XL/AX5: значок отдельной строкой над текстом, текст на всю ширину */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av)){display:grid;grid-template-columns:minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:center;padding-block:12px}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>:is(.ico,.pc-av){grid-column:1/-1;justify-self:start}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>.t{grid-column:1;grid-row:2}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>:not(.ico,.pc-av,.t){grid-row:2}
+ /* строки с отметкой, флажком или значком (выбор, флажок, карточка, пункт согласия) при XL/AX5: отметка/значок первой строкой, текст на всю ширину под ней, кнопка — ниже */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact){flex-wrap:wrap;row-gap:8px;align-items:flex-start}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:is(.ico,.mk,.bx,.pc-av,.pc-persona){order:1}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:is(.t,.tx,div){order:2;flex:1 1 100%}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:not(.ico,.mk,.bx,.pc-av,.pc-persona,.t,.tx,div){order:3}
 }
