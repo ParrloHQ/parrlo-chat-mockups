@@ -75,7 +75,8 @@ const probe = ([allowKeys, TOL]) => {
 };
 
 (async () => {
-  const b = await chromium.launch();
+  // без хинтинга шрифта: ширины глифов дробные и одинаковые на разных машинах (иначе Linux-раннер и локальная машина округляют по-разному)
+  const b = await chromium.launch({args: ['--font-render-hinting=none']});
   const p = await b.newPage({viewport: {width: 1600, height: 1300}});
   const allowAll = writeAllow || !fs.existsSync(ALLOW) ? [] : fs.readFileSync(ALLOW, 'utf8').split('\n').filter((x) => x && !x.startsWith('#'));
   const found = [], fitsAll = new Set();
