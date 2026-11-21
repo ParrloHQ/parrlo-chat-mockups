@@ -4,6 +4,7 @@
 // Разрыв допустим только у слова шире экрана (ширина кадра − 32): так переносит и iOS.
 // Остальные места XL/AX5, что были на старте, перечислены в checks/wbr-allow.txt; список только сокращается:
 // новое место → ошибка; место из списка, которого больше нет, → ошибка (удали строку из списка).
+// Запас TOL px на разницу шрифтов между машинами: разрыв «впритык» не считается новым, строка списка «впритык» — не устаревшей.
 // Код выхода 1 при ошибке.
 const {chromium} = require('playwright');
 const fs = require('fs');
@@ -16,8 +17,10 @@ let screens = argv.filter((a) => !a.startsWith('--'));
 const partial = screens.length > 0;
 if (!partial) screens = [...new Set(fs.readdirSync(R + '/frames').filter((f) => /^ru-.*\.html$/.test(f)).map((f) => f.slice(3, -5)))].sort();
 
-const probe = () => {
-  const res = [];
+const TOL = 3; // px: запас на разницу шрифтов между машинами
+const probe = ([allowKeys, TOL]) => {
+  const res = [], fits = [];
+  const allow = new Set(allowKeys);
   const L = /[\p{L}\p{N}]/u;
   const rg = document.createRange();
   document.querySelectorAll('figure').forEach((fg) => {
@@ -36,7 +39,7 @@ const probe = () => {
       if (cs.display === 'none' || cs.visibility === 'hidden') continue;
       rg.selectNodeContents(n);
       const all = [...rg.getClientRects()].filter((r) => r.width);
-      if (all.length < 2) continue;
+      const lineW = Math.max(...all.map((r) => r.width)); // самая длинная строка узла ≈ ширина строки
       const re = /\S+/g;
       let m;
       while ((m = re.exec(t))) {
@@ -44,7 +47,12 @@ const probe = () => {
         rg.setStart(n, m.index);
         rg.setEnd(n, m.index + m[0].length);
         const rs = [...rg.getClientRects()].filter((r) => r.width);
-        if (rs.length < 2 || Math.max(...rs.map((r) => r.top)) - Math.min(...rs.map((r) => r.top)) < 2) continue;
+        const key = id + ' | ' + m[0].replace(/^[«“"(]+|[»”"),.:;!?]+$/g, '');
+        if (rs.length < 2 || Math.max(...rs.map((r) => r.top)) - Math.min(...rs.map((r) => r.top)) < 2) {
+          // слово целое; если оно в списке — точно ли влезает (с запасом)? Только в многострочном узле, где ширина строки известна
+          if (allow.has(key) && all.length > 1 && rs[0] && rs[0].width < lineW - TOL) fits.push(key);
+          continue;
+        }
         // где именно перенос: между двумя буквами/цифрами — разрыв; после дефиса — нормально
         let prevTop = null, broken = false;
         for (let i = 0; i < m[0].length; i++) {
@@ -58,23 +66,28 @@ const probe = () => {
         if (!broken) continue;
         const wide = rs.reduce((s, r) => s + r.width, 0);
         if (wide > screenW) continue; // шире экрана — допустимо
-        res.push(id + ' | ' + m[0].replace(/^[«“"(]+|[»”"),.:;!?]+$/g, ''));
+        if (wide - Math.max(...rs.map((r) => r.width)) <= TOL && !allow.has(key)) continue; // рвётся «впритык» — на другой машине может и не рваться
+        res.push(key);
       }
     }
   });
-  return res;
+  return {res, fits};
 };
 
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({viewport: {width: 1600, height: 1300}});
-  const found = [];
+  const allowAll = writeAllow || !fs.existsSync(ALLOW) ? [] : fs.readFileSync(ALLOW, 'utf8').split('\n').filter((x) => x && !x.startsWith('#'));
+  const found = [], fitsAll = new Set();
   for (const s of screens) for (const l of ['ru', 'es', 'en']) {
     const f = `${R}/frames/${l}-${s}.html`;
     if (!fs.existsSync(f)) continue;
     await p.goto('file://' + f);
     await p.waitForTimeout(100);
-    for (const x of await p.evaluate(probe)) found.push(l + ' ' + x);
+    const keys = allowAll.filter((x) => x.startsWith(l + ' ' + s + '__')).map((x) => x.slice(3));
+    const {res, fits} = await p.evaluate(probe, [keys, writeAllow ? -1e9 : TOL]);
+    for (const x of res) found.push(l + ' ' + x);
+    for (const x of fits) fitsAll.add(l + ' ' + x);
   }
   await b.close();
   const uniq = [...new Set(found)].sort();
@@ -86,7 +99,10 @@ const probe = () => {
   const allow = new Set(fs.existsSync(ALLOW) ? fs.readFileSync(ALLOW, 'utf8').split('\n').filter((x) => x && !x.startsWith('#')) : []);
   const fresh = uniq.filter((x) => !allow.has(x));
   const inScope = (x) => screens.includes(x.split(' ')[1].split('__')[0]);
-  const gone = [...allow].filter((x) => inScope(x) && !uniq.includes(x));
+  // устарела строка списка — только если слово сейчас целое и влезает в строку с запасом TOL
+  const gone = [...allow].filter((x) => inScope(x) && !uniq.includes(x) && fitsAll.has(x));
+  const unsure = [...allow].filter((x) => inScope(x) && !uniq.includes(x) && !fitsAll.has(x));
+  if (unsure.length) console.log(`wbr: в списке ${unsure.length} строк, где слово сейчас целое, но впритык (или в однострочном блоке) — не ошибка; при правке экрана проверь и удали`);
   fresh.forEach((x) => console.log('новый разрыв: ' + x));
   gone.forEach((x) => console.log('уже исправлено — удали из checks/wbr-allow.txt: ' + x));
   console.log(`wbr: новых разрывов — ${fresh.length}, устаревших строк в списке — ${gone.length}, в списке — ${allow.size} (экранов ${screens.length} × ru/es/en)`);
