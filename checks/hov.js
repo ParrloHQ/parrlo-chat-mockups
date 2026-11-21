@@ -1,5 +1,6 @@
 // Горизонтальные вылеты текста в кадрах: текст за краем кадра или обрезан по X обрезающим блоком.
 //   node checks/hov.js [экран ...]       — без аргументов: все экраны frames/{ru,es,en}-*.html
+// Кадры SE (375) проверяются ещё и на ширине 360 (суффикс @360) — ширина проверки веба.
 // Печатает найденное и итог; код выхода 1, если есть вылеты. Ожидаемый результат — 0.
 // Не считается вылетом:
 //   — блоки нулевого размера (контейнер прокрутки в позах Duo hp/hl и на входе при XL — это раскладка сеткой);
@@ -12,10 +13,13 @@ const R = path.resolve(__dirname, '..');
 let screens = process.argv.slice(2);
 if (!screens.length) screens = [...new Set(fs.readdirSync(R + '/frames').filter((f) => /^ru-.*\.html$/.test(f)).map((f) => f.slice(3, -5)))].sort();
 
-const probe = () => {
+const probe = (w360) => {
   const res = [];
+  // второй проход: кадры SE (375) сужены до 360 — ширина проверки веба
+  if (w360) document.querySelectorAll('figure[data-dev="se"] .pc-frame').forEach((fr) => fr.style.setProperty('--W', '360px'));
   document.querySelectorAll('figure .pc-frame').forEach((fr) => {
-    const id = fr.closest('figure').dataset.id;
+    if (w360 && fr.closest('figure').dataset.dev !== 'se') return;
+    const id = fr.closest('figure').dataset.id + (w360 ? '@360' : '');
     const F = fr.getBoundingClientRect();
     fr.querySelectorAll('*').forEach((e) => {
       if (e.closest('.pc-sr')) return;
@@ -49,9 +53,11 @@ const probe = () => {
   for (const s of screens) for (const l of ['ru', 'es', 'en']) {
     const f = `${R}/frames/${l}-${s}.html`;
     if (!fs.existsSync(f)) continue;
-    await p.goto('file://' + f);
-    await p.waitForTimeout(100);
-    for (const x of await p.evaluate(probe)) all.push(l + ' ' + x);
+    for (const w360 of [false, true]) {
+      await p.goto('file://' + f);
+      await p.waitForTimeout(100);
+      for (const x of await p.evaluate(probe, w360)) all.push(l + ' ' + x);
+    }
   }
   await b.close();
   all.forEach((x) => console.log(x));
