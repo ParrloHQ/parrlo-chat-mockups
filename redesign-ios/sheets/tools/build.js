@@ -88,9 +88,10 @@ const T = {
   gCall: ['Идёт групповой звонок', 'Llamada de grupo en curso', 'Group call in progress'],
   gCallS: ['Лена и Marco уже в звонке', 'Lena y Marco ya están en la llamada', 'Lena and Marco are on the call'],
   join: ['Присоединиться', 'Unirse', 'Join'],
-  gSys: ['Анна присоединилась к группе', 'Ana se ha unido al grupo', 'Anna joined the group'],
+  // ru: прошедшее время с родом переписано нейтрально (не утверждено)
+  gSys: ['Анна теперь в группе <span class="tbd">формулировка: не утверждено</span>', 'Ana se ha unido al grupo', 'Anna joined the group'],
   lena: ['Лена', 'Lena', 'Lena'],
-  g1: ['Оплатила свет, чек выше', 'He pagado la luz, recibo arriba', 'Paid the electricity, receipt above'],
+  g1: ['Свет оплачен, чек выше <span class="tbd">формулировка: не утверждено</span>', 'He pagado la luz, recibo arriba', 'Paid the electricity, receipt above'],
   g2: ['Кто принесёт хлеб?', '¿Quién trae el pan?', 'Who’s bringing the bread?'],
   g3: ['Я возьму, заеду в семь', 'Lo traigo yo, paso a las siete', 'I’ll get it, stopping by at seven'],
   // лист перевода
@@ -205,10 +206,10 @@ const t = (k) => { const v = T[k]; if (!v) throw new Error('нет текста 
 // список чатов (frames/*-home-menu.html); ru «Позвони, когда будешь свободен» заменено утверждённым S1 «Позвони, как сможешь. Ничего срочного 🙂» (без рода)
 const HOME = [
   [['av-0', 'П', 'Петя', '09:12', 'Завтра в 10 в офисе?', '2'], ['av-0', 'P', 'Pedro', '09:12', '¿Mañana a las 10 en la oficina?', '2'], ['av-0', 'P', 'Pete', '09:12', 'Tomorrow at 10 at the office?', '2']],
-  [['av-1', 'К', 'Квартира', '08:47', '<em>Лена:</em> оплатила свет, чек выше', '5'], ['av-1', 'P', 'Piso', '08:47', '<em>Lena:</em> ha pagado la luz, recibo arriba', '5'], ['av-1', 'F', 'Flat', '08:47', '<em>Lena:</em> paid the electricity, receipt above', '5']],
+  [['av-1', 'К', 'Квартира', '08:47', '<em>Лена:</em> свет оплачен, чек выше <span class="tbd">формулировка: не утверждено</span>', '5'], ['av-1', 'P', 'Piso', '08:47', '<em>Lena:</em> ha pagado la luz, recibo arriba', '5'], ['av-1', 'F', 'Flat', '08:47', '<em>Lena:</em> paid the electricity, receipt above', '5']],
   [['av-2', 'M', 'Marco', 'Вчера', 'Увидимся у входа в девять'], ['av-2', 'M', 'Marco', 'Ayer', 'Nos vemos en la entrada a las nueve'], ['av-2', 'M', 'Marco', 'Yesterday', 'See you at the entrance at nine']],
   [['av-3', 'М', 'Мама', 'Вчера', 'Позвони, как сможешь. Ничего срочного&nbsp;🙂'], ['av-3', 'M', 'Mamá', 'Ayer', 'Llámame cuando estés libre'], ['av-3', 'M', 'Mum', 'Yesterday', 'Call me when you’re free']],
-  [['av-1', 'А', 'Анна Л.', 'Вт', 'Спасибо, всё получила'], ['av-1', 'A', 'Ana L.', 'Mar', 'Gracias, lo he recibido todo'], ['av-1', 'A', 'Anna L.', 'Tue', 'Thanks, got everything']],
+  [['av-1', 'А', 'Анна Л.', 'Вт', 'Спасибо, всё пришло <span class="tbd">формулировка: не утверждено</span>'], ['av-1', 'A', 'Ana L.', 'Mar', 'Gracias, lo he recibido todo'], ['av-1', 'A', 'Anna L.', 'Tue', 'Thanks, got everything']],
   [['av-2', 'М', 'Макеты', 'Пн', 'Файл с макетами обновлён'], ['av-2', 'M', 'Maquetas', 'Lun', 'El archivo de maquetas está actualizado'], ['av-2', 'M', 'Mockups', 'Mon', 'The mockups file is updated']],
 ];
 
@@ -239,7 +240,8 @@ const bubble = (b) => {
 const group = (own, items) => `<div class="grp ${own ? 'out' : 'in'}">${items.map((it, i) => bubble({ ...it, own, tail: it.tail ?? i === items.length - 1 })).join('')}</div>`;
 
 const navChat = ({ title, sub, av, avC }) => `<header class="nav"><div class="bar"><span class="cbtn" aria-label="${t('back')}">${ic('back')}</span><div class="ttl"><b>${title}</b><span>${sub}</span></div>${av}</div></header>`;
-const composer = (ph = t('msg'), cls = '') => `<div class="comp ${cls}"><span class="cbtn">${ic('clip')}</span><div class="field ${ph.length > 14 ? 'wrap' : ''}"><span>${ph}</span>${ic('smile')}</div><span class="cbtn">${ic('mic')}</span></div>`;
+// поле ввода без иконок (решение: и в покое тоже) — скрепка ○ · поле · микрофон ○, как s2-chat-A после PR 71
+const composer = (ph = t('msg'), cls = '') => `<div class="comp ${cls}"><span class="cbtn">${ic('clip')}</span><div class="field ${ph.length > 14 ? 'wrap' : ''}"><span>${ph}</span></div><span class="cbtn">${ic('mic')}</span></div>`;
 const marcoNav = (off) => navChat({ title: 'Marco', sub: t(off ? 'marcoSubOff' : 'marcoSub'), av: `<span class="av av36" style="background:var(--av-2)">M</span>` });
 
 // фон: чат с Marco (frames/*-chat-tr-sheet.html и др.)
