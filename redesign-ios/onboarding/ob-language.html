@@ -51,7 +51,7 @@ h.dataset.theme='dark';var l=q.get('l');h.lang=(l==='es'||l==='en')?l:'ru';})()<
     L=Math.max(L,ab.left+parseFloat(ac.paddingLeft)+parseFloat(ac.borderLeftWidth)-0.5);R=Math.min(R,ab.right-parseFloat(ac.paddingRight)-parseFloat(ac.borderRightWidth)+0.5);if(a.classList.contains('screen'))break}
    var bad=false;
    var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT), n;
-   while(!bad&&(n=w.nextNode())){if(n.parentElement.closest(sel)!==el)continue;var re=/[^ \n\t]+/g,m;while((m=re.exec(n.data))){var r=document.createRange();r.setStart(n,m.index);r.setEnd(n,m.index+m[0].length);
+   while(!bad&&(n=w.nextNode())){if(n.parentElement.closest(sel)!==el)continue;var re=/[^ \n\t\u00a0]+/g,m;while((m=re.exec(n.data))){var r=document.createRange();r.setStart(n,m.index);r.setEnd(n,m.index+m[0].length);
      var rs=[].slice.call(r.getClientRects()).filter(function(x){return x.width>0});
      var tops={};rs.forEach(function(x){tops[Math.round(x.top)]=1});
      if(Object.keys(tops).length>1){bad=true;break}
@@ -67,13 +67,14 @@ h.dataset.theme='dark';var l=q.get('l');h.lang=(l==='es'||l==='en')?l:'ru';})()<
 (function(){var h=document.documentElement,t=document.getElementById('l-'+h.lang),m=document.querySelector('main');
 m.className='screen '+t.dataset.cls;m.appendChild(t.content.cloneNode(true));
 // порядок: раскладка → unglue → WordFit; data-ready — после обоих
-// раскладка → unglue → WordFit (склеенная цепочка считается одним словом: шрифт уменьшается, пока она не влезет) → unglue для оставшихся
+// порядок (решение Мурата 22.11): раскладка → unglue → WordFit (только одиночные слова, не ниже 28)
+// Если WordFit уменьшил шрифт блока, решения unglue в нём устарели: склейку в этом блоке возвращаем и снимаем заново
+// при новом шрифте (шрифт ради склейки не меняется).
 document.fonts.ready.then(function(){var orig=new Map(),tw=document.createTreeWalker(m,NodeFilter.SHOW_TEXT),x;
  while((x=tw.nextNode()))if(x.data.indexOf(' ')>=0)orig.set(x,x.data);
- window.unglue();
- orig.forEach(function(v,k){k.data=v});
- wordfit();
- window.unglue();
+ window.unglue();wordfit();
+ var fit=document.querySelectorAll('[data-wf]');
+ if(fit.length){fit.forEach(function(el){var w2=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),y;while((y=w2.nextNode()))if(orig.has(y))y.data=orig.get(y);});window.unglue();}
  var s=document.querySelector('.susp'),g=document.querySelector('.msgs');if(s&&g)g.style.paddingBottom=(s.offsetHeight+8)+'px';
  document.body.dataset.ready='1';});})();</script>
 </body></html>
