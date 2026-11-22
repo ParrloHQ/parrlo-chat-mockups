@@ -78,7 +78,7 @@ const probe = ({doHov, doWbr, W}) => {
         }
       }
       // висячее короткое слово: следующее слово этого же текста начинается на строке ниже
-      const bare = wd.replace(/^[«“"(¿¡]+/, '').toLowerCase();
+      const bare = wd.replace(/^[«“"(\[¿¡]+/, '').toLowerCase();
       if (i + 1 < words.length && short.has(bare) && /[\p{L}\p{N}]$/u.test(wd)) {
         const nx = rectOf(n, words[i + 1].s, words[i + 1].s + 1)[0];
         const last = rs[rs.length - 1];
@@ -86,7 +86,7 @@ const probe = ({doHov, doWbr, W}) => {
           // склеенная цепочка: короткие слова подряд до первого обычного («не на перевод.», «There is no password»).
           // Висячее слово — ошибка, только если вся цепочка помещается в строку блока; иначе склейку снимает
           // tools/unglue.js, и целое слово важнее склейки (решение 22.11: раскладка → снять склейку → WordFit).
-          const isShort = (x) => short.has(x.replace(/^[«“"(¿¡]+/, '').toLowerCase()) && /[\p{L}\p{N}]$/u.test(x);
+          const isShort = (x) => short.has(x.replace(/^[«“"(\[¿¡]+/, '').toLowerCase()) && /[\p{L}\p{N}]$/u.test(x);
           let j = i, k = i + 1;
           while (j > 0 && isShort(words[j - 1].w)) j--;
           while (k < words.length - 1 && isShort(words[k].w)) k++;
