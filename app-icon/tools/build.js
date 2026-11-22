@@ -34,13 +34,14 @@ const svg = (bg, inner) => `<svg xmlns="http://www.w3.org/2000/svg" width="1024"
 const P = { body: 'grad', eye: INK, beak: INK, smile: W };
 const PD = { body: 'grad', eye: INK, beak: MINT, smile: W };            // как тёмная иконка Parrlo
 const PT = { body: '#D8D8D8', eye: '#000', beak: '#6E6E6E', smile: '#000' }; // tinted — оттенки серого
-const TA = 'translate(10 180) scale(0.8)';
+const TA = 'translate(0 215) scale(0.76)';
+const BA = [540, 120, 380, 265, 132], DA = [730, 252, 86, 31]; // облачко A крупнее — чтобы отличалось от Parrlo в 29 pt и в папке
 // A — как Parrlo (мятный фон) + тёмное облачко «…» сверху справа. Ближе всего к Parrlo — почти его копия.
 const A = {
-  name: 'A · попугай Parrlo с облачком «…» (ближе всего к Parrlo — может путаться)',
-  light: svg(MINT, parrot(P, TA) + bubble(600, 160, 310, 215, 108, INK, 'l') + dots(755, 268, 72, 25, MINT)),
-  dark: svg(INK, parrot(PD, TA) + bubble(600, 160, 310, 215, 108, MINT, 'l') + dots(755, 268, 72, 25, INK)),
-  tinted: svg('#000', parrot(PT, TA) + bubble(600, 160, 310, 215, 108, '#8A8A8A', 'l') + dots(755, 268, 72, 25, '#000')),
+  name: 'A · попугай Parrlo с облачком «…» — выбор Мурата 22.11',
+  light: svg(MINT, parrot(P, TA) + bubble(...BA, INK, 'l') + dots(...DA, MINT)),
+  dark: svg(INK, parrot(PD, TA) + bubble(...BA, MINT, 'l') + dots(...DA, INK)),
+  tinted: svg('#000', parrot(PT, TA) + bubble(...BA, '#8A8A8A', 'l') + dots(...DA, '#000')),
 };
 // B — фон мессенджера #12161C во всех режимах, попугай Parrlo и зелёное облачко «…»
 const B = {
