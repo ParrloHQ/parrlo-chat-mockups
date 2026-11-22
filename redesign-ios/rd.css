@@ -231,6 +231,21 @@ html[data-t="ax5"] .search{height:44px;border-radius:22px}
 .row .av52{width:52px;height:52px;font-size:21px;margin:12px 12px 0 0}
 .row .rb{flex:1;min-width:0;padding:10px 16px 11px 0;border-bottom:.5px solid var(--hair);display:grid;grid-template-columns:1fr auto;grid-template-areas:"n t" "p x";column-gap:8px;row-gap:1px;min-height:76px}
 .row:last-child .rb{border-bottom:0}
+/* свайп строки: кнопки на всю высоту строки, 84 pt (AX5 — 96), подпись 13/700 без значков; тёмный текст — контраст ≥ 4.5:1 на цветных кнопках */
+.row.swipe{position:relative;padding-left:0;overflow:hidden}
+.row.swipe .rc{position:relative;z-index:1;display:flex;align-items:stretch;padding-left:16px;width:100%;background:var(--bg)}
+.row.swipe .acts{position:absolute;inset:0;display:flex;justify-content:flex-end}
+.row.swipe .acts b{width:84px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;line-height:16px;font-weight:700;padding:0 6px}
+.row.swipe .acts .mute{background:var(--raised);color:var(--ink)}
+.row.swipe .acts .del{background:#FF6B5E;color:#12161C}
+.row.swipe .acts .read{background:var(--acc);color:#12161C;width:auto;flex:1;justify-content:flex-start;padding-left:20px}
+.row.sw-l .rc{transform:translateX(-168px)}
+.row.sw-r .rc{transform:translateX(150px)}
+.row.sw-r .acts{justify-content:flex-start}
+html[data-t="ax5"] .row.swipe .acts b{width:96px}
+html[data-t="ax5"] .row.sw-l .rc{transform:translateX(-192px)}
+html[data-t="ax5"] .row.swipe{display:block;padding:0}
+html[data-t="ax5"] .row.swipe .rc{display:grid;grid-template-columns:52px 1fr;column-gap:12px;align-items:center;padding:14px 16px 16px;border-bottom:.5px solid var(--hair)}
 .row .n{grid-area:n;display:flex;align-items:center;gap:5px;min-width:0;font-size:var(--body);font-weight:600;line-height:var(--lh-body)}
 .row .n b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row .n .ic{width:15px;height:15px;color:var(--muted);stroke-width:2}
