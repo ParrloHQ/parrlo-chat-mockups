@@ -79,6 +79,8 @@ html[data-d="se"] .home-ind{display:none}
 .nav .bar{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;position:relative}
 .nav .ttl{position:absolute;left:64px;right:64px;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2}
 .nav .ttl b{font-size:var(--nav-t);font-weight:600;letter-spacing:-.02em}
+/* плашка «ИИ» у имени ИИ-собеседника — открытая пометка ИИ (решение 22.11, закон ЕС); как в строке чата бота в iOS */
+.nav .ttl b .ai{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:6px;background:rgba(43,196,138,.16);color:var(--acc);font-size:11px;font-style:normal;font-weight:600;line-height:16px;letter-spacing:0;vertical-align:2px}
 .nav .ttl span{font-size:var(--nav-s);color:var(--muted);margin-top:1px}
 .av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;flex:none;letter-spacing:0}
 .av36{width:36px;height:36px;font-size:16px}
