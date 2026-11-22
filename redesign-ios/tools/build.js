@@ -29,6 +29,9 @@ const P = {
   tone: '<path d="M5 5.5h14a1.5 1.5 0 011.5 1.5v8.5a1.5 1.5 0 01-1.5 1.5h-7l-4.5 3.5V17H5a1.5 1.5 0 01-1.5-1.5V7A1.5 1.5 0 015 5.5z"/><path d="M8 10.5h8M8 13.5h5"/>',
   bell: '<path d="M6.5 16v-5a5.5 5.5 0 0111 0v5l1.8 1.8H4.7zM10 20.2a2 2 0 004 0"/>',
   help: '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.6a2.4 2.4 0 014.8 0c0 1.6-2.4 1.9-2.4 3.8"/><circle cx="12" cy="16.6" r=".9" fill="currentColor" stroke="none"/>',
+  up: '<path d="M12 19V5.5M6 11.5l6-6 6 6"/>',
+  shift: '<path d="M12 4l7.5 8H15v7.5H9V12H4.5z"/>',
+  bksp: '<path d="M9 5.5h10.5a1.5 1.5 0 011.5 1.5v10a1.5 1.5 0 01-1.5 1.5H9L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5"/>',
   trash: '<path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l.9 12.5a1 1 0 001 .9h7.2a1 1 0 001-.9L17.5 7M10 11v5.5M14 11v5.5"/>',
 };
 const ic = (n, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
@@ -45,16 +48,20 @@ const statusBar = () => `<div class="sb"><span>9:41</span><i class="island"></i>
 <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="2" y="2" width="16" height="9" rx="2" fill="currentColor"/><path d="M24.5 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="currentColor" fill-opacity=".4"/></svg></span></div>`;
 
 // Таб-бар: Контакты · Звонки · [Parrlo] · Чаты · Настройки (решение Мурата 22.11).
-// Parrlo — по центру, крупнее, плоский круг акцентного цвета, чуть выступает над панелью; без тени и свечения.
-// Вариант подписи: TAB_LABEL = true — «Parrlo» под кругом, false — без подписи.
-let TAB_LABEL = true;
-const tabs = (active) => {
-  const items = [['contacts', 'Контакты'], ['calls', 'Звонки'], ['parrlo', 'Parrlo'], ['chats', 'Чаты'], ['gear', 'Настройки']];
-  return `<nav class="tabs${TAB_LABEL ? '' : ' nolabel'}" aria-label="Разделы">${items.map(([k, l]) => {
+// Parrlo — круг 60 фиксированного размера поверх системной 3-й вкладки, без подписи (утверждено Муратом 22.11);
+// плоский, без тени и свечения. Спека — tabbar-spec.html.
+// Подписи на es/en подставляет скрипт страницы по ?l=es|en (data-атрибуты).
+const TABS = [['contacts', 'Контакты', 'Contactos', 'Contacts'], ['calls', 'Звонки', 'Llamadas', 'Calls'], ['parrlo', '', '', ''], ['chats', 'Чаты', 'Chats', 'Chats'], ['gear', 'Настройки', 'Ajustes', 'Settings']];
+const tabLabel = (ru, es, en) => `<span data-es="${es}" data-en="${en}">${ru}</span>`;
+// o: { badge, pressed, only: [ключи вкладок] }
+const tabs = (active, o = {}) => {
+  const list = o.only ? TABS.filter(t => o.only.includes(t[0])) : TABS;
+  const st = o.only ? ` style="grid-template-columns:repeat(${list.length},1fr)"` : '';
+  return `<nav class="tabs" aria-label="Разделы"${st}>${list.map(([k, ru, es, en]) => {
     const on = k === active;
-    if (k === 'parrlo') return `<a class="pc${on ? ' on' : ''}" aria-label="Parrlo"><i class="disc">${parrot()}</i>${TAB_LABEL ? `<span>${l}</span>` : ''}</a>`;
+    if (k === 'parrlo') return `<a class="pc${on ? ' on' : ''}${o.pressed ? ' pressed' : ''}" aria-label="Parrlo${o.badge ? ', непрочитанных: ' + o.badge : ''}"><i class="disc">${parrot()}${o.badge ? `<b class="pc-badge">${o.badge}</b>` : ''}</i></a>`;
     const icon = ic(k, on && k !== 'gear' ? 'fill' : '');
-    return `<a class="${on ? 'on' : ''}">${icon}<span>${l}</span></a>`;
+    return `<a class="${on ? 'on' : ''}">${icon}${tabLabel(ru, es, en)}</a>`;
   }).join('')}</nav>`;
 };
 
@@ -86,9 +93,11 @@ const navChat = ({ left, title, sub, right }) => `<header class="nav"><div class
 const composer = (onTabs) => `<div class="comp${onTabs ? ' on-tabs' : ''}"><span class="cbtn" aria-label="Вложение">${ic('clip')}</span><div class="field"><span>Сообщение</span>${ic('smile')}</div><span class="cbtn" aria-label="Голосовое">${ic('mic')}</span></div>`;
 
 const page = (title, cls, inner) => `<!doctype html>
-<html lang="ru" data-d="max" data-t="n"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title><link rel="stylesheet" href="rd.css">
-<script>(function(){var q=new URLSearchParams(location.search),h=document.documentElement;h.dataset.d=q.get('d')||'max';h.dataset.t=q.get('t')||'n'})()</script>
+<script>(function(){var q=new URLSearchParams(location.search),h=document.documentElement;h.dataset.d=q.get('d')||'max';h.dataset.t=q.get('t')||'n';
+h.dataset.theme=q.get('th')==='light'?'light':'dark';var l=q.get('l');if(l==='es'||l==='en'){h.lang=l;document.addEventListener('DOMContentLoaded',function(){
+document.querySelectorAll('[data-'+l+']').forEach(function(e){e.textContent=e.dataset[l]})})}})()</script>
 </head><body><main class="screen ${cls}" style="--pattern:${PATTERN.replace(/"/g, "'")}">
 ${statusBar()}
 ${inner}
@@ -116,7 +125,7 @@ const rowHtml = (r) => `<li class="row"><span class="av av52" style="background:
 const s1 = page('Чаты', 'has-tabs', `<div class="head"><div class="bar"><span class="pbtn">Изменить</span><span class="cbtn" aria-label="Новый чат">${ic('compose')}</span></div>
 <h1 class="large">Чаты</h1><div class="search">${ic('search')}<span>Поиск</span></div></div>
 <ul class="list">${rows.map(rowHtml).join('')}</ul>
-${tabs('chats')}`);
+${tabs('chats', { badge: '3' })}`);
 
 // ---------- S2: чат с Lucía ----------
 const bars = [8, 14, 20, 12, 24, 18, 10, 22, 26, 16, 12, 20, 24, 14, 8, 12, 18, 22, 14, 10, 16, 20, 12, 8, 6];
@@ -149,7 +158,7 @@ ${composer(false)}`;
 const s2a = page('Чат с Lucía — фон A', '', lucia);
 
 // ---------- S3: Parrlo ----------
-const parrloMsgs = `<div class="msgs">
+const parrloList = `<div class="msgs">
 <div class="chip">Вчера</div>
 ${group(true, [{ text: 'Как сказать «сколько стоит билет?»', time: '19:20' }])}
 ${group(false, [{ text: '¿Cuánto cuesta el billete? Читается: «куа́нто куэ́ста эль бильетэ».', time: '19:20' }])}
@@ -160,8 +169,10 @@ ${group(true, [{ text: 'Напомни в пятницу в 18:00 купить �
 ${group(false, [{ text: 'Готово. Напомню в пятницу.', time: '10:04', card: { t: 'Купить цветы', s: 'Пт, 18:00' } }])}
 ${group(true, [{ text: 'Спасибо!', time: '10:05' }])}
 ${group(false, [{ text: 'Обращайся 🙂', time: '10:05' }])}
-</div>
-${navChat({ left: `<span class="av av36 av-p" aria-label="Parrlo">${parrot()}</span>`, title: 'Parrlo', sub: 'помощник', right: `<span class="cbtn" aria-label="Меню">${ic('more')}</span>` })}
+</div>`;
+const parrloNav = navChat({ left: `<span class="av av36 av-p" aria-label="Parrlo">${parrot()}</span>`, title: 'Parrlo', sub: 'помощник', right: `<span class="cbtn" aria-label="Меню">${ic('more')}</span>` });
+const parrloMsgs = `${parrloList}
+${parrloNav}
 ${composer(true)}
 ${tabs('parrlo')}`;
 const s3 = page('Parrlo', 'has-tabs', parrloMsgs);
@@ -177,14 +188,146 @@ const menu = `<div class="scrim"></div><div class="menu" role="menu">
 </div>`;
 const s3m = page('Parrlo — меню', 'has-tabs', parrloMsgs + menu);
 
-// вариант без подписи под Parrlo: тот же кадр, другой таб-бар (pid в SVG у попугая сбрасывать не нужно — id уникальны в пределах страницы)
-const noLabel = (html, active) => { const withL = tabs(active); TAB_LABEL = false; const without = tabs(active); TAB_LABEL = true;
-  return html.replace(/<nav class="tabs"[\s\S]*?<\/nav>/, without); };
-const pages = { 's1-chats': s1, 's1-chats-nl': noLabel(s1, 'chats'), 's2-chat-A': s2a, 's3-parrlo': s3, 's3-parrlo-nl': noLabel(s3, 'parrlo'), 's3-menu': s3m, 's3-menu-nl': noLabel(s3m, 'parrlo') };
+const pages = { 's1-chats': s1, 's2-chat-A': s2a, 's3-parrlo': s3, 's3-menu': s3m };
+
+// ---------- S4: клавиатура открыта (чат Parrlo) — таб-бара и кнопки Parrlo нет ----------
+const KB = [['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'], ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'], ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю']];
+const keyboard = `<div class="kb" aria-hidden="true"><div class="kb-sug"><span>по-испанский</span><i></i><span class="m1">по-испански</span><i></i><span>по-испанскому</span></div>
+<div class="kb-rows">
+<div class="kb-r">${KB[0].map(k => `<b>${k}</b>`).join('')}</div>
+<div class="kb-r">${KB[1].map(k => `<b>${k}</b>`).join('')}</div>
+<div class="kb-r r3"><b class="fn">${ic('shift')}</b>${KB[2].map(k => `<b>${k}</b>`).join('')}<b class="fn">${ic('bksp')}</b></div>
+<div class="kb-r r4"><b class="fn">123</b><b class="fn glb">${ic('globe')}</b><b class="fn">${ic('smile')}</b><b class="sp">Пробел</b><b class="fn ret">Ввод</b></div>
+</div><div class="kb-bot">${ic('globe')}${ic('mic')}</div></div>`;
+const composerTyped = `<div class="comp on-tabs typed"><span class="cbtn" aria-label="Вложение">${ic('clip')}</span><div class="field"><span>Скажи «спасибо» по-исп</span>${ic('smile')}</div><span class="cbtn send" aria-label="Отправить">${ic('up')}</span></div>`;
+const s4 = page('Parrlo — клавиатура', 'kbd-open', `${parrloList}
+${parrloNav}
+${composerTyped}
+${keyboard}`);
+fs.writeFileSync(path.join(OUT, 's4-kbd.html'), s4);
+
+// ---------- лист спеки кнопки Parrlo (×3) ----------
+const Z = 3;
+const demo = (th, w, h, navHtml) => `<div class="demo" data-theme="${th}" style="width:${w}px;height:${h}px">${navHtml}</div>`;
+const sw = (hex, t) => `<span class="sw"><i style="background:${hex}"></i>${t ? t + ' ' : ''}${hex}</span>`;
+const STATE_TXT = {
+  dark: {
+    normal: [sw('#242B34', 'фон'), sw('#2BC48A', 'обводка 1 pt'), sw('#2BC48A', 'попугай'), sw('#9AA4B2', 'подпись')],
+    on: [sw('#00875C', 'фон'), 'обводки нет', sw('#FFFFFF', 'попугай'), sw('#2BC48A', 'подпись')],
+    pn: [sw('#1C2026', 'фон'), 'обводка и попугай — как в обычном'],
+    ps: [sw('#006B48', 'фон'), 'попугай — как в выбранном'],
+    badge: [sw('#FF3B30', 'бейдж'), sw('#FFFFFF', 'цифра'), '18 × 18, r 9, 13 semibold'],
+  },
+  light: {
+    normal: [sw('#FFFFFF', 'фон'), sw('#00875C', 'обводка 1 pt'), sw('#00875C', 'попугай'), sw('#5E6773', 'подпись')],
+    on: [sw('#00875C', 'фон'), 'обводки нет', sw('#FFFFFF', 'попугай'), sw('#00875C', 'подпись')],
+    pn: [sw('#EEF1F4', 'фон'), 'обводка и попугай — как в обычном'],
+    ps: [sw('#006B48', 'фон'), 'попугай — как в выбранном'],
+    badge: [sw('#FF3B30', 'бейдж'), sw('#FFFFFF', 'цифра'), '18 × 18, r 9, 13 semibold'],
+  },
+};
+const STATES = [['normal', 'Обычное', {}], ['on', 'Выбрано (открыта вкладка Parrlo)', { on: true }], ['pn', 'Нажато (из обычного)', { pressed: true }], ['ps', 'Нажато (из выбранного)', { on: true, pressed: true }], ['badge', 'С бейджем «3»', { badge: '3' }]];
+const anat = () => `<div class="fig anat">${demo('dark', 3 * 88, 30 + 49, tabs('', { only: ['calls', 'parrlo', 'chats'], badge: '3' }))}<svg class="ann"></svg></div>`;
+const stateRow = (th) => `<h3>${th === 'dark' ? 'Тёмная тема' : 'Светлая тема'}</h3>
+<div class="states">${STATES.map(([k, name, o]) => `<div class="st"><div class="fig">${demo(th, 88, 32 + 49, tabs(o.on ? 'parrlo' : '', { only: ['parrlo'], pressed: o.pressed, badge: o.badge }))}</div>
+<p class="sn">${name}</p><p class="sv">${STATE_TXT[th][k].join('<br>')}</p></div>`).join('')}</div>`;
+const spec = `<!doctype html>
+<html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кнопка Parrlo — спека</title><link rel="stylesheet" href="rd.css">
+<style>
+html,body{background:#0B0E12}
+body{width:1720px;padding:48px 56px 64px;color:#E8ECF1;letter-spacing:0}
+h1{font-size:34px;font-weight:700;letter-spacing:-.02em}
+.lead{font-size:17px;color:#9AA4B2;margin:8px 0 8px;line-height:1.45;max-width:1300px}
+h2{font-size:24px;font-weight:600;margin:44px 0 6px}
+h3{font-size:17px;font-weight:600;margin:28px 0 14px;color:#E8ECF1}
+.demo{position:relative;zoom:${Z};background:var(--bg);--home:0px;overflow:visible}
+.demo .tabs{bottom:0}
+.fig{position:relative;display:inline-block}
+.anat-row{display:flex;gap:40px;align-items:flex-start;margin-top:20px}
+.anat{padding:120px 380px 60px 230px;background:#12161C;border-radius:16px;border:1px solid rgba(255,255,255,.1)}
+svg.ann{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:100}
+svg.ann line,svg.ann rect,svg.ann path{stroke:#F5B83D;fill:none;stroke-width:1.5}
+svg.ann .dash{stroke-dasharray:6 5}
+svg.ann text{fill:#F5B83D;font:500 15px var(--font);letter-spacing:0}
+svg.ann text.b{font-weight:700;font-size:17px}
+.notes{font-size:15px;line-height:1.5;color:#C9D0D9;width:420px;padding-top:8px}
+.notes b{color:#fff;font-weight:600}
+.notes li{margin:0 0 8px 18px}
+.states{display:flex;gap:22px;align-items:flex-start}
+.st{width:300px}
+.st .fig{padding:0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#12161C}
+.sn{font-size:15px;font-weight:600;margin:10px 0 4px}
+.sv{font-size:13px;line-height:1.6;color:#9AA4B2}
+.sw{display:inline-flex;align-items:center;gap:6px}
+.sw i{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.3)}
+</style></head><body>
+<h1>Кнопка Parrlo в таб-баре — спека для кода</h1>
+<p class="lead">Круг Parrlo лежит поверх системного таб-бара iOS 26 (5 вкладок: Контакты · Звонки · Parrlo · Чаты · Настройки; у системной вкладки под кругом подписи нет). Утверждённый вариант — без подписи, круг 60. Масштаб рисунков ×3, все размеры — в pt. Размеры на рисунках анатомии измерены по самому макету. Круг фиксированный: на AX5 он такой же, подписи таб-бара тоже не растут (10 pt).</p>
+<h2>Анатомия</h2>
+<div class="anat-row">${anat()}<ul class="notes">
+<li><b>Утверждено Муратом 22.11: без подписи, круг 60.</b> Подписи «Parrlo» нет ни под кругом, ни у системной вкладки под ним.</li>
+<li>Круг 60 × 60, фиксированный (на AX5 такой же), по центру 3-й вкладки. Выступает над верхней кромкой панели на 12; низ круга — 48 от верха панели (на 1 pt выше её нижнего края 49).</li>
+<li>Попугай 30 × 32 по центру круга.</li>
+<li>Обводка 1 pt внутрь (входит в 60), только в обычном состоянии.</li>
+<li>Бейдж: системный, 18 × 18 (min-width 18, растёт вправо), r 9, 13 semibold, #FF3B30, цифра белая. Центр бейджа — на окружности под 45°: левый верхний угол бейджа в (+42; 0) от левого верхнего угла круга.</li>
+<li>Подписи остальных вкладок — 10 pt medium, иконки 26; на AX5 не растут.</li>
+</ul></div>
+<h2>Состояния</h2>
+<p class="lead">Нажатие меняет только заливку: без тени, свечения, градиента и масштабирования.</p>
+${stateRow('dark')}${stateRow('light')}
+<script>
+document.fonts.ready.then(function(){
+  var NS='http://www.w3.org/2000/svg', Z=${Z};
+  document.querySelectorAll('.anat').forEach(function(fig){
+    var svg=fig.querySelector('svg.ann'), F=fig.getBoundingClientRect();
+    function R(e){var r=e.getBoundingClientRect();return {l:r.left-F.left,t:r.top-F.top,r:r.right-F.left,b:r.bottom-F.top,w:r.width,h:r.height}}
+    function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;svg.appendChild(e);return e}
+    function ln(x1,y1,x2,y2,c){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,'class':c||''})}
+    function tx(x,y,s,a,c){return el('text',{x:x,y:y,'text-anchor':a||'start','class':c||''},s)}
+    function pt(v){return Math.round(v/Z*10)/10}
+    function dimH(x1,x2,y,s){ln(x1,y,x2,y);ln(x1,y-7,x1,y+7);ln(x2,y-7,x2,y+7);tx((x1+x2)/2,y-10,s,'middle','b')}
+    function dimV(y1,y2,x,s,side){ln(x,y1,x,y2);ln(x-7,y1,x+7,y1);ln(x-7,y2,x+7,y2);tx(side==='r'?x+12:x-12,(y1+y2)/2+6,s,side==='r'?'start':'end','b')}
+    var nav=R(fig.querySelector('.tabs')), d=fig.querySelector('.disc'), disc=R(d), gl=R(d.querySelector('.ic-parrot')), bd=R(fig.querySelector('.pc-badge'));
+    var cx=(disc.l+disc.r)/2, right=nav.r+40;
+    // базовая линия подписей: соседняя вкладка и (в варианте 1) подпись Parrlo
+    function base(span){var i=document.createElement('i');i.style.cssText='display:inline-block;width:0;height:0;vertical-align:baseline';span.appendChild(i);var y=R(i).t;i.remove();return y}
+    var spans=fig.querySelectorAll('.tabs a span'), yb=base(spans[0]);
+    // центр вкладки
+    ln(cx,disc.t-24,cx,nav.b,'dash');
+    // ширина круга
+    dimH(disc.l,disc.r,disc.t-52,'⌀ '+pt(disc.w));
+    // выступ над панелью
+    ln(disc.l-70,nav.t,disc.l-4,nav.t,'dash');
+    dimV(disc.t,nav.t,disc.l-56,'выступ '+pt(nav.t-disc.t),'l');
+    ln(disc.l-70,disc.t,cx,disc.t,'dash');
+    // высота панели
+    dimV(nav.t,nav.b,nav.l-40,'панель '+pt(nav.h),'l');
+    // попугай
+    el('rect',{x:gl.l,y:gl.t,width:gl.w,height:gl.h,'class':'dash'});
+    ln(gl.r,gl.t+gl.h*.7,right,gl.t+gl.h*.7);tx(right+8,gl.t+gl.h*.7+5,'попугай '+pt(gl.w)+' × '+pt(gl.h)+', по центру круга');
+    // обводка
+    var ang=-2.3, bx=cx+Math.cos(ang)*disc.w/2, by=(disc.t+disc.b)/2+Math.sin(ang)*disc.w/2;
+    ln(bx,by,disc.l-60,disc.t-60);ln(disc.l-60,disc.t-60,disc.l-90,disc.t-60);tx(disc.l-96,disc.t-55,'обводка 1 pt внутрь (входит в ⌀)','end');
+    // бейдж
+    dimH(bd.l,bd.r,bd.t-14,pt(bd.w)+'');
+    ln(bd.r,bd.t+bd.h/2,right,bd.t+bd.h/2);tx(right+8,bd.t+bd.h/2-4,'бейдж '+pt(bd.w)+' × '+pt(bd.h)+', r 9, 13 semibold');
+    tx(right+8,bd.t+bd.h/2+16,'угол бейджа: +'+pt(bd.l-disc.l)+' / '+pt(bd.t-disc.t)+' от угла круга');
+    // базовая линия подписей
+    ln(nav.l,yb,nav.r+30,yb,'dash');
+    tx(right+8,yb-6,'базовая линия подписей · 10 pt medium');
+    // низ круга
+    ln(disc.r,disc.b,right,disc.b,'dash');tx(right+8,disc.b+22,'низ круга: '+pt(disc.b-nav.t)+' от верха панели');
+  });
+  document.body.dataset.ready='1';
+});
+</script>
+</body></html>`;
+fs.writeFileSync(path.join(OUT, 'tabbar-spec.html'), spec);
 for (const [k, v] of Object.entries(pages)) fs.writeFileSync(path.join(OUT, k + '.html'), v);
 
 // ---------- обзор ----------
-const caps = { 's1-chats': 'S1 · Чаты (Parrlo в таб-баре — с подписью)', 's1-chats-nl': 'S1 · Чаты (Parrlo — без подписи)', 's2-chat-A': 'S2 · Чат с Lucía (фон ровный)', 's3-parrlo': 'S3 · Вкладка Parrlo (с подписью)', 's3-parrlo-nl': 'S3 · Вкладка Parrlo (без подписи)', 's3-menu': 'S3 · Parrlo, меню открыто (с подписью)', 's3-menu-nl': 'S3 · Parrlo, меню открыто (без подписи)' };
+const caps = { 's1-chats': 'S1 · Чаты', 's2-chat-A': 'S2 · Чат с Lucía (фон A, ровный)', 's3-parrlo': 'S3 · Вкладка Parrlo', 's3-menu': 'S3 · Parrlo, меню открыто' };
 const vars = [['se-n', 'iPhone SE · обычный'], ['max-n', 'Pro Max · обычный'], ['se-ax5', 'iPhone SE · AX5'], ['max-ax5', 'Pro Max · AX5']];
 const idx = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Редизайн iOS</title>
 <style>@font-face{font-family:Inter;font-weight:100 900;src:url(../fonts/Inter-Variable.woff2) format("woff2")}
@@ -194,7 +337,7 @@ h2{font-size:19px;font-weight:600;margin:36px 0 14px}
 .g{display:flex;gap:24px;align-items:flex-start}
 figure{margin:0}figure img{display:block;border-radius:18px;border:1px solid rgba(255,255,255,.14)}
 figcaption{font-size:13px;color:#9AA4B2;margin-top:8px}</style></head><body>
-<h1>Parrlo Chat — редизайн iOS</h1><p class="l">Тёмная тема · iPhone SE (375×667) и Pro Max (440×956) · обычный текст и AX5</p>
+<h1>Parrlo Chat — редизайн iOS</h1><p class="l">Тёмная тема · iPhone SE (375×667) и Pro Max (440×956) · обычный текст и AX5. Кнопка Parrlo, светлая тема, клавиатура — <a style="color:#2BC48A" href="tabbar-spec.html">спека таб-бара</a> и png/tabbar/</p>
 ${Object.keys(pages).map(k => `<h2>${caps[k]}</h2><div class="g">${vars.map(([v, c]) => `<figure><img src="png/${k}__${v}.png" width="${v.startsWith('se') ? 375 * 0.62 : 440 * 0.62}" alt="${caps[k]} — ${c}"><figcaption>${c}</figcaption></figure>`).join('')}</div>`).join('\n')}
 </body></html>`;
 fs.writeFileSync(path.join(OUT, 'index.html'), idx);

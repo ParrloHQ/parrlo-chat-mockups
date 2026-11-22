@@ -1,4 +1,4 @@
-/* Parrlo Chat — редизайн «как iOS, спокойно». Только тёмная тема.
+/* Parrlo Chat — редизайн «как iOS, спокойно». Тёмная тема по умолчанию, светлая — html[data-theme="light"] (?th=light).
    Шрифт: системный (SF Pro). В контейнере SF Pro нет — Inter грузится как заменитель для рендера. */
 @font-face{font-family:Inter;font-weight:100 900;font-display:block;src:url(../fonts/Inter-Variable.woff2) format("woff2")}
 
@@ -150,6 +150,9 @@ html[data-t="ax5"] .card .tx span{line-height:52px}
 .comp{position:absolute;z-index:20;left:0;right:0;bottom:var(--tabH,0px);padding:8px 10px calc(8px + var(--home));display:flex;align-items:flex-end;gap:8px;
  background:var(--mat);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-top:.5px solid var(--hair)}
 .comp.on-tabs{padding-bottom:8px;border-bottom:0}
+/* над таб-баром композер получает +12 снизу — под выступ круга Parrlo */
+.screen.has-tabs .comp.on-tabs{padding-bottom:20px}
+.screen.has-tabs .msgs{padding-bottom:calc(var(--compH) + 12px + var(--home) + var(--tabH) + 8px)}
 .field{flex:1;min-width:0;min-height:36px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 8px 0 14px}
 .field span{flex:1;min-width:0;font-size:var(--field);color:var(--muted);white-space:nowrap}
 .field .ic{color:var(--muted);width:22px;height:22px}
@@ -157,28 +160,61 @@ html[data-t="ax5"] .field{min-height:44px;border-radius:22px}
 html[data-t="ax5"] .comp{--x:1}
 html[data-t="ax5"] .screen{--compH:60px}
 
-/* ---------- таб-бар (системный) ---------- */
+/* ---------- таб-бар (системный) ----------
+   49 + индикатор «домой», материал с размытием, иконки 26, подписи 10 / 500.
+   Подписи НЕ растут с Dynamic Type (на AX5 таб-бар такой же, как обычно; полный текст — через Large Content Viewer).
+   Раскладка ячейки: иконка 26 с отступом 7 сверху, зазор 2, строка подписи 12 (35…47). */
 .screen.has-tabs{--tabH:calc(49px + var(--home))}
 .tabs{position:absolute;z-index:25;left:0;right:0;bottom:0;height:calc(49px + var(--home));padding-bottom:var(--home);display:grid;grid-template-columns:repeat(5,1fr);
- background:var(--mat);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-top:.5px solid var(--hair)}
-.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:6px;gap:2px;color:var(--muted);text-decoration:none;font-size:var(--tab-l);font-weight:500;letter-spacing:.01em}
+ background:var(--mat);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-top:0}
+.tabs::after{border-top:.5px solid var(--hair)} /* волосяная линия — внутри 49, верх панели = верх линии */
+.tabs a{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:7px;gap:2px;color:var(--muted);text-decoration:none;font-size:var(--tab-l);font-weight:500;letter-spacing:.01em}
 .tabs a .ic{width:26px;height:26px}
+.tabs a span{display:block;line-height:12px;white-space:nowrap}
 .tabs a.on{color:var(--acc)}
 .tabs a.on .ic.fill{fill:currentColor;stroke:none}
-.tabs a .ic-parrot{width:24px;height:26px;padding:1px 0}
-html[data-t="ax5"] .tabs a{justify-content:center;padding-top:0}
-html[data-t="ax5"] .tabs a span{display:none}
-html[data-t="ax5"] .tabs a .ic{width:28px;height:28px}
-/* Parrlo по центру: крупнее, плоский круг акцентного цвета, выступает над панелью на 14 px; без тени и свечения.
-   Неактивна: заливка --raised, попугай акцентный, обводка 1 px акцентом. Активна: заливка --btn, попугай белый. */
-.tabs a.pc{position:relative;justify-content:flex-start;padding-top:0;color:var(--muted)}
-.tabs a.pc .disc{display:grid;place-items:center;width:56px;height:56px;margin-top:-14px;border-radius:50%;background:var(--raised);box-shadow:inset 0 0 0 1px var(--acc);color:var(--acc)}
+/* Кнопка Parrlo — поверх системной вкладки №3 (у неё самой подписи нет). Утверждено Муратом 22.11: без подписи, круг 60.
+   Круг фиксированного размера (не растёт с Dynamic Type), по центру 3-й вкладки, выступает над панелью на 12 (от верха волосяной линии).
+   Плоско: без тени, свечения, градиента и масштабирования при нажатии. */
+.tabs a.pc .disc{position:absolute;left:50%;top:-12px;width:60px;height:60px;margin-left:-30px;border-radius:50%;display:grid;place-items:center;
+ background:var(--pc-bg);border:1px solid var(--pc-bd);color:var(--pc-ic)}
 .tabs a.pc .disc .ic-parrot{width:30px;height:32px;padding:0}
-.tabs a.pc.on{color:var(--acc)}
-.tabs a.pc.on .disc{background:#00875C;box-shadow:none;color:#fff}
-.tabs a.pc span{margin-top:1px}
-.tabs.nolabel a.pc .disc{margin-top:-10px;width:60px;height:60px}
-html[data-t="ax5"] .tabs a.pc{justify-content:flex-start}
+.tabs a.pc.pressed .disc{background:var(--pc-bg-p)}
+.tabs a.pc.on .disc{background:var(--pc-on);border-color:transparent;color:#fff}
+.tabs a.pc.on.pressed .disc{background:var(--pc-on-p)}
+/* бейдж непрочитанного от помощника — системный бейдж iOS; центр бейджа на окружности под 45° (справа сверху):
+   левый верхний угол бейджа (+42; 0) от угла круга; left/top отсчитаны от внутреннего края обводки 1 */
+.pc-badge{position:absolute;left:41px;top:-1px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;
+ background:#FF3B30;color:#fff;font-size:13px;font-weight:600;line-height:18px;text-align:center;letter-spacing:0;font-style:normal}
+:root{--pc-bg:#242B34;--pc-bd:#2BC48A;--pc-ic:#2BC48A;--pc-bg-p:#1C2026;--pc-on:#00875C;--pc-on-p:#006B48}
+
+/* ---------- клавиатура (S4) ---------- */
+.screen.kbd-open{--home:0px;--tabH:var(--kbH)}
+:root{--kbH:291px;--kb-bg:#2A2D33;--kb-key:#50555D;--kb-fn:#383C43;--kb-ink:#FFFFFF}
+html[data-d="se"]{--kbH:260px}
+.kb{position:absolute;z-index:22;left:0;right:0;bottom:0;height:var(--kbH);background:var(--kb-bg);color:var(--kb-ink);letter-spacing:0;padding-top:0}
+.kb-sug{height:44px;display:flex;align-items:center;font-size:15px}
+.kb-sug span{flex:1;text-align:center;white-space:nowrap}
+.kb-sug span.m1{font-weight:600}
+.kb-sug i{width:1px;height:24px;background:var(--kb-fn)}
+.kb-rows{display:flex;flex-direction:column;gap:12px;padding:8px 3px 4px}
+.kb-r{display:flex;justify-content:center;gap:5px;--kw:calc((100% - 55px) / 12)}
+.kb-r b{height:42px;width:var(--kw);border-radius:6px;background:var(--kb-key);display:grid;place-items:center;font-weight:400;font-size:22px;line-height:1}
+.kb-r b.fn{background:var(--kb-fn);font-size:16px}
+.kb-r b.fn .ic{width:22px;height:22px}
+.kb-r.r3 b.fn{flex:1}
+.kb-r.r3 b.fn:first-child{margin-right:4px}
+.kb-r.r3 b.fn:last-child{margin-left:4px}
+.kb-r.r4 b.fn{width:calc(var(--kw) * 1.55)}
+.kb-r.r4 b.ret{width:calc(var(--kw) * 2.6)}
+.kb-r.r4 b.sp{flex:1;font-size:16px}
+.kb-bot{display:none;height:35px;padding:0 22px;align-items:flex-start;justify-content:space-between;padding-top:2px}
+.kb-bot .ic{width:26px;height:26px;color:var(--kb-ink)}
+html[data-d="max"] .kb-bot{display:flex}
+html[data-d="max"] .kb-r.r4 .glb{display:none}
+.comp.typed .field span{color:var(--ink);white-space:normal;padding:7px 0;line-height:22px}
+.comp.typed .field span::after{content:"";display:inline-block;width:2px;height:20px;margin-left:1px;vertical-align:-4px;background:var(--acc)}
+.cbtn.send{background:var(--btn);color:#fff}
 
 /* ---------- список чатов ---------- */
 .head{padding-top:var(--safe-top)}
@@ -249,3 +285,24 @@ html[data-t="ax5"] .card .btn{height:auto;padding:8px 14px;border-radius:30px;fo
 .b.has-card{width:78%}
 html[data-t="ax5"] .b.has-card{width:90%}
 html[data-t="ax5"] .bars{zoom:1.6}
+
+/* ---------- светлая тема: html[data-theme="light"] (?th=light) ----------
+   Селектор без html, чтобы на листе спеки тему можно было задать отдельному блоку. */
+[data-theme="light"]{color-scheme:light;
+ --bg:#F2F2F7; --surface:#FFFFFF; --raised:#E6E7EB; --ink:#0E1116; --muted:#5E6773;
+ --line:rgba(0,0,0,.12); --hair:rgba(0,0,0,.12); --acc:#00875C; --err:#D70015;
+ --own:#1F6B4E; --own-meta:rgba(255,255,255,.82); --other:#E9E9EB;
+ --mat:rgba(249,249,249,.86); --scrim:rgba(0,0,0,.20);
+ --pc-bg:#FFFFFF;--pc-bd:#00875C;--pc-ic:#00875C;--pc-bg-p:#EEF1F4;--pc-on:#00875C;--pc-on-p:#006B48;
+ --kb-bg:#D1D4DA;--kb-key:#FFFFFF;--kb-fn:#AEB3BC;--kb-ink:#0E1116}
+html[data-theme="light"],html[data-theme="light"] body{background:#D8DBE0}
+[data-theme="light"] .chip{background:rgba(255,255,255,.9)}
+[data-theme="light"] .badge{color:#fff}
+[data-theme="light"] .badge.mute{background:#D9DDE2;color:var(--ink)}
+[data-theme="light"] .card{background:#FFFFFF}
+[data-theme="light"] .menu{background:#FFFFFF}
+[data-theme="light"] .menu .gap{background:rgba(0,0,0,.06)}
+[data-theme="light"] .rx{background:rgba(0,0,0,.07)}
+[data-theme="light"] .play{background:var(--ink)}
+[data-theme="light"] .play svg{fill:#fff}
+[data-theme="light"] .bars i.r{background:rgba(14,17,22,.3)}
