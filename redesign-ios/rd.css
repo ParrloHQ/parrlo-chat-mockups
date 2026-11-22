@@ -169,6 +169,16 @@ html[data-t="ax5"] .screen{--compH:60px}
 html[data-t="ax5"] .tabs a{justify-content:center;padding-top:0}
 html[data-t="ax5"] .tabs a span{display:none}
 html[data-t="ax5"] .tabs a .ic{width:28px;height:28px}
+/* Parrlo по центру: крупнее, плоский круг акцентного цвета, выступает над панелью на 14 px; без тени и свечения.
+   Неактивна: заливка --raised, попугай акцентный, обводка 1 px акцентом. Активна: заливка --btn, попугай белый. */
+.tabs a.pc{position:relative;justify-content:flex-start;padding-top:0;color:var(--muted)}
+.tabs a.pc .disc{display:grid;place-items:center;width:56px;height:56px;margin-top:-14px;border-radius:50%;background:var(--raised);box-shadow:inset 0 0 0 1px var(--acc);color:var(--acc)}
+.tabs a.pc .disc .ic-parrot{width:30px;height:32px;padding:0}
+.tabs a.pc.on{color:var(--acc)}
+.tabs a.pc.on .disc{background:#00875C;box-shadow:none;color:#fff}
+.tabs a.pc span{margin-top:1px}
+.tabs.nolabel a.pc .disc{margin-top:-10px;width:60px;height:60px}
+html[data-t="ax5"] .tabs a.pc{justify-content:flex-start}
 
 /* ---------- список чатов ---------- */
 .head{padding-top:var(--safe-top)}

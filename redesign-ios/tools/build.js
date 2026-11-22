@@ -44,11 +44,16 @@ const statusBar = () => `<div class="sb"><span>9:41</span><i class="island"></i>
 <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.4c2.3 0 4.4.9 6 2.4l1.2-1.3A10.4 10.4 0 008 .6 10.4 10.4 0 00.8 3.5L2 4.8a8.6 8.6 0 016-2.4zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.2-1.3A6.8 6.8 0 008 4.2 6.8 6.8 0 003.4 6l1.2 1.3c.9-.8 2.1-1.3 3.4-1.3zm0 3.5c.4 0 .8.2 1.1.4L8 11.2 6.9 9.9c.3-.2.7-.4 1.1-.4z"/></svg>
 <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="2" y="2" width="16" height="9" rx="2" fill="currentColor"/><path d="M24.5 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="currentColor" fill-opacity=".4"/></svg></span></div>`;
 
+// Таб-бар: Контакты · Звонки · [Parrlo] · Чаты · Настройки (решение Мурата 22.11).
+// Parrlo — по центру, крупнее, плоский круг акцентного цвета, чуть выступает над панелью; без тени и свечения.
+// Вариант подписи: TAB_LABEL = true — «Parrlo» под кругом, false — без подписи.
+let TAB_LABEL = true;
 const tabs = (active) => {
-  const items = [['contacts', 'Контакты'], ['calls', 'Звонки'], ['chats', 'Чаты'], ['parrlo', 'Parrlo'], ['gear', 'Настройки']];
-  return `<nav class="tabs" aria-label="Разделы">${items.map(([k, l]) => {
+  const items = [['contacts', 'Контакты'], ['calls', 'Звонки'], ['parrlo', 'Parrlo'], ['chats', 'Чаты'], ['gear', 'Настройки']];
+  return `<nav class="tabs${TAB_LABEL ? '' : ' nolabel'}" aria-label="Разделы">${items.map(([k, l]) => {
     const on = k === active;
-    const icon = k === 'parrlo' ? parrot() : ic(k, on && k !== 'gear' ? 'fill' : '');
+    if (k === 'parrlo') return `<a class="pc${on ? ' on' : ''}" aria-label="Parrlo"><i class="disc">${parrot()}</i>${TAB_LABEL ? `<span>${l}</span>` : ''}</a>`;
+    const icon = ic(k, on && k !== 'gear' ? 'fill' : '');
     return `<a class="${on ? 'on' : ''}">${icon}<span>${l}</span></a>`;
   }).join('')}</nav>`;
 };
@@ -108,7 +113,7 @@ const rowHtml = (r) => `<li class="row"><span class="av av52" style="background:
 <div class="t">${r.own ? TICK2 : ''}${r.t}</div>
 <div class="p">${r.p}</div>
 <div class="x">${r.pin ? ic('pin') : ''}${r.badge ? `<span class="badge${r.muted ? ' mute' : ''}">${r.badge}</span>` : ''}</div></div></li>`;
-const s1 = page('Чаты', 'has-tabs', `<div class="head"><div class="bar"><span class="pbtn">Изм.</span><span class="cbtn" aria-label="Новый чат">${ic('compose')}</span></div>
+const s1 = page('Чаты', 'has-tabs', `<div class="head"><div class="bar"><span class="pbtn">Изменить</span><span class="cbtn" aria-label="Новый чат">${ic('compose')}</span></div>
 <h1 class="large">Чаты</h1><div class="search">${ic('search')}<span>Поиск</span></div></div>
 <ul class="list">${rows.map(rowHtml).join('')}</ul>
 ${tabs('chats')}`);
@@ -142,7 +147,6 @@ ${group(false, [
 ${navChat({ left: `<span class="cbtn" aria-label="Назад">${ic('back')}</span>`, title: 'Lucía', sub: 'в сети', right: `<span class="av av36" style="background:var(--av-1)">L</span>` })}
 ${composer(false)}`;
 const s2a = page('Чат с Lucía — фон A', '', lucia);
-const s2b = page('Чат с Lucía — фон B', 'bg-b', lucia);
 
 // ---------- S3: Parrlo ----------
 const parrloMsgs = `<div class="msgs">
@@ -173,11 +177,14 @@ const menu = `<div class="scrim"></div><div class="menu" role="menu">
 </div>`;
 const s3m = page('Parrlo — меню', 'has-tabs', parrloMsgs + menu);
 
-const pages = { 's1-chats': s1, 's2-chat-A': s2a, 's2-chat-B': s2b, 's3-parrlo': s3, 's3-menu': s3m };
+// вариант без подписи под Parrlo: тот же кадр, другой таб-бар (pid в SVG у попугая сбрасывать не нужно — id уникальны в пределах страницы)
+const noLabel = (html, active) => { const withL = tabs(active); TAB_LABEL = false; const without = tabs(active); TAB_LABEL = true;
+  return html.replace(/<nav class="tabs"[\s\S]*?<\/nav>/, without); };
+const pages = { 's1-chats': s1, 's1-chats-nl': noLabel(s1, 'chats'), 's2-chat-A': s2a, 's3-parrlo': s3, 's3-parrlo-nl': noLabel(s3, 'parrlo'), 's3-menu': s3m, 's3-menu-nl': noLabel(s3m, 'parrlo') };
 for (const [k, v] of Object.entries(pages)) fs.writeFileSync(path.join(OUT, k + '.html'), v);
 
 // ---------- обзор ----------
-const caps = { 's1-chats': 'S1 · Чаты', 's2-chat-A': 'S2 · Чат с Lucía, фон A (ровный)', 's2-chat-B': 'S2 · Чат с Lucía, фон B (узор)', 's3-parrlo': 'S3 · Вкладка Parrlo', 's3-menu': 'S3 · Parrlo, меню открыто' };
+const caps = { 's1-chats': 'S1 · Чаты (Parrlo в таб-баре — с подписью)', 's1-chats-nl': 'S1 · Чаты (Parrlo — без подписи)', 's2-chat-A': 'S2 · Чат с Lucía (фон ровный)', 's3-parrlo': 'S3 · Вкладка Parrlo (с подписью)', 's3-parrlo-nl': 'S3 · Вкладка Parrlo (без подписи)', 's3-menu': 'S3 · Parrlo, меню открыто (с подписью)', 's3-menu-nl': 'S3 · Parrlo, меню открыто (без подписи)' };
 const vars = [['se-n', 'iPhone SE · обычный'], ['max-n', 'Pro Max · обычный'], ['se-ax5', 'iPhone SE · AX5'], ['max-ax5', 'Pro Max · AX5']];
 const idx = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Редизайн iOS</title>
 <style>@font-face{font-family:Inter;font-weight:100 900;src:url(../fonts/Inter-Variable.woff2) format("woff2")}

@@ -2,7 +2,7 @@
 const { chromium } = require('playwright');
 const path = require('path');
 const DIR = path.resolve(__dirname, '..');
-const screens = ['s1-chats', 's2-chat-A', 's2-chat-B', 's3-parrlo', 's3-menu'];
+const screens = ['s1-chats', 's1-chats-nl', 's2-chat-A', 's3-parrlo', 's3-parrlo-nl', 's3-menu', 's3-menu-nl'];
 const dev = { se: [375, 667], max: [440, 956] };
 (async () => {
   const b = await chromium.launch();
