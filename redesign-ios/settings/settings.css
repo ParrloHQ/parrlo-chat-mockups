@@ -1,0 +1,186 @@
+/* «Настройки» — дополнения к ../rd.css (подключается первым). Inset-grouped списки iOS, тёмная тема. */
+:root{
+ --cell:#1C2026;            /* ячейка списка: --ink 13.79:1, --muted 6.49:1 */
+ --tile:29px; --tile-ic:19px; --chev:#6B7482;
+ --title1:28px;             /* заголовок в теле экрана (Title 1) */
+ --btn-l:17px;              /* подпись большой кнопки */
+ --alert-t:17px; --alert-m:13px; --alert-b:17px;
+ --tbd:12px;
+ --warn:#FFC247; --info:#6AA6F5; --err-bg:#3C2A2E;
+}
+html[data-t="ax5"]{
+ --tile:44px; --tile-ic:28px;
+ --title1:48px;             /* 28 × ~1.7, потолок как у большого заголовка (48) */
+ --btn-l:34px; --alert-t:34px; --alert-m:28px; --alert-b:34px;
+ --tbd:28px;                /* служебная пометка: не меньше AX1 */
+}
+.nw{white-space:nowrap}
+
+/* ---------- прокрутка: контент под навбаром ---------- */
+.scroll{position:absolute;inset:0;overflow:hidden;padding:calc(var(--safe-top) + 52px + 20px) 0 0}
+.scroll.root{padding-top:0}
+.head .bar.empty{height:44px}
+
+/* ---------- inset-grouped ---------- */
+.sec{margin:0 16px}
+.sec + .sec{margin-top:24px}
+.sh{font-weight:500;padding:0 16px 7px;font-size:var(--foot);line-height:1.38;color:var(--muted)}
+.ft{padding:7px 16px 0;font-size:var(--foot);line-height:1.38;color:var(--muted)}
+.ft p + p{margin-top:6px}
+.ft a,.cellp a{color:var(--acc);text-decoration:none}
+.grp-l{background:var(--cell);border-radius:14px;overflow:hidden}
+.r{position:relative;display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 16px}
+.r::after{content:"";position:absolute;left:16px;right:0;bottom:0;height:.5px;background:var(--line)}
+.r.has-tile::after{left:calc(16px + var(--tile) + 12px)}
+.r:last-child::after{display:none}
+.tile{width:var(--tile);height:var(--tile);border-radius:calc(var(--tile) * .24);display:grid;place-items:center;flex:none;color:#fff;align-self:center}
+.tile .ic{width:var(--tile-ic);height:var(--tile-ic);stroke-width:2}
+.tile .ic-parrot{width:calc(var(--tile-ic) * .9);height:var(--tile-ic)}
+.tile img{width:calc(var(--tile-ic) * .82);height:auto;display:block}
+.tx{flex:1;min-width:0;padding:3px 0}
+.t{font-size:var(--body);line-height:var(--lh-body)}
+.s{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted);margin-top:1px}
+.v{font-size:var(--body);line-height:var(--lh-body);color:var(--muted);white-space:nowrap;flex:none}
+.chev{width:9px;height:15px;flex:none;color:var(--chev);fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.r.danger .t{color:var(--err)}
+.r .chk{width:22px;height:22px;color:var(--acc);stroke-width:2.4;flex:none}
+/* переключатель: плоский iOS, включён — зелёный Parrlo */
+.sw{position:relative;width:51px;height:31px;border-radius:16px;background:#3A424D;flex:none}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff}
+.sw.on{background:var(--acc)}
+.sw.on::after{left:22px}
+.sw.dis{opacity:.4}
+/* баннер-ячейка (ошибка / инфо / выключено) */
+.r.ban{align-items:flex-start;padding-top:12px;padding-bottom:12px}
+.r.ban .tile{align-self:flex-start;margin-top:1px}
+.r.ban .t{font-weight:600}
+.tile.err{background:var(--err);color:#12161C}
+.tile.ok{background:var(--acc);color:#12161C}
+.tile.off{background:#4A5360}
+/* пометка «не утверждено» — пунктирная жёлтая пилюля */
+.tbd{display:table;margin-top:6px;padding:1px 8px;border-radius:10px;border:1px dashed var(--warn);color:var(--warn);background:rgba(255,194,71,.08);
+ font-size:var(--tbd);font-weight:500;line-height:1.35;letter-spacing:0;white-space:normal}
+.tbd.inl{display:inline-block;margin:0 0 0 6px;vertical-align:1px}
+/* текст в ячейке (оператор, шаги) */
+.cellp{padding:11px 16px 12px;font-size:var(--sub);line-height:var(--lh-sub);color:var(--ink)}
+.cellp.mut{color:var(--muted)}
+.cellp ol{list-style:none}
+.cellp ol li + li{margin-top:6px}
+
+/* ---------- заголовок в теле экрана ---------- */
+.hero{padding:8px 32px 20px}
+.hero .cap{font-size:var(--foot);line-height:1.38;color:var(--muted);margin-bottom:6px}
+.hero h1{font-size:var(--title1);font-weight:700;letter-spacing:-.02em;line-height:1.18}
+.hero .lead{font-size:var(--body);line-height:var(--lh-body);color:var(--muted);margin-top:10px}
+.hero .lead.sm{font-size:var(--sub);line-height:var(--lh-sub)}
+.persona{width:64px;height:64px;border-radius:50%;background:var(--raised);border:1px solid var(--acc);color:var(--acc);display:grid;place-items:center;margin-bottom:16px}
+.persona .ic-parrot{width:32px;height:34px}
+html[data-d="se"] .persona,html[data-t="ax5"] .persona{display:none}
+.intro{padding:0 32px 18px;font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted)}
+
+/* ---------- кнопки внизу (материал) ---------- */
+.acts{position:absolute;z-index:20;left:0;right:0;bottom:0;padding:12px 16px calc(12px + var(--home));display:flex;flex-direction:column;gap:8px}
+.acts::before{content:"";position:absolute;z-index:-2;left:0;right:0;top:-48px;bottom:0;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+ -webkit-mask:linear-gradient(transparent 48px,#000 0);mask:linear-gradient(transparent 48px,#000 0)}
+.acts::after{content:"";position:absolute;z-index:-1;inset:0;background:var(--mat);border-top:.5px solid var(--hair)}
+.acts.clear::before,.acts.clear::after{display:none}
+.bb{min-height:50px;border-radius:25px;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px 20px;
+ font-size:var(--btn-l);font-weight:600;line-height:1.25;background:var(--raised);color:var(--ink)}
+.bb.pri{background:var(--btn);color:#fff}
+.bb.dng{background:var(--err-bg);color:var(--err)}
+.bb.pl{background:transparent;color:var(--acc);min-height:44px}
+.bb.sm{min-height:40px;border-radius:20px;font-size:var(--sub)}
+html[data-t="ax5"] .bb{min-height:64px;border-radius:32px;padding:10px 24px}
+html[data-t="ax5"] .bb.sm{font-size:var(--btn-l)}
+
+/* навбар: кнопка справа (текст) */
+.pbtn.acc{color:var(--acc);font-weight:600}
+.nav.wide .ttl{left:112px;right:112px}
+
+/* ---------- поле ввода в ячейке ---------- */
+.inp{display:flex;align-items:center;min-height:44px;padding:8px 16px;font-size:var(--body);line-height:var(--lh-body)}
+.inp .cur{display:inline-block;width:2px;height:1.15em;background:var(--acc);vertical-align:-.2em;margin-left:1px}
+.ft .cnt{float:right;margin-left:12px;letter-spacing:0}
+
+/* ---------- алерт iOS ---------- */
+.dim{position:absolute;inset:0;z-index:50;background:rgba(0,0,0,.42)}
+.al{position:absolute;z-index:60;left:50%;top:50%;width:270px;transform:translate(-50%,-50%);border-radius:14px;background:var(--raised);overflow:hidden;text-align:center}
+.al .bd{padding:19px 16px 16px}
+.al h2{font-size:var(--alert-t);font-weight:600;line-height:1.3}
+.al p{font-size:var(--alert-m);line-height:1.38;margin-top:4px}
+.al p.n{color:var(--muted)}
+.al .tbd{margin:8px auto 0}
+.al .ab{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border-top:.5px solid var(--line);font-size:var(--alert-b);line-height:1.25;color:var(--acc)}
+.al .ab.d{color:var(--err)}
+.al .ab.c{font-weight:600}
+html[data-t="ax5"] .al{width:auto;left:16px;right:16px;transform:translateY(-50%)}
+html[data-t="ax5"] .al .bd{padding:24px 20px 20px}
+
+/* ---------- использование: полоски ---------- */
+.ur{position:relative;display:grid;grid-template-columns:96px 1fr;align-items:center;column-gap:12px;min-height:44px;padding:8px 16px}
+.ur::after{content:"";position:absolute;left:16px;right:0;bottom:0;height:.5px;background:var(--line)}
+.ur:last-child::after{display:none}
+.ur .n{font-size:var(--body);line-height:var(--lh-body);min-width:0}
+.mt{height:8px;border-radius:4px;background:#2F3640;overflow:hidden}
+.mt i{display:block;height:100%;border-radius:4px;min-width:0}
+.mt .k1{background:var(--acc)} .mt .k2{background:var(--warn)} .mt .k3{background:var(--info)}
+.mt.full .k1{background:var(--err)}
+.ur .full-l{grid-column:2;font-size:var(--foot);color:var(--err);margin-top:4px;line-height:1.3}
+.rs{display:flex;gap:6px;align-items:flex-start}
+.rs > div{flex:1;min-width:0}
+.rs .ic{width:15px;height:15px;margin-top:1px;stroke-width:2}
+html[data-t="ax5"] .ur{grid-template-columns:1fr;row-gap:10px;padding:12px 16px 16px}
+html[data-t="ax5"] .mt{height:14px;border-radius:7px}
+html[data-t="ax5"] .rs .ic{width:34px;height:34px;margin-top:4px}
+
+/* ---------- план (тариф) ---------- */
+.plan{padding:14px 16px 16px}
+.plan h3{font-size:var(--body);font-weight:600;line-height:var(--lh-body)}
+.plan .pr{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted);margin-top:2px}
+.plan .pr b{color:var(--ink);font-weight:600}
+.incl{margin-top:12px;padding-top:12px;border-top:.5px solid var(--line)}
+.plan-only .incl{margin-top:0;padding-top:0;border-top:0}
+.incl h4{font-size:var(--foot);font-weight:600;line-height:1.38;color:var(--muted)}
+.incl p{font-size:var(--sub);line-height:var(--lh-sub);margin-top:8px}
+.incl p b{font-weight:600}
+.incl ul{list-style:none;margin-top:4px}
+.incl li{display:flex;justify-content:space-between;gap:12px;font-size:var(--sub);line-height:var(--lh-sub);padding:5px 0 5px 14px;position:relative}
+.incl li::before{content:"";position:absolute;left:2px;top:calc(var(--lh-sub) / 2 + 5px - 2px);width:4px;height:4px;border-radius:50%;background:var(--muted)}
+.incl li .vv{color:var(--muted);white-space:nowrap}
+.plan .bb{margin-top:14px}
+.ph{margin:16px 16px 0;padding:10px 12px;border:1px dashed var(--line);border-radius:12px;font-size:var(--foot);line-height:1.38;color:var(--muted)}
+html[data-t="ax5"] .incl li{flex-wrap:wrap;padding-left:24px}
+html[data-t="ax5"] .incl li::before{width:8px;height:8px;left:4px;top:calc(var(--lh-sub) / 2 + 1px)}
+
+/* ---------- состояние «готово» (аккаунт удалён) ---------- */
+.done{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--safe-top) 32px calc(90px + var(--home))}
+.done .ring{width:72px;height:72px;border-radius:50%;background:var(--raised);color:var(--acc);display:grid;place-items:center;margin-bottom:20px}
+.done .ring .ic{width:34px;height:34px;stroke-width:2.2}
+.done h1{font-size:var(--title1);font-weight:700;line-height:1.18;letter-spacing:-.02em}
+.done p{font-size:var(--body);line-height:var(--lh-body);color:var(--muted);margin-top:8px}
+.done .tbd{margin:10px auto 0}
+
+/* ---------- AX5: строки складываются ----------
+   Иконка-плитка и переключатель / шеврон — в первой строке, текст — на всю ширину ниже, значение — под названием. */
+html[data-t="ax5"] .r{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:12px;row-gap:6px;padding:12px 16px 14px}
+html[data-t="ax5"] .r > .tile{grid-column:1;grid-row:1}
+html[data-t="ax5"] .r > .tx{grid-column:1 / -1;grid-row:2;padding:0}
+html[data-t="ax5"] .r > .v{grid-column:1 / -1;grid-row:3;white-space:normal}
+html[data-t="ax5"] .r > .chev,html[data-t="ax5"] .r > .sw,html[data-t="ax5"] .r > .chk{grid-column:3;grid-row:1}
+html[data-t="ax5"] .r:not(:has(> .tile)) > .tx{grid-row:1;grid-column:1 / 3}
+html[data-t="ax5"] .r:not(:has(> .tile)):has(> .sw) > .tx{grid-row:2;grid-column:1 / -1}
+html[data-t="ax5"] .r:not(:has(> .tile)):has(> .sw) > .sw{grid-column:1;justify-self:start}
+html[data-t="ax5"] .r::after,html[data-t="ax5"] .r.has-tile::after{left:16px}
+html[data-t="ax5"] .chev{width:14px;height:24px}
+html[data-t="ax5"] .sw{width:64px;height:39px;border-radius:20px}
+html[data-t="ax5"] .sw::after{width:35px;height:35px}
+html[data-t="ax5"] .sw.on::after{left:27px}
+html[data-t="ax5"] .r .chk{width:34px;height:34px}
+html[data-t="ax5"] .r.ban{display:grid}
+html[data-t="ax5"] .hero{padding:8px 24px 20px}
+html[data-t="ax5"] .intro{padding:0 24px 18px}
+html[data-t="ax5"] .sh,html[data-t="ax5"] .ft{line-height:1.25}
+html[data-t="ax5"] .tbd.inl{display:table;margin:6px 0 0}
+html[data-t="ax5"] .large{line-height:1.2}
+html[data-t="ax5"] .inp{min-height:64px}
+html[data-t="ax5"] .ft .cnt{float:none;display:block;margin:4px 0 0}
