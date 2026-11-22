@@ -137,7 +137,7 @@ ${igf(hint)}
 ${reset ? `<ul class="ig"><li class="ir accent"><div class="tx"><b>${t('Сбросить к имени из профиля')}</b></div></li></ul>` : ''}
 ${igh('Заметка')}<ul class="ig"><li class="ir">${note}</li></ul>
 <div class="nfoot"><span>${t('Собеседник её не видит')}</span>${cnt ? `<span class="cnt${max ? ' max' : ''}">${cnt}</span>` : ''}${max ? `<span class="lim" role="status">${t('Больше 500 символов не поместится')}</span>` : ''}</div>
-<p class="small">${tbd('формулировка: не утверждено', 'blk')}</p></div></div>`;
+${max ? `<p class="small">${tbd('формулировка: не утверждено', 'blk')}</p>` : ''}</div></div>`; // №33/37/39 утверждены 22.11 (оркестратор); у лимита (№35) плашка остаётся
 const notePh = () => `<div class="notefield"><span class="ph">${t('Например, где вы познакомились')}</span></div>`;
 const noteLong = (txt) => `<div class="notefield focus" style="display:flex;flex-direction:column;justify-content:flex-end"><div>${txt}<i class="caret"></i></div></div>`;
 
@@ -185,7 +185,7 @@ S['contact-block'] = () => `${marcoProfile()}<div class="scrim dark"></div>
 <span class="bt danger">${t('Заблокировать')}</span><span class="bt">${t('Отмена')}</span></div>`;
 S['contact-blocked'] = () => `<div class="page pushed"><div class="scroll">${prof(MARCO)}
 <div class="banner" role="status">${ic('block')}<div><h3>${t('Контакт Marco заблокирован')}</h3><p>${t('Снять блокировку можно здесь.')}</p></div></div>
-${searchOnly()}${groups()}${blockRow('Разблокировать', 'accent')}${igf(tbd('не утверждено', 'blk'))}${profNote()}</div></div>${nav()}`;
+${searchOnly()}${groups()}${blockRow('Разблокировать', 'accent')}${profNote()}</div></div>${nav()}`;
 S['contact-error'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco' })}
 <div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не получилось загрузить профиль')}</h3><p>${t('Проверь сеть и попробуй ещё раз.')}</p></div></div>
 <div style="padding:0 16px">${cta('Повторить', 'primary')}</div></div></div>${nav()}`;

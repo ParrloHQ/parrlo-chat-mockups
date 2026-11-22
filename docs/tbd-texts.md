@@ -2,7 +2,7 @@
 
 Собрано 22.11.2026 из отрисованных страниц `redesign-ios/{onboarding,settings,contacts-calls,groups,sheets}`, в ru, es и en, после вычитки Переводчика (`docs/tbd-texts-review.md`). Утверждённые по вычитке тексты применены, их плашки сняты; ниже — то, что осталось.
 
-**Итого: 73 места.** Решает Мурат — 48, юрист — 22, Translate (en) — 3.
+**Итого: 69 мест.** Решает Мурат — 44, юрист — 22, Translate (en) — 3.
 
 - **Решает Мурат** — плашки «не утверждено», «формулировка: не утверждено», «запасной вариант», «кнопка жалобы: формулировка не утверждена». Сюда входят служебные пометки для дизайна («не UI» в вычитке), блокер с ценой подписки (`plans`, цена — `{price}` из StoreKit) и исправленные черновики вычитки.
 - **Решает Translate** — черновики en на экранах `ob-address` и `ob-mic` (ru/es там уже утверждены).
@@ -40,7 +40,7 @@
 | 7 | `settings-notifications-blocked` | Мурат | формулировка: не утверждено | (блок над плашкой) 1. Настройки iPhone2. Parrlo3. Уведомления | (блок над плашкой) 1. Ajustes2. Parrlo3. Notificaciones | (блок над плашкой) 1. Settings2. Parrlo3. Notifications |
 
 
-## Контакты, звонки, профиль (`redesign-ios/contacts-calls/`) — 20
+## Контакты, звонки, профиль (`redesign-ios/contacts-calls/`) — 16
 
 | № | Экран | Решает | Пометка | ru | es | en |
 |---|---|---|---|---|---|---|
@@ -56,14 +56,10 @@
 | 10 | `calls-missed` | Мурат | не утверждено | Где открывается список звонков (вкладка или «Позвонить» в быстрых действиях): | Dónde se abre la lista de llamadas (una pestaña o «Llamar» en acciones rápidas): | Where the call list opens (a tab or “Call” in quick actions): |
 | 11 | `calls-missed` | юрист | юрист проверит | Срок хранения истории звонков и копии протокола на сервере: [уточнить]. | Plazo de conservación del historial de llamadas y de la copia de la transcripción en el servidor: [por confirmar]. | How long call history and the server copy of the transcript are kept: [to be confirmed]. |
 | 12 | `contact-block` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
-| 13 | `contact-blocked` | Мурат | не утверждено | (блок над плашкой) Разблокировать | (блок над плашкой) Desbloquear | (блок над плашкой) Unblock |
-| 14 | `contact-blocked` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
-| 15 | `contact-edit` | Мурат | формулировка: не утверждено | (блок над плашкой) Собеседник её не видит | (блок над плашкой) La otra persona no la ve | (блок над плашкой) The other person can’t see it |
-| 16 | `contact-edit-filled` | Мурат | формулировка: не утверждено | (блок над плашкой) Собеседник её не видит476 / 500 | (блок над плашкой) La otra persona no la ve488 / 500 | (блок над плашкой) The other person can’t see it475 / 500 |
-| 17 | `contact-edit-limit` | Мурат | формулировка: не утверждено | (блок над плашкой) Собеседник её не видит500 / 500Больше 500 символов не поместится | (блок над плашкой) La otra persona no la ve500 / 500No caben más de 500 caracteres | (блок над плашкой) The other person can’t see it500 / 500Notes can’t be longer than 500 characters |
-| 18 | `contact-edit-reset` | Мурат | формулировка: не утверждено | (блок над плашкой) Собеседник её не видит | (блок над плашкой) La otra persona no la ve | (блок над плашкой) The other person can’t see it |
-| 19 | `contact-nogroups` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
-| 20 | `contact-profile` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
+| 13 | `contact-blocked` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
+| 14 | `contact-edit-limit` | Мурат | формулировка: не утверждено | (блок над плашкой) Собеседник её не видит500 / 500Больше 500 символов не поместится | (блок над плашкой) La otra persona no la ve500 / 500No caben más de 500 caracteres | (блок над плашкой) The other person can’t see it500 / 500Notes can’t be longer than 500 characters |
+| 15 | `contact-nogroups` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
+| 16 | `contact-profile` | Мурат | не утверждено | Что есть в профиле: имя, статус, звук, поиск в чате, общие группы. | Qué hay en el perfil: nombre, estado, sonido, búsqueda en el chat, grupos en común. | What the profile has: name, status, sound, search in chat, shared groups. |
 
 
 ## Группы (`redesign-ios/groups/`) — 18
