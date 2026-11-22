@@ -2,7 +2,7 @@
 //   node checks/wbr.js [экран ...]             — без аргументов: все экраны frames/{ru,es,en}-*.html
 //   Кадры SE (375) проверяются ещё и на ширине 360 (ключ «…__se-…@360»), как веб.
 //   node checks/wbr.js --write-allow           — переписать checks/wbr-allow.txt текущими местами (только для старта)
-// Разрыв допустим только у слова шире экрана (ширина кадра − 32): так переносит и iOS.
+// Разрыв внутри слова недопустим нигде (решение 22.11): при XL/AX5 его убирает WordFit (wordfit.js — кегль блока ступенями, не ниже AX1).
 // Остальные места XL/AX5, что были на старте, перечислены в checks/wbr-allow.txt; список только сокращается:
 // новое место → ошибка; место из списка, которого больше нет, → ошибка (удали строку из списка).
 // Запас TOL px на разницу шрифтов между машинами: разрыв «впритык» не считается новым, строка списка «впритык» — не устаревшей.
@@ -23,6 +23,7 @@ const probe = ([allowKeys, TOL, w360]) => {
   const res = [], fits = [];
   // второй проход: узкие кадры (SE, 375) сужены до 360 — ширина проверки веба (360/390/1440); ключ кадра с суффиксом @360
   if (w360) document.querySelectorAll('figure[data-dev="se"] .pc-frame').forEach((fr) => fr.style.setProperty('--W', '360px'));
+  if (w360 && window.wordFit) window.wordFit(); // WordFit заново на новой ширине
   const allow = new Set(allowKeys);
   const L = /[\p{L}\p{N}]/u;
   const rg = document.createRange();
@@ -31,7 +32,6 @@ const probe = ([allowKeys, TOL, w360]) => {
     if (!fr) return;
     if (w360 && fg.dataset.dev !== 'se') return;
     const id = fg.dataset.id + (w360 ? '@360' : '');
-    const screenW = fr.getBoundingClientRect().width - 32;
     const w = document.createTreeWalker(fr, NodeFilter.SHOW_TEXT);
     let n;
     while ((n = w.nextNode())) {
@@ -69,7 +69,6 @@ const probe = ([allowKeys, TOL, w360]) => {
         }
         if (!broken) continue;
         const wide = rs.reduce((s, r) => s + r.width, 0);
-        if (wide > screenW) continue; // шире экрана — допустимо
         if (wide - Math.max(...rs.map((r) => r.width)) <= TOL && !allow.has(key)) continue; // рвётся «впритык» — на другой машине может и не рваться
         res.push(key);
       }
@@ -88,10 +87,10 @@ const probe = ([allowKeys, TOL, w360]) => {
     const f = `${R}/frames/${l}-${s}.html`;
     if (!fs.existsSync(f)) continue;
     await p.goto('file://' + f);
-    await p.waitForTimeout(100);
+    await p.waitForFunction(() => document.body.dataset.ready === '1', null, {timeout: 15000}).catch(() => {});
     const keys = allowAll.filter((x) => x.startsWith(l + ' ' + s + '__')).map((x) => x.slice(3));
     for (const w360 of [false, true]) {
-      if (w360) { await p.goto('file://' + f); await p.waitForTimeout(100); }
+      if (w360) { await p.goto('file://' + f); await p.waitForFunction(() => document.body.dataset.ready === '1', null, {timeout: 15000}).catch(() => {}); }
       const {res, fits} = await p.evaluate(probe, [keys, writeAllow ? -1e9 : TOL, w360]);
       for (const x of res) found.push(l + ' ' + x);
       for (const x of fits) fitsAll.add(l + ' ' + x);
