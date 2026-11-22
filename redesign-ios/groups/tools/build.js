@@ -13,7 +13,27 @@ const glueHtml = (html, lang) => glueBase(html, lang).replace(/<template id="L-(
 const norm = (s) => s.replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let L = 'ru';
-const T = (ru) => { const e = STR[norm(ru)]; if (!e) throw new Error('нет строки: ' + ru); return esc(e[L]); };
+
+// Без рода (решение 22.11): ru-тексты старых кадров с прошедшим временем / местоимением о человеке заменены.
+// es/en не меняются. Видимые строки получают пометку «не утверждено» (только в ru) — см. README.
+const OVR = {
+  'Пригласила: Лена': 'Зовёт Лена',
+  'Карточка приглашения: группа, число участников, кто пригласил.': 'Карточка приглашения: группа, число участников, от кого приглашение.',
+  'Анна присоединилась к группе': 'Анна теперь в группе',
+  'Петя вышел из группы': 'Выход из группы: Петя',
+  'Анна присоединилась. Идёт расшифровка ИИ.': 'Анна теперь в звонке. Идёт расшифровка ИИ.',
+  'Кто присоединился': 'Участники звонка',
+  'Попроси того, кто пригласил, прислать новое приглашение.': 'Попроси прислать новое приглашение.',
+  'Новый участник: Marco · кто добавил: Лена': 'Лена добавляет в группу: Marco',
+  'Исключение из группы: Петя · кто исключил: Лена': 'Лена исключает из группы: Петя',
+  'Новое название группы: «Квартира на Майор» · кто изменил: Marco': 'Marco меняет название группы: «Квартира на Майор»',
+  'Когда админ выходит, он выбирает нового админа сам или выбирает автоматически: админом станет тот, кто дольше всех в группе.': 'Админ при выходе выбирает нового админа или включает автоматический выбор: админом станет тот, кто дольше всех в группе.',
+  'Ты — админ группы «Квартира». Перед выходом выбери нового админа: он получит доступ к разделу «Участники и права».': 'Ты — админ группы «Квартира». Перед выходом выбери нового админа: у нового админа будет доступ к разделу «Участники и права».',
+  'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.': 'ИИ-помощники в этой группе запрещены админом. Parrlo здесь не работает.',
+};
+const T = (ru) => { const e = STR[norm(ru)]; if (!e) throw new Error('нет строки: ' + ru); return esc(L === 'ru' && OVR[norm(ru)] ? OVR[norm(ru)] : e[L]); };
+// TT: как T, плюс пометка «не утверждено» в ru, если строка заменена (OVR)
+const TT = (ru) => T(ru) + (L === 'ru' && OVR[norm(ru)] ? tbd('не утверждено') : '');
 
 // ---------- иконки (из redesign-ios/tools/build.js + новые в той же сетке 24, штрих 1.8) ----------
 const PARROT_INNER = '<defs><mask id="pc-pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/>';
@@ -75,7 +95,7 @@ const bubble = ({ text = '', time, own, tail, trf, orig, photo }) => {
 };
 const gin = (who, items) => `<div class="grp in wa"><div class="snm" style="color:var(--nt-${PPL[who]})">${T(who)}</div>${items.map((it, i) => bubble({ ...it, tail: i === items.length - 1 })).join('')}${av(who, 'gav')}</div>`;
 const gout = (items) => `<div class="grp out">${items.map((it, i) => bubble({ ...it, own: true, tail: i === items.length - 1 })).join('')}</div>`;
-const sys = (s, o = {}) => `<div class="sys" role="status">${o.admin ? ic('shield') : ''}${T(s)}${o.tbd ? tbd() : ''}</div>`;
+const sys = (s, o = {}) => `<div class="sys" role="status">${o.admin ? ic('shield') : ''}${TT(s)}${o.tbd ? tbd() : ''}</div>`;
 
 // ---------- навбар, композер, низ ----------
 const back = () => `<span class="cbtn" aria-label="${T('Назад')}">${ic('back')}</span>`;
@@ -88,7 +108,7 @@ const groupNav = ({ ai = true, call = true, callBtn = true } = {}) => nav({
   right: `<span class="rt">${callBtn ? `<span class="cbtn" aria-label="${T('Групповой звонок')}">${ic('calls')}</span>` : ''}<span aria-label="${T('О группе')}">${av('Квартира', 'av36')}</span></span>`,
   extra: (ai ? aistrip() : '') + (call ? callbar() : ''),
 });
-const composer = (lim = '') => `<div class="comp${lim ? ' has-lim' : ''}">${lim}<span class="cbtn" aria-label="Вложение">${ic('clip')}</span><div class="field"><span>${T('Сообщение')}</span>${ic('smile')}</div><span class="cbtn" aria-label="${T('Продиктовать')}">${ic('mic')}</span></div>`;
+const composer = (lim = '') => `<div class="comp${lim ? ' has-lim' : ''}">${lim}<span class="cbtn" aria-label="Вложение">${ic('clip')}</span><div class="field"><span>${T('Сообщение')}</span></div><span class="cbtn" aria-label="${T('Продиктовать')}">${ic('mic')}</span></div>`;
 const chat = (o, msgs, comp = composer()) => `<div class="msgs">${msgs}</div>${groupNav(o)}${comp}`;
 const dock = (...btns) => `<div class="dock">${btns.join('')}</div>`;
 const btn = (s, cls = '') => `<span class="bigbtn ${cls}">${T(s)}</span>`;
@@ -111,7 +131,7 @@ const alert = ({ title, msg, btns }) => `<div class="ov"></div><div class="alert
 <div class="al-btns">${btns.map(([s, c]) => `<a class="${c || ''}">${T(s)}</a>`).join('')}</div></div>`;
 const legal = 'В Parrlo Chat каждый человек может включить для себя ИИ-ассистента Parrlo. Он читает чаты этого человека — в том числе сообщения, которые ты пишешь в этой группе, — только чтобы помогать ему: пересказывать, переводить, составлять тексты. Тексты обрабатывают поставщики ИИ по нашему поручению; часть — в США. Ты можешь возразить, написав на [e-mail], или выйти из группы в любой момент. Оператор: PADELADA WORLD, S.L. · NIF B05783238 · Calle Josep Pla 8, Esc. 1, Pta. 1, 17252 Calonge i Sant Antoni (Girona), España · hello@';
 const legalP = () => `<p class="legal">${T(legal)}${T('parrlo.com.')}</p>`;
-const joinPage = (wait) => `<div class="page"><div class="gcard" role="group" aria-label="${T('Приглашение в группу')}">${av('Квартира', '')}<div class="ct"><b>${T('Квартира')}</b><span>${T('12 участников')}</span><span>${T('Пригласила: Лена')}</span></div></div>
+const joinPage = (wait) => `<div class="page"><div class="gcard" role="group" aria-label="${T('Приглашение в группу')}">${av('Квартира', '')}<div class="ct"><b>${T('Квартира')}</b><span>${T('12 участников')}</span><span>${TT('Пригласила: Лена')}</span></div></div>
 <h1 class="h1">${T('Перед тем как вступить')}</h1>${legalP()}<p class="legal"><a class="lnk" style="margin-top:0">${T('Политика конфиденциальности')}</a></p>
 <div class="notes"><p>${T('Карточка приглашения: группа, число участников, кто пригласил.')}${tbd('не утверждено')}</p><p>${T('Всё, что в [скобках], нужно заполнить или подтвердить.')}${tbd()}</p></div></div>
 ${nav()}${dock(wait ? `<span class="bigbtn wait" role="status"><i class="spin"></i>${T('Вступаем в группу…')}</span>` : btn('Вступить'), btn('Не вступать', 'alt'))}`;
@@ -120,7 +140,7 @@ const pickList = (who, sel, auto) => who.map(n => `<div class="cell wav" role="r
   (auto ? `<div class="cell" role="radio" style="--sep:16px"><div class="ct"><b>${T('Выбрать автоматически')}</b><span>${T('Админом станет тот, кто дольше всех в группе.')}</span></div></div>` : '');
 const transferPage = () => `<div class="page"><h1 class="h1">${T('Кому передать роль админа?')}</h1><p class="lead">${T('Ты останешься в группе «Квартира» участником. Новый админ получит доступ к разделу «Участники и права».')}</p>
 ${sec({ cells: pickList(MEM, 'Marco'), f: tbd() })}</div>${nav()}${dock(btn('Передать роль'), btn('Отмена', 'txt'))}`;
-const successorPage = () => `<div class="page"><h1 class="h1">${T('Кому передать роль админа?')}</h1><p class="lead">${T('Ты — админ группы «Квартира». Перед выходом выбери нового админа: он получит доступ к разделу «Участники и права».')}</p>
+const successorPage = () => `<div class="page"><h1 class="h1">${T('Кому передать роль админа?')}</h1><p class="lead">${TT('Ты — админ группы «Квартира». Перед выходом выбери нового админа: он получит доступ к разделу «Участники и права».')}</p>
 ${sec({ cells: pickList(['Marco', 'Мама', 'Анна Л.', 'Петя'], 'Marco', true), f: tbd() })}</div>${nav()}${dock(btn('Назначить и выйти'), btn('Отмена', 'txt'))}`;
 const invitePage = () => `<div class="page"><p class="lead" style="padding-top:12px">${T('Любой, у кого есть эта ссылка, сможет вступить в «Квартира». Отправляй её только тем, кому доверяешь.')}</p>
 ${sec({ h: T('Ссылка'), cells: `<div class="cell">${ic('link', 'mut')}<span class="field-v">${T('…/join/7Kq2x9')}</span></div>`,
@@ -130,7 +150,7 @@ ${sec({ cells: `<div class="cell danger">${ic('reset')}<div class="ct"><b>${T('�
 </div>${nav({ title: T('Ссылка-приглашение') })}`;
 const swCell = (title, on, dis) => `<div class="cell swr"><div class="ct"><b>${T(title)}</b></div><span class="sw${on ? ' on' : ''}${dis ? ' dis' : ''}" role="switch" aria-checked="${on}"></span></div>`;
 const parrloPage = (off) => `<div class="page">
-${sec({ h: T('Для тебя') + tbd(), cells: swCell('Parrlo в этой группе', !off, off), f: T(off ? 'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.' : 'Parrlo читает эту группу только для тебя и пишет по твоей команде от твоего имени. Другим участникам он не виден.') })}
+${sec({ h: T('Для тебя') + tbd(), cells: swCell('Parrlo в этой группе', !off, off), f: (off ? TT : T)(off ? 'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.' : 'Parrlo читает эту группу только для тебя и пишет по твоей команде от твоего имени. Другим участникам он не виден.') })}
 ${sec({ h: T('Для группы') + tbd('не утверждено'), cells: swCell('ИИ-помощники в этой группе', !off), f: T('Админ решает, могут ли участники использовать Parrlo в этой группе.') })}
 ${off ? sec({ h: T('Так это видят участники'), f: T('Показывается ли строка, если ИИ-помощники запрещены') + tbd('не утверждено') })
     : sec({ h: T('Кто может вызывать Parrlo'), cells: `<div class="cell" role="radio"><div class="ct"><b>${T('Все участники')}</b></div>${ic('check', 'ck')}</div><div class="cell" role="radio"><div class="ct"><b>${T('Только админ')}</b></div></div>` }) +
@@ -187,7 +207,7 @@ ${gin('Marco', [{ photo: true, text: 'Вот какая сегодня улиц�
   ['group-successor', 'Выход админа: преемник', 'group-successor', successorPage],
   ['group-successor-confirm', 'Назначить и выйти?', 'group-successor-confirm', () => successorPage() + alert({ title: 'Передать роль админа и выйти?', msg: 'Marco станет админом группы «Квартира». Ты выйдешь из группы.', btns: [['Отмена', 'cancel'], ['Назначить и выйти', 'bold']] })],
   ['group-call', 'Групповой звонок', 'group-call', () => `<div class="call"><div class="call-top"><span class="rec" role="status"><i></i>${T('Идёт расшифровка ИИ')}</span><span class="cbtn" aria-label="${T('Полный протокол')}">${ic('list')}</span></div>
-${aistrip()}<div class="toast" role="status">${T('Анна присоединилась. Идёт расшифровка ИИ.')}</div>
+${aistrip()}<div class="toast" role="status">${TT('Анна присоединилась. Идёт расшифровка ИИ.')}</div>
 <div class="tiles" role="group" aria-label="${T('Кто присоединился')}">${['Лена', 'Marco', 'Анна Л.', 'Петя', 'Мама', 'Ты'].map(n => `<div class="tile${n === 'Marco' ? ' spk' : ''}">${av(n, '', n === 'Ты' ? T('Т') : undefined)}<span class="tn">${T(n)}</span></div>`).join('')}</div>
 <div class="capt"><b>${T('Marco')}</b><p>${T('Увидимся у входа в девять, я возьму билеты.')}</p><span>${T('Перевод с испанского')}</span></div>
 <div class="ctrl"><i aria-label="${T('Микрофон')}">${ic('micoff')}</i><i class="end" aria-label="${T('Завершить')}">${ic('end')}</i><i aria-label="${T('Полный протокол')}">${ic('list')}</i></div></div>`],

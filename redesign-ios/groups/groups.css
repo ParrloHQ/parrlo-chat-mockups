@@ -279,3 +279,5 @@ html[data-t="ax5"] .capt span,html[data-t="ax5"] .capt b{font-size:20px}
 html[data-t="ax5"] .toast{font-size:20px}
 html[data-t="ax5"] .call .aistrip{font-size:20px}
 html[data-d="se"][data-t="ax5"] .page.center .eic{display:none}
+.gcard .ct span.tbd{display:table;margin:4px 0 0;font-size:12px;line-height:17px;color:var(--tbd)}
+html[data-t="ax5"] .gcard .ct{align-self:stretch}
