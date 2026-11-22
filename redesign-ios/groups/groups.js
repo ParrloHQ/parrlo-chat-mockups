@@ -1,4 +1,5 @@
 // Пакет «группы»: язык (?l=), подгонка ленты под композер, WordFit для AX5.
+// Порядок: раскладка → window.unglue() (../tools/unglue.js) → WordFit.
 // WordFit: если слово не помещается в строку (перенос внутри слова или вылезает за блок) — кегль этого блока ×0,92 ступенями,
 // не ниже AX1 (×0,53 от AX5: тело 53 → 28). Раскладка AX5 (строки во всю ширину, значок над текстом) — основная; WordFit — страховка.
 (function(){
@@ -22,5 +23,10 @@
   function fitFeed(){var c=document.querySelector('.comp'),m=document.querySelector('.msgs');if(c&&m)m.style.paddingBottom=(c.offsetHeight+8)+'px';
     var d=document.querySelector('.dock'),p=document.querySelector('.page');if(d&&p&&!p.classList.contains('center'))p.style.paddingBottom=d.offsetHeight+'px';}
   document.addEventListener('DOMContentLoaded',function(){var l=document.documentElement.dataset.l,m=document.querySelector('main');m.innerHTML=document.getElementById('L-'+l).innerHTML;
-    document.fonts.ready.then(function(){wordFit();fitFeed();document.body.dataset.ready='1';});});
+    document.fonts.ready.then(function(){fitFeed();
+      // снимок склеенного текста: после WordFit блоки с уменьшенным кеглем получают склейку обратно и unglue проходит по ним ещё раз
+      var snap=[],tw=document.createTreeWalker(m,NodeFilter.SHOW_TEXT),x;while((x=tw.nextNode()))snap.push([x,x.textContent]);
+      if(window.unglue)window.unglue();wordFit();
+      var re=false;snap.forEach(function(p){var el=p[0].parentElement;if(el&&el.closest('[data-wf]')&&p[0].textContent!==p[1]){p[0].textContent=p[1];re=true;}});
+      if(re&&window.unglue)window.unglue();fitFeed();document.documentElement.dataset.unglued='1';document.body.dataset.ready='1';});});
 })();

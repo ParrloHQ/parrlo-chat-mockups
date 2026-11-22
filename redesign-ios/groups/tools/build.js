@@ -5,7 +5,12 @@ const fs = require('fs');
 const path = require('path');
 const OUT = path.resolve(__dirname, '..');
 const STR = require('./strings.json');
-const norm = (s) => s.replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
+const { glueHtml: glueBase } = require('../../tools/nbsp.js');
+const SW = require('../../tools/short-words.json');
+// дополнительно к nbsp.js: короткое слово перед заполнителем в квадратных скобках («в [скобках]», «to [e-mail]»)
+const glueHtml = (html, lang) => glueBase(html, lang).replace(/<template id="L-(ru|es|en)"[\s\S]*?<\/template>/g, (tpl, l) =>
+  tpl.replace(new RegExp(`(?<![\\p{L}\\p{N}])(${SW[l].join('|')}) (?=\\[)`, 'giu'), (_, w) => w + '\u00a0')); // NBSP после коротких слов (языки — по lang у <template>)
+const norm = (s) => s.replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let L = 'ru';
 const T = (ru) => { const e = STR[norm(ru)]; if (!e) throw new Error('нет строки: ' + ru); return esc(e[L]); };
@@ -194,14 +199,15 @@ const page = (id, title, bodies) => `<!doctype html>
 <html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title><link rel="stylesheet" href="../rd.css"><link rel="stylesheet" href="groups.css">
 <script>(function(){var q=new URLSearchParams(location.search),h=document.documentElement;h.dataset.d=q.get('d')==='se'?'se':'max';h.dataset.t=q.get('t')==='ax5'?'ax5':'n';
-var l=q.get('l');if(l!=='es'&&l!=='en')l='ru';h.lang=l;h.dataset.l=l;})()</script><script src="groups.js" defer></script>
+var l=q.get('l');if(l!=='es'&&l!=='en')l='ru';h.lang=l;h.dataset.l=l;})()</script><script src="../tools/unglue.js"></script><script src="groups.js" defer></script>
 </head><body><main class="screen" data-screen="${id}"></main>
-${Object.entries(bodies).map(([l, b]) => `<template id="L-${l}">${statusBar()}
+${Object.entries(bodies).map(([l, b]) => `<template id="L-${l}" lang="${l}">${statusBar()}
 ${b}
 <i class="home-ind"></i></template>`).join('\n')}
 </body></html>
 `;
 const JS = `// Пакет «группы»: язык (?l=), подгонка ленты под композер, WordFit для AX5.
+// Порядок: раскладка → window.unglue() (../tools/unglue.js) → WordFit.
 // WordFit: если слово не помещается в строку (перенос внутри слова или вылезает за блок) — кегль этого блока ×0,92 ступенями,
 // не ниже AX1 (×0,53 от AX5: тело 53 → 28). Раскладка AX5 (строки во всю ширину, значок над текстом) — основная; WordFit — страховка.
 (function(){
@@ -225,14 +231,19 @@ const JS = `// Пакет «группы»: язык (?l=), подгонка л�
   function fitFeed(){var c=document.querySelector('.comp'),m=document.querySelector('.msgs');if(c&&m)m.style.paddingBottom=(c.offsetHeight+8)+'px';
     var d=document.querySelector('.dock'),p=document.querySelector('.page');if(d&&p&&!p.classList.contains('center'))p.style.paddingBottom=d.offsetHeight+'px';}
   document.addEventListener('DOMContentLoaded',function(){var l=document.documentElement.dataset.l,m=document.querySelector('main');m.innerHTML=document.getElementById('L-'+l).innerHTML;
-    document.fonts.ready.then(function(){wordFit();fitFeed();document.body.dataset.ready='1';});});
+    document.fonts.ready.then(function(){fitFeed();
+      // снимок склеенного текста: после WordFit блоки с уменьшенным кеглем получают склейку обратно и unglue проходит по ним ещё раз
+      var snap=[],tw=document.createTreeWalker(m,NodeFilter.SHOW_TEXT),x;while((x=tw.nextNode()))snap.push([x,x.textContent]);
+      if(window.unglue)window.unglue();wordFit();
+      var re=false;snap.forEach(function(p){var el=p[0].parentElement;if(el&&el.closest('[data-wf]')&&p[0].textContent!==p[1]){p[0].textContent=p[1];re=true;}});
+      if(re&&window.unglue)window.unglue();fitFeed();document.documentElement.dataset.unglued='1';document.body.dataset.ready='1';});});
 })();
 `;
 fs.writeFileSync(path.join(OUT, 'groups.js'), JS);
 for (const [id, cap, , fn] of SCREENS) {
   const bodies = {};
   for (const l of ['ru', 'es', 'en']) { L = l; pid = 0; bodies[l] = fn(); }
-  fs.writeFileSync(path.join(OUT, id + '.html'), page(id, 'Группы — ' + cap, bodies));
+  fs.writeFileSync(path.join(OUT, id + '.html'), glueHtml(page(id, 'Группы — ' + cap, bodies), 'ru'));
 }
 // ---------- обзор: все экраны, Pro Max, обычный текст, ru ----------
 const idx = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Группы — обзор</title>

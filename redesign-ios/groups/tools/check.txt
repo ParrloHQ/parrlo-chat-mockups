@@ -2,64 +2,50 @@
 проверка: текст нигде не вылезает, слова не разорваны
 
 WordFit (кегль уменьшен, AX5):
-group se-ax5-ru: sys → 34.3px, trf → 36.8px
+group se-ax5-ru: sys → 34.3px
 group se-ax5-en: b tail in-t → 48.8px
-group-syslines se-ax5-es: sys → 40.5px
-group-syslines se-ax5-en: b tail in-t → 48.8px, sys → 40.5px
-group-photo se-ax5-ru: trf → 36.8px, trf → 36.8px
+group-syslines se-ax5-en: b tail in-t → 48.8px
 group-photo se-ax5-en: b tail in-t → 48.8px
-group-invite se-ax5-ru: field-v → 38.0px, P → 40.5px, B → 38.0px
+group-invite se-ax5-ru: field-v → 38.0px, B → 38.0px
 group-invite se-ax5-es: field-v → 38.0px, B → 44.9px
 group-invite se-ax5-en: field-v → 38.0px
-group-invite-reset se-ax5-ru: field-v → 38.0px, P → 40.5px, B → 38.0px
+group-invite-reset se-ax5-ru: field-v → 38.0px, B → 38.0px
 group-invite-reset se-ax5-es: field-v → 38.0px, B → 44.9px
 group-invite-reset se-ax5-en: field-v → 38.0px
-group-join se-ax5-ru: legal → 38.2px, lnk → 29.7px, P → 37.2px
-group-join se-ax5-es: legal → 38.2px, P → 40.5px
+group-join se-ax5-ru: legal → 38.2px, lnk → 29.7px
+group-join se-ax5-es: legal → 38.2px
 group-join se-ax5-en: legal → 38.2px
-group-join-wait se-ax5-ru: legal → 38.2px, lnk → 29.7px, P → 37.2px
-group-join-wait se-ax5-es: legal → 38.2px, P → 40.5px
+group-join-wait se-ax5-ru: legal → 38.2px, lnk → 29.7px
+group-join-wait se-ax5-es: legal → 38.2px
 group-join-wait se-ax5-en: legal → 38.2px
-group-join-declined se-ax5-ru: P → 41.5px
 group-members se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 40.5px
-group-members se-ax5-es: B → 38.0px, B → 32.1px, SPAN → 45.1px, P → 37.2px, P → 40.5px
+group-members se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
 group-members-menu se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 40.5px
-group-members-menu se-ax5-es: B → 38.0px, B → 32.1px, SPAN → 45.1px, P → 37.2px, P → 40.5px
+group-members-menu se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
 group-members-remove se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 40.5px
-group-members-remove se-ax5-es: B → 38.0px, B → 32.1px, SPAN → 45.1px, P → 37.2px, P → 40.5px
-group-members-empty se-ax5-ru: P → 45.1px
-group-admin-you se-ax5-ru: sys → 34.3px, trf → 36.8px
+group-members-remove se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
+group-admin-you se-ax5-ru: sys → 34.3px
 group-admin-you se-ax5-en: b tail in-t → 48.8px
-group-admin-changed se-ax5-ru: sys → 34.3px, trf → 36.8px
+group-admin-changed se-ax5-ru: sys → 34.3px
 group-admin-changed se-ax5-en: b tail in-t → 48.8px
 group-leave-confirm se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 40.5px
-group-leave-confirm se-ax5-es: B → 38.0px, B → 32.1px, SPAN → 45.1px, P → 37.2px, P → 40.5px
-group-limit se-ax5-ru: sys → 34.3px, trf → 36.8px
+group-leave-confirm se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
+group-limit se-ax5-ru: sys → 34.3px
 group-limit se-ax5-en: b tail in-t → 48.8px
-group-limit-inline se-ax5-ru: sys → 34.3px, trf → 36.8px
+group-limit-inline se-ax5-ru: sys → 34.3px
 group-limit-inline se-ax5-en: b tail in-t → 48.8px
-group-parrlo se-ax5-ru: sec-f → 31.5px, B → 48.8px
-group-parrlo se-ax5-es: B → 48.8px, sec-f → 34.3px, B → 32.1px, sec-h → 37.2px
-group-parrlo se-ax5-en: sec-f → 34.3px, B → 48.8px
-group-parrlo-off se-ax5-ru: sec-f → 31.5px, sec-f → 24.5px
-group-parrlo-off se-ax5-es: sec-f → 40.5px, B → 48.8px, sec-f → 34.3px, sec-h → 37.2px
-group-parrlo-off se-ax5-en: B → 48.8px
-group-ai-info se-ax5-ru: legal → 38.2px, lnk → 29.7px, P → 37.2px
+group-parrlo se-ax5-ru: B → 48.8px
+group-parrlo se-ax5-es: B → 41.3px
+group-ai-info se-ax5-ru: legal → 38.2px, lnk → 29.7px
 group-ai-info se-ax5-es: legal → 38.2px
 group-ai-info se-ax5-en: legal → 38.2px
-admin-transfer se-ax5-ru: lead → 45.1px
-admin-transfer se-ax5-es: lead → 45.1px
-admin-transfer se-ax5-en: lead → 38.2px
-admin-transfer-confirm se-ax5-ru: lead → 45.1px
-admin-transfer-confirm se-ax5-es: lead → 45.1px
-admin-transfer-confirm se-ax5-en: lead → 38.2px
 admin-transfer-done se-ax5-en: b tail in-t → 48.8px
 group-successor se-ax5-ru: B → 41.3px
-group-successor se-ax5-es: lead → 45.1px, B → 38.0px
-group-successor se-ax5-en: lead → 38.2px, B → 48.8px
+group-successor se-ax5-es: B → 38.0px
+group-successor se-ax5-en: B → 48.8px
 group-successor-confirm se-ax5-ru: B → 41.3px
-group-successor-confirm se-ax5-es: lead → 45.1px, B → 38.0px
-group-successor-confirm se-ax5-en: lead → 38.2px, B → 48.8px
+group-successor-confirm se-ax5-es: B → 38.0px
+group-successor-confirm se-ax5-en: B → 48.8px
 group-invite max-ax5-ru: field-v → 44.9px, B → 48.8px
 group-invite max-ax5-es: field-v → 44.9px
 group-invite max-ax5-en: field-v → 44.9px
@@ -72,15 +58,10 @@ group-join max-ax5-en: legal → 45.1px
 group-join-wait max-ax5-ru: legal → 45.1px, lnk → 35.1px
 group-join-wait max-ax5-es: legal → 45.1px
 group-join-wait max-ax5-en: legal → 45.1px
-group-members max-ax5-es: B → 48.8px, B → 41.3px
-group-members-menu max-ax5-es: B → 48.8px, B → 41.3px
-group-members-remove max-ax5-es: B → 48.8px, B → 41.3px
-group-leave-confirm max-ax5-es: B → 48.8px, B → 41.3px
-group-parrlo max-ax5-ru: sec-f → 37.2px
-group-parrlo max-ax5-es: sec-f → 40.5px, B → 41.3px
-group-parrlo max-ax5-en: sec-f → 40.5px
-group-parrlo-off max-ax5-ru: sec-f → 37.2px, sec-f → 29.0px
-group-parrlo-off max-ax5-es: sec-f → 40.5px
+group-members max-ax5-es: B → 48.8px, B → 48.8px
+group-members-menu max-ax5-es: B → 48.8px, B → 48.8px
+group-members-remove max-ax5-es: B → 48.8px, B → 48.8px
+group-leave-confirm max-ax5-es: B → 48.8px, B → 48.8px
 group-ai-info max-ax5-ru: legal → 45.1px, lnk → 35.1px
 group-ai-info max-ax5-es: legal → 45.1px
 group-ai-info max-ax5-en: legal → 45.1px
