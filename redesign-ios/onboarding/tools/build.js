@@ -87,7 +87,7 @@ const C = {
   setup_t: L('Настрой Parrlo', 'Configura a Parrlo', 'Set up Parrlo'),
   setup_l: L('Всё это можно поменять потом: Настройки → Parrlo.', 'Todo esto se puede cambiar después: Ajustes → Parrlo.', 'You can change all of this later: Settings → Parrlo.'),
   skip: L('Пропустить', 'Omitir', 'Skip'),
-  remember: L('Запоминать мои предпочтения', 'Recordar mis ajustes', 'Remember my settings'),
+  remember: L('Запоминать мои предпочтения', 'Recordar mis preferencias', 'Remember my preferences'),
 };
 
 // конструкторы (li — индекс языка)
@@ -196,7 +196,7 @@ S['ob-consent'] = (li) => ob(`${top(li, 6)}
 <ul class="facts">${FACTS.map(([i, h, p, b]) => `<li class="fact"><span class="fi">${ic(i)}</span><div class="fx"><h3>${tx(h[li])}</h3><p>${encMark(tx(p[li]))}</p>${b ? tbd(b[li], true) : ''}</div></li>`).join('')}</ul>
 <p class="ph">${tx(C.op[li])}</p>
 <p class="small">${tx(L('Поставщики ИИ, основание передачи и срок хранения:', 'Proveedores de IA, base de la transferencia y conservación:', 'AI providers, transfer basis and retention:')[li])}</p>${tbd(C.na[li])}
-<div class="sech"></div><div class="glist"><div class="cell swr"><div class="tx"><h3>${tx(L('Запоминать мои предпочтения', 'Recordar mis preferencias', 'Remember my preferences')[li])}</h3><span class="s">${tx(L('Выключено по умолчанию. Посмотреть и удалить можно в Настройки → Parrlo → Память.', 'Desactivado por defecto. Puedes verla o borrarla en Ajustes → Parrlo → Memoria.', 'Off by default. View or delete it in Settings → Parrlo → Memory.')[li])}</span></div><span class="sw" role="switch" aria-checked="false"></span></div></div>
+<div class="sech"></div><div class="glist"><div class="cell swr"><div class="tx"><h3>${tx(C.remember[li])}</h3><span class="s">${tx(L('Выключено по умолчанию. Посмотреть и удалить можно в Настройки → Parrlo → Память.', 'Desactivado por defecto. Puedes verla o borrarla en Ajustes → Parrlo → Memoria.', 'Off by default. View or delete it in Settings → Parrlo → Memory.')[li])}</span></div><span class="sw" role="switch" aria-checked="false"></span></div></div>
 <div class="links"><span class="lnk" role="button">${tx(C.privacy[li])}</span></div>
 <div class="ax5-only"><p class="small">${tx(CNOTE[li])}</p></div></div>
 <div class="acts line"><p class="note n-only">${tx(CNOTE[li])}</p>${bp(L('Разрешить', 'Permitir', 'Allow')[li])}${bs(L('Не сейчас', 'Ahora no', 'Not now')[li])}</div>`);
