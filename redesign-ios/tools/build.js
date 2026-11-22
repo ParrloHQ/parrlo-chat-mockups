@@ -35,6 +35,12 @@ const P = {
   shift: '<path d="M12 4l7.5 8H15v7.5H9V12H4.5z"/>',
   bksp: '<path d="M9 5.5h10.5a1.5 1.5 0 011.5 1.5v10a1.5 1.5 0 01-1.5 1.5H9L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5"/>',
   trash: '<path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l.9 12.5a1 1 0 001 .9h7.2a1 1 0 001-.9L17.5 7M10 11v5.5M14 11v5.5"/>',
+  reply: '<path d="M9 7 4 12l5 5"/><path d="M4 12h10a6 6 0 016 6v1"/>',
+  copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/>',
+  flag: '<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>',
+  trbad: '<path d="M3 5h9M7.5 3v2M5.5 5c.5 3.5 3 6.5 6 7.5M9.5 5c-.7 3.6-3 6.6-6 7.5"/><path d="m13 21 4-9 4 9M14.4 18h5.2"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  chev: '<path d="m9.5 6 6 6-6 6"/>',
 };
 const ic = (n, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 const TICK2 = '<svg class="tick" viewBox="0 0 17 11" aria-hidden="true"><path d="M1 6l3.2 3.2L10 2.8"/><path d="M7.6 8.6l.6.6L15.6 1.8"/></svg>';
@@ -133,7 +139,12 @@ const s1Body = (rs) => `<div class="head"><div class="bar end"><span class="cbtn
 <h1 class="large">Чаты</h1><div class="search">${ic('search')}<span>Поиск</span></div></div>
 <ul class="list">${rs.map(rowHtml).join('')}</ul>
 ${tabs('chats', { badge: '3' })}`;
+// блок «Запросы» (запросы на переписку) — первой строкой списка; AX5: без значка, «Запросы», счётчик и шеврон в одну строку, превью в одну строку
+const reqRow = `<li class="row req" role="button"><span class="av av52 req-ic" aria-hidden="true">${ic('people')}</span><div class="rb">
+<div class="n"><b>Запросы</b><span class="badge">3</span>${ic('chev', 'chev')}</div>
+<div class="p">Lena, Пётр и ещё 1 хотят написать тебе</div></div></li>`;
 const s1 = page('Чаты', 'has-tabs', s1Body(rows));
+const s1req = page('Чаты — запросы', 'has-tabs', s1Body(rows).replace('<ul class="list">', '<ul class="list">' + reqRow));
 const s1swL = page('Чаты — свайп влево', 'has-tabs', s1Body(rows.map((r, k) => k === 0 ? { ...r, sw: 'l' } : r)));
 const s1swR = page('Чаты — свайп вправо', 'has-tabs', s1Body(rows.map((r, k) => k === 0 ? { ...r, sw: 'r' } : r)));
 
@@ -166,6 +177,15 @@ ${group(false, [
 ${navChat({ left: `<span class="cbtn" aria-label="Назад">${ic('back')}</span>`, title: 'Lucía', sub: 'в сети', right: `<span class="av av36" style="background:var(--av-1)">L</span>` })}
 ${composer(false)}`;
 const s2a = page('Чат с Lucía — фон A', '', lucia);
+// меню облачка (долгое нажатие): реакции, поднятое облачко, пункты. Плоско: без теней, линия 0,5 (SPEC §28)
+const ctxMenu = (b) => `<div class="scrim blur"></div><div class="ctx"><div class="rxbar" role="group" aria-label="Реакции">${['👍', '❤️', '😂', '😮', '😢', '🙏'].map((e) => `<b>${e}</b>`).join('')}<b class="more" aria-label="Другие реакции">${ic('plus')}</b></div>
+<div class="lift${b.long ? ' long' : ''}"><div class="grp in">${bubble({ ...b, tail: true })}</div></div>
+<div class="menu ctxm" role="menu"><div class="it"><span>Ответить</span>${ic('reply')}</div><div class="it"><span>Копировать</span>${ic('copy')}</div><div class="it"><span>Неточный перевод</span>${ic('trbad')}</div><div class="gap"></div><div class="it danger"><span>Пожаловаться</span>${ic('flag')}</div></div></div>
+<script>(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){var l=document.querySelector('.ctx .lift');if(l&&l.scrollHeight>l.clientHeight+1)l.classList.add('long')})</script>`;
+const s2m = page('Чат — меню облачка', '', lucia + ctxMenu({ text: 'Хочу показать тебе кафе у реки', orig: 'Quiero enseñarte un café junto al río', time: '09:40' }));
+const s2ml = page('Чат — меню длинного облачка', '', lucia + ctxMenu({ long: true, time: '09:41',
+  text: 'Слушай, я тут подумала: если завтра будет дождь, давай встретимся не у моста, а сразу в кафе у реки. Там есть терраса под навесом, и вид на воду ничуть не хуже. А если будет солнце, можно сначала пройтись по набережной до старой мельницы, там красиво на закате, а потом уже сесть в кафе и взять тот самый пирог с инжиром, про который я говорила.',
+  orig: 'Oye, si mañana llueve, quedamos en el café del río y no en el puente. Tiene una terraza con techo y la vista al agua es igual de bonita. Y si hace sol, damos un paseo hasta el viejo molino, que de tarde es precioso, y luego nos sentamos en el café a pedir la tarta de higos de la que te hablé.' }));
 
 // ---------- S3: Parrlo ----------
 const parrloList = `<div class="msgs">
@@ -198,7 +218,7 @@ const menu = `<div class="scrim"></div><div class="menu" role="menu">
 </div>`;
 const s3m = page('Parrlo — меню', 'has-tabs', parrloMsgs + menu);
 
-const pages = { 's1-chats': s1, 's1-swipe-l': s1swL, 's1-swipe-r': s1swR, 's2-chat-A': s2a, 's3-parrlo': s3, 's3-menu': s3m };
+const pages = { 's1-chats': s1, 's1-requests': s1req, 's2-menu': s2m, 's2-menu-long': s2ml, 's1-swipe-l': s1swL, 's1-swipe-r': s1swR, 's2-chat-A': s2a, 's3-parrlo': s3, 's3-menu': s3m };
 
 // ---------- S4: клавиатура открыта (чат Parrlo) — таб-бара и кнопки Parrlo нет ----------
 const KB = [['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'], ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'], ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю']];
@@ -337,7 +357,7 @@ write(path.join(OUT, 'tabbar-spec.html'), spec);
 for (const [k, v] of Object.entries(pages)) write(path.join(OUT, k + '.html'), v);
 
 // ---------- обзор ----------
-const caps = { 's1-chats': 'S1 · Чаты', 's2-chat-A': 'S2 · Чат с Lucía (фон A, ровный)', 's3-parrlo': 'S3 · Вкладка Parrlo', 's3-menu': 'S3 · Parrlo, меню открыто' };
+const caps = { 's1-chats': 'S1 · Чаты', 's1-requests': 'S1 · Чаты, блок «Запросы»', 's1-swipe-l': 'S1 · Свайп влево', 's1-swipe-r': 'S1 · Свайп вправо', 's2-menu': 'S2 · Меню облачка', 's2-menu-long': 'S2 · Меню длинного облачка', 's2-chat-A': 'S2 · Чат с Lucía (фон A, ровный)', 's3-parrlo': 'S3 · Вкладка Parrlo', 's3-menu': 'S3 · Parrlo, меню открыто' };
 const vars = [['se-n', 'iPhone SE · обычный'], ['max-n', 'Pro Max · обычный'], ['se-ax5', 'iPhone SE · AX5'], ['max-ax5', 'Pro Max · AX5']];
 const idx = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Редизайн iOS</title>
 <style>@font-face{font-family:Inter;font-weight:100 900;src:url(../fonts/Inter-Variable.woff2) format("woff2")}

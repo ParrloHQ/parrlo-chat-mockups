@@ -325,3 +325,29 @@ html[data-theme="light"],html[data-theme="light"] body{background:#D8DBE0}
 [data-theme="light"] .play{background:var(--ink)}
 [data-theme="light"] .play svg{fill:#fff}
 [data-theme="light"] .bars i.r{background:rgba(14,17,22,.3)}
+
+/* блок «Запросы» — первой строкой списка «Чаты» */
+.row.req .req-ic{background:var(--raised);color:var(--acc);display:grid;place-items:center}
+.row.req .req-ic .ic{width:26px;height:26px}
+.row.req .rb{grid-template-areas:"n n" "p p"}
+.row.req .n .badge{margin-left:auto}
+.row.req .n .chev{width:18px;height:18px;color:var(--muted);flex:none}
+.row.req .p{-webkit-line-clamp:1}
+html[data-t="ax5"] .row.req .req-ic{display:none}
+html[data-t="ax5"] .row.req{grid-template-columns:1fr}
+html[data-t="ax5"] .row.req .n{grid-column:1;min-height:0;flex-wrap:nowrap}
+html[data-t="ax5"] .row.req .n b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+html[data-t="ax5"] .row.req .n .chev{width:34px;height:34px}
+html[data-t="ax5"] .row.req .p{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;white-space:normal}
+/* меню облачка (долгое нажатие): плоско — без теней, линия 0,5 (SPEC §28) */
+.scrim.blur{background:rgba(0,0,0,.40);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.ctx{position:absolute;z-index:60;left:0;right:0;top:calc(var(--safe-top) + 12px);bottom:calc(var(--home) + 12px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:8px;padding:0 16px}
+.ctx .rxbar{display:flex;gap:2px;padding:4px 6px;border-radius:26px;background:var(--raised);border:.5px solid var(--line);flex:none}
+.ctx .rxbar b{width:40px;height:40px;display:grid;place-items:center;font-size:26px;line-height:1;font-weight:400}
+.ctx .rxbar .more .ic{width:22px;height:22px;color:var(--muted)}
+.ctx .lift{flex:0 1 auto;min-height:0;width:100%;overflow:hidden}
+html[data-t="ax5"] .ctx .lift .b{max-width:100%}
+.ctx .lift.long{overflow-y:auto;-webkit-mask-image:linear-gradient(#000 calc(100% - 36px),transparent);mask-image:linear-gradient(#000 calc(100% - 36px),transparent)}
+.ctx .lift .grp{margin:0}
+.ctx .menu.ctxm{position:static;width:250px;flex:none}
+html[data-t="ax5"] .ctx .menu.ctxm{width:100%}
