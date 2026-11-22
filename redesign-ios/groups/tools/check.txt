@@ -18,15 +18,15 @@ group-join-wait se-ax5-ru: legal → 38.2px, lnk → 29.7px
 group-join-wait se-ax5-es: legal → 38.2px
 group-join-wait se-ax5-en: legal → 38.2px
 group-members se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 37.2px
-group-members se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
+group-members se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px
 group-members-menu se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 37.2px
-group-members-menu se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
+group-members-menu se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px
 group-members-remove se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 37.2px
-group-members-remove se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
+group-members-remove se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px
 group-admin-you se-ax5-en: b tail in-t → 48.8px
 group-admin-changed se-ax5-en: b tail in-t → 48.8px
 group-leave-confirm se-ax5-ru: B → 41.3px, SPAN → 45.1px, P → 37.2px
-group-leave-confirm se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px, P → 37.2px
+group-leave-confirm se-ax5-es: B → 38.0px, B → 38.0px, SPAN → 45.1px
 group-limit se-ax5-en: b tail in-t → 48.8px
 group-limit-inline se-ax5-en: b tail in-t → 48.8px
 group-parrlo se-ax5-ru: B → 48.8px

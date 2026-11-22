@@ -67,6 +67,12 @@ const OV = {
   'Чтобы тебя было слышно в звонке с Marco, нужен доступ к микрофону.': { es: 'Para que Marco te oiga, hace falta acceso al micrófono.', en: 'So Marco can hear you, we need microphone access.' },
   'Давай, сайт уже открыт.': { es: 'Vale, ya tengo la web abierta.', en: 'Go ahead, I already have the site open.' },
   'На связи по вечерам': { es: 'Disponible por las tardes', en: 'Around in the evenings' },
+  // вычитка Переводчика 22.11 (docs/tbd-texts-review.md): «позже» без срока → «ещё раз»; в iOS нет браузера
+  'Попробуй позвонить позже или напиши.': { ru: 'Попробуй позвонить ещё раз или напиши.', es: 'Vuelve a llamar o escribe un mensaje.', en: 'Try calling again or send a message.' },
+  'Появится запрос системы или браузера — выбери «Разрешить». Передумаешь — это можно поменять в настройках.': { ru: 'Появится запрос системы — выбери «Разрешить». Передумаешь — это можно поменять в настройках.', es: 'Verás una pregunta del sistema: elige «Permitir». Si cambias de idea, puedes modificarlo en los ajustes.', en: 'You’ll see a system prompt — choose “Allow”. If you change your mind, you can change it in settings.' },
+  // черновик №13 исправлен: шаги для iOS (в iOS нет «настроек сайта», доступ включается переключателем); пометка остаётся
+  '1. Открой настройки сайта или приложения.': { ru: '1. Открой Настройки iPhone → Parrlo.', es: '1. Abre Ajustes → Parrlo.', en: '1. Open Settings → Parrlo.' },
+  '3. Выбери «Разрешить» и вернись в звонок.': { ru: '3. Включи его и вернись в звонок.', es: '3. Actívalo y vuelve a la llamada.', en: '3. Turn it on and return to the call.' },
   // служебные подписи, которых нет в старых кадрах
   'Назад': { es: 'Atrás', en: 'Back' },
 };
@@ -108,7 +114,7 @@ const groups = () => `${igh('Общие группы')}<ul class="ig">
 ${row({ cls: 'with-av', ii: `<span class="ii av av36" style="background:var(--av-1)">${t('К')}</span>`, b: t('Квартира'), small: [t('12 участников')], chevron: true })}
 ${row({ cls: 'with-av', ii: `<span class="ii av av36" style="background:var(--av-5)">${t('М')}</span>`, b: t('Макеты'), chevron: true })}</ul>`;
 const profNote = () => igf(`${t('Что есть в профиле: имя, статус, звук, поиск в чате, общие группы.')} ${tbd('не утверждено')}`);
-const nameNote = () => igf(`${t('Имя для контакта и заметку видишь только ты.')} ${tbd('формулировка: не утверждено')}`);
+const nameNote = () => igf(t('Имя для контакта и заметку видишь только ты.'));
 const blockRow = (s = 'Заблокировать', cls = 'danger') => `<ul class="ig"><li class="ir ${cls}"><div class="tx"><b>${t(s)}</b></div></li></ul>`;
 const MARCO = { g: 'g2', l: 'M', name: 'Marco', st: 'На связи по вечерам', ln: 'Пишет по-испански' };
 const LUCIA = () => ({ g: 'g2', l: 'L', name: t('Лусия'), real: 'В профиле: Lucía Fernández', st: 'На связи по вечерам', ln: 'Пишет по-испански' });
@@ -161,7 +167,7 @@ const cta = (s, cls = '') => `<span class="cta${cls ? ' ' + cls : ''}">${t(s)}</
 const avBig = (g, l) => av(g, l);
 const avIc = (n) => `<span class="av ic-av">${ic(n)}</span>`;
 const aim = () => `<div class="aim" role="note">${ic('info')}<span>${t('Расшифровку и перевод делает ИИ — возможны ошибки.')}</span></div>`;
-const protoNote = () => `<p class="small">${t('После звонка протокол придёт в чат участникам звонка. Каждый может удалить его у себя.')} ${tbd('не утверждено')}</p>`;
+const protoNote = () => `<p class="small">${t('После звонка протокол придёт в чат участникам звонка. Каждый может удалить его у себя.')}</p>`;
 const keepNote = () => `<p class="small">${t('Срок хранения истории звонков и копии протокола на сервере: [уточнить].')} ${tbd('юрист проверит')}</p>`;
 const protoCard = (sub) => `<ul class="ig">${row({ cls: 'with-ic', ii: iib('doc', 'var(--acc)'), b: `<span style="font-weight:600">${t('Протокол звонка')}</span>`, small: [t(sub), t('Расшифровка ИИ')], tail: `<span class="cta sm">${t('Открыть')}</span>` })}</ul>`;
 const delRow = () => `<ul class="ig">${row({ cls: 'danger with-ic', ii: iib('trash', 'var(--err)'), b: t('Удалить из истории звонков') })}</ul><p class="igf">${tbd('не утверждено', 'blk')}</p>`;
@@ -175,25 +181,25 @@ S['contact-edit-filled'] = () => editSheet({ name: t('Лусия, испанск
 S['contact-edit-limit'] = () => editSheet({ name: t('Лусия, испанский'), hint: t('В профиле: Lucía Fernández'), note: noteLong(tp('Познакомились')), cnt: t('500 / 500'), max: true });
 S['contact-edit-reset'] = () => editSheet({ name: 'Lucía Fernández', hint: t('Совпадает с именем в профиле'), reset: false, note: notePh() });
 S['contact-block'] = () => `${marcoProfile()}<div class="scrim dark"></div>
-<div class="alert" role="alertdialog" aria-label="${t('Заблокировать Marco?')}"><div class="ab"><h2>${t('Заблокировать Marco?')}</h2><p>${t('Marco не получит уведомления о блокировке.')}</p>${tbd('формулировка: не утверждено', 'blk')}</div>
+<div class="alert" role="alertdialog" aria-label="${t('Заблокировать Marco?')}"><div class="ab"><h2>${t('Заблокировать Marco?')}</h2><p>${t('Marco не получит уведомления о блокировке.')}</p></div>
 <span class="bt danger">${t('Заблокировать')}</span><span class="bt">${t('Отмена')}</span></div>`;
 S['contact-blocked'] = () => `<div class="page pushed"><div class="scroll">${prof(MARCO)}
-<div class="banner" role="status">${ic('block')}<div><h3>${t('Контакт Marco заблокирован')}</h3><p>${t('Снять блокировку можно здесь.')} ${tbd('формулировка: не утверждено')}</p></div></div>
+<div class="banner" role="status">${ic('block')}<div><h3>${t('Контакт Marco заблокирован')}</h3><p>${t('Снять блокировку можно здесь.')}</p></div></div>
 ${searchOnly()}${groups()}${blockRow('Разблокировать', 'accent')}${igf(tbd('не утверждено', 'blk'))}${profNote()}</div></div>${nav()}`;
 S['contact-error'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco' })}
-<div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не получилось загрузить профиль')}</h3><p>${t('Проверь сеть и попробуй ещё раз.')} ${tbd('формулировка: не утверждено')}</p></div></div>
+<div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не получилось загрузить профиль')}</h3><p>${t('Проверь сеть и попробуй ещё раз.')}</p></div></div>
 <div style="padding:0 16px">${cta('Повторить', 'primary')}</div></div></div>${nav()}`;
 S['contact-loading'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco' })}
-<p class="loadln" role="status"><i class="spin"></i><span>${t('Загружаем профиль…')}</span>${tbd('формулировка: не утверждено')}</p>
+<p class="loadln" role="status"><i class="spin"></i><span>${t('Загружаем профиль…')}</span></p>
 <div class="ig">${skel(3)}</div></div></div>${nav()}`;
 S['contact-nogroups'] = () => `<div class="page pushed"><div class="scroll">${prof(MARCO)}${acts(CHAT_ACTS)}${soundSearch()}
-${igh('Общие группы')}<div class="ig"><div class="es" role="status"><i>${ic('people')}</i><h2>${t('Общих групп нет')}</h2><p>${t('Когда появится общая группа, она будет здесь.')} ${tbd('формулировка: не утверждено')}</p></div></div>
+${igh('Общие группы')}<div class="ig"><div class="es" role="status"><i>${ic('people')}</i><h2>${t('Общих групп нет')}</h2><p>${t('Когда появится общая группа, она будет здесь.')}</p></div></div>
 ${blockRow()}${profNote()}</div></div>${nav()}`;
 S['contact'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco', lead: 'Контакт' })}${acts(CHAT_ACTS)}
 ${igh('Последние звонки')}<ul class="ig">
 ${row({ cls: 'with-ic', ii: iib('in'), b: t('Входящий'), small: [t('12 мин')], v: t('Сегодня, 09:14') })}
 ${row({ cls: 'with-ic', ii: iib('out'), b: t('Исходящий'), small: [t('3 мин')], v: t('Вчера') })}</ul>
-${igf(`${t('Перед звонком появится экран «Этот звонок переводится и расшифровывается ИИ».')} ${tbd('формулировка: не утверждено')}`)}</div></div>${nav()}`;
+${igf(t('Перед звонком появится экран «Этот звонок переводится и расшифровывается ИИ».'))}</div></div>${nav()}`;
 S['empty-contacts'] = () => `<div class="page root"><div class="scroll"><div class="head"><div class="bar"></div><h1 class="large">${t('Контакты')}</h1></div>
 <div class="es" role="status"><i>${ic('contacts')}</i><h2>${t('Пока нет контактов')}</h2><p>${t('Пригласи человека по ссылке — он появится здесь.')}</p><span class="cta primary">${t('Пригласить по ссылке')}</span></div></div></div>${tabs('contacts')}`;
 S['stranger'] = () => `<div class="page pushed"><div class="scroll">
@@ -202,7 +208,7 @@ S['stranger'] = () => `<div class="page pushed"><div class="scroll">
 <p class="trrow"><span>${t('Переведено с английского')}</span><a>${t('Показать оригинал')}</a></p></div>
 <div class="objn"><p>${t('Пока запрос не принят, Parrlo не читает это сообщение и не отвечает от твоего имени.')}</p>
 <p>${t('Не хочешь, чтобы Parrlo читал твои сообщения?')}</p><div class="lnk"><a>${t('Возразить')}</a><a>${t('Подробнее')}</a></div>
-<p>${t('Заблокировать или выйти можно в любой момент.')}</p><p>${t('Путь возражения (форма или e-mail):')} ${tbd('не утверждено')}</p></div></div>
+<p>${t('Заблокировать или выйти можно в любой момент.')}</p><p>${t('Путь возражения (форма или e-mail):')}</p></div></div>
 <div class="dock"><div class="row2">${cta('Принять', 'primary')}${cta('Заблокировать')}</div></div></div>
 ${nav({ title: 'Alex R.', sub: t('Новый контакт'), right: av('g3', 'A', 'av36') })}`;
 S['calls'] = () => `<div class="page root"><div class="scroll">${callsHead()}${seg(0)}
@@ -210,25 +216,25 @@ ${sec('Сегодня', [R.kv, R.mc])}${sec('Вчера', [R.mm, R.an, R.pt])}${
 S['calls-missed'] = () => `<div class="page root"><div class="scroll">${callsHead()}${seg(1)}
 ${sec('Вчера', [R.mm])}${sec('Вт', [R.an2])}${callsNotes()}</div></div>${tabs('calls')}`;
 S['calls-empty'] = () => `<div class="page root"><div class="scroll">${callsHead(false)}${seg(0)}
-<div class="es" role="status"><i>${ic('calls')}</i><h2>${t('Звонков пока нет')}</h2><p>${t('Здесь появятся звонки, когда ты позвонишь или тебе позвонят.')} ${tbd('формулировка: не утверждено')}</p>${cta('Позвонить', 'primary')}</div></div></div>${tabs('calls')}`;
+<div class="es" role="status"><i>${ic('calls')}</i><h2>${t('Звонков пока нет')}</h2><p>${t('Здесь появятся звонки, когда ты позвонишь или тебе позвонят.')}</p>${cta('Позвонить', 'primary')}</div></div></div>${tabs('calls')}`;
 S['calls-error'] = () => `<div class="page root"><div class="scroll">${callsHead()}${seg(0)}
-<div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не удалось загрузить звонки')}</h3><p>${t('Проверь подключение к интернету и попробуй ещё раз.')} ${tbd('формулировка: не утверждено')}</p>${cta('Повторить', 'sm')}</div></div></div></div>${tabs('calls')}`;
+<div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не удалось загрузить звонки')}</h3><p>${t('Проверь подключение к интернету и попробуй ещё раз.')}</p>${cta('Повторить', 'sm')}</div></div></div></div>${tabs('calls')}`;
 S['calls-loading'] = () => `<div class="page root"><div class="scroll">${callsHead()}${seg(0)}
-<p class="loadln" role="status"><i class="spin"></i><span>${t('Загружаем звонки…')}</span>${tbd('формулировка: не утверждено')}</p>${skel(5)}</div></div>${tabs('calls')}`;
+<p class="loadln" role="status"><i class="spin"></i><span>${t('Загружаем звонки…')}</span></p>${skel(5)}</div></div>${tabs('calls')}`;
 S['call-detail'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco', lead: 'Входящий звонок · Сегодня, 09:14', leadIc: 'in' })}${acts(CHAT_ACTS)}
 <ul class="ig">${kv('Когда', 'Сегодня, 09:14')}${kv('Длительность', '12 мин')}</ul>
 ${protoCard('Звонок с Marco · 12 мин')}${aim()}${protoNote()}${keepNote()}${delRow()}</div></div>${nav()}`;
 S['call-detail-missed'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g3', l: t('М'), name: t('Мама'), lead: 'Пропущенный звонок · Вчера, 18:02', leadIc: 'in', miss: true })}${acts(CHAT_ACTS)}
 <ul class="ig">${kv('Когда', 'Вчера, 18:02')}</ul>
-<p class="small">${t('Протокола нет: звонок не состоялся.')} ${tbd('формулировка: не утверждено')}</p>${keepNote()}${delRow()}</div></div>${nav()}`;
+<p class="small">${t('Протокола нет: звонок не состоялся.')}</p>${keepNote()}${delRow()}</div></div>${nav()}`;
 S['call-detail-group'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g1', l: t('К'), name: t('Квартира'), lead: 'Групповой звонок · Сегодня, 12:05 · 24 мин', leadIc: 'people' })}${acts([['chats', 'Написать'], ['calls', 'Позвонить в группу']])}
 ${igh('Участники звонка')}<ul class="ig">${[['g1', 'Л', 'Лена'], ['g2', 'M', 'Marco'], ['g4', 'А', 'Анна Л.'], ['g0', 'Т', 'Ты']].map(([g, l, n]) => row({ cls: 'with-av', ii: `<span class="ii av av36" style="background:var(--av-${AV[g]})">${t(l)}</span>`, b: t(n) })).join('')}</ul>
 ${protoCard('Групповой звонок · 24 мин')}${aim()}${protoNote()}${keepNote()}</div></div>${nav()}`;
 S['call-incoming'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Marco звонит…'), lead: t('Входящий звонок'),
-  mid: `<p class="small" style="text-align:center">${t('Перед началом покажем уведомление о переводе и расшифровке.')} ${tbd('формулировка: не утверждено')}</p>`,
+  mid: `<p class="small" style="text-align:center">${t('Перед началом покажем уведомление о переводе и расшифровке.')}</p>`,
   bottom: `<div class="ctls">${ctl('red', 'hang', 'Отклонить')}${ctl('green', 'calls', 'Ответить')}</div>` });
 S['call-connecting'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Звоним Marco…'), lead: t('Ждём ответа'),
-  mid: `<p class="small" style="text-align:center">${t('Пока Marco не ответит, расшифровки нет.')} ${tbd('формулировка: не утверждено')}</p>`,
+  mid: `<p class="small" style="text-align:center">${t('Пока Marco не ответит, расшифровки нет.')}</p>`,
   bottom: `<div class="ctls">${ctl('red', 'hang', 'Отменить звонок')}</div>` });
 S['call'] = () => `<div class="incall"><div class="cbar"><span class="rec" role="status">${t('Идёт расшифровка ИИ')}</span><span class="sp"></span><span class="cbtn" aria-label="${t('Полный протокол')}">${ic('list')}</span></div>
 <div class="toast" role="status">${t('Все в звонке видят, что идёт расшифровка. Протокол придёт в чат участникам звонка.')}</div>
@@ -238,50 +244,50 @@ S['call'] = () => `<div class="incall"><div class="cbar"><span class="rec" role=
 S['call-ended'] = () => callScr({ avHtml: avIc('hang'), h1: t('Звонок завершён'), lead: t('Marco · 12 мин'), mid: `${aim()}${protoNote()}`,
   bottom: dock(cta('Открыть расшифровку', 'primary') + cta('Закрыть')) });
 S['call-failed'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Звонок не начался'), lead: t('Ничего не отправлено и звонок не идёт.'),
-  mid: `<div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не удалось позвонить')}</h3><p>${t('Проверь подключение к интернету и попробуй ещё раз.')} ${tbd('формулировка: не утверждено')}</p></div></div>`,
+  mid: `<div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не удалось позвонить')}</h3><p>${t('Проверь подключение к интернету и попробуй ещё раз.')}</p></div></div>`,
   bottom: dock(cta('Повторить', 'primary') + cta('Отмена')) });
-S['call-noanswer'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Marco не отвечает'), lead: `${t('Попробуй позвонить позже или напиши.')} ${tbd('формулировка: не утверждено')}`,
+S['call-noanswer'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Marco не отвечает'), lead: t('Попробуй позвонить позже или напиши.'),
   bottom: dock(cta('Позвонить ещё раз', 'primary') + cta('Написать') + cta('Закрыть', 'plain')) });
 S['call-network-lost'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Связь пропала'), lead: t('Пробуем подключиться снова…'),
-  mid: `<div class="banner" role="status">${ic('wifioff')}<div><h3>${t('Нет сети')}</h3><p>${t('Звонок на паузе, расшифровка и перевод ждут связи. Если связь не вернётся за 60 секунд, звонок завершится.')} ${tbd('формулировка: не утверждено')}</p></div></div>
+  mid: `<div class="banner" role="status">${ic('wifioff')}<div><h3>${t('Нет сети')}</h3><p>${t('Звонок на паузе, расшифровка и перевод ждут связи. Если связь не вернётся за 60 секунд, звонок завершится.')}</p></div></div>
 <p class="loadln" role="status" style="padding-left:4px"><i class="spin"></i><span>${t('Переподключаем…')}</span></p>`,
   bottom: dock(cta('Завершить звонок', 'danger') + cta('Подождать')) });
 S['call-mic-blocked'] = () => callScr({ avHtml: avIc('micoff'), h1: t('Микрофон выключен'), lead: t('Доступ запрещён, поэтому тебя не слышно. Включи его в настройках.'),
   mid: `<ul class="ig">${['1. Открой настройки сайта или приложения.', '2. Найди «Микрофон».', '3. Выбери «Разрешить» и вернись в звонок.'].map(s => `<li class="ir"><div class="tx"><b>${t(s)}</b></div></li>`).join('')}</ul><p class="small" style="margin-top:-14px">${tbd('формулировка: не утверждено', 'blk')}</p>`,
   bottom: dock(cta('Открыть настройки', 'primary') + cta('Закрыть')) });
 S['call-permission'] = () => callScr({ avHtml: avIc('mic'), h1: t('Разреши микрофон'), lead: t('Чтобы тебя было слышно в звонке с Marco, нужен доступ к микрофону.'),
-  mid: `<ul class="ig">${kv('Микрофон', 'нужен для звонка')}${kv('Камера', 'по желанию, для видео')}</ul><p class="small" style="margin-top:-8px">${t('Появится запрос системы или браузера — выбери «Разрешить». Передумаешь — это можно поменять в настройках.')} ${tbd('формулировка: не утверждено')}</p>`,
+  mid: `<ul class="ig">${kv('Микрофон', 'нужен для звонка')}${kv('Камера', 'по желанию, для видео')}</ul><p class="small" style="margin-top:-8px">${t('Появится запрос системы или браузера — выбери «Разрешить». Передумаешь — это можно поменять в настройках.')}</p>`,
   bottom: dock(cta('Разрешить', 'primary') + cta('Не сейчас')) });
 S['call-notice'] = () => `<div class="page pushed"><div class="scroll"><div class="consent"><span class="pp">${parrot()}</span>
 <h1>${t('Этот звонок переводится и расшифровывается ИИ')}</h1><p class="lead">${tp('Parrlo Chat переведёт')} ${tbd('юрист проверит')}</p>
 <ul class="ig">${row({ cls: 'with-av', ii: `<span class="ii av av36" style="background:var(--av-2)">M</span>`, b: `<span style="font-weight:600">${t('Звонок с Marco')}</span>`, small: [t('Идёт расшифровка ИИ')] })}</ul>
-<p class="small">${t('Поставщики ИИ и «звук и видео не сохраняются»:')} ${tbd('не утверждено')}</p>
+<p class="small">${t('Поставщики ИИ и «звук и видео не сохраняются»:')}</p>
 <p class="ph">${tp('Оператор:')} ${L({ ru: 'hello@parrlo.com', es: 'hello@parrlo.com', en: 'hello@parrlo.com' })}</p><span class="linkbtn">${t('Подробнее')}</span></div></div>
 <div class="dock"><p class="note" role="group">${t('Нажимая «Продолжить», ты соглашаешься на перевод и расшифровку этого звонка. Не хочешь — нажми «Выйти», это нормально.')}</p>${cta('Продолжить', 'primary')}${cta('Выйти')}</div></div>${nav()}`;
 S['call-protocol'] = () => `<div class="page pushed"><div class="scroll"><div style="padding:4px 16px 12px"><span class="rec" role="status">${t('Ведётся протокол (расшифровка ИИ)')}</span></div>${aim()}
 <ul class="proto" aria-label="${t('Протокол звонка')}">${[['Marco', 'Привет! Слышно хорошо?'], ['Ты', 'Да, слышу отлично.'], ['Marco', 'Тогда начнём с билетов.'], ['Ты', 'Давай, сайт уже открыт.']].map(([w, s]) => `<li${w === 'Ты' ? ' class="me"' : ''}><b>${t(w)}</b><span>${t(s)}</span></li>`).join('')}</ul>
 ${protoNote()}</div></div>${nav({ title: t('Протокол звонка') })}`;
 S['search-home'] = () => `<div class="page bare"><div class="srow"><div class="search" role="search">${ic('search')}<span class="ph" role="textbox" aria-label="${t('Поиск по чатам и контактам')}">${t('Чаты и контакты')}</span></div><span class="cancel">${t('Отмена')}</span></div>
-<div class="scroll"><div class="es" role="status"><i>${ic('search')}</i><h2>${t('Ищи по чатам и контактам')}</h2><p>${t('Введи имя человека или название чата.')} ${tbd('формулировка: не утверждено')}</p></div></div></div>`;
+<div class="scroll"><div class="es" role="status"><i>${ic('search')}</i><h2>${t('Ищи по чатам и контактам')}</h2><p>${t('Введи имя человека или название чата.')}</p></div></div></div>`;
 const SR = {
   ru: { cancel: 'Отмена', clear: 'Очистить поиск', chats: 'Чаты', contacts: 'Контакты', contact: 'Контакт', call: 'Позвонить: ',
     c: [['g3', 'М', 'Мама', 'Вчера', 'Позвони, как сможешь'], ['g5', 'М', 'Макеты', 'Пн', 'Файл с макетами обновлён']],
     k: [['g1', 'М', 'Мария К.'], ['g4', 'М', 'Матвей']],
-    note: 'Ищем и в оригинале, и в переводе сообщений, результаты — одной лентой. Протоколы звонков и память Parrlo в поиск не входят.', tbd: 'формулировка: не утверждено' },
+    note: 'Ищем и в оригинале, и в переводе сообщений, результаты — одной лентой. Протоколы звонков и память Parrlo в поиск не входят.' },
   es: { cancel: 'Cancelar', clear: 'Borrar búsqueda', chats: 'Chats', contacts: 'Contactos', contact: 'Contacto', call: 'Llamar a ',
     c: [['g2', 'M', 'Marco', 'Ayer', 'Nos vemos en la entrada a las nueve'], ['g3', 'M', 'Mamá', 'Ayer', 'Llámame cuando estés libre'], ['g5', 'M', 'Maquetas', 'Lun', 'El archivo de maquetas está actualizado']],
     k: [['g1', 'M', 'María G.'], ['g4', 'M', 'Mateo']],
-    note: 'La búsqueda incluye el original y la traducción de los mensajes, en una sola lista. Las transcripciones de llamadas y la memoria de Parrlo no se incluyen en la búsqueda.', tbd: 'redacción: no aprobada' },
+    note: 'La búsqueda incluye el original y la traducción de los mensajes, en una sola lista. Las transcripciones de llamadas y la memoria de Parrlo no se incluyen en la búsqueda.' },
   en: { cancel: 'Cancel', clear: 'Clear search', chats: 'Chats', contacts: 'Contacts', contact: 'Contact', call: 'Call ',
     c: [['g2', 'M', 'Marco', 'Yesterday', 'See you at the entrance at nine']],
     k: [['g1', 'M', 'Maria G.'], ['g4', 'M', 'Matt']],
-    note: 'Search covers both the original and the translation of messages, in a single list. Call transcripts and Parrlo’s memory are not included in search.', tbd: 'wording: not approved' },
+    note: 'Search covers both the original and the translation of messages, in a single list. Call transcripts and Parrlo’s memory are not included in search.' },
 };
 const hl = (n) => `<mark>${n.slice(0, 2)}</mark>${n.slice(2)}`;
 S['search-home-results'] = () => { const r = SR[LANG]; return `<div class="page bare"><div class="srow"><div class="search" role="search">${ic('search')}<span class="q" role="textbox" aria-label="${t('Поиск по чатам и контактам')}">${L({ ru: 'Ма', es: 'Ma', en: 'Ma' })}</span><span class="cw" aria-label="${r.clear}">${ic('clr', 'clr')}</span></div><span class="cancel">${r.cancel}</span></div>
 <div class="scroll"><p class="sech">${r.chats}</p><ul class="list">${r.c.map(([g, l, n, tm, pv]) => `<li class="crow">${av(g, l)}<div class="cb"><div class="cx"><b>${hl(n)}</b><small><span>${pv}</span></small></div><span class="tm">${tm}</span></div></li>`).join('')}</ul>
 <p class="sech">${r.contacts}</p><ul class="list">${r.k.map(([g, l, n]) => `<li class="crow">${av(g, l)}<div class="cb"><div class="cx"><b>${hl(n)}</b><small><span>${r.contact}</span></small></div><span class="call" aria-label="${r.call + n}">${ic('calls')}</span></div></li>`).join('')}</ul>
-<p class="small" style="margin-top:14px">${r.note} <span class="tbd">${r.tbd}</span></p></div></div>`; };
+<p class="small" style="margin-top:14px">${r.note}</p></div></div>`; };
 
 // ---------- страница: три языка в <template>, выбор по ?l ----------
 const WORDFIT = fs.readFileSync(path.join(__dirname, 'wordfit.js'), 'utf8');

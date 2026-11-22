@@ -101,7 +101,7 @@ const bs = (s, icn) => `<span class="bs" role="button">${icn ? ic(icn) : ''}<spa
 const bt = (s) => `<span class="bt" role="button">${tx(s)}</span>`;
 const sib = (li, busy) => `<span class="sib apple" role="button"${busy ? ' aria-busy="true"' : ''}><img src="../../brand/apple-logo-black.svg" alt=""><span>${C.apple[li]}</span></span>
 <span class="sib google" role="button"><img src="../../brand/google-g.png" alt=""><span>${C.google[li]}</span></span>`;
-const legal = (li) => `<p class="small">${tx(C.legal[li])}</p>${tbd(C.word[li])}
+const legal = (li) => `<p class="small">${tx(C.legal[li])}</p>
 <div class="links"><span class="lnk" role="button">${tx(C.terms[li])}</span><span class="lnk" role="button">${tx(C.privacy[li])}</span></div>
 <p class="ph">${tx(C.op[li])}</p>`;
 const ob = (inner) => ({ cls: 'ob', inner });
@@ -140,15 +140,15 @@ ${mid || ''}${legal(li)}${o.after || ''}</div>
 const errBan = (title, body, extra = '') => `<div class="ban err" role="alert">${ic('alert')}<div class="bx"><h3>${tx(title)}</h3><p>${tx(body)}</p>${extra}</div></div>`;
 
 S['ob-signin'] = (li) => signin(li);
-S['ob-signin-wait'] = (li) => signin(li, `<p class="stl" role="status">${ic('spin', 'spin')}<span>${tx(L('Закончи вход в окне Apple. Это займёт несколько секунд.', 'Termina el acceso en la ventana de Apple. Tarda unos segundos.', 'Finish signing in in the Apple window. It takes a few seconds.')[li])}${tbd(C.word[li])}</span></p>`, { busy: true, cancel: L('Отмена', 'Cancelar', 'Cancel')[li] });
+S['ob-signin-wait'] = (li) => signin(li, `<p class="stl" role="status">${ic('spin', 'spin')}<span>${tx(L('Закончи вход в окне Apple. Это займёт несколько секунд.', 'Termina el acceso en la ventana de Apple. Tarda unos segundos.', 'Finish signing in with Apple. It takes a few seconds.')[li])}</span></p>`, { busy: true, cancel: L('Отмена', 'Cancelar', 'Cancel')[li] });
 S['ob-signin-apple-error'] = (li) => signin(li, errBan(L('Не получилось войти через Apple', 'No se pudo iniciar sesión con Apple', 'Couldn’t sign in with Apple')[li], L('Попробуй ещё раз — или войди через Google.', 'Inténtalo de nuevo o entra con Google.', 'Try again, or sign in with Google.')[li],
   `<span class="lnk" role="button" aria-label="${L('Повторить вход через Apple', 'Reintentar con Apple', 'Retry with Apple')[li]}">${L('Повторить', 'Reintentar', 'Retry')[li]}</span>`));
 S['ob-signin-google-error'] = (li) => signin(li, errBan(L('Не получилось войти через Google', 'No se pudo iniciar sesión con Google', 'Couldn’t sign in with Google')[li], L('Попробуй ещё раз — или войди через Apple.', 'Inténtalo de nuevo o entra con Apple.', 'Try again, or sign in with Apple.')[li],
   `<span class="lnk" role="button" aria-label="${L('Повторить вход через Google', 'Reintentar con Google', 'Retry with Google')[li]}">${L('Повторить', 'Reintentar', 'Retry')[li]}</span>`));
-S['ob-signin-cancel'] = (li) => signin(li, errBan(L('Вход отменён', 'Acceso cancelado', 'Sign-in cancelled')[li], L('Аккаунт не создан. Можно попробовать снова.', 'No se ha creado ninguna cuenta. Puedes intentarlo de nuevo.', 'No account was created. You can try again.')[li], tbd(C.word[li])));
-S['ob-signin-offline'] = (li) => signin(li, errBan(L('Нет сети', 'Sin conexión', 'No connection')[li], L('Проверь подключение к интернету и попробуй ещё раз.', 'Comprueba tu conexión a internet e inténtalo de nuevo.', 'Check your internet connection and try again.')[li], tbd(C.word[li])));
+S['ob-signin-cancel'] = (li) => signin(li, errBan(L('Вход отменён', 'Acceso cancelado', 'Sign-in cancelled')[li], L('Аккаунт не создан. Можно попробовать снова.', 'No se ha creado ninguna cuenta. Puedes intentarlo de nuevo.', 'No account was created. You can try again.')[li], ''));
+S['ob-signin-offline'] = (li) => signin(li, errBan(L('Нет сети', 'Sin conexión', 'No connection')[li], L('Проверь подключение к интернету и попробуй ещё раз.', 'Comprueba tu conexión a internet e inténtalo de nuevo.', 'Check your internet connection and try again.')[li], ''));
 S['ob-signin-invite'] = (li) => signin(li, '', {
-  head: `<div class="gcard" role="group" aria-label="${L('Приглашение в группу', 'Invitación al grupo', 'Group invitation')[li]}"><span class="av" style="background:var(--av-1)">${L('К', 'P', 'F')[li]}</span><div class="tx"><b>${L('Квартира', 'Piso', 'Flat')[li]}</b><span class="s">${L('12 участников', '12 participantes', '12 members')[li]}</span><span class="s">${L('Зовёт Лена', 'Te invita: Lena', 'Invited by: Lena')[li]}</span></div></div>`,
+  head: `<div class="gcard" role="group" aria-label="${L('Приглашение в группу', 'Invitación al grupo', 'Group invitation')[li]}"><span class="av" style="background:var(--av-1)">${L('К', 'P', 'F')[li]}</span><div class="tx"><b>${L('Квартира', 'Piso', 'Flat')[li]}</b><span class="s">${L('12 участников', '12 participantes', '12 members')[li]}</span><span class="s">${L('Зовёт Лена', 'Te invita Lena', 'Lena invited you')[li]}</span></div></div>`,
   after: `<p class="small">${tx(L('Карточка приглашения: группа, число участников, от кого приглашение.', 'Tarjeta de invitación: grupo, número de participantes, quién te invita.', 'Invitation card: group, number of members, who invited you.')[li])}</p>${tbd(C.na[li])}`,
 });
 
@@ -214,14 +214,14 @@ S['ob-consent'] = (li) => ob(`${top(li, 6)}
 <h1 class="ttl">${tx(L('Parrlo читает чаты, чтобы помогать', 'Parrlo lee tus chats para ayudarte', 'Parrlo reads your chats to help you')[li])}</h1>
 <ul class="facts">${FACTS.map(([i, h, p, b]) => `<li class="fact"><span class="fi">${ic(i)}</span><div class="fx"><h3>${tx(h[li])}</h3><p>${encMark(tx(p[li]))}</p>${b ? tbd(b[li], true) : ''}</div></li>`).join('')}</ul>
 <p class="ph">${tx(C.op[li])}</p>
-<p class="small">${tx(L('Поставщики ИИ, основание передачи и срок хранения:', 'Proveedores de IA, base de la transferencia y conservación:', 'AI providers, transfer basis and retention:')[li])}</p>${tbd(C.na[li])}
+<p class="small">${tx(L('Поставщики ИИ, основание передачи и срок хранения:', 'Proveedores de IA, base de la transferencia y plazo de conservación:', 'AI providers, transfer basis and retention:')[li])}</p>
 <div class="sech"></div><div class="glist"><div class="cell swr"><div class="tx"><h3>${tx(C.remember[li])}</h3><span class="s">${tx(L('Выключено по умолчанию. Посмотреть и удалить можно в Настройки → Parrlo → Память.', 'Desactivado por defecto. Puedes verla o borrarla en Ajustes → Parrlo → Memoria.', 'Off by default. View or delete it in Settings → Parrlo → Memory.')[li])}</span></div><span class="sw" role="switch" aria-checked="false"></span></div></div>
 <div class="links"><span class="lnk" role="button">${tx(C.privacy[li])}</span></div>
 <div class="ax5-only"><p class="small">${tx(CNOTE[li])}</p></div></div>
 <div class="acts line"><p class="note n-only">${tx(CNOTE[li])}</p>${bp(L('Разрешить', 'Permitir', 'Allow')[li])}${bs(L('Не сейчас', 'Ahora no', 'Not now')[li])}</div>`);
 
 S['ob-consent-no'] = (li) => {
-  const ban = `<div class="ban info" role="status">${ic('info')}<div class="bx"><p>${tx(L('Безопасный режим включён. Напоминание покажем только в приложении, не пушем.', 'El modo seguro está activado. Te lo recordaremos solo dentro de la app, sin notificación push.', 'Safe mode is on. We’ll remind you only inside the app, not as a push notification.')[li])}</p>${tbd(C.word[li])}<p style="margin-top:6px">${tx(L('Когда и как часто:', 'Cuándo y con qué frecuencia:', 'When and how often:')[li])}</p>${tbd(C.na[li])}</div></div>`;
+  const ban = `<div class="ban info" role="status">${ic('info')}<div class="bx"><p>${tx(L('Безопасный режим включён. Напоминать будем только в приложении, без пуш-уведомлений.', 'El modo seguro está activado. Te lo recordaremos solo dentro de la app, sin notificaciones push.', 'Safe mode is on. We’ll remind you only in the app, not with push notifications.')[li])}</p><p style="margin-top:6px">${tx(L('Когда и как часто:', 'Cuándo y con qué frecuencia:', 'When and how often:')[li])}</p></div></div>`;
   return ob(`${top(li, 6)}
 <div class="body"><div class="hide-compact"><span class="pdisc sm" aria-hidden="true">${parrot()}</span></div>
 <h1 class="ttl">${tx(L('Хорошо, без чтения чатов', 'De acuerdo, sin leer tus chats', 'OK, without reading chats')[li])}</h1><p class="lead">${tx(L('Parrlo будет работать только по прямым командам.', 'Parrlo funcionará solo con órdenes directas.', 'Parrlo will work on direct commands only.')[li])}</p>
@@ -242,9 +242,9 @@ S['ob-parrlo-setup'] = (li) => ob(`${top(li, 7)}${setupBody(li)}
 <div class="acts">${bp(L('Готово', 'Listo', 'Done')[li])}${bt(C.skip[li])}</div>`);
 S['ob-parrlo-setup-skip'] = (li) => { const t = L('Пропустить настройку?', '¿Omitir la configuración?', 'Skip setup?')[li]; return ob(`${top(li, 7)}${setupBody(li)}
 <div class="acts">${bp(L('Готово', 'Listo', 'Done')[li])}${bt(C.skip[li])}</div>
-<div class="scrim" style="background:rgba(0,0,0,.5)"></div><div class="alert" role="alertdialog" aria-label="${t}"><div class="ac"><h2>${tx(t)}</h2><p>${tx(L('Parrlo начнёт с настроек по умолчанию. Память останется выключенной. Поменять можно позже: Настройки → Parrlo.', 'Parrlo empezará con los ajustes por defecto. La memoria seguirá desactivada. Puedes cambiarlo después: Ajustes → Parrlo.', 'Parrlo will start with the default settings. Memory stays off. You can change this later: Settings → Parrlo.')[li])}</p></div>
-<div class="bb">${bp(C.skip[li])}${bs(L('Вернуться к настройке', 'Volver a ajustes', 'Back to setup')[li])}</div>${tbd(C.word[li])}</div>`); };
-S['ob-parrlo-setup-error'] = (li) => ob(`${top(li, 7)}${setupBody(li, errBan(L('Не получилось сохранить настройки', 'No se han podido guardar los ajustes', 'Couldn’t save your settings')[li], L('Попробуй ещё раз или пропусти: настроить Parrlo можно позже.', 'Inténtalo de nuevo u omite este paso: puedes configurar a Parrlo más tarde.', 'Try again or skip: you can set up Parrlo later.')[li], tbd(C.word[li])))}
+<div class="scrim" style="background:rgba(0,0,0,.5)"></div><div class="alert" role="alertdialog" aria-label="${t}"><div class="ac"><h2>${tx(t)}</h2><p>${tx(L('Parrlo начнёт с настроек по умолчанию. Память останется выключенной. Поменять можно в Настройках → Parrlo.', 'Parrlo empezará con los ajustes por defecto. La memoria seguirá desactivada. Puedes cambiarlo en Ajustes → Parrlo.', 'Parrlo will start with the default settings. Memory stays off. You can change this in Settings → Parrlo.')[li])}</p></div>
+<div class="bb">${bp(C.skip[li])}${bs(L('Вернуться к настройке', 'Seguir configurando', 'Back to setup')[li])}</div></div>`); };
+S['ob-parrlo-setup-error'] = (li) => ob(`${top(li, 7)}${setupBody(li, errBan(L('Не получилось сохранить настройки', 'No se han podido guardar los ajustes', 'Couldn’t save your settings')[li], L('Попробуй ещё раз или пропусти: настроить Parrlo можно в Настройках → Parrlo.', 'Inténtalo de nuevo u omite este paso: puedes configurar Parrlo en Ajustes → Parrlo.', 'Try again or skip: you can set up Parrlo in Settings → Parrlo.')[li], ''))}
 <div class="acts">${bp(L('Повторить', 'Reintentar', 'Try again')[li])}${bs(C.skip[li])}</div>`);
 
 // первый список чатов: вкладка «Чаты», пусто. Parrlo — своя вкладка (круг в таб-баре), не строка списка.
@@ -263,10 +263,10 @@ ${group(true, [{ text: tx(L('Отлично, до встречи!', '¡Genial, h
 ${group(false, [{ text: tx(L('Можно, я приведу ещё и Джулию?', '¿Puedo llevar también a Giulia?', 'Can I bring Giulia too?')[li]), time: '09:14' }])}${tr(li)}
 </div>
 <header class="nav"><div class="bar"><span class="cbtn" role="button" aria-label="${C.back[li]}">${ic('back')}</span><div class="ttl"><b>Marco</b><span>${tx(L('Пишет по-испански · перевод включён', 'Escribe en ruso · traducción activada', 'Writes in Spanish · translation on')[li])}</span></div><span class="av av36" style="background:var(--av-0)">M</span></div></header>
-<div class="susp">${errBan(L('Отправка временно недоступна', 'No puedes enviar mensajes por ahora', 'Sending is temporarily unavailable')[li], L('Ты не можешь отправлять сообщения до 18 ноября, 14:00. Читать чаты можно.', 'No podrás enviar mensajes hasta el 18 de noviembre a las 14:00. Puedes seguir leyendo tus chats.', 'You can’t send messages until 18 November, 14:00. You can still read your chats.')[li], tbd(C.word[li]) + `<span class="lnk" role="button">${L('Подробнее', 'Más información', 'Learn more')[li]}</span>`).replace('role="alert"', 'role="status"')}</div>` });
+<div class="susp">${errBan(L('Отправка временно недоступна', 'No puedes enviar mensajes por ahora', 'Sending is temporarily unavailable')[li], L('Ты не можешь отправлять сообщения до 18 ноября, 14:00. Читать чаты можно.', 'No podrás enviar mensajes hasta el 18 de noviembre a las 14:00. Puedes seguir leyendo tus chats.', 'You can’t send messages until 18 November, 14:00. You can still read your chats.')[li], `<span class="lnk" role="button">${L('Подробнее', 'Más información', 'Learn more')[li]}</span>`).replace('role="alert"', 'role="status"')}</div>` });
 
 S['account-banned'] = (li) => ob(`${top(li, 0, false)}
-<div class="es" role="status"><span class="ei">${ic('block')}</span><h2>${tx(L('Аккаунт заблокирован', 'Cuenta bloqueada', 'Account blocked')[li])}</h2><p>${tx(L('Мы заблокировали аккаунт за нарушение правил Parrlo Chat. Если считаешь, что это ошибка, напиши нам — разберёмся.', 'Hemos bloqueado tu cuenta por incumplir las normas de Parrlo Chat. Si crees que es un error, escríbenos y lo revisamos.', 'We’ve blocked your account for breaking the Parrlo Chat rules. If you think this is a mistake, write to us and we’ll look into it.')[li])}</p>${tbd(C.word[li])}</div>
+<div class="es" role="status"><span class="ei">${ic('block')}</span><h2>${tx(L('Аккаунт заблокирован', 'Cuenta bloqueada', 'Account blocked')[li])}</h2><p>${tx(L('Мы заблокировали аккаунт за нарушение правил Parrlo Chat. Если считаешь, что это ошибка, напиши нам — разберёмся.', 'Hemos bloqueado tu cuenta por incumplir las normas de Parrlo Chat. Si crees que es un error, escríbenos y lo revisamos.', 'We’ve blocked your account for breaking the Parrlo Chat rules. If you think this is a mistake, write to us and we’ll look into it.')[li])}</p></div>
 <div class="acts">${bp(L('Написать в поддержку', 'Escribir a soporte', 'Contact support')[li])}${bs(L('Выйти', 'Cerrar sesión', 'Log out')[li])}</div>`);
 
 // ---------- страница ----------
