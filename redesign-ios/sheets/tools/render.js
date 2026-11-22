@@ -51,7 +51,7 @@ const check = () => {
     const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
     for (const s of screens) for (const l of ['ru', 'es', 'en']) {
       await p.goto(`file://${DIR}/${s}.html?d=${d}&t=${t}&l=${l}`);
-      await p.waitForFunction(() => document.body.dataset.ready === '1');
+      await p.waitForFunction(() => document.body.dataset.ready === '1' && document.documentElement.dataset.unglued === '1');
       // хвостики облачек — псевдоэлементы за краем, их не считаем
       const st = await p.addStyleTag({ content: '.b::after{display:none!important}' });
       const bad = await p.evaluate(check);

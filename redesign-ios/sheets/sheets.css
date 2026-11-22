@@ -289,3 +289,11 @@ html[data-t="ax5"] .hint{top:calc(var(--safe-top) + 60px);bottom:auto;font-size:
 html[data-t="ax5"] .hint .ic{width:28px;height:28px;vertical-align:-5px}
 html[data-t="ax5"] .capt{font-size:var(--cell);line-height:var(--cell-lh);background:rgba(0,0,0,.72)}
 html[data-t="ax5"] .capt{max-height:calc(var(--H) - var(--safe-top) - var(--home) - 64px - 230px);overflow:auto;scrollbar-width:none}
+/* AX5: галочка над текстом — строка текста на всю ширину ячейки */
+html[data-t="ax5"] .cell.top{flex-direction:column;align-items:flex-start;gap:10px}
+html[data-t="ax5"] .cell.top .tx{flex:none;width:100%}
+.draft .stl span{flex:1;min-width:0}
+/* предложения неподдерживаемого сообщения — каждое с новой строки (AX5: WordFit уменьшает только предложение с длинным словом) */
+.unsup .sn{display:block}
+html[data-t="ax5"] .b.wide{max-width:calc(100% - 6px)}
+.b .btn.inb{line-height:1.2}

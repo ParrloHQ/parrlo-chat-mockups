@@ -198,7 +198,9 @@ const T = {
   addPh: ['Добавить ещё фото', 'Añadir más fotos', 'Add more photos'],
   rmPh: ['Убрать это фото', 'Quitar esta foto', 'Remove this photo'],
 };
-const t = (k) => { const v = T[k]; if (!v) throw new Error('нет текста ' + k); return v[L]; };
+// фрагменты на другом языке (оригиналы переводов) помечены lang — для склейки NBSP и проверки по своему списку слов
+const FOREIGN = { m1off: ['es', 'ru', 'es'], m3o: ['es', 'ru', 'es'], capO: ['es', 'ru', 'es'] };
+const t = (k) => { const v = T[k]; if (!v) throw new Error('нет текста ' + k); return FOREIGN[k] ? `<span lang="${FOREIGN[k][L]}">${v[L]}</span>` : v[L]; };
 
 // список чатов (frames/*-home-menu.html); ru «Позвони, когда будешь свободен» заменено утверждённым S1 «Позвони, как сможешь. Ничего срочного 🙂» (без рода)
 const HOME = [
@@ -374,7 +376,7 @@ S['err-reject-blocked'] = { old: 'err-reject-blocked', ttl: 'Сообщение 
 S['err-reject-toolong'] = { old: 'err-reject-toolong', ttl: 'Сообщение слишком длинное', html: () => marcoChat({ m3closed: true, after: failed('hLong', ['edit', 'retry', 'del']) }) };
 S['msg-unsupported'] = {
   old: 'msg-unsupported', ttl: 'Неподдерживаемое сообщение', html: () => marcoChat({
-    m3closed: true, after: group(false, [{ text: t('unsup'), tcls: 'unsup', time: '09:34', extra: `<span class="btn inb">${t('upd')}</span>` }]),
+    m3closed: true, after: group(false, [{ text: t('unsup').split(/(?<=\.) /).map(x => `<span class="sn">${x}</span>`).join(' '), tcls: 'unsup', cls: 'wide', time: '09:34', extra: `<span class="btn inb">${t('upd')}</span>` }]),
   }),
 };
 S['err-offline-banner'] = {
@@ -391,7 +393,7 @@ const parrloScreen = (edit) => {
   const card = `<div class="h">${t(edit ? 'dHe' : 'dH')}</div>
 <div class="to"><span class="av" style="background:var(--av-0)">${t('petyaI')}</span><div><span class="lb">${t('to')}</span><b>${t('petya')}</b></div></div>
 <div class="txt${edit ? ' edit' : ''}">${t('dTxt')}</div>
-${edit ? '' : `<div class="stl"><i></i>${t('dSt')}</div>`}<div class="s">${t(edit ? 'dSe' : 'dS')}</div>
+${edit ? '' : `<div class="stl"><i></i><span>${t('dSt')}</span></div>`}<div class="s">${t(edit ? 'dSe' : 'dS')}</div>
 <div class="acts">${edit ? `<span class="btn primary">${t('done')}</span><span class="btn text">${t('cancel')}</span>`
     : `<span class="btn primary">${t('send')}</span><span class="btn">${t('edit')}</span><span class="btn text">${t('cancel')}</span>`}</div>`;
   return `<div class="msgs"><div class="chip">${t('today')}</div>
@@ -424,11 +426,18 @@ var l=q.get('l');h.dataset.l=(l==='es'||l==='en')?l:'ru';h.lang=h.dataset.l;})()
 // (3) прокрутка листа к концу (data-scroll=end).
 const RUN = `<script>document.fonts.ready.then(function(){
 var scr=document.querySelector('.screen[data-l="'+document.documentElement.dataset.l+'"]');
+// порядок: раскладка → unglue (tools/unglue.js) → WordFit (только одиночные слова, которые не помещаются после unglue)
+if(window.unglue)window.unglue();
 if(document.documentElement.dataset.t==='ax5'){
  var tmp=document.createElement('style');tmp.textContent='.b::after{display:none!important}';document.head.appendChild(tmp);
  var els=[].slice.call(scr.querySelectorAll('*')).filter(function(e){return [].some.call(e.childNodes,function(n){return n.nodeType===3&&n.textContent.trim()})});
- els.forEach(function(e){var b=e;while(b&&getComputedStyle(b).display==='inline')b=b.parentElement;var k=0;
-  while(b.scrollWidth>b.clientWidth+1&&k<12){var fs=parseFloat(getComputedStyle(e).fontSize);if(fs*0.92<28)break;e.style.fontSize=(fs*0.92)+'px';e.style.lineHeight='1.2';if(b!==e)b.style.lineHeight='1.2';k++}});
+ // уменьшаем только тот элемент, чей собственный текст выходит за правый край строки блока
+ var rg=document.createRange();
+ function over(e,b){var bs=getComputedStyle(b),br=b.getBoundingClientRect(),right=br.left+b.clientLeft+b.clientWidth-parseFloat(bs.paddingRight)+0.5,left=br.left+b.clientLeft+parseFloat(bs.paddingLeft)-0.5;
+  return [].some.call(e.childNodes,function(n){if(n.nodeType!==3||!n.textContent.trim())return false;rg.selectNodeContents(n);
+   return [].some.call(rg.getClientRects(),function(r){return r.width&&(r.right>right||r.left<left)})})}
+ els.forEach(function(e){var b=e;while(b&&getComputedStyle(b).display.indexOf('inline')===0)b=b.parentElement;var k=0;
+  while(over(e,b)&&k<12){var fs=parseFloat(getComputedStyle(e).fontSize);if(fs*0.92<28)break;e.style.fontSize=(fs*0.92)+'px';e.style.lineHeight='1.2';if(b!==e)b.style.lineHeight=(fs*0.92*1.2)+'px';k++}});
  tmp.remove();
 }
 scr.querySelectorAll('[data-scroll="end"]').forEach(function(e){e.scrollTop=e.scrollHeight});
@@ -439,13 +448,16 @@ const page = (key, s) => `<!doctype html>
 <html lang="ru" data-d="max" data-t="n" data-l="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${s.ttl}</title><link rel="stylesheet" href="../rd.css"><link rel="stylesheet" href="sheets.css">
 ${SCRIPT}
+<script src="../tools/unglue.js"></script>
 </head><body>
 ${LANGS.map((lg, i) => { L = i; return `<main class="screen ${s.cls || ''}" data-l="${lg}" lang="${lg}">\n${statusBar()}\n${s.html()}\n<i class="home-ind"></i>\n</main>`; }).join('\n')}
 ${RUN}
 </body></html>
 `;
 
-for (const [k, s] of Object.entries(S)) fs.writeFileSync(path.join(OUT, k + '.html'), page(k, s));
+// NBSP после коротких слов (redesign-ios/tools/nbsp.js); язык — lang у <main> каждого экрана и у иноязычных фрагментов
+const { glueHtml } = require('../../tools/nbsp.js');
+for (const [k, s] of Object.entries(S)) fs.writeFileSync(path.join(OUT, k + '.html'), glueHtml(page(k, s), 'ru'));
 // список экранов для render.js и index.html
 fs.writeFileSync(path.join(OUT, 'tools', 'screens.json'), JSON.stringify(Object.entries(S).map(([k, s]) => ({ k, old: s.old, ttl: s.ttl })), null, 1));
 const idx = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Листы, диалоги, ошибки — обзор</title>

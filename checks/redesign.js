@@ -2,8 +2,9 @@
 //   node checks/redesign.js [--hov] [--wbr] [страница …]   — без флагов обе проверки; страница — путь от redesign-ios, напр. s1-chats.html
 // --hov: текст выходит за край экрана (по X).
 // --wbr: слово разорвано между строками (перенос между двумя буквами/цифрами) или короткое служебное слово
-//        (redesign-ios/tools/short-words.json) осталось в конце строки — висячий предлог/союз. Не считается, если пара
-//        «слово + следующее» шире строки блока: тогда склейку снимает tools/unglue.js (целое слово важнее склейки).
+//        (redesign-ios/tools/short-words.json) осталось в конце строки — висячий предлог/союз. Не считается, если вся
+//        склеенная цепочка (короткие слова подряд + следующее слово) шире строки блока: тогда склейку снимает
+//        tools/unglue.js (целое слово важнее склейки).
 // Исключений нет: ожидаемый результат — 0. Код выхода 1 при находках.
 const {chromium} = require('playwright');
 const fs = require('fs');
@@ -82,13 +83,20 @@ const probe = ({doHov, doWbr, W}) => {
         const nx = rectOf(n, words[i + 1].s, words[i + 1].s + 1)[0];
         const last = rs[rs.length - 1];
         if (nx && nx.top > last.top + 2) {
-          // склейка допустима, только если пара целиком помещается в строку блока; иначе целое слово важнее (решение 22.11)
+          // склеенная цепочка: короткие слова подряд до первого обычного («не на перевод.», «There is no password»).
+          // Висячее слово — ошибка, только если вся цепочка помещается в строку блока; иначе склейку снимает
+          // tools/unglue.js, и целое слово важнее склейки (решение 22.11: раскладка → снять склейку → WordFit).
+          const isShort = (x) => short.has(x.replace(/^[«“"(¿¡]+/, '').toLowerCase()) && /[\p{L}\p{N}]$/u.test(x);
+          let j = i, k = i + 1;
+          while (j > 0 && isShort(words[j - 1].w)) j--;
+          while (k < words.length - 1 && isShort(words[k].w)) k++;
           let b = el;
           while (b && getComputedStyle(b).display.startsWith('inline')) b = b.parentElement;
           const bs = getComputedStyle(b);
           const avail = b.clientWidth - parseFloat(bs.paddingLeft) - parseFloat(bs.paddingRight);
-          const pair = rs.reduce((a, r) => a + r.width, 0) + spaceW(el) + rectOf(n, words[i + 1].s, words[i + 1].e).reduce((a, r) => a + r.width, 0);
-          if (pair <= avail + 0.5) res.push('висит: ' + wd + ' ' + words[i + 1].w);
+          let chain = 0;
+          for (let q = j; q <= k; q++) chain += rectOf(n, words[q].s, words[q].e).reduce((a, r) => a + r.width, 0) + (q > j ? spaceW(el) : 0);
+          if (chain <= avail + 0.5) res.push('висит: ' + wd + ' ' + words[i + 1].w);
         }
       }
     }
