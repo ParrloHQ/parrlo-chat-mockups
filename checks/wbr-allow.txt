@@ -7,12 +7,8 @@ en msg-unsupported__duoc-ax5 | Unsupported
 en msg-unsupported__pro-ax5 | Unsupported
 en msg-unsupported__se-ax5 | Unsupported
 en msg-unsupported__se-ax5@360 | Unsupported
-en ob-consent-no__duoc-ax5 | conversations
-en ob-consent-no__pro-ax5 | conversations
 en ob-consent-no__se-ax5 | conversations
 en search-chat__se-ax5@360 | entrance
-es admin-transfer-confirm__duoc-ax5 | administración
-es admin-transfer-confirm__pro-ax5 | administración
 es call-detail-group__se-ax5 | Transcripción
 es call-detail-group__se-ax5@360 | Transcripción
 es call-detail__se-ax5 | Transcripción
@@ -41,9 +37,7 @@ es group-members-remove__duoc-ax5 | administración
 es group-members-remove__pro-ax5 | administración
 es group-members__duoc-ax5 | administración
 es group-members__pro-ax5 | administración
-es group-successor-confirm__duoc-ax5 | administración
 es group-successor-confirm__duoc-ax5 | automáticamente
-es group-successor-confirm__se-ax5 | administración
 es group-successor-confirm__se-xl | automáticamente
 es group-successor-confirm__se-xl@360 | automáticamente
 es group-successor-error__duoc-ax5 | automáticamente
@@ -84,7 +78,6 @@ es search-chat-empty__se-xl@360 | coincidencias
 es search-home-results__se-ax5@360 | Contacto
 es search-home-results__se-ax5@360 | actualizado
 es search-home-results__se-ax5@360 | quetas
-es settings-account-delete-confirm__duoc-ax5 | definitivamente
 es settings-notifications-blocked__se-xl@360 | notificaciones
 es settings-notifications__duoc-ax5 | notificaciones
 es settings-notifications__se-ax5 | notificaciones
@@ -247,8 +240,6 @@ ru msg-unsupported__se-ax5@360 | приложение
 ru msg-unsupported__se-xl | поддерживается
 ru msg-unsupported__se-xl@360 | поддерживается
 ru ob-consent-no__duoc-ax5 | подтверждения
-ru ob-consent-no__duoc-ax5 | продиктуешь
-ru ob-consent-no__pro-ax5 | продиктуешь
 ru ob-consent-no__se-ax5 | продиктуешь
 ru ob-consent-no__se-ax5@360 | продиктуешь
 ru ob-consent-no__se-ax5@360 | субтитрами
@@ -267,8 +258,6 @@ ru ob-parrlo-setup__se-ax5@360 | приложении
 ru ob-signin-invite__se-ax5 | Квартира
 ru ob-signin-invite__se-ax5@360 | Квартира
 ru plans__se-ax5@360 | бесплатный
-ru reminder__duoc-ax5 | Напоминание
-ru reminder__se-ax5@360 | Напоминание
 ru report-message-illegal__duoc-ax5 | Заблокировать
 ru report-message-illegal__duoc-ax5 | Мошенничество
 ru report-message-illegal__duoc-ax5 | добросовестно
