@@ -189,7 +189,7 @@ S['contact-loading'] = () => `<div class="page pushed"><div class="scroll">${pro
 S['contact-nogroups'] = () => `<div class="page pushed"><div class="scroll">${prof(MARCO)}${acts(CHAT_ACTS)}${soundSearch()}
 ${igh('Общие группы')}<div class="ig"><div class="es" role="status"><i>${ic('people')}</i><h2>${t('Общих групп нет')}</h2><p>${t('Когда появится общая группа, она будет здесь.')} ${tbd('формулировка: не утверждено')}</p></div></div>
 ${blockRow()}${profNote()}</div></div>${nav()}`;
-S['contact'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco', lead: 'Контакт' })}${acts([['calls', 'Позвонить'], ['chats', 'Написать']])}
+S['contact'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco', lead: 'Контакт' })}${acts(CHAT_ACTS)}
 ${igh('Последние звонки')}<ul class="ig">
 ${row({ cls: 'with-ic', ii: iib('in'), b: t('Входящий'), small: [t('12 мин')], v: t('Сегодня, 09:14') })}
 ${row({ cls: 'with-ic', ii: iib('out'), b: t('Исходящий'), small: [t('3 мин')], v: t('Вчера') })}</ul>
@@ -215,13 +215,13 @@ S['calls-error'] = () => `<div class="page root"><div class="scroll">${callsHead
 <div class="banner err" role="alert">${ic('alert')}<div><h3>${t('Не удалось загрузить звонки')}</h3><p>${t('Проверь подключение к интернету и попробуй ещё раз.')} ${tbd('формулировка: не утверждено')}</p>${cta('Повторить', 'sm')}</div></div></div></div>${tabs('calls')}`;
 S['calls-loading'] = () => `<div class="page root"><div class="scroll">${callsHead()}${seg(0)}
 <p class="loadln" role="status"><i class="spin"></i><span>${t('Загружаем звонки…')}</span>${tbd('формулировка: не утверждено')}</p>${skel(5)}</div></div>${tabs('calls')}`;
-S['call-detail'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco', lead: 'Входящий звонок · Сегодня, 09:14', leadIc: 'in' })}${acts([['calls', 'Позвонить'], ['chats', 'Написать']])}
+S['call-detail'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g2', l: 'M', name: 'Marco', lead: 'Входящий звонок · Сегодня, 09:14', leadIc: 'in' })}${acts(CHAT_ACTS)}
 <ul class="ig">${kv('Когда', 'Сегодня, 09:14')}${kv('Длительность', '12 мин')}</ul>
 ${protoCard('Звонок с Marco · 12 мин')}${aim()}${protoNote()}${keepNote()}${delRow()}</div></div>${nav()}`;
-S['call-detail-missed'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g3', l: t('М'), name: t('Мама'), lead: 'Пропущенный звонок · Вчера, 18:02', leadIc: 'in', miss: true })}${acts([['calls', 'Позвонить'], ['chats', 'Написать']])}
+S['call-detail-missed'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g3', l: t('М'), name: t('Мама'), lead: 'Пропущенный звонок · Вчера, 18:02', leadIc: 'in', miss: true })}${acts(CHAT_ACTS)}
 <ul class="ig">${kv('Когда', 'Вчера, 18:02')}</ul>
 <p class="small">${t('Протокола нет: звонок не состоялся.')} ${tbd('формулировка: не утверждено')}</p>${keepNote()}${delRow()}</div></div>${nav()}`;
-S['call-detail-group'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g1', l: t('К'), name: t('Квартира'), lead: 'Групповой звонок · Сегодня, 12:05 · 24 мин', leadIc: 'people' })}${acts([['calls', 'Позвонить в группу'], ['chats', 'Написать']])}
+S['call-detail-group'] = () => `<div class="page pushed"><div class="scroll">${prof({ g: 'g1', l: t('К'), name: t('Квартира'), lead: 'Групповой звонок · Сегодня, 12:05 · 24 мин', leadIc: 'people' })}${acts([['chats', 'Написать'], ['calls', 'Позвонить в группу']])}
 ${igh('Участники звонка')}<ul class="ig">${[['g1', 'Л', 'Лена'], ['g2', 'M', 'Marco'], ['g4', 'А', 'Анна Л.'], ['g0', 'Т', 'Ты']].map(([g, l, n]) => row({ cls: 'with-av', ii: `<span class="ii av av36" style="background:var(--av-${AV[g]})">${t(l)}</span>`, b: t(n) })).join('')}</ul>
 ${protoCard('Групповой звонок · 24 мин')}${aim()}${protoNote()}${keepNote()}</div></div>${nav()}`;
 S['call-incoming'] = () => callScr({ avHtml: avBig('g2', 'M'), h1: t('Marco звонит…'), lead: t('Входящий звонок'),
