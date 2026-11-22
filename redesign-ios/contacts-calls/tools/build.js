@@ -8,6 +8,8 @@ const path = require('path');
 const OUT = path.resolve(__dirname, '..');
 const TX = require('./texts.json');
 const SCREENS = require('./screens.js');
+// короткие служебные слова не остаются в конце строки: U+00A0 (общий redesign-ios/tools/nbsp.js); в странице — unglue.js, потом WordFit
+const { glueHtml } = require('../../tools/nbsp.js');
 
 // ---------- общие куски из redesign-ios/tools/build.js ----------
 const PARROT_INNER = '<defs><mask id="pc-pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/>';
@@ -287,20 +289,21 @@ const TITLES = { ru: {}, es: {}, en: {} };
 const page = (id, cls, bodies) => `<!doctype html>
 <html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${id} — редизайн iOS</title><link rel="stylesheet" href="../rd.css"><link rel="stylesheet" href="contacts-calls.css">
+<script src="../tools/unglue.js"></script>
 <script>(function(){var q=new URLSearchParams(location.search),h=document.documentElement;h.dataset.d=q.get('d')||'max';h.dataset.t=q.get('t')||'n';
 h.dataset.theme='dark';var l=q.get('l');h.lang=(l==='es'||l==='en')?l:'ru'})()</script>
 </head><body><main class="screen ${cls}"></main>
-${['ru', 'es', 'en'].map(l => `<template data-l="${l}">${statusBar()}\n${bodies[l]}\n<i class="home-ind"></i></template>`).join('\n')}
+${['ru', 'es', 'en'].map(l => `<template data-l="${l}" lang="${l}">${statusBar()}\n${bodies[l]}\n<i class="home-ind"></i></template>`).join('\n')}
 <script>${WORDFIT}
 (function(){var l=document.documentElement.lang,tp=document.querySelector('template[data-l="'+l+'"]');document.querySelector('.screen').appendChild(tp.content.cloneNode(true));
-document.fonts.ready.then(function(){if(document.documentElement.dataset.t==='ax5')wordFit(document.querySelector('.screen'));document.body.dataset.ready='1'})})()</script>
+document.fonts.ready.then(function(){var sc=document.querySelector('.screen'),w=document.createTreeWalker(sc,NodeFilter.SHOW_TEXT),n,orig=[];while((n=w.nextNode()))orig.push([n,n.textContent]);window.unglue();if(document.documentElement.dataset.t==='ax5'){wordFit(sc);orig.forEach(function(o){o[0].textContent=o[1]});window.unglue();}document.documentElement.dataset.unglued='1';document.body.dataset.ready='1'})})()</script>
 </body></html>
 `;
 const CLS = (id) => ['calls', 'calls-missed', 'calls-empty', 'calls-error', 'calls-loading', 'empty-contacts'].includes(id) ? 'has-tabs' : '';
 for (const id of SCREENS) {
   CUR = id; const bodies = {};
   for (const l of ['ru', 'es', 'en']) { LANG = l; bodies[l] = S[id](); }
-  fs.writeFileSync(path.join(OUT, id + '.html'), page(id, CLS(id), bodies));
+  fs.writeFileSync(path.join(OUT, id + '.html'), glueHtml(page(id, CLS(id), bodies), 'ru'));
 }
 if (missing.size) { console.log('НЕТ В СТАРЫХ КАДРАХ:\n' + [...missing].join('\n')); }
 

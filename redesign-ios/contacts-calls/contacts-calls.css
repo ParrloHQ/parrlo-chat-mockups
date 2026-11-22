@@ -344,9 +344,9 @@ html[data-t="ax5"] .alert h2,html[data-t="ax5"] .alert .bt{font-size:34px}
 html[data-t="ax5"] .alert p{font-size:28px}
 .scrim.dark{background:rgba(0,0,0,.45)}
 /* AX5 в идущем звонке: кнопки всегда видны. Плашка расшифровки и подсказка — потолок 28 (как поле поиска),
-   подсказка не длиннее 4 строк (полный текст — по нажатию), субтитры — потолок 34 (как пункты меню). */
+   подсказка не выше 4 строк, низ гаснет (полный текст — по нажатию), субтитры — потолок 34 (как пункты меню). */
 html[data-t="ax5"] .incall .rec{font-size:28px}
-html[data-t="ax5"] .incall .toast{flex:none;font-size:28px;line-height:34px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;max-height:160px;padding-bottom:0;border-bottom:12px solid var(--surface)}
+html[data-t="ax5"] .incall .toast{flex:none;font-size:28px;line-height:34px;max-height:160px;overflow:hidden;-webkit-mask:linear-gradient(#000 calc(100% - 46px),transparent calc(100% - 12px));mask:linear-gradient(#000 calc(100% - 46px),transparent calc(100% - 12px))}
 html[data-t="ax5"] .incall .subs p{font-size:34px;line-height:40px}
 html[data-t="ax5"] .incall .subs b,html[data-t="ax5"] .incall .subs small{font-size:28px}
 html[data-t="ax5"] .incall .self{display:none}
