@@ -177,8 +177,8 @@ ${group(false, [
 ${navChat({ left: `<span class="cbtn" aria-label="Назад">${ic('back')}</span>`, title: 'Lucía', sub: 'в сети', right: `<span class="av av36" style="background:var(--av-1)">L</span>` })}
 ${composer(false)}`;
 const s2a = page('Чат с Lucía — фон A', '', lucia);
-// меню облачка (долгое нажатие): реакции, поднятое облачко, пункты. Плоско: без теней, линия 0,5 (SPEC §28)
-const ctxMenu = (b) => `<div class="scrim blur"></div><div class="ctx"><div class="rxbar" role="group" aria-label="Реакции">${['👍', '❤️', '😂', '😮', '😢', '🙏'].map((e) => `<b>${e}</b>`).join('')}<b class="more" aria-label="Другие реакции">${ic('plus')}</b></div>
+// меню облачка (долгое нажатие): реакции 👍 ❤️ 😂 😮 🙏 👎 — как в iOS (FiChatView.menuColumn, chat.react.0…5), «＋» пока нет; поднятое облачко, пункты. Плоско: без теней, линия 0,5 (SPEC §28)
+const ctxMenu = (b) => `<div class="scrim blur"></div><div class="ctx"><div class="rxbar" role="group" aria-label="Реакции">${['👍', '❤️', '😂', '😮', '🙏', '👎'].map((e) => `<b>${e}</b>`).join('')}</div>
 <div class="lift${b.long ? ' long' : ''}"><div class="grp in">${bubble({ ...b, tail: true })}</div></div>
 <div class="menu ctxm" role="menu"><div class="it"><span>Ответить</span>${ic('reply')}</div><div class="it"><span>Копировать</span>${ic('copy')}</div><div class="it"><span>Неточный перевод</span>${ic('trbad')}</div><div class="gap"></div><div class="it danger"><span>Пожаловаться</span>${ic('flag')}</div></div></div>
 <script>(document.fonts?document.fonts.ready:Promise.resolve()).then(function(){var l=document.querySelector('.ctx .lift');if(l&&l.scrollHeight>l.clientHeight+1)l.classList.add('long')})</script>`;
