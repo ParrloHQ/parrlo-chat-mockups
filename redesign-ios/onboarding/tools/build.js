@@ -38,6 +38,9 @@ const P = {
   block: '<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>',
   trans: '<path d="M4 6h9M8.5 4v2M6 6c.8 3 3 5.4 6 6.5M11 6c-.8 3-3 5.4-6 6.5"/><path d="M13 20l3.5-8 3.5 8M14.2 17.3h4.6"/>',
   spin: '<path d="M12 3.5a8.5 8.5 0 108.5 8.5" opacity=".9"/>',
+  // SF person.fill / mic.fill (заливка)
+  person: '<circle cx="12" cy="7.6" r="4.1" fill="currentColor" stroke="none"/><path d="M3.8 20.2c.7-4.1 4-6.6 8.2-6.6s7.5 2.5 8.2 6.6c.1.5-.3.8-.8.8H4.6c-.5 0-.9-.3-.8-.8z" fill="currentColor" stroke="none"/>',
+  mic: '<rect x="8.6" y="2.6" width="6.8" height="12" rx="3.4" fill="currentColor" stroke="none"/><path d="M5.6 11.2a6.4 6.4 0 0012.8 0M12 17.6v3.4M8.8 21h6.4"/>',
 };
 const ic = (n, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
 const TICK2 = '<svg class="tick" viewBox="0 0 17 11" aria-hidden="true"><path d="M1 6l3.2 3.2L10 2.8"/><path d="M7.6 8.6l.6.6L15.6 1.8"/></svg>';
@@ -91,7 +94,7 @@ const C = {
 };
 
 // конструкторы (li — индекс языка)
-const top = (li, step, back = true) => `<header class="top">${back ? `<span class="cbtn" role="button" aria-label="${C.back[li]}">${ic('back')}</span>` : ''}${step ? `<div class="prog" role="img" aria-label="${C.step(step)[li]}">${[1, 2, 3, 4, 5, 6, 7].map(i => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>` : ''}</header>`;
+const top = (li, step, back = true, of = 7) => `<header class="top">${back ? `<span class="cbtn" role="button" aria-label="${C.back[li]}">${ic('back')}</span>` : ''}${step ? `<div class="prog" role="img" aria-label="${of === 7 ? C.step(step)[li] : L(`Шаг ${step} из ${of}`, `Paso ${step} de ${of}`, `Step ${step} of ${of}`)[li]}">${Array.from({ length: of }, (_, k) => k + 1).map(i => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>` : ''}</header>`;
 const tbd = (s, long) => `<span class="tbd${long ? ' long' : ''}">${tx(s)}</span>`;
 const bp = (s, icn) => `<span class="bp" role="button">${icn ? ic(icn) : ''}<span>${tx(s)}</span></span>`;
 const bs = (s, icn) => `<span class="bs" role="button">${icn ? ic(icn) : ''}<span>${tx(s)}</span></span>`;
@@ -179,6 +182,22 @@ S['ob-name'] = (li) => ob(`${top(li, 5)}
 <p class="help">${tx(L('до 60 символов', 'hasta 60 caracteres', 'up to 60 characters')[li])}</p></div>
 <div class="acts">${bp(C.cont[li])}</div>`);
 
+// живой путь мессенджера (FiOnboarding.swift, chat/main 1f1a2276): приветствие → обращение → микрофон → вкладки, прогресс из 4 шагов.
+// Тексты ru/es — из кода и Translate (es заголовок «¿Cómo nos dirigimos a ti?» утвердил Translate); en — Translate, кроме помеченных.
+const icHead = (n) => `<div class="obi" aria-hidden="true">${ic(n)}</div>`;
+S['ob-address'] = (li) => {
+  const opts = [[L('Мужчина', 'Hombre', 'Man'), 'я устал', false], [L('Женщина', 'Mujer', 'Woman'), 'я устала', true]];
+  return ob(`${top(li, 2, true, 4)}
+<div class="body">${icHead('person')}<h1 class="ttl">${tx(L('Как к тебе обращаться?', '¿Cómo nos dirigimos a ti?', 'How should we address you?')[li])}</h1>
+<p class="lead">${tx(L('Нужно для правильных окончаний: «я устал» или «я устала».', 'Sirve para acertar con el género en ruso: «я устал» o «я устала».', 'This helps us get Russian endings right: «я устал» or «я устала».')[li]).replace(/«я устала?»/g, m => `<span class="nw" lang="ru">${m}</span>`)}</p>${li === 2 ? tbd('en text: not approved') : ''}
+<div class="gcards" role="radiogroup" aria-label="${L('Как к тебе обращаться?', '¿Cómo nos dirigimos a ti?', 'How should we address you?')[li]}">${opts.map(([t, ex, on]) => `<div class="gopt${on ? ' on' : ''}" role="radio" aria-checked="${on}"><b>${tx(t[li])}</b><span lang="ru">«${ex}»</span>${on ? ic('check', 'mk') : ''}</div>`).join('')}</div>${li === 2 ? tbd('en: Man / Woman — not approved') : ''}</div>
+<div class="acts">${bp(L('Дальше', 'Siguiente', 'Next')[li])}${bt(C.skip[li])}</div>`);
+};
+S['ob-mic'] = (li) => ob(`${top(li, 3, true, 4)}
+<div class="body">${icHead('mic')}<h1 class="ttl">${tx(L('Разреши микрофон', 'Permite el micrófono', 'Allow microphone access')[li])}</h1>
+<p class="lead">${tx(L('Parrlo слушает только после нажатия на кнопку. Звук не сохраняется.', 'Parrlo solo escucha cuando pulsas el botón. El audio no se guarda.', 'Parrlo listens only after you tap the button. Audio is never stored.')[li])}</p>${tbd(L('юрист проверит', 'lo revisará un abogado', 'lawyer to review')[li])}${li === 2 ? tbd('en button “Allow microphone”: not approved') : ''}</div>
+<div class="acts">${bp(L('Разрешить микрофон', 'Permitir micrófono', 'Allow microphone')[li])}</div>`);
+
 // согласие — текст юриста дословно
 const FACTS = [
   ['eye', L('Что читает', 'Qué lee', 'What it reads'), L('Все твои чаты — только для тебя. Другим участникам Parrlo не виден.', 'Todos tus chats, solo para ti. Parrlo no es visible para los demás participantes.', 'All your chats — only for you. Parrlo isn’t visible to other participants.')],
@@ -255,7 +274,7 @@ S['account-banned'] = (li) => ob(`${top(li, 0, false)}
 // Подгонка слова (AX5): если слово не влезает в строку, шрифт блока × 0.92, пока не влезет, но не ниже 28 (≈ AX1 Body).
 const WORDFIT = `function wordfit(){
  if(document.documentElement.dataset.t!=='ax5')return;
- var MIN=28, sel='.ttl,.lead,.small,.note,.foot,.sech,.cell .tx,.cell .tx h3,.cell .tx .s,.ban h3,.ban p,.ban .lnk,.tbd,.lnk,.bp>span,.bs>span,.bt,.fact h3,.fact p,.ckl span,.ckh,.ph,.help,.alert h2,.alert p,.es h2,.es p,.gcard .tx,.fld,.b,.trrow,.stl span,.large,.search span,.nav .ttl span';
+ var MIN=28, sel='.gopt b,.gopt span,.ttl,.lead,.small,.note,.foot,.sech,.cell .tx,.cell .tx h3,.cell .tx .s,.ban h3,.ban p,.ban .lnk,.tbd,.lnk,.bp>span,.bs>span,.bt,.fact h3,.fact p,.ckl span,.ckh,.ph,.help,.alert h2,.alert p,.es h2,.es p,.gcard .tx,.fld,.b,.trrow,.stl span,.large,.search span,.nav .ttl span';
  document.querySelectorAll(sel).forEach(function(el){
   for(var k=0;k<30;k++){
    var cs=getComputedStyle(el), fs=parseFloat(cs.fontSize); if(fs<=MIN)break;
@@ -308,7 +327,7 @@ const SCREENS = Object.keys(S);
 for (const k of SCREENS) fs.writeFileSync(path.join(OUT, k + '.html'), page(k));
 
 // ---------- обзор (ru, Pro Max, обычный текст) ----------
-const PRIO = ['ob-welcome', 'ob-signin', 'ob-age', 'ob-name', 'ob-consent', 'ob-parrlo-setup', 'home-empty'];
+const PRIO = ['ob-address', 'ob-mic', 'ob-welcome', 'ob-signin', 'ob-age', 'ob-name', 'ob-consent', 'ob-parrlo-setup', 'home-empty'];
 const idx = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Редизайн iOS — вход и онбординг</title>
 <style>@font-face{font-family:Inter;font-weight:100 900;src:url(../../fonts/Inter-Variable.woff2) format("woff2")}
 body{margin:0;background:#0B0E12;color:#E8ECF1;font-family:-apple-system,"SF Pro Text",Inter,system-ui,sans-serif;padding:40px;width:1880px}
