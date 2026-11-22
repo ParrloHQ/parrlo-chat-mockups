@@ -228,3 +228,5 @@ html[data-t="ax5"] .tbd{border-radius:14px;padding:2px 10px}
 html[data-t="ax5"] .susp .ban{flex-direction:row}
 html[data-t="ax5"] .susp .ban h3,html[data-t="ax5"] .susp .ban p,html[data-t="ax5"] .susp .ban .lnk{font-size:28px;line-height:34px}
 html[data-t="ax5"] .susp .ban .ic{width:28px;height:28px;margin-top:3px}
+/* маркер внутри абзаца: сразу после фразы, к которой относится */
+.tbd.inl{display:inline-block;margin:0 0 0 2px;vertical-align:baseline}

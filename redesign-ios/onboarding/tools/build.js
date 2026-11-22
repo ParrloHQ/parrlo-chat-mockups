@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const OUT = path.resolve(__dirname, '..');
 const LANGS = ['ru', 'es', 'en'];
+const { glueHtml } = require('../../tools/nbsp.js'); // NBSP после коротких слов (общий список redesign-ios/tools/short-words.json)
 
 // ---------- из redesign-ios/tools/build.js ----------
 const PARROT_INNER = '<defs><mask id="pc-pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/>';
@@ -186,10 +187,13 @@ const FACTS = [
   ['power', L('Выключить можно всегда', 'Desactívalo cuando quieras', 'Turn it off any time'), L('Настройки → Parrlo: Parrlo перестанет читать чаты, а созданное им мы удалим.', 'En Ajustes → Parrlo: dejará de leer tus chats y borraremos lo que haya generado.', 'Settings → Parrlo: Parrlo stops reading your chats and we delete what it generated.')],
 ];
 const CNOTE = L('Нажимая «Разрешить», ты разрешаешь Parrlo читать твои чаты.', 'Al pulsar «Permitir», permites que Parrlo lea tus chats.', 'By tapping “Allow” you let Parrlo read your chats.');
+// Фраза юриста о шифровании — дословно; сразу после неё маркер [УТОЧНИТЬ] (юрист даст замену; решение координатора 22.11)
+const ENC_END = /(помощник Parrlo\)\.|asistente Parrlo\)\.|the Parrlo assistant\)\.)/;
+const encMark = (h) => h.replace(ENC_END, '$1 <span class="tbd inl">[УТОЧНИТЬ]</span>');
 S['ob-consent'] = (li) => ob(`${top(li, 6)}
 <div class="body"><div class="hide-compact"><span class="pdisc sm" aria-hidden="true">${parrot()}</span></div>
 <h1 class="ttl">${tx(L('Parrlo читает чаты, чтобы помогать', 'Parrlo lee tus chats para ayudarte', 'Parrlo reads your chats to help you')[li])}</h1>
-<ul class="facts">${FACTS.map(([i, h, p, b]) => `<li class="fact"><span class="fi">${ic(i)}</span><div class="fx"><h3>${tx(h[li])}</h3><p>${tx(p[li])}</p>${b ? tbd(b[li], true) : ''}</div></li>`).join('')}</ul>
+<ul class="facts">${FACTS.map(([i, h, p, b]) => `<li class="fact"><span class="fi">${ic(i)}</span><div class="fx"><h3>${tx(h[li])}</h3><p>${encMark(tx(p[li]))}</p>${b ? tbd(b[li], true) : ''}</div></li>`).join('')}</ul>
 <p class="ph">${tx(C.op[li])}</p>
 <p class="small">${tx(L('Поставщики ИИ, основание передачи и срок хранения:', 'Proveedores de IA, base de la transferencia y conservación:', 'AI providers, transfer basis and retention:')[li])}</p>${tbd(C.na[li])}
 <div class="sech"></div><div class="glist"><div class="cell swr"><div class="tx"><h3>${tx(C.remember[li])}</h3><span class="s">${tx(L('Выключено по умолчанию. Посмотреть и удалить можно в Настройки → Parrlo → Память.', 'Desactivado por defecto. Puedes verla o borrarla en Ajustes → Parrlo → Memoria.', 'Off by default. View or delete it in Settings → Parrlo → Memory.')[li])}</span></div><span class="sw" role="switch" aria-checked="false"></span></div></div>
@@ -273,10 +277,11 @@ const WORDFIT = `function wordfit(){
  });
 }`;
 const page = (key) => {
-  const tpl = LANGS.map((l, li) => { const s = S[key](li); return `<template id="l-${l}" data-cls="${s.cls}">${statusBar()}\n${s.inner}\n<i class="home-ind"></i></template>`; }).join('\n');
+  const tpl = LANGS.map((l, li) => { const s = S[key](li); return `<template id="l-${l}" data-cls="${s.cls}">${glueHtml(`${statusBar()}\n${s.inner}\n<i class="home-ind"></i>`, l)}</template>`; }).join('\n');
   return `<!doctype html>
 <html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${key}</title><link rel="stylesheet" href="../rd.css"><link rel="stylesheet" href="onboarding.css">
+<script src="../tools/unglue.js"></script>
 <script>(function(){var q=new URLSearchParams(location.search),h=document.documentElement;h.dataset.d=q.get('d')||'max';h.dataset.t=q.get('t')||'n';
 h.dataset.theme='dark';var l=q.get('l');h.lang=(l==='es'||l==='en')?l:'ru';})()</script>
 </head><body><main class="screen"></main>
@@ -284,7 +289,14 @@ ${tpl}
 <script>${WORDFIT}
 (function(){var h=document.documentElement,t=document.getElementById('l-'+h.lang),m=document.querySelector('main');
 m.className='screen '+t.dataset.cls;m.appendChild(t.content.cloneNode(true));
-document.fonts.ready.then(function(){wordfit();
+// порядок: раскладка → unglue → WordFit; data-ready — после обоих
+// раскладка → unglue → WordFit (склеенная цепочка считается одним словом: шрифт уменьшается, пока она не влезет) → unglue для оставшихся
+document.fonts.ready.then(function(){var orig=new Map(),tw=document.createTreeWalker(m,NodeFilter.SHOW_TEXT),x;
+ while((x=tw.nextNode()))if(x.data.indexOf('\u00a0')>=0)orig.set(x,x.data);
+ window.unglue();
+ orig.forEach(function(v,k){k.data=v});
+ wordfit();
+ window.unglue();
  var s=document.querySelector('.susp'),g=document.querySelector('.msgs');if(s&&g)g.style.paddingBottom=(s.offsetHeight+8)+'px';
  document.body.dataset.ready='1';});})();</script>
 </body></html>
