@@ -874,6 +874,7 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* AX5: выключатель под текстом, как в iOS при крупном шрифте — заголовок строки помещается целиком, без разрыва слова (решение 19.11). Только узкие колонки; на десктопе места хватает */
 /* узкий экран (SE): у шапки чата зазор 8 — заголовок группы не рвётся внутри слова */
 @container (max-width:399px){.pc-pp-bar{gap:8px}}
+@container (max-width:369px){.pc-pp-bar{gap:4px}}
 @container (max-width:699px){
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow>div{flex:1 1 100%}

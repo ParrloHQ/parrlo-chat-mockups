@@ -17,6 +17,7 @@ const probe = (w360) => {
   const res = [];
   // второй проход: кадры SE (375) сужены до 360 — ширина проверки веба
   if (w360) document.querySelectorAll('figure[data-dev="se"] .pc-frame').forEach((fr) => fr.style.setProperty('--W', '360px'));
+  if (w360 && window.wordFit) window.wordFit(); // WordFit заново на новой ширине
   document.querySelectorAll('figure .pc-frame').forEach((fr) => {
     if (w360 && fr.closest('figure').dataset.dev !== 'se') return;
     const id = fr.closest('figure').dataset.id + (w360 ? '@360' : '');
@@ -55,7 +56,7 @@ const probe = (w360) => {
     if (!fs.existsSync(f)) continue;
     for (const w360 of [false, true]) {
       await p.goto('file://' + f);
-      await p.waitForTimeout(100);
+      await p.waitForFunction(() => document.body.dataset.ready === '1', null, {timeout: 15000}).catch(() => {});
       for (const x of await p.evaluate(probe, w360)) all.push(l + ' ' + x);
     }
   }
