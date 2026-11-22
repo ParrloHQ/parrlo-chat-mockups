@@ -857,6 +857,10 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 .pc-row .pv{overflow-wrap:break-word}
 .pc-frame :where(div,p,span,h1,h2,h3,h4,b,strong,em,label,a,button,li){min-width:0}.pc-frame .ico{flex-shrink:0}
 .pc-frame :where(p,h1,h2,h3,h4){max-width:100%}
+/* как в вебе (public/css/app.css): заголовки — balance, абзацы — pretty (против одного слова в последней строке); онбординг при XL/AX5 — pretty целиком */
+.pc-frame :where(h1,h2,h3,.pc-title){text-wrap:balance}
+.pc-frame :where(p,li,.pc-lead,.pc-note,.pc-sub,.pc-small){text-wrap:pretty}
+.pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-onb-col{text-wrap:pretty}
 .pc-menu button,.pc-btn{overflow-wrap:break-word;max-width:100%}
 /* у кнопок текст — анонимный flex-элемент, min-width на него не поставить: слово шире кнопки рвётся только когда не помещается */
 /* при break-word текстовые блоки во flex-строках должны уметь сужаться (min-width:0), иначе длинное слово выталкивает блок за край */
@@ -876,6 +880,12 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  /* шеврон строки настроек при XL/AX5 на узком экране: не растёт (16 px, как в iOS) и стоит у первой строки справа — признак перехода сохраняется */
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow>svg.ic{width:16px;height:16px;align-self:flex-start;margin-top:calc((var(--t-row)*1.25 - 16px)/2)}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-onb-col{padding-inline:16px}
+ /* поля даты при XL/AX5 на узком экране — друг под другом (день, месяц, год), каждое во всю ширину */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-datefields{flex-direction:column}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-datefields .pc-field{flex:none}
+ /* диалог при AX5 на узком экране: почти во всю ширину (поля 8), внутренние поля 16; строка с выключателем в нём — без своих полей */
+ .pc-frame[data-ts=ax5] .pc-alert{width:calc(100% - 16px);padding:16px}
+ .pc-frame[data-ts=ax5] .pc-alert .pc-switchrow{padding-inline:12px}
  .pc-frame[data-ts=ax5] :is(.pc-onb-scroll,.pc-onb-body){margin-inline:-16px;padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-setlist,.pc-radios,.pc-checks,.pc-facts,.pc-switchrow,.pc-banner,.pc-reportform>div>.pc-check,.pc-reportform>div>.pc-radio){margin-inline:-16px;border-radius:0}
  .pc-frame[data-ts=ax5] .pc-onb-body .pc-ph{margin-inline:-16px;padding-inline:16px;border-inline:0;border-radius:0;max-width:none}
