@@ -7,6 +7,7 @@ en msg-unsupported__duoc-ax5 | Unsupported
 en msg-unsupported__pro-ax5 | Unsupported
 en msg-unsupported__se-ax5 | Unsupported
 en msg-unsupported__se-ax5@360 | Unsupported
+en ob-consent-no__se-ax5 | conversations
 en search-chat__se-ax5@360 | entrance
 es call-detail-group__se-ax5 | Transcripción
 es call-detail-group__se-ax5@360 | Transcripción
@@ -55,6 +56,8 @@ es limit-err-group-call__duoc-ax5 | Restablecimiento
 es limit-err-parrlo__duoc-ax5 | Restablecimiento
 es limit-err-week__duoc-ax5 | Restablecimiento
 es ob-consent-no__duoc-ax5 | conversaciones
+es ob-parrlo-setup-skip__duoc-ax5 | configuración
+es ob-parrlo-setup-skip__se-ax5 | configuración
 es report-message-illegal__duoc-ax5 | transcripciones
 es report-message-illegal__se-ax5 | denunciado
 es report-message-illegal__se-ax5@360 | denunciado
@@ -75,6 +78,7 @@ es search-chat-empty__se-xl@360 | coincidencias
 es search-home-results__se-ax5@360 | Contacto
 es search-home-results__se-ax5@360 | actualizado
 es search-home-results__se-ax5@360 | quetas
+es settings-notifications-blocked__se-xl@360 | notificaciones
 es settings-notifications__duoc-ax5 | notificaciones
 es settings-notifications__se-ax5 | notificaciones
 es settings__duoc-ax5 | Notificaciones
@@ -157,7 +161,10 @@ ru chat-tr-sheet-off__se-ax5@360 | Переводить
 ru chat-tr-sheet-off__se-ax5@360 | показываются
 ru chat-tr-sheet__duoc-ax5 | Переводить
 ru chat-tr-sheet__se-ax5@360 | Переводить
+ru contact-block__duoc-ax5 | Заблокировать
+ru contact-block__pro-ax5 | Заблокировать
 ru contact-blocked__duoc-ax5 | заблокирован
+ru contact-blocked__se-xl@360 | заблокирован
 ru empty-memory__duoc-ax5 | предпочтения
 ru err-offline-full__se-ax5@360 | подключения
 ru group-ai-info__duoc-ax5 | обрабатывают
@@ -233,6 +240,9 @@ ru msg-unsupported__se-ax5@360 | приложение
 ru msg-unsupported__se-xl | поддерживается
 ru msg-unsupported__se-xl@360 | поддерживается
 ru ob-consent-no__duoc-ax5 | подтверждения
+ru ob-consent-no__se-ax5 | продиктуешь
+ru ob-consent-no__se-ax5@360 | продиктуешь
+ru ob-consent-no__se-ax5@360 | субтитрами
 ru ob-consent-no__se-xl@360 | подтверждения
 ru ob-consent__duoc-ax5 | обрабатывается
 ru ob-consent__duoc-ax5 | предпочтения
@@ -279,6 +289,7 @@ ru search-home-results__se-ax5@360 | твей
 ru settings-about__duoc-ax5 | использования
 ru settings-about__se-xl@360 | использования
 ru settings-account-delete-confirm__duoc-ax5 | Подтверждение
+ru settings-notifications-blocked__se-xl@360 | уведомления
 ru settings-parrlo-more__duoc-ax5 | Неформальный
 ru settings-parrlo-more__duoc-ax5 | предпочтения
 ru settings-parrlo-more__duoc-ax5 | приложении

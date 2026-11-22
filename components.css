@@ -73,6 +73,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-hero .pc-title,.pc-hero .pc-lead{position:relative}
 .pc-hero .pc-lead{margin-top:0}
 .pc-hero-text{display:flex;flex-direction:column;gap:12px}
+/* блок текста приветствия не шире колонки (иначе склеенная группа раздвигает его за край) */
+.pc-hero-text{max-width:100%}
 .pc-hero-text .pc-lead{margin-top:0}
 /* список выбора языка */
 .pc-radios{display:flex;flex-direction:column;gap:8px;list-style:none}
@@ -507,6 +509,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-protofull .pc-callbar .pc-rec{flex:1 1 100%;justify-content:flex-start}
 /* диалог на Duo в полураскрытом виде — в одной из половин, не через сгиб (допущение, сверить в Xcode / Device Hub) */
 .pc-alert[data-pose=hp]{top:503.5px;transform:translateX(-50%);max-height:calc(100% - 503.5px - 42px)}
+/* содержимое диалога не сжимается: если не влезает по высоте, диалог прокручивается (а не наезжает текст на кнопки) */
+.pc-alert>*{flex-shrink:0}
 .pc-alert[data-pose=hl]{left:511.5px;transform:translateY(-50%);width:340px;max-height:calc(100% - 32px)}
 
 .pc-frame.full .pc-app[data-view=detail] .pc-pane--detail{flex:1 1 0;width:100%;min-width:0}

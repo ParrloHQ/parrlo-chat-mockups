@@ -8,6 +8,8 @@ on:
       - 'frames/**'
       - '*.css'
       - 'fonts/**'
+      - 'redesign-ios/**'
+      - 'checks/redesign.js'
       - 'checks/hov.js'
       - '.github/workflows/hov.yml'
   workflow_dispatch:
@@ -34,3 +36,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: checks/hov.js — горизонтальных вылетов должно быть 0
         run: node checks/hov.js
+      - name: checks/redesign.js --hov — редизайн iOS (вылеты текста за экран), должно быть 0
+        run: node checks/redesign.js --hov
