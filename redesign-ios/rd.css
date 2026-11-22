@@ -1,0 +1,308 @@
+/* Parrlo Chat — редизайн «как iOS, спокойно». Тёмная тема по умолчанию, светлая — html[data-theme="light"] (?th=light).
+   Шрифт: системный (SF Pro). В контейнере SF Pro нет — Inter грузится как заменитель для рендера. */
+@font-face{font-family:Inter;font-weight:100 900;font-display:block;src:url(../fonts/Inter-Variable.woff2) format("woff2")}
+
+:root{
+ color-scheme:dark;
+ /* цвета бренда (tokens.css) */
+ --bg:#12161C; --surface:#1C2026; --raised:#242B34; --ink:#E8ECF1; --muted:#9AA4B2;
+ --line:rgba(255,255,255,.14); --hair:rgba(255,255,255,.09);
+ --acc:#2BC48A; --btn:#00875C; --brand:#00A86B; --err:#FF6B5E;
+ --av-0:#00875C; --av-1:#8A5A00; --av-2:#3F5FB5; --av-3:#9A3F73;
+ /* редизайн */
+ --own:#1F6B4E;            /* своё облачко: белый текст 6.42:1 */
+ --own-meta:rgba(255,255,255,.82);
+ --other:#22272F;          /* чужое облачко: --ink 12.65:1 */
+ --mat:rgba(18,22,28,.82); /* материал панелей: #12161C 82% + blur 50 */
+ --blur:saturate(140%) blur(20px);
+ --scrim:rgba(0,0,0,.30);
+ /* устройство (переключается data-d) */
+ --W:440px; --H:956px; --safe-top:62px; --home:34px;
+ /* типографика iOS (pt = px). Normal */
+ --large:34px; --body:17px; --callout:16px; --sub:15px; --foot:13px; --cap:12px; --cap2:11px;
+ --lh-body:22px; --lh-sub:20px;
+ /* не растут с Dynamic Type */
+ --nav-t:17px; --nav-s:12px; --tab-l:10px; --bar-btn:17px;
+ /* поля ввода и меню: свой потолок (см. README) */
+ --field:17px; --menu:17px;
+ --font:-apple-system,"SF Pro Text","SF Pro Display",Inter,system-ui,sans-serif;
+}
+html[data-d="se"]{--W:375px;--H:667px;--safe-top:20px;--home:0px}
+html[data-t="ax5"]{
+ --large:48px;   /* 34 × 1.4 — потолок для большого заголовка */
+ --body:53px; --callout:51px; --sub:49px; --foot:44px; --cap:40px; --cap2:40px;
+ --lh-body:64px; --lh-sub:60px;
+ --field:28px; --menu:34px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0A0D11}
+body{font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased;
+ hyphens:none;-webkit-hyphens:none;overflow-wrap:normal;word-break:normal;letter-spacing:-.01em;
+ font-feature-settings:"cv11" 0}
+svg{display:block}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.ic-parrot{fill:currentColor;stroke:none}
+
+.screen{position:relative;width:var(--W);height:var(--H);overflow:hidden;background:var(--bg)}
+.bg-b{background-color:var(--bg);background-image:var(--pattern);background-size:88px 88px}
+
+/* ---------- статус-бар ---------- */
+.sb{position:absolute;z-index:30;left:0;right:0;top:0;height:var(--safe-top);display:flex;align-items:center;justify-content:space-between;
+ padding:0 22px 0 32px;font-weight:600;font-size:17px;letter-spacing:0}
+.sb .ri{display:flex;gap:6px;align-items:center}
+.sb .island{position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;border-radius:20px;background:#000}
+html[data-d="se"] .sb{padding:0 8px;font-size:12px}
+html[data-d="se"] .sb .island{display:none}
+html[data-d="se"] .sb .ri svg{transform:scale(.8)}
+.home-ind{position:absolute;z-index:40;left:50%;bottom:8px;width:144px;height:5px;margin-left:-72px;border-radius:3px;background:var(--ink)}
+html[data-d="se"] .home-ind{display:none}
+
+/* ---------- материал: blur + тон #12161C 82% ----------
+   Слой размытия выходит за край панели на 48px и обрезается маской: так у кромки нет «читаемой» полосы. */
+.nav,.comp,.tabs{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.nav::before,.comp::before,.tabs::before{content:"";position:absolute;z-index:-2;left:0;right:0;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.nav::before{top:0;bottom:-48px;-webkit-mask:linear-gradient(#000 calc(100% - 48px),transparent 0);mask:linear-gradient(#000 calc(100% - 48px),transparent 0)}
+.comp::before,.tabs::before{top:-48px;bottom:0;-webkit-mask:linear-gradient(transparent 48px,#000 0);mask:linear-gradient(transparent 48px,#000 0)}
+.nav::after,.comp::after,.tabs::after{content:"";position:absolute;z-index:-1;inset:0;background:var(--mat)}
+
+/* ---------- кнопки: плоские ---------- */
+.cbtn{width:36px;height:36px;border-radius:50%;background:var(--raised);color:var(--ink);display:grid;place-items:center;flex:none;border:0}
+.cbtn .ic{width:22px;height:22px}
+.pbtn{height:36px;padding:0 14px;border-radius:18px;background:var(--raised);color:var(--ink);font-size:var(--bar-btn);display:inline-flex;align-items:center;font-weight:400}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 14px;border-radius:17px;font-size:var(--sub);font-weight:600;background:var(--raised);color:var(--ink);border:1px solid var(--line)}
+.btn.primary{background:var(--btn);color:#fff;border-color:transparent}
+
+/* ---------- навбар (материал) ---------- */
+.nav{position:absolute;z-index:20;left:0;right:0;top:0;padding-top:var(--safe-top);background:var(--mat);
+ -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-bottom:.5px solid var(--hair)}
+.nav .bar{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;position:relative}
+.nav .ttl{position:absolute;left:64px;right:64px;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2}
+.nav .ttl b{font-size:var(--nav-t);font-weight:600;letter-spacing:-.02em}
+.nav .ttl span{font-size:var(--nav-s);color:var(--muted);margin-top:1px}
+.av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;flex:none;letter-spacing:0}
+.av36{width:36px;height:36px;font-size:16px}
+.av-p{background:var(--raised);color:var(--ink)}
+.av-p .ic-parrot{width:20px;height:20px}
+
+/* ---------- чат ---------- */
+.msgs{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+ padding:0 8px calc(var(--compH) + var(--home) + var(--tabH,0px) + 8px)}
+.screen{--compH:52px}
+.chip{align-self:center;margin:12px 0 4px;padding:3px 10px;border-radius:12px;background:rgba(36,43,52,.86);
+ font-size:var(--foot);font-weight:600;color:var(--muted);line-height:1.35}
+.grp{display:flex;flex-direction:column;gap:3px;margin-top:10px}
+.grp.out{align-items:flex-end}
+.grp.in{align-items:flex-start}
+.b{--bc:var(--other);position:relative;max-width:78%;padding:9px 12px 8px;border-radius:18px;background:var(--bc);
+ font-size:var(--body);line-height:var(--lh-body);font-weight:400}
+.out .b{--bc:var(--own);color:#fff}
+.b.tail.out-t{border-bottom-right-radius:6px;margin-right:6px}
+.b.tail.in-t{border-bottom-left-radius:6px;margin-left:6px}
+.grp.out .b:not(.tail){margin-right:6px}
+.grp.in .b:not(.tail){margin-left:6px}
+.b.tail::after{content:"";position:absolute;bottom:0;width:12px;height:18px;background:var(--bc);
+ -webkit-mask:var(--tail) no-repeat;mask:var(--tail) no-repeat}
+.b.out-t::after{right:-6px}
+.b.in-t::after{left:-6px;transform:scaleX(-1)}
+:root{--tail:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='18'%3E%3Cpath d='M0 0H6V8C6 13.5 8.5 16.5 12 18C7.5 18.4 3.5 17.2 0 14.5Z'/%3E%3C/svg%3E")}
+/* время внутри облачка */
+.m{position:absolute;right:12px;bottom:6px;display:flex;align-items:center;gap:3px;font-size:var(--cap);line-height:16px;color:var(--muted);white-space:nowrap;letter-spacing:0}
+.out .m{color:var(--own-meta)}
+.ms{display:inline-flex;gap:3px;visibility:hidden;margin-left:10px;font-size:var(--cap);line-height:1;white-space:nowrap;letter-spacing:0;vertical-align:baseline}
+.tick{width:17px;height:11px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-t="ax5"] .m{line-height:46px;bottom:6px}
+html[data-t="ax5"] .tick{width:40px;height:26px}
+/* перевод */
+.orig{margin:8px -12px 0;padding:6px 12px 0;border-top:1px solid var(--line)}
+.orig .lb{display:block;font-size:var(--cap);font-weight:600;color:var(--muted);line-height:16px;letter-spacing:0}
+.orig p{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted)}
+html[data-t="ax5"] .orig .lb{line-height:48px}
+/* голосовое */
+.voice{display:flex;align-items:center;gap:10px;padding-right:2px}
+.play{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.play svg{width:18px;height:18px;margin-left:3px;fill:#12161C}
+.wv{display:flex;flex-direction:column;gap:4px}
+.bars{display:flex;align-items:center;gap:2px;height:26px}
+.bars i{display:block;width:3px;border-radius:2px;background:var(--ink)}
+.bars i.r{background:rgba(232,236,241,.38)}
+.dur{font-size:var(--cap);line-height:16px;color:var(--muted);letter-spacing:0}
+html[data-t="ax5"] .play{width:72px;height:72px}
+html[data-t="ax5"] .play svg{width:28px;height:28px}
+html[data-t="ax5"] .dur{line-height:48px}
+html[data-t="ax5"] .bars{height:40px}
+/* реакция */
+.rx{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 3px 0 7px;margin-top:6px;border-radius:13px;background:rgba(255,255,255,.14);vertical-align:bottom}
+.rx .e{font-size:15px;line-height:1}
+.rx .av{width:20px;height:20px;font-size:11px}
+html[data-t="ax5"] .rx{height:56px;border-radius:28px;padding:0 6px 0 12px;gap:8px}
+html[data-t="ax5"] .rx .e{font-size:34px}
+html[data-t="ax5"] .rx .av{width:42px;height:42px;font-size:22px}
+/* карточка внутри ответа Parrlo */
+.card{margin:8px -4px 2px;padding:10px 12px;border-radius:12px;background:var(--raised);display:flex;align-items:center;gap:10px}
+.card .ic{color:var(--muted)}
+.card .tx{flex:1;min-width:0;font-size:var(--sub);line-height:var(--lh-sub)}
+.card .tx span{display:block;color:var(--muted);font-size:var(--foot);line-height:18px}
+html[data-t="ax5"] .card{flex-wrap:wrap}
+html[data-t="ax5"] .card .tx span{line-height:52px}
+
+/* ---------- композер (материал) ---------- */
+.comp{position:absolute;z-index:20;left:0;right:0;bottom:var(--tabH,0px);padding:8px 10px calc(8px + var(--home));display:flex;align-items:flex-end;gap:8px;
+ background:var(--mat);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-top:.5px solid var(--hair)}
+.comp.on-tabs{padding-bottom:8px;border-bottom:0}
+/* над таб-баром композер получает +12 снизу — под выступ круга Parrlo */
+.screen.has-tabs .comp.on-tabs{padding-bottom:20px}
+.screen.has-tabs .msgs{padding-bottom:calc(var(--compH) + 12px + var(--home) + var(--tabH) + 8px)}
+.field{flex:1;min-width:0;min-height:36px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 8px 0 14px}
+.field span{flex:1;min-width:0;font-size:var(--field);color:var(--muted);white-space:nowrap}
+.field .ic{color:var(--muted);width:22px;height:22px}
+html[data-t="ax5"] .field{min-height:44px;border-radius:22px}
+html[data-t="ax5"] .comp{--x:1}
+html[data-t="ax5"] .screen{--compH:60px}
+
+/* ---------- таб-бар (системный) ----------
+   49 + индикатор «домой», материал с размытием, иконки 26, подписи 10 / 500.
+   Подписи НЕ растут с Dynamic Type (на AX5 таб-бар такой же, как обычно; полный текст — через Large Content Viewer).
+   Раскладка ячейки: иконка 26 с отступом 7 сверху, зазор 2, строка подписи 12 (35…47). */
+.screen.has-tabs{--tabH:calc(49px + var(--home))}
+.tabs{position:absolute;z-index:25;left:0;right:0;bottom:0;height:calc(49px + var(--home));padding-bottom:var(--home);display:grid;grid-template-columns:repeat(5,1fr);
+ background:var(--mat);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-top:0}
+.tabs::after{border-top:.5px solid var(--hair)} /* волосяная линия — внутри 49, верх панели = верх линии */
+.tabs a{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:7px;gap:2px;color:var(--muted);text-decoration:none;font-size:var(--tab-l);font-weight:500;letter-spacing:.01em}
+.tabs a .ic{width:26px;height:26px}
+.tabs a span{display:block;line-height:12px;white-space:nowrap}
+.tabs a.on{color:var(--acc)}
+.tabs a.on .ic.fill{fill:currentColor;stroke:none}
+/* Кнопка Parrlo — поверх системной вкладки №3 (у неё самой подписи нет). Утверждено Муратом 22.11: без подписи, круг 60.
+   Круг фиксированного размера (не растёт с Dynamic Type), по центру 3-й вкладки, выступает над панелью на 12 (от верха волосяной линии).
+   Плоско: без тени, свечения, градиента и масштабирования при нажатии. */
+.tabs a.pc .disc{position:absolute;left:50%;top:-12px;width:60px;height:60px;margin-left:-30px;border-radius:50%;display:grid;place-items:center;
+ background:var(--pc-bg);border:1px solid var(--pc-bd);color:var(--pc-ic)}
+.tabs a.pc .disc .ic-parrot{width:30px;height:32px;padding:0}
+.tabs a.pc.pressed .disc{background:var(--pc-bg-p)}
+.tabs a.pc.on .disc{background:var(--pc-on);border-color:transparent;color:#fff}
+.tabs a.pc.on.pressed .disc{background:var(--pc-on-p)}
+/* бейдж непрочитанного от помощника — системный бейдж iOS; центр бейджа на окружности под 45° (справа сверху):
+   левый верхний угол бейджа (+42; 0) от угла круга; left/top отсчитаны от внутреннего края обводки 1 */
+.pc-badge{position:absolute;left:41px;top:-1px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;
+ background:#FF3B30;color:#fff;font-size:13px;font-weight:600;line-height:18px;text-align:center;letter-spacing:0;font-style:normal}
+:root{--pc-bg:#242B34;--pc-bd:#2BC48A;--pc-ic:#2BC48A;--pc-bg-p:#1C2026;--pc-on:#00875C;--pc-on-p:#006B48}
+
+/* ---------- клавиатура (S4) ---------- */
+.screen.kbd-open{--home:0px;--tabH:var(--kbH)}
+:root{--kbH:291px;--kb-bg:#2A2D33;--kb-key:#50555D;--kb-fn:#383C43;--kb-ink:#FFFFFF}
+html[data-d="se"]{--kbH:260px}
+.kb{position:absolute;z-index:22;left:0;right:0;bottom:0;height:var(--kbH);background:var(--kb-bg);color:var(--kb-ink);letter-spacing:0;padding-top:0}
+.kb-sug{height:44px;display:flex;align-items:center;font-size:15px}
+.kb-sug span{flex:1;text-align:center;white-space:nowrap}
+.kb-sug span.m1{font-weight:600}
+.kb-sug i{width:1px;height:24px;background:var(--kb-fn)}
+.kb-rows{display:flex;flex-direction:column;gap:12px;padding:8px 3px 4px}
+.kb-r{display:flex;justify-content:center;gap:5px;--kw:calc((100% - 55px) / 12)}
+.kb-r b{height:42px;width:var(--kw);border-radius:6px;background:var(--kb-key);display:grid;place-items:center;font-weight:400;font-size:22px;line-height:1}
+.kb-r b.fn{background:var(--kb-fn);font-size:16px}
+.kb-r b.fn .ic{width:22px;height:22px}
+.kb-r.r3 b.fn{flex:1}
+.kb-r.r3 b.fn:first-child{margin-right:4px}
+.kb-r.r3 b.fn:last-child{margin-left:4px}
+.kb-r.r4 b.fn{width:calc(var(--kw) * 1.55)}
+.kb-r.r4 b.ret{width:calc(var(--kw) * 2.6)}
+.kb-r.r4 b.sp{flex:1;font-size:16px}
+.kb-bot{display:none;height:35px;padding:0 22px;align-items:flex-start;justify-content:space-between;padding-top:2px}
+.kb-bot .ic{width:26px;height:26px;color:var(--kb-ink)}
+html[data-d="max"] .kb-bot{display:flex}
+html[data-d="max"] .kb-r.r4 .glb{display:none}
+.comp.typed .field span{color:var(--ink);white-space:normal;padding:7px 0;line-height:22px}
+.comp.typed .field span::after{content:"";display:inline-block;width:2px;height:20px;margin-left:1px;vertical-align:-4px;background:var(--acc)}
+.cbtn.send{background:var(--btn);color:#fff}
+
+/* ---------- список чатов ---------- */
+.head{padding-top:var(--safe-top)}
+.head .bar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.large{font-size:var(--large);font-weight:700;letter-spacing:-.02em;line-height:1.2;padding:2px 16px 0}
+.search{margin:8px 16px 10px;height:36px;border-radius:18px;background:var(--surface);display:flex;align-items:center;gap:6px;padding:0 10px;color:var(--muted);font-size:var(--field)}
+.search .ic{width:20px;height:20px}
+html[data-t="ax5"] .search{height:44px;border-radius:22px}
+.list{list-style:none}
+.row{display:flex;align-items:stretch;padding-left:16px}
+.row .av52{width:52px;height:52px;font-size:21px;margin:12px 12px 0 0}
+.row .rb{flex:1;min-width:0;padding:10px 16px 11px 0;border-bottom:.5px solid var(--hair);display:grid;grid-template-columns:1fr auto;grid-template-areas:"n t" "p x";column-gap:8px;row-gap:1px;min-height:76px}
+.row:last-child .rb{border-bottom:0}
+.row .n{grid-area:n;display:flex;align-items:center;gap:5px;min-width:0;font-size:var(--body);font-weight:600;line-height:var(--lh-body)}
+.row .n b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .n .ic{width:15px;height:15px;color:var(--muted);stroke-width:2}
+.row .n .cnt{display:inline-flex;align-items:center;gap:2px;font-size:var(--foot);font-weight:400;color:var(--muted)}
+.row .t{grid-area:t;font-size:14px;color:var(--muted);line-height:var(--lh-body);display:flex;align-items:center;gap:3px;white-space:nowrap;letter-spacing:0}
+.row .t .tick{width:17px;height:11px;stroke:var(--acc)}
+.row .p{grid-area:p;font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row .p em{font-style:normal;color:var(--ink)}
+.row .x{grid-area:x;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;padding-bottom:2px}
+.row .x .ic{width:15px;height:15px;color:var(--muted);stroke-width:2}
+.badge{min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--acc);color:#12161C;font-size:13px;font-weight:600;display:grid;place-items:center;letter-spacing:0}
+.badge.mute{background:#3A424D;color:var(--ink)}
+/* AX5: строка складывается — аватар + имя, ниже превью на всю ширину, ниже время и счётчик */
+html[data-t="ax5"] .row{display:grid;grid-template-columns:52px 1fr;column-gap:12px;align-items:center;padding:14px 16px 16px;border-bottom:.5px solid var(--hair)}
+html[data-t="ax5"] .row .av52{margin:4px 0 0;grid-row:1;grid-column:1;align-self:start}
+html[data-t="ax5"] .row .rb{display:contents}
+html[data-t="ax5"] .row .n{grid-row:1;grid-column:2}
+html[data-t="ax5"] .row .p{grid-row:2;grid-column:1/-1}
+html[data-t="ax5"] .row .t,html[data-t="ax5"] .row .x{grid-row:3;grid-column:1/-1}
+html[data-t="ax5"] .row .x{justify-self:end}
+html[data-t="ax5"] .row .n{min-height:60px;flex-wrap:wrap}
+html[data-t="ax5"] .row .n b{white-space:normal}
+html[data-t="ax5"] .row .n .ic{width:34px;height:34px}
+html[data-t="ax5"] .row .p{clear:both;display:block;padding-top:6px}
+html[data-t="ax5"] .row .t{font-size:var(--cap);line-height:52px;display:inline-flex;margin-top:4px}
+html[data-t="ax5"] .row .t .tick{width:40px;height:26px}
+html[data-t="ax5"] .row .x{display:inline-flex;vertical-align:middle;margin-left:12px;align-items:center}
+html[data-t="ax5"] .row .x .ic{width:34px;height:34px}
+html[data-t="ax5"] .row .n .cnt{font-size:var(--foot)}
+html[data-t="ax5"] .row .n .cnt .ic{width:34px;height:34px}
+html[data-t="ax5"] .badge{min-width:44px;height:44px;border-radius:22px;font-size:28px;padding:0 12px}
+
+/* ---------- меню Parrlo (поповер) ---------- */
+.scrim{position:absolute;inset:0;z-index:50;background:var(--scrim)}
+.menu{position:absolute;z-index:60;right:12px;top:calc(var(--safe-top) + 52px + 6px);width:262px;border-radius:14px;background:var(--raised);overflow:hidden;border:.5px solid var(--line)}
+.menu .it{display:flex;align-items:center;gap:12px;min-height:44px;padding:10px 16px;font-size:var(--menu);line-height:1.25;border-top:.5px solid var(--line)}
+.menu .it:first-child{border-top:0}
+.menu .it span{flex:1;min-width:0}
+.menu .it .ic{width:22px;height:22px}
+.menu .it small{font-size:var(--menu);color:var(--muted)}
+.menu .gap{height:8px;background:rgba(0,0,0,.28)}
+.menu .gap + .it{border-top:0}
+.menu .it.danger{color:var(--err)}
+html[data-t="ax5"] .menu{left:16px;right:16px;width:auto}
+html[data-t="ax5"] .menu .it{gap:16px;padding:12px 20px}
+html[data-t="ax5"] .menu .it .ic{width:34px;height:34px}
+/* AX5: время уходит отдельной строкой справа и может переноситься по словам */
+html[data-t="ax5"] .ms{display:none}
+html[data-t="ax5"] .m{position:static;display:flex;flex-wrap:wrap;justify-content:flex-end;column-gap:8px;margin-top:2px}
+html[data-t="ax5"] .dur .m{margin-top:0}
+html[data-t="ax5"] .b{max-width:90%}
+html[data-t="ax5"] .card{flex-direction:column;align-items:stretch;margin:10px -4px 4px}
+html[data-t="ax5"] .card > .ic{width:34px;height:34px}
+html[data-t="ax5"] .card .btn{height:auto;padding:8px 14px;border-radius:30px;font-size:var(--foot)}
+.b.has-card{width:78%}
+html[data-t="ax5"] .b.has-card{width:90%}
+html[data-t="ax5"] .bars{zoom:1.6}
+
+/* ---------- светлая тема: html[data-theme="light"] (?th=light) ----------
+   Селектор без html, чтобы на листе спеки тему можно было задать отдельному блоку. */
+[data-theme="light"]{color-scheme:light;
+ --bg:#F2F2F7; --surface:#FFFFFF; --raised:#E6E7EB; --ink:#0E1116; --muted:#5E6773;
+ --line:rgba(0,0,0,.12); --hair:rgba(0,0,0,.12); --acc:#00875C; --err:#D70015;
+ --own:#1F6B4E; --own-meta:rgba(255,255,255,.82); --other:#E9E9EB;
+ --mat:rgba(249,249,249,.86); --scrim:rgba(0,0,0,.20);
+ --pc-bg:#FFFFFF;--pc-bd:#00875C;--pc-ic:#00875C;--pc-bg-p:#EEF1F4;--pc-on:#00875C;--pc-on-p:#006B48;
+ --kb-bg:#D1D4DA;--kb-key:#FFFFFF;--kb-fn:#AEB3BC;--kb-ink:#0E1116}
+html[data-theme="light"],html[data-theme="light"] body{background:#D8DBE0}
+[data-theme="light"] .chip{background:rgba(255,255,255,.9)}
+[data-theme="light"] .badge{color:#fff}
+[data-theme="light"] .badge.mute{background:#D9DDE2;color:var(--ink)}
+[data-theme="light"] .card{background:#FFFFFF}
+[data-theme="light"] .menu{background:#FFFFFF}
+[data-theme="light"] .menu .gap{background:rgba(0,0,0,.06)}
+[data-theme="light"] .rx{background:rgba(0,0,0,.07)}
+[data-theme="light"] .play{background:var(--ink)}
+[data-theme="light"] .play svg{fill:#fff}
+[data-theme="light"] .bars i.r{background:rgba(14,17,22,.3)}
