@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const OUT = path.resolve(__dirname, '..');
+const { glueHtml } = require('../../tools/nbsp.js');
 
 // ---------- общие помощники (из redesign-ios/tools/build.js) ----------
 const PARROT_INNER = '<defs><mask id="pc-pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/>';
@@ -88,8 +89,8 @@ const T = {
     msgs: 'Сообщения', msgsS: 'Уведомления о новых сообщениях', calls: 'Звонки', callsS: 'Уведомления о входящих звонках', inApp: 'Внутри приложения',
     rem: 'Напоминание про Parrlo', remS: 'Одно напоминание через 24 часа, только внутри приложения, без push. Сейчас выключено: выбрано «Не напоминать». Включи, чтобы разрешить его снова.',
     pushOff: 'Отключить все push-уведомления', pushOffS: 'В системных настройках устройства',
-    blkT: 'Браузер блокирует уведомления', blkS: 'Пока ты не разрешишь их в настройках сайта, оповещений о сообщениях и звонках не будет.',
-    how: 'Как включить', steps: ['1. Нажми на значок рядом с адресом сайта.', '2. Найди «Уведомления».', '3. Выбери «Разрешить» и обнови страницу.'],
+    blkT: 'Уведомления выключены.', blkS: 'Включи их: Настройки iPhone → Parrlo → Уведомления.',
+    how: 'Как включить', steps: ['1. Настройки iPhone', '2. Parrlo', '3. Уведомления'],
     saveErr: 'Не получилось сохранить настройку', saveErrS: 'Ничего не изменилось. Проверь сеть и попробуй ещё раз.',
     aboutT: 'О приложении', legalH: 'Юридическое', terms: 'Условия использования', privacy: 'Политика конфиденциальности', op: 'Оператор',
     opT: 'Оператор: PADELADA WORLD, S.L. · NIF B05783238 · Calle Josep Pla 8, Esc. 1, Pta. 1, 17252 Calonge i Sant Antoni (Girona), España · <a>hello@parrlo.com</a>. <a>Политика конфиденциальности</a>.',
@@ -129,8 +130,8 @@ const T = {
     msgs: 'Mensajes', msgsS: 'Avisos de mensajes nuevos', calls: 'Llamadas', callsS: 'Avisos de llamadas entrantes', inApp: 'Dentro de la app',
     rem: 'Recordatorio sobre Parrlo', remS: 'Un recordatorio a las 24 horas, solo dentro de la app y sin push. Ahora está desactivado: elegiste «No recordármelo». Actívalo para permitirlo de nuevo.',
     pushOff: 'Desactivar todas las notificaciones push', pushOffS: 'En los ajustes del sistema del dispositivo',
-    blkT: 'El navegador bloquea las notificaciones', blkS: 'Mientras no las permitas en los ajustes del sitio, no habrá avisos de mensajes ni de llamadas.',
-    how: 'Cómo activarlas', steps: ['1. Pulsa el icono junto a la dirección del sitio.', '2. Busca «Notificaciones».', '3. Elige «Permitir» y recarga la página.'],
+    blkT: 'Las notificaciones están desactivadas.', blkS: 'Actívalas en Ajustes del iPhone → Parrlo → Notificaciones.',
+    how: 'Cómo activarlas', steps: ['1. Ajustes', '2. Parrlo', '3. Notificaciones'],
     saveErr: 'No se ha podido guardar el ajuste', saveErrS: 'No ha cambiado nada. Comprueba la conexión e inténtalo de nuevo.',
     aboutT: 'Acerca de', legalH: 'Aviso legal', terms: 'Condiciones de uso', privacy: 'Política de privacidad', op: 'Responsable',
     opT: 'Responsable: PADELADA WORLD, S.L. · NIF B05783238 · Calle Josep Pla 8, Esc. 1, Pta. 1, 17252 Calonge i Sant Antoni (Girona), España · <a>hello@parrlo.com</a>. <a>Política de privacidad</a>.',
@@ -170,8 +171,8 @@ const T = {
     msgs: 'Messages', msgsS: 'Notifications about new messages', calls: 'Calls', callsS: 'Notifications about incoming calls', inApp: 'Inside the app',
     rem: 'Reminder about Parrlo', remS: 'One reminder after 24 hours, only inside the app, no push. It’s off now: you chose “Don’t remind me”. Turn it on to allow it again.',
     pushOff: 'Turn off all push notifications', pushOffS: 'In the device’s system settings',
-    blkT: 'Your browser is blocking notifications', blkS: 'Until you allow them in the site settings, there won’t be alerts about messages and calls.',
-    how: 'How to turn them on', steps: ['1. Click the icon next to the site address.', '2. Find “Notifications”.', '3. Choose “Allow” and reload the page.'],
+    blkT: 'Notifications are off.', blkS: 'Turn them on in iPhone Settings → Parrlo → Notifications.',
+    how: 'How to turn them on', steps: ['1. Settings', '2. Parrlo', '3. Notifications'],
     saveErr: 'Couldn’t save the setting', saveErrS: 'Nothing has changed. Check your connection and try again.',
     aboutT: 'About', legalH: 'Legal', terms: 'Terms of Use', privacy: 'Privacy Policy', op: 'Operator',
     opT: 'Controller: PADELADA WORLD, S.L. · NIF B05783238 · Calle Josep Pla 8, Esc. 1, Pta. 1, 17252 Calonge i Sant Antoni (Girona), España · <a>hello@parrlo.com</a>. <a>Privacy Policy</a>.',
@@ -281,23 +282,32 @@ var l=q.get('l');if(l!=='es'&&l!=='en')l='ru';h.lang=l;
 document.addEventListener('DOMContentLoaded',function(){var tp=document.querySelector('template[data-l="'+l+'"]');var s=document.querySelector('.screen');
 s.insertBefore(tp.content.cloneNode(true),s.querySelector('.home-ind'));
 document.fonts.ready.then(function(){
+ // раскладка → WordFit (склеенная цепочка «con las que hablas» считается одним словом: шрифт блока уменьшается, пока
+ // цепочка не поместится в строку, не ниже 28) → unglue (снимает склейку только там, где цепочка не влезает и на 28).
+ // Иначе unglue рвёт цепочку и короткое слово повисает, хотя на меньшем шрифте пара бы поместилась.
  var own=function(e){for(var n=e.firstChild;n;n=n.nextSibling)if(n.nodeType===3&&n.textContent.trim())return true;return false};
  var els=[].slice.call(s.querySelectorAll('*')).filter(function(e){return own(e)&&getComputedStyle(e).display!=='inline'&&!e.closest('.tabs,.sb')});
- var over=function(e){var b=e.closest('.nw')?e.parentElement:e;return e.scrollWidth>e.clientWidth+1};
+ // не помещается: блок шире своего бокса или слово / склеенная цепочка шире строки (вылезает и в поле padding)
+ var rg=document.createRange();
+ var over=function(e){if(e.scrollWidth>e.clientWidth+1)return true;var cs=getComputedStyle(e),a=e.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  var w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT),n,m;while((n=w.nextNode())){var re=/[^ \t\n]+/g;while((m=re.exec(n.textContent))){
+   rg.setStart(n,m.index);rg.setEnd(n,m.index+m[0].length);var ww=0;[].forEach.call(rg.getClientRects(),function(r){ww+=r.width});if(ww>a+0.5)return true}}return false};
  els.forEach(function(e){var fs=parseFloat(getComputedStyle(e).fontSize),n=0;
   while(over(e)&&fs>28&&n<20){fs=Math.max(28,fs*0.92);e.style.fontSize=fs+'px';e.style.lineHeight='1.2';n++}
   if(n)e.dataset.fit=n});
+ if(window.unglue)window.unglue();
  document.body.dataset.ready='1';});});})()`;
 
 const page = (key, sc) => `<!doctype html>
 <html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${T.ru[{ settings: 'settings', plans: 'plans', usage: 'usage' }[key] || 'settings']} — ${key}</title><link rel="stylesheet" href="../rd.css"><link rel="stylesheet" href="settings.css">
 <script>${RUNTIME}</script>
+<script src="../tools/unglue.js"></script>
 </head><body><main class="screen${sc.tabs ? ' has-tabs' : ''}" data-screen="${key}">
 ${statusBar()}
 <i class="home-ind"></i>
 </main>
-${['ru', 'es', 'en'].map(l => `<template data-l="${l}">${sc.body(T[l], l)}</template>`).join('\n')}
+${['ru', 'es', 'en'].map(l => glueHtml(`<template data-l="${l}" lang="${l}">${sc.body(T[l], l)}</template>`, l)).join('\n')}
 </body></html>
 `;
 
