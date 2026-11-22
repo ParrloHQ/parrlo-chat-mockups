@@ -19,7 +19,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:max(var(--tap),calc(var(--btn-h)*(1 + (var(--ts-c) - 1)*.25)));padding:12px 24px;border-radius:var(--r-pill);
  background:var(--btn);color:var(--on-btn);font:var(--fw-semi) var(--t-btn)/1.2 var(--font);text-align:center;transition:background var(--dur-fast),transform var(--dur-fast)}
 .pc-btn:hover,.pc-btn.is-hover{background:var(--btn-hover)}
-.pc-btn:active,.pc-btn.is-pressed{background:var(--btn-press);transform:scale(.98)}
+.pc-btn:active,.pc-btn.is-pressed{background:var(--btn-press)}
 .pc-btn:focus-visible,.pc-btn.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
 .pc-btn:disabled,.pc-btn.is-disabled{background:var(--disabled-bg);color:var(--disabled-ink);transform:none;cursor:not-allowed}
 .pc-btn--glass{background:var(--glass);color:var(--ink)}
@@ -30,7 +30,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-btn--text:active,.pc-btn--text.is-pressed{background:var(--press);transform:none}
 .pc-btn--s{min-height:var(--tap);padding:8px 18px;width:auto}
 .pc-ibtn{display:grid;place-items:center;width:var(--icon-btn);height:var(--icon-btn);min-width:var(--tap);min-height:var(--tap);border-radius:50%;background:var(--glass);color:var(--ink);font-size:22px;flex:none}
-.pc-ibtn:hover,.pc-ibtn.is-hover{background:#3E4548}.pc-ibtn:active,.pc-ibtn.is-pressed{background:#2B3033;transform:scale(.96)}
+.pc-ibtn:hover,.pc-ibtn.is-hover{background:#3E4548}.pc-ibtn:active,.pc-ibtn.is-pressed{background:#2B3033}
 .pc-ibtn:focus-visible,.pc-ibtn.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
 .pc-ibtn--plain{background:none}.pc-ibtn--plain:hover{background:var(--hover)}
 .pc-ibtn--mic{background:var(--btn);color:var(--on-btn);width:52px;height:52px}.pc-ibtn--mic:hover{background:var(--btn-hover)}
@@ -133,7 +133,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;width:calc(100% - 2*var(--gutter));margin:0 var(--gutter);padding:6px 8px 14px;border-radius:var(--r-lg);min-height:var(--tap);text-align:center;cursor:pointer}
 .pc-stage:hover,.pc-stage.is-hover{background:var(--hover)}.pc-stage:active,.pc-stage.is-pressed{background:var(--press)}
 .pc-stage:focus-visible,.pc-stage.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
-.pc-stage::before{content:"";position:absolute;left:50%;top:-30px;width:300px;height:300px;margin-left:-150px;background:radial-gradient(closest-side,rgba(0,168,107,.20),rgba(0,168,107,0));pointer-events:none}
+/* свечение под кнопкой-сценой убрано: все кнопки плоские (решение Мурата 22.11) */
 .pc-stage .pw{position:relative;margin-bottom:8px}
 .pc-stage .pc-persona{--s:var(--i-stage);position:relative}
 .pc-stage .pin{position:absolute;right:calc(var(--i-stage)*.02);bottom:calc(var(--i-stage)*.02);width:calc(28px*(1 + (var(--ts-i) - 1)*.5));height:calc(28px*(1 + (var(--ts-i) - 1)*.5));border-radius:50%;background:var(--beak);color:var(--ink-0);display:grid;place-items:center;font-size:calc(15px*(1 + (var(--ts-i) - 1)*.5));box-shadow:0 0 0 3px var(--bg)}
