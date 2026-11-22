@@ -19,7 +19,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:max(var(--tap),calc(var(--btn-h)*(1 + (var(--ts-c) - 1)*.25)));padding:12px 24px;border-radius:var(--r-pill);
  background:var(--btn);color:var(--on-btn);font:var(--fw-semi) var(--t-btn)/1.2 var(--font);text-align:center;transition:background var(--dur-fast),transform var(--dur-fast)}
 .pc-btn:hover,.pc-btn.is-hover{background:var(--btn-hover)}
-.pc-btn:active,.pc-btn.is-pressed{background:var(--btn-press);transform:scale(.98)}
+.pc-btn:active,.pc-btn.is-pressed{background:var(--btn-press)}
 .pc-btn:focus-visible,.pc-btn.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
 .pc-btn:disabled,.pc-btn.is-disabled{background:var(--disabled-bg);color:var(--disabled-ink);transform:none;cursor:not-allowed}
 .pc-btn--glass{background:var(--glass);color:var(--ink)}
@@ -30,7 +30,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-btn--text:active,.pc-btn--text.is-pressed{background:var(--press);transform:none}
 .pc-btn--s{min-height:var(--tap);padding:8px 18px;width:auto}
 .pc-ibtn{display:grid;place-items:center;width:var(--icon-btn);height:var(--icon-btn);min-width:var(--tap);min-height:var(--tap);border-radius:50%;background:var(--glass);color:var(--ink);font-size:22px;flex:none}
-.pc-ibtn:hover,.pc-ibtn.is-hover{background:#3E4548}.pc-ibtn:active,.pc-ibtn.is-pressed{background:#2B3033;transform:scale(.96)}
+.pc-ibtn:hover,.pc-ibtn.is-hover{background:#3E4548}.pc-ibtn:active,.pc-ibtn.is-pressed{background:#2B3033}
 .pc-ibtn:focus-visible,.pc-ibtn.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
 .pc-ibtn--plain{background:none}.pc-ibtn--plain:hover{background:var(--hover)}
 .pc-ibtn--mic{background:var(--btn);color:var(--on-btn);width:52px;height:52px}.pc-ibtn--mic:hover{background:var(--btn-hover)}
@@ -73,6 +73,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-hero .pc-title,.pc-hero .pc-lead{position:relative}
 .pc-hero .pc-lead{margin-top:0}
 .pc-hero-text{display:flex;flex-direction:column;gap:12px}
+/* блок текста приветствия не шире колонки (иначе склеенная группа раздвигает его за край) */
+.pc-hero-text{max-width:100%}
 .pc-hero-text .pc-lead{margin-top:0}
 /* список выбора языка */
 .pc-radios{display:flex;flex-direction:column;gap:8px;list-style:none}
@@ -131,7 +133,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;width:calc(100% - 2*var(--gutter));margin:0 var(--gutter);padding:6px 8px 14px;border-radius:var(--r-lg);min-height:var(--tap);text-align:center;cursor:pointer}
 .pc-stage:hover,.pc-stage.is-hover{background:var(--hover)}.pc-stage:active,.pc-stage.is-pressed{background:var(--press)}
 .pc-stage:focus-visible,.pc-stage.is-focus{outline:var(--focus-w) solid var(--focus);outline-offset:var(--focus-off)}
-.pc-stage::before{content:"";position:absolute;left:50%;top:-30px;width:300px;height:300px;margin-left:-150px;background:radial-gradient(closest-side,rgba(0,168,107,.20),rgba(0,168,107,0));pointer-events:none}
+/* свечение под кнопкой-сценой убрано: все кнопки плоские (решение Мурата 22.11) */
 .pc-stage .pw{position:relative;margin-bottom:8px}
 .pc-stage .pc-persona{--s:var(--i-stage);position:relative}
 .pc-stage .pin{position:absolute;right:calc(var(--i-stage)*.02);bottom:calc(var(--i-stage)*.02);width:calc(28px*(1 + (var(--ts-i) - 1)*.5));height:calc(28px*(1 + (var(--ts-i) - 1)*.5));border-radius:50%;background:var(--beak);color:var(--ink-0);display:grid;place-items:center;font-size:calc(15px*(1 + (var(--ts-i) - 1)*.5));box-shadow:0 0 0 3px var(--bg)}
@@ -874,11 +876,12 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* AX5: выключатель под текстом, как в iOS при крупном шрифте — заголовок строки помещается целиком, без разрыва слова (решение 19.11). Только узкие колонки; на десктопе места хватает */
 /* узкий экран (SE): у шапки чата зазор 8 — заголовок группы не рвётся внутри слова */
 @container (max-width:399px){.pc-pp-bar{gap:8px}}
+@container (max-width:369px){.pc-pp-bar{gap:4px}}
 @container (max-width:699px){
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow>div{flex:1 1 100%}
- /* баннер при AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
- .pc-frame[data-ts=ax5] .pc-banner>.ico{display:none}
+ /* баннер при XL/AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-banner>.ico{display:none}
  /* AX5, узкий экран: колонка с полями 16, а списки, строки и баннеры — во всю ширину экрана без скругления (как простой список iOS).
     Текст строки получает ширину экрана − 32: слово уже этого больше не рвётся */
  /* шеврон строки настроек при XL/AX5 на узком экране: не растёт (16 px, как в iOS) и стоит у первой строки справа — признак перехода сохраняется */
@@ -886,12 +889,19 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-onb-col{padding-inline:16px}
  /* поля даты при XL/AX5 на узком экране — друг под другом (день, месяц, год), каждое во всю ширину */
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-datefields{flex-direction:column}
+ /* пункты «можно / нельзя» (.pc-chk) при AX5 на узком экране: отметка над текстом, текст на всю ширину */
+ .pc-frame[data-ts=ax5] .pc-chk li{flex-wrap:wrap;row-gap:6px}
+ .pc-frame[data-ts=ax5] .pc-chk li>:not(.m){flex:1 1 100%}
+ /* заголовок диалога при XL/AX5 растёт не больше чем в 1,4 раза (как .pc-title): длинное слово с «?» влезает целиком */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-alert h2{font-size:min(var(--t-lead),calc(var(--fs-lead)*1.4))}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-datefields .pc-field{flex:none}
  /* диалог при AX5 на узком экране: почти во всю ширину (поля 8), внутренние поля 16; строка с выключателем в нём — без своих полей */
  .pc-frame[data-ts=ax5] .pc-alert{width:calc(100% - 16px);padding:16px}
  .pc-frame[data-ts=ax5] .pc-alert .pc-switchrow{padding-inline:12px}
  .pc-frame[data-ts=ax5] :is(.pc-onb-scroll,.pc-onb-body){margin-inline:-16px;padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-setlist,.pc-radios,.pc-checks,.pc-facts,.pc-switchrow,.pc-banner,.pc-reportform>div>.pc-check,.pc-reportform>div>.pc-radio){margin-inline:-16px;border-radius:0}
+ /* пункты согласия во всю ширину: у самого пункта своих полей нет — поле экрана 16 даёт список */
+ .pc-frame[data-ts=ax5] .pc-onb-body .pc-facts{padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body .pc-ph{margin-inline:-16px;padding-inline:16px;border-inline:0;border-radius:0;max-width:none}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>*>:is(.pc-radio,.pc-check),.pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>:is(.pc-radio,.pc-check){border-radius:0}
  /* строка настроек при XL/AX5: значок и шеврон — первой строкой, текст на всю ширину под ними, значение — ниже */
@@ -906,3 +916,6 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:is(.t,.tx,div){order:2;flex:1 1 100%}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:not(.ico,.mk,.bx,.pc-av,.pc-persona,.t,.tx,div){order:3}
 }
+/* XL: список настроек во всю ширину экрана, как на AX5 — иначе «конфиденциальности» не помещается даже на нижнем пределе WordFit (SE, 360) */
+.pc-frame[data-ts=xl] :is(.pc-onb-scroll:has(.pc-onb-body>.pc-setlist),.pc-onb-body:has(>.pc-setlist)){margin-inline:-16px;padding-inline:16px}
+.pc-frame[data-ts=xl] .pc-onb-body>.pc-setlist{margin-inline:-16px;border-radius:0}

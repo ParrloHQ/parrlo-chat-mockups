@@ -1,0 +1,299 @@
+/* Parrlo Chat — редизайн iOS · пакет «листы, диалоги, контекстные меню, ошибки».
+   Подключается после ../rd.css; токены и базовые компоненты — оттуда. */
+
+/* ---------- язык: на странице три экрана (ru/es/en), виден один ---------- */
+html[data-l="ru"] .screen:not([data-l="ru"]),
+html[data-l="es"] .screen:not([data-l="es"]),
+html[data-l="en"] .screen:not([data-l="en"]){display:none}
+
+:root{
+ /* диалог */
+ --dlg-t:20px; --dlg-b:15px; --dlg-lh:20px; --dbtn:17px;
+ /* лист: строки и текст — потолок как у меню (34 на AX5) */
+ --cell:17px; --cell-s:15px; --cell-lh:22px; --cell-s-lh:20px;
+ --sh-title:28px;
+ --tbd-ink:#FFC247;
+ --err-fill:#C4302B; /* «Удалить чат»: белый 5,62:1 */
+ --switch-on:#00875C; --switch-off:#3A424D;
+ --ctx-bg:rgba(36,43,52,.94);
+}
+html[data-t="ax5"]{
+ --dlg-t:44px; --dlg-b:40px; --dlg-lh:50px; --dbtn:34px;
+ --cell:34px; --cell-s:30px; --cell-lh:42px; --cell-s-lh:38px;
+ --sh-title:48px;
+}
+
+/* «не утверждено» — жёлтая пунктирная капсула, как в старых кадрах */
+.tbd{display:inline-block;padding:1px 8px;border-radius:999px;border:1px dashed var(--tbd-ink);color:var(--tbd-ink);
+ background:rgba(255,194,71,.08);font-size:var(--foot);font-weight:500;line-height:1.35;letter-spacing:0;white-space:normal;vertical-align:baseline}
+.tbd.blk{display:table;margin-top:6px;border-radius:10px;padding:3px 10px;max-width:100%}
+html[data-t="ax5"] .tbd{font-size:28px;border-radius:24px;padding:2px 12px}
+
+/* ---------- затемнение ---------- */
+.scrim{z-index:50}
+.scrim.dim{background:rgba(0,0,0,.45)}
+
+/* ---------- лист iOS 26 ---------- */
+.sheet{position:absolute;z-index:60;left:0;right:0;bottom:0;display:flex;flex-direction:column;background:var(--surface);
+ border-radius:34px 34px 0 0;border-top:.5px solid var(--line);padding-bottom:var(--home);max-height:calc(var(--H) - var(--safe-top) - 10px)}
+.sheet.detent-l{top:calc(var(--safe-top) + 10px)}
+.grab{flex:none;width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.28);margin:5px auto 0}
+.sh-bar{flex:none;position:relative;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.sh-bar .st{position:absolute;left:96px;right:96px;text-align:center;font-size:var(--nav-t);font-weight:600;line-height:1.2;letter-spacing:-.02em}
+.sh-bar .pbtn{font-size:var(--bar-btn)}
+.pbtn.acc{background:var(--btn);color:#fff;font-weight:600}
+.sh-body{flex:1;min-height:0;overflow:auto;padding:4px 16px 20px;scrollbar-width:none}
+.sh-body::-webkit-scrollbar{display:none}
+.sh-foot{flex:none;padding:12px 16px 16px;display:flex;flex-direction:column;gap:8px;border-top:.5px solid var(--hair)}
+.sh-lead{font-size:var(--cell-s);line-height:var(--cell-s-lh);color:var(--muted);margin:0 4px 14px}
+.sh-h1{font-size:var(--sh-title);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin:4px 4px 18px}
+.sh-sec{font-size:var(--foot);font-weight:600;color:var(--muted);margin:22px 16px 8px;line-height:1.35}
+.sh-p{font-size:var(--cell-s);line-height:var(--cell-s-lh);color:var(--ink);margin:0 4px 10px}
+.sh-p.mut{color:var(--muted)}
+html[data-t="ax5"] .sh-sec{font-size:30px}
+
+/* сгруппированные ячейки */
+.cells{border-radius:16px;background:var(--raised);overflow:hidden}
+.cell{display:flex;align-items:center;gap:12px;min-height:48px;padding:11px 16px;border-top:.5px solid var(--line);font-size:var(--cell);line-height:var(--cell-lh)}
+.cell:first-child{border-top:0}
+.cell .tx{flex:1;min-width:0}
+.cell .tx small{display:block;font-size:var(--cell-s);line-height:var(--cell-s-lh);color:var(--muted);margin-top:2px}
+.cell .ic{width:22px;height:22px;color:var(--muted)}
+.cell.link{color:var(--acc)}
+.cell.link .ic{color:var(--muted)}
+.cell .ic.chev{width:18px;height:18px}
+html[data-t="ax5"] .cell{gap:16px;padding:14px 18px}
+html[data-t="ax5"] .cell .ic{width:34px;height:34px}
+html[data-t="ax5"] .cell.sw{flex-wrap:wrap}
+html[data-t="ax5"] .cell.sw .tx{flex-basis:100%}
+/* переключатель iOS 51×31 */
+.switch{flex:none;width:51px;height:31px;border-radius:16px;background:var(--switch-off);position:relative}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff}
+.switch.on{background:var(--switch-on)}
+.switch.on::after{left:22px}
+html[data-t="ax5"] .switch{zoom:1.4}
+/* радио и галочка */
+.radio{flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--muted)}
+.radio.on{border:7px solid var(--acc)}
+.chk{flex:none;width:24px;height:24px;border-radius:7px;border:1.5px solid var(--muted);display:grid;place-items:center;align-self:flex-start;margin-top:0}
+.chk.on{background:var(--btn);border-color:var(--btn);color:#fff}
+.chk .ic{width:16px;height:16px;color:#fff;stroke-width:2.4}
+html[data-t="ax5"] .radio,html[data-t="ax5"] .chk{width:38px;height:38px}
+html[data-t="ax5"] .radio.on{border-width:11px}
+html[data-t="ax5"] .chk .ic{width:26px;height:26px}
+.cell.top{align-items:flex-start}
+.cell.top .chk{margin-top:0}
+/* поле ввода */
+.tarea{min-height:96px;border-radius:16px;background:var(--raised);border:1px solid var(--line)}
+.flbl{font-size:var(--cell-s);line-height:var(--cell-s-lh);color:var(--muted);margin:16px 4px 8px}
+/* набор сообщений для модератора */
+.rep .cell{align-items:center}
+.rep .who{display:block;font-size:var(--foot);color:var(--muted);line-height:1.35}
+html[data-t="ax5"] .rep .who{font-size:30px}
+.rep .rm{flex:none;width:28px;height:28px;border-radius:50%;background:var(--surface);display:grid;place-items:center;color:var(--muted)}
+.rep .rm .ic{width:16px;height:16px;color:var(--muted)}
+.rep .cell.hl{background:rgba(255,255,255,.05)}
+html[data-t="ax5"] .rep .rm{width:44px;height:44px}
+html[data-t="ax5"] .rep .rm .ic{width:26px;height:26px}
+
+/* кнопки во всю ширину: плоские */
+.fbtn{display:flex;align-items:center;justify-content:center;text-align:center;min-height:50px;padding:12px 20px;border-radius:25px;
+ font-size:var(--dbtn);font-weight:600;line-height:1.25;background:var(--raised);color:var(--ink);border:0}
+.fbtn.primary{background:var(--btn);color:#fff}
+.fbtn.danger{background:var(--err-fill);color:#fff}
+.fbtn.text{background:transparent;color:var(--acc);min-height:44px}
+html[data-t="ax5"] .fbtn{min-height:68px;border-radius:34px;padding:12px 24px}
+
+/* ---------- лист «Отправить фото» ---------- */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:92px;padding:12px 6px;border-radius:18px;background:var(--raised);
+ font-size:var(--cell-s);font-weight:500;line-height:1.25;text-align:center}
+.tile .ic{width:28px;height:28px;color:var(--acc)}
+html[data-t="ax5"] .tiles{grid-template-columns:1fr}
+html[data-t="ax5"] .tile{flex-direction:row;justify-content:flex-start;gap:18px;min-height:76px;padding:12px 20px;font-size:var(--cell)}
+html[data-t="ax5"] .tile .ic{width:40px;height:40px}
+.lim{font-size:var(--cell-s);line-height:var(--cell-s-lh);color:var(--muted);text-align:center;margin:14px 8px 0}
+
+/* «Жалоба получена» */
+.okmark{width:64px;height:64px;border-radius:50%;background:var(--btn);color:#fff;display:grid;place-items:center;margin:8px auto 16px}
+.okmark .ic{width:34px;height:34px;stroke-width:2.2}
+.center{text-align:center}
+html[data-t="ax5"] .okmark{width:88px;height:88px}
+html[data-t="ax5"] .okmark .ic{width:48px;height:48px}
+
+/* ---------- наш диалог (.pc-alert): радиус 28, рамка 1px ---------- */
+.dlg-wrap{position:absolute;z-index:60;left:0;right:0;top:var(--safe-top);bottom:var(--home);display:flex;align-items:center;justify-content:center;padding:16px 24px}
+.dlg{width:100%;max-width:340px;max-height:100%;display:flex;flex-direction:column;border-radius:28px;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.dlg-body{flex:1 1 auto;min-height:0;overflow:auto;padding:24px 22px 4px;text-align:center;position:relative;scrollbar-width:none}
+.dlg-body::-webkit-scrollbar{display:none}
+.dlg h2{font-size:var(--dlg-t);font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.dlg p{font-size:var(--dlg-b);line-height:var(--dlg-lh);color:var(--muted);margin-top:8px}
+.dlg .tbd{margin-top:8px}
+.dlg-btns{flex:none;display:flex;flex-direction:column;gap:8px;padding:16px 16px 16px}
+.dlg.scrolls .dlg-btns{border-top:1px solid var(--line)}
+/* индикатор прокрутки iOS: виден, когда текст не помещается */
+.sbar{position:absolute;right:4px;width:4px;border-radius:2px;background:rgba(255,255,255,.35);display:none}
+.dlg.scrolls .sbar{display:block}
+html[data-t="ax5"] .dlg-wrap{padding:12px 12px}
+html[data-t="ax5"] .dlg{max-width:none}
+html[data-t="ax5"] .dlg-body{padding:24px 20px 12px}
+
+/* ---------- контекстное меню iOS ---------- */
+.ctx-blur{position:absolute;inset:0;z-index:50;background:rgba(10,13,17,.42);-webkit-backdrop-filter:saturate(140%) blur(22px);backdrop-filter:saturate(140%) blur(22px)}
+.ctx{position:absolute;z-index:60;left:0;right:0;top:var(--safe-top);bottom:var(--home);display:flex;flex-direction:column;justify-content:center;gap:10px;padding:12px 16px}
+.ctx .pv{display:flex;flex-direction:column;align-items:flex-start;padding:0 0 0 0}
+.ctx .pv .b{max-width:85%}
+.ctx-menu{width:250px;border-radius:20px;background:var(--ctx-bg);overflow:hidden;border:.5px solid var(--line)}
+.ctx-menu .it{display:flex;align-items:center;gap:12px;min-height:44px;padding:11px 16px;font-size:var(--menu);line-height:1.25;border-top:.5px solid var(--line)}
+.ctx-menu .it:first-child{border-top:0}
+.ctx-menu .it span{flex:1;min-width:0}
+.ctx-menu .it .ic{width:22px;height:22px}
+.ctx-menu .it.danger{color:var(--err)}
+.ctx-menu .hd{padding:10px 16px 6px;font-size:var(--foot);color:var(--muted);line-height:1.35}
+html[data-t="ax5"] .ctx-menu{width:auto;align-self:stretch}
+html[data-t="ax5"] .ctx-menu .it{gap:16px;padding:12px 20px}
+html[data-t="ax5"] .ctx-menu .it .ic{width:34px;height:34px}
+html[data-t="ax5"] .ctx .pv .b{max-width:100%}
+/* превью чата (долгое нажатие на строку списка) */
+.chatpv{position:relative;align-self:stretch;height:46%;border-radius:22px;overflow:hidden;background:var(--bg);border:.5px solid var(--line)}
+.chatpv .pv-nav{position:absolute;z-index:2;left:0;right:0;top:0;height:52px;display:flex;align-items:center;gap:10px;padding:0 14px;background:var(--mat);border-bottom:.5px solid var(--hair)}
+.chatpv .pv-nav b{font-size:var(--nav-t);font-weight:600}
+.chatpv .msgs{padding:60px 8px 10px;justify-content:flex-start}
+
+/* ---------- облачка: подписи перевода, ошибка отправки ---------- */
+.trc{display:block;margin-top:6px;font-size:var(--cap);line-height:16px;color:var(--muted);letter-spacing:0}
+.trc .ic{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:4px}
+.trc a{color:var(--acc);text-decoration:none;font-weight:600;white-space:nowrap}
+.out .trc{color:var(--own-meta)}
+html[data-t="ax5"] .trc{line-height:48px}
+html[data-t="ax5"] .trc .ic{width:34px;height:34px;vertical-align:-6px}
+.nm{display:block;font-size:var(--foot);font-weight:600;line-height:18px;margin-bottom:2px}
+html[data-t="ax5"] .nm{line-height:52px}
+.sys{align-self:center;margin:10px 16px 2px;font-size:var(--foot);color:var(--muted);text-align:center;line-height:1.35}
+.sys a{color:var(--acc);font-weight:600;text-decoration:none}
+.note-card{align-self:stretch;margin:10px 8px 4px;padding:12px 14px;border-radius:16px;background:var(--raised);font-size:var(--sub);line-height:var(--lh-sub)}
+.note-card b{display:block;font-weight:600;font-size:var(--sub)}
+.note-card p{color:var(--muted)}
+.note-card .lnk{display:inline-block;margin-top:8px;color:var(--acc);font-weight:600}
+/* полоска группового звонка под навбаром */
+.callbar{position:absolute;z-index:19;left:0;right:0;top:calc(var(--safe-top) + 52px);display:flex;align-items:center;gap:10px;padding:8px 12px 8px 16px;background:var(--mat);border-bottom:.5px solid var(--hair)}
+.callbar .tx{flex:1;min-width:0;font-size:var(--foot);line-height:1.3}
+.callbar .tx b{display:block;font-weight:600}
+.callbar .tx span{color:var(--muted)}
+.callbar .btn{flex:none}
+html[data-t="ax5"] .callbar{flex-wrap:wrap}
+html[data-t="ax5"] .callbar .btn{height:auto;padding:8px 16px;border-radius:30px;font-size:30px}
+/* ошибка отправки */
+.fail{display:flex;align-items:flex-end;gap:6px;margin-right:6px}
+.fail .b{margin-right:0!important}
+.fail .bang{flex:none;width:22px;height:22px;border-radius:50%;background:var(--err-fill);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:700;line-height:1;margin-bottom:2px}
+html[data-t="ax5"] .fail .bang{width:44px;height:44px;font-size:30px}
+.failrow{align-self:flex-end;display:flex;flex-wrap:wrap;justify-content:flex-end;column-gap:14px;row-gap:2px;margin:4px 14px 0 0;font-size:var(--foot);line-height:1.4}
+.failrow .st{color:var(--err);font-weight:600}
+.failrow a{color:var(--acc);font-weight:600;text-decoration:none}
+.failhint{align-self:flex-end;max-width:78%;margin:6px 14px 0 0;text-align:right;font-size:var(--foot);line-height:1.4;color:var(--muted)}
+html[data-t="ax5"] .failhint{max-width:100%;margin-left:16px}
+/* неподдерживаемое сообщение */
+.unsup{font-style:italic;color:var(--muted)}
+.b .btn.inb{margin-top:10px}
+html[data-t="ax5"] .b .btn.inb{height:auto;padding:8px 16px;border-radius:32px;font-size:var(--foot)}
+
+/* ---------- черновик Parrlo ---------- */
+.draft .h{font-size:var(--foot);font-weight:600;color:var(--muted);line-height:1.35}
+.draft .to{display:flex;align-items:center;gap:10px;margin:10px 0}
+.draft .to .av{width:32px;height:32px;font-size:14px}
+.draft .to .lb{display:block;font-size:var(--cap);color:var(--muted);line-height:1.3}
+.draft .to b{font-size:var(--sub);font-weight:600;line-height:1.3}
+.draft .txt{padding:10px 12px;border-radius:12px;background:var(--surface);font-size:var(--body);line-height:var(--lh-body)}
+.draft .txt.edit{border:1.5px solid var(--acc)}
+.draft .txt.edit::after{content:"";display:inline-block;width:2px;height:20px;margin-left:1px;vertical-align:-4px;background:var(--acc)}
+.draft .stl{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:var(--foot);font-weight:600;color:var(--tbd-ink);line-height:1.35}
+.draft .stl i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--tbd-ink)}
+.draft .s{font-size:var(--foot);color:var(--muted);line-height:1.35;margin-top:4px}
+.draft .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.draft .acts .btn.text{background:transparent;border-color:transparent;color:var(--acc)}
+html[data-t="ax5"] .draft .to .av{width:56px;height:56px;font-size:26px}
+html[data-t="ax5"] .draft .txt.edit::after{height:50px;vertical-align:-10px}
+html[data-t="ax5"] .draft .acts{flex-direction:column}
+html[data-t="ax5"] .draft .acts .btn{height:auto;min-height:60px;padding:8px 16px;border-radius:32px;font-size:var(--foot)}
+html[data-t="ax5"] .draft .stl i{width:16px;height:16px}
+.b.draft{width:86%}
+html[data-t="ax5"] .b.draft{width:92%}
+.field.wrap span{white-space:normal;line-height:1.25;padding:7px 0}
+
+/* ---------- список чатов: баннер «Нет сети» ---------- */
+.banner{display:flex;gap:12px;margin:0 16px 8px;padding:12px 14px;border-radius:16px;background:var(--raised);font-size:var(--sub);line-height:var(--lh-sub)}
+.banner > .ic{color:var(--tbd-ink);width:22px;height:22px;margin-top:1px}
+.banner b{display:block;font-weight:600}
+.banner p{color:var(--ink)}
+html[data-t="ax5"] .banner{flex-direction:column}
+html[data-t="ax5"] .banner > .ic{width:40px;height:40px}
+.menu .hd{padding:10px 16px 6px;font-size:var(--foot);color:var(--muted);line-height:1.35}
+.menu .hd + .it{border-top:.5px solid var(--line)}
+.menu.left-ic .it .ic{color:var(--ink)}
+.menu.anchor{top:calc(var(--safe-top) + 44px + 4px);right:12px}
+
+/* ---------- просмотр фото и предпросмотр (тёмный полноэкранный) ---------- */
+.screen.black{background:#000}
+.pv-top{position:absolute;z-index:20;left:0;right:0;top:0;padding-top:var(--safe-top);background:rgba(0,0,0,.55);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.pv-top .bar{height:52px;display:flex;align-items:center;gap:10px;padding:0 12px}
+.pv-top .who{flex:1;min-width:0;line-height:1.2}
+.pv-top .who b{display:block;font-size:var(--nav-t);font-weight:600}
+.pv-top .who span{font-size:var(--nav-s);color:var(--muted)}
+.pv-top .ttl{flex:1;text-align:center;font-size:var(--nav-t);font-weight:600}
+.photo{position:absolute;left:0;right:0;top:calc(var(--safe-top) + 52px);height:calc(var(--W) * .78)}
+.photo svg{width:100%;height:100%}
+.hint{position:absolute;z-index:5;left:50%;transform:translateX(-50%);top:calc(var(--safe-top) + 52px + var(--W) * .78 - 30px);width:max-content;max-width:calc(100% - 32px);
+ padding:8px 14px;border-radius:16px;background:rgba(36,43,52,.92);font-size:var(--foot);line-height:1.45;color:var(--ink)}
+.hint .ic{display:inline-block;width:15px;height:15px;vertical-align:-3px;margin-right:6px;color:var(--muted)}
+.capt{position:absolute;left:0;right:0;bottom:calc(var(--home) + 64px);padding:12px 16px 14px;font-size:var(--sub);line-height:var(--lh-sub);background:linear-gradient(transparent,rgba(0,0,0,.0))}
+.capt .trc{margin:0 0 4px}
+.capt .lbo{display:block;margin-top:8px;font-size:var(--cap);font-weight:600;color:var(--muted);line-height:16px}
+.capt .o{color:var(--muted)}
+html[data-t="ax5"] .capt .lbo{line-height:48px}
+.pv-bot{position:absolute;z-index:20;left:0;right:0;bottom:0;padding-bottom:var(--home);display:grid;grid-template-columns:repeat(3,1fr);
+ background:rgba(0,0,0,.6);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border-top:.5px solid var(--hair)}
+.pv-bot a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 8px;min-height:56px;color:var(--ink);font-size:11px;font-weight:500;text-align:center;line-height:1.2;letter-spacing:0}
+.pv-bot a .ic{width:24px;height:24px}
+.pv-bot a.danger{color:var(--err)}
+html[data-t="ax5"] .hint{top:auto;bottom:calc(var(--home) + 64px + 8px);position:absolute}
+/* предпросмотр перед отправкой */
+.pp-img{position:absolute;left:12px;right:12px;top:calc(var(--safe-top) + 56px);bottom:calc(var(--home) + 150px);border-radius:18px;overflow:hidden}
+.pp-img svg{width:100%;height:100%}
+.thumbs{position:absolute;left:0;right:0;bottom:calc(var(--home) + 76px);display:flex;justify-content:center;gap:8px;padding:0 12px}
+.thumbs > *{flex:none;width:56px;height:56px;border-radius:12px;overflow:hidden;position:relative;display:grid;place-items:center}
+.thumbs .add{background:var(--raised);color:var(--ink)}
+.thumbs .add .ic{width:24px;height:24px}
+.thumbs .th svg{position:absolute;inset:0;width:100%;height:100%}
+.thumbs .th.on{outline:2px solid var(--acc);outline-offset:-2px}
+.thumbs .n{position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--btn);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center;font-style:normal;letter-spacing:0}
+.pp-comp{position:absolute;left:0;right:0;bottom:0;padding:8px 10px calc(8px + var(--home));display:flex;align-items:flex-end;gap:8px}
+.pp-comp .send{position:relative;width:44px;height:44px;border-radius:50%;background:var(--btn);color:#fff;display:grid;place-items:center;flex:none}
+.pp-comp .send .badge{position:absolute;right:-4px;top:-4px;background:#fff;color:#12161C;min-width:20px;height:20px;font-size:12px}
+.pp-comp .field{min-height:44px;border-radius:22px}
+html[data-t="ax5"] .pp-img{bottom:calc(var(--home) + 250px)}
+html[data-t="ax5"] .thumbs{bottom:calc(var(--home) + 170px)}
+.nw{white-space:nowrap}
+html[data-t="ax5"] .callbar .tx{font-size:30px;flex:1 1 calc(100% - 40px)}
+/* поправки после просмотра PNG */
+html[data-t="ax5"] .chatpv .msgs{zoom:.5}
+html[data-t="ax5"] .draft .acts .btn{font-size:var(--menu)}
+.photo{top:calc(50% - var(--W) * .39 - 60px)}
+.hint{top:calc(50% + var(--W) * .39 - 60px - 30px)}
+html[data-t="ax5"] .menu .hd,html[data-t="ax5"] .ctx-menu .hd{font-size:30px}
+html[data-t="ax5"] .banner{font-size:var(--cell);line-height:var(--cell-lh)}
+html[data-t="ax5"] .banner b{font-size:var(--cell)}
+html[data-t="ax5"] .chatpv .msgs{padding-top:124px}
+/* просмотр фото на AX5: подсказка — плашка поверх фото под навбаром, подпись на подложке поверх фото */
+html[data-t="ax5"] .hint{top:calc(var(--safe-top) + 60px);bottom:auto;font-size:28px;line-height:1.3}
+html[data-t="ax5"] .hint .ic{width:28px;height:28px;vertical-align:-5px}
+html[data-t="ax5"] .capt{font-size:var(--cell);line-height:var(--cell-lh);background:rgba(0,0,0,.72)}
+html[data-t="ax5"] .capt{max-height:calc(var(--H) - var(--safe-top) - var(--home) - 64px - 230px);overflow:auto;scrollbar-width:none}
+/* AX5: галочка над текстом — строка текста на всю ширину ячейки */
+html[data-t="ax5"] .cell.top{flex-direction:column;align-items:flex-start;gap:10px}
+html[data-t="ax5"] .cell.top .tx{flex:none;width:100%}
+.draft .stl span{flex:1;min-width:0}
+/* предложения неподдерживаемого сообщения — каждое с новой строки (AX5: WordFit уменьшает только предложение с длинным словом) */
+.unsup .sn{display:block}
+html[data-t="ax5"] .b.wide{max-width:calc(100% - 6px)}
+.b .btn.inb{line-height:1.2}
