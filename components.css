@@ -893,6 +893,8 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame[data-ts=ax5] .pc-alert .pc-switchrow{padding-inline:12px}
  .pc-frame[data-ts=ax5] :is(.pc-onb-scroll,.pc-onb-body){margin-inline:-16px;padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-setlist,.pc-radios,.pc-checks,.pc-facts,.pc-switchrow,.pc-banner,.pc-reportform>div>.pc-check,.pc-reportform>div>.pc-radio){margin-inline:-16px;border-radius:0}
+ /* пункты согласия во всю ширину: у самого пункта своих полей нет — поле экрана 16 даёт список */
+ .pc-frame[data-ts=ax5] .pc-onb-body .pc-facts{padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body .pc-ph{margin-inline:-16px;padding-inline:16px;border-inline:0;border-radius:0;max-width:none}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>*>:is(.pc-radio,.pc-check),.pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>:is(.pc-radio,.pc-check){border-radius:0}
  /* строка настроек при XL/AX5: значок и шеврон — первой строкой, текст на всю ширину под ними, значение — ниже */
