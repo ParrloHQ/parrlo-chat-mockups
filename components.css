@@ -915,4 +915,5 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:not(.ico,.mk,.bx,.pc-av,.pc-persona,.t,.tx,div){order:3}
 }
 /* XL: список настроек во всю ширину экрана, как на AX5 — иначе «конфиденциальности» не помещается даже на нижнем пределе WordFit (SE, 360) */
-.pc-frame[data-ts=xl] .pc-onb-body .pc-setlist{margin-inline:-16px;border-radius:0}
+.pc-frame[data-ts=xl] :is(.pc-onb-scroll:has(.pc-onb-body>.pc-setlist),.pc-onb-body:has(>.pc-setlist)){margin-inline:-16px;padding-inline:16px}
+.pc-frame[data-ts=xl] .pc-onb-body>.pc-setlist{margin-inline:-16px;border-radius:0}
