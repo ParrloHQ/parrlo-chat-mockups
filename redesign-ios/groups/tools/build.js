@@ -14,26 +14,34 @@ const norm = (s) => s.replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let L = 'ru';
 
-// Без рода (решение 22.11): ru-тексты старых кадров с прошедшим временем / местоимением о человеке заменены.
-// es/en не меняются. Видимые строки получают пометку «не утверждено» (только в ru) — см. README.
+// Замены текстов старых кадров. Строка — замена только ru (без рода, решение 22.11); объект — { ru?, es?, en? }.
+// Вычитка Переводчика 22.11 (docs/tbd-texts-review.md) утвердила эти строки: пометок «не утверждено» у них больше нет.
+// Имена в es/en — как в остальном пакете (Ana, Pedro / Pete, «Piso de Mayor»).
 const OVR = {
-  'Пригласила: Лена': 'Зовёт Лена',
+  'Пригласила: Лена': { ru: 'Зовёт Лена', es: 'Te invita Lena', en: 'Lena invited you' },
   'Карточка приглашения: группа, число участников, кто пригласил.': 'Карточка приглашения: группа, число участников, от кого приглашение.',
   'Анна присоединилась к группе': 'Анна теперь в группе',
   'Петя вышел из группы': 'Выход из группы: Петя',
-  'Анна присоединилась. Идёт расшифровка ИИ.': 'Анна теперь в звонке. Идёт расшифровка ИИ.',
+  'Анна присоединилась. Идёт расшифровка ИИ.': { ru: 'Анна теперь в звонке. Идёт расшифровка ИИ.', es: 'Ana se ha unido a la llamada. La IA está transcribiendo.', en: 'Anna joined the call. AI transcription is on.' },
   'Кто присоединился': 'Участники звонка',
   'Попроси того, кто пригласил, прислать новое приглашение.': 'Попроси прислать новое приглашение.',
-  'Новый участник: Marco · кто добавил: Лена': 'Лена добавляет в группу: Marco',
-  'Исключение из группы: Петя · кто исключил: Лена': 'Лена исключает из группы: Петя',
-  'Новое название группы: «Квартира на Майор» · кто изменил: Marco': 'Marco меняет название группы: «Квартира на Майор»',
-  'Когда админ выходит, он выбирает нового админа сам или выбирает автоматически: админом станет тот, кто дольше всех в группе.': 'Админ при выходе выбирает нового админа или включает автоматический выбор: админом станет тот, кто дольше всех в группе.',
-  'Ты — админ группы «Квартира». Перед выходом выбери нового админа: он получит доступ к разделу «Участники и права».': 'Ты — админ группы «Квартира». Перед выходом выбери нового админа: у нового админа будет доступ к разделу «Участники и права».',
-  'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.': 'ИИ-помощники в этой группе запрещены админом. Parrlo здесь не работает.',
+  'Новый участник: Marco · кто добавил: Лена': { ru: 'Добавление в группу: Marco · Лена', es: 'Lena ha añadido a Marco al grupo', en: 'Lena added Marco to the group' },
+  'Исключение из группы: Петя · кто исключил: Лена': { ru: 'Исключение из группы: Петя · Лена', es: 'Lena ha sacado a Pedro del grupo', en: 'Lena removed Pete from the group' },
+  'Новое название группы: «Квартира на Майор» · кто изменил: Marco': { ru: 'Новое название группы: «Квартира на Майор» · Marco', es: 'Marco ha cambiado el nombre del grupo a «Piso de Mayor»', en: 'Marco renamed the group to “Flat on Mayor”' },
+  'Когда админ выходит, он выбирает нового админа сам или выбирает автоматически: админом станет тот, кто дольше всех в группе.': { ru: 'Админ при выходе выбирает нового админа или включает автоматический выбор: админом станет тот, кто дольше всех в группе.', es: 'Al salir, quien administra elige a la nueva persona admin o deja que se elija sola: lo será quien lleve más tiempo en el grupo.', en: 'When leaving, the admin picks a new admin or lets it happen automatically: the longest-standing member becomes admin.' },
+  'Ты — админ группы «Квартира». Перед выходом выбери нового админа: он получит доступ к разделу «Участники и права».': { ru: 'Ты — админ группы «Квартира». Перед выходом передай роль админа: вместе с ней передаётся доступ к разделу «Участники и права».', es: 'Administras «Piso». Antes de salir, pasa la administración a otra persona: con ella pasa el acceso a «Participantes y permisos».', en: 'You’re the admin of “Flat”. Before leaving, hand over the admin role — access to “Members and permissions” goes with it.' },
+  // правило дома: без прошедшего времени о человеке («Админ отключил…» из вычитки → безличная форма)
+  'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.': { ru: 'ИИ-помощники в этой группе отключены админом. Parrlo здесь не работает.', es: 'En este grupo, los asistentes de IA están desactivados por quien lo administra. Parrlo no funciona aquí.', en: 'AI assistants are turned off in this group by the admin. Parrlo doesn’t work here.' },
+  // вычитка 22.11: es/en без рода, «(hora local)», «Se reinicia»; заголовок отказа
+  'Админ теперь: ты': { es: 'Ahora administras tú el grupo', en: 'You’re now the admin' },
+  'Админом группы станешь ты.': { es: 'Administrarás el grupo.' },
+  'Хорошо, без вступления': { ru: 'Приглашение не принято', es: 'Invitación no aceptada', en: 'Invitation not accepted' },
+  'Лимит Parrlo на сегодня закончился. Обычные чаты работают. Сброс: завтра в 00:00 по твоему времени.': { es: 'El límite de Parrlo de hoy se ha acabado. Los chats normales funcionan. Se reinicia mañana a las 00:00 (hora local).', en: 'Today’s Parrlo limit has run out. Regular chats work. Resets tomorrow at 00:00 your time.' },
+  'Обнулится завтра в 00:00 по твоему времени': { es: 'Se reinicia mañana a las 00:00 (hora local)' },
 };
-const T = (ru) => { const e = STR[norm(ru)]; if (!e) throw new Error('нет строки: ' + ru); return esc(L === 'ru' && OVR[norm(ru)] ? OVR[norm(ru)] : e[L]); };
-// TT: как T, плюс пометка «не утверждено» в ru, если строка заменена (OVR)
-const TT = (ru) => T(ru) + (L === 'ru' && OVR[norm(ru)] ? tbd('не утверждено') : '');
+const T = (ru) => { const e = STR[norm(ru)]; if (!e) throw new Error('нет строки: ' + ru); const o = OVR[norm(ru)];
+  const v = typeof o === 'string' ? (L === 'ru' ? o : e[L]) : o && o[L] ? o[L] : e[L]; return esc(v); };
+const TT = T; // раньше добавляла пометку «не утверждено» к заменённым строкам; после вычитки 22.11 они утверждены
 
 // ---------- иконки (из redesign-ios/tools/build.js + новые в той же сетке 24, штрих 1.8) ----------
 const PARROT_INNER = '<defs><mask id="pc-pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/>';
@@ -95,7 +103,7 @@ const bubble = ({ text = '', time, own, tail, trf, orig, photo }) => {
 };
 const gin = (who, items) => `<div class="grp in wa"><div class="snm" style="color:var(--nt-${PPL[who]})">${T(who)}</div>${items.map((it, i) => bubble({ ...it, tail: i === items.length - 1 })).join('')}${av(who, 'gav')}</div>`;
 const gout = (items) => `<div class="grp out">${items.map((it, i) => bubble({ ...it, own: true, tail: i === items.length - 1 })).join('')}</div>`;
-const sys = (s, o = {}) => `<div class="sys" role="status">${o.admin ? ic('shield') : ''}${TT(s)}${o.tbd ? tbd() : ''}</div>`;
+const sys = (s, o = {}) => `<div class="sys" role="status">${o.admin ? ic('shield') : ''}${TT(s)}</div>`;
 
 // ---------- навбар, композер, низ ----------
 const back = () => `<span class="cbtn" aria-label="${T('Назад')}">${ic('back')}</span>`;
@@ -125,9 +133,9 @@ const membersPage = () => `<div class="page">${hero()}
 ${sec({ h: T('Участники'), cells: addCell() + meCell() + MEM.map(memberCell).join('') + `<div class="cell acc"><div class="ct"><b>${T('Показать всех')}</b></div></div>` })}
 ${sec({ h: T('Права'), cells: `<div class="cell kv"><div class="ct"><b>${T('Название группы')}</b></div><span class="val">${T('Квартира')}</span>${ic('chev', 'chev')}</div>
 <div class="cell"><div class="ct"><b>${T('Передать роль админа')}</b><span>${T('Ты станешь участником')}</span></div>${ic('chev', 'chev')}</div>`,
-  f: `<p>${T('Когда админ выходит, он выбирает нового админа сам или выбирает автоматически: админом станет тот, кто дольше всех в группе.')}${tbd()}</p><p>${T('Когда из группы выйдет последний участник, группа и сообщения будут удалены.')}${tbd()}${tbd('юрист проверит')}</p>` })}
+  f: `<p>${T('Когда админ выходит, он выбирает нового админа сам или выбирает автоматически: админом станет тот, кто дольше всех в группе.')}</p><p>${T('Когда из группы выйдет последний участник, группа и сообщения будут удалены.')}${tbd()}${tbd('юрист проверит')}</p>` })}
 </div>${nav({ title: T('Участники и права') })}`;
-const alert = ({ title, msg, btns }) => `<div class="ov"></div><div class="alert" role="alertdialog"><div class="al-b"><h2>${T(title)}</h2><p>${T(msg)}</p>${tbd(undefined, true)}</div>
+const alert = ({ title, msg, btns }) => `<div class="ov"></div><div class="alert" role="alertdialog"><div class="al-b"><h2>${T(title)}</h2><p>${T(msg)}</p></div>
 <div class="al-btns">${btns.map(([s, c]) => `<a class="${c || ''}">${T(s)}</a>`).join('')}</div></div>`;
 const legal = 'В Parrlo Chat каждый человек может включить для себя ИИ-ассистента Parrlo. Он читает чаты этого человека — в том числе сообщения, которые ты пишешь в этой группе, — только чтобы помогать ему: пересказывать, переводить, составлять тексты. Тексты обрабатывают поставщики ИИ по нашему поручению; часть — в США. Ты можешь возразить, написав на [e-mail], или выйти из группы в любой момент. Оператор: PADELADA WORLD, S.L. · NIF B05783238 · Calle Josep Pla 8, Esc. 1, Pta. 1, 17252 Calonge i Sant Antoni (Girona), España · hello@';
 const legalP = () => `<p class="legal">${T(legal)}${T('parrlo.com.')}</p>`;
@@ -135,7 +143,7 @@ const joinPage = (wait) => `<div class="page"><div class="gcard" role="group" ar
 <h1 class="h1">${T('Перед тем как вступить')}</h1>${legalP()}<p class="legal"><a class="lnk" style="margin-top:0">${T('Политика конфиденциальности')}</a></p>
 <div class="notes"><p>${T('Карточка приглашения: группа, число участников, кто пригласил.')}${tbd('не утверждено')}</p><p>${T('Всё, что в [скобках], нужно заполнить или подтвердить.')}${tbd()}</p></div></div>
 ${nav()}${dock(wait ? `<span class="bigbtn wait" role="status"><i class="spin"></i>${T('Вступаем в группу…')}</span>` : btn('Вступить'), btn('Не вступать', 'alt'))}`;
-const esPage = (icon, h, p, btns, noNav) => `<div class="page center${noNav ? ' nonav' : ''}"><div class="es" role="status"><span class="eic">${ic(icon)}</span><h2>${T(h)}</h2><p>${T(p)}</p>${tbd(undefined, true)}</div></div>${noNav ? '' : nav()}${dock(...btns)}`;
+const esPage = (icon, h, p, btns, noNav) => `<div class="page center${noNav ? ' nonav' : ''}"><div class="es" role="status"><span class="eic">${ic(icon)}</span><h2>${T(h)}</h2><p>${T(p)}</p></div></div>${noNav ? '' : nav()}${dock(...btns)}`;
 const pickList = (who, sel, auto) => who.map(n => `<div class="cell wav" role="radio">${av(n)}<div class="ct"><b>${T(n)}</b></div>${n === sel ? ic('check', 'ck') : ''}</div>`).join('') +
   (auto ? `<div class="cell" role="radio" style="--sep:16px"><div class="ct"><b>${T('Выбрать автоматически')}</b><span>${T('Админом станет тот, кто дольше всех в группе.')}</span></div></div>` : '');
 const transferPage = () => `<div class="page"><h1 class="h1">${T('Кому передать роль админа?')}</h1><p class="lead">${T('Ты останешься в группе «Квартира» участником. Новый админ получит доступ к разделу «Участники и права».')}</p>
@@ -144,17 +152,17 @@ const successorPage = () => `<div class="page"><h1 class="h1">${T('Кому пе
 ${sec({ cells: pickList(['Marco', 'Мама', 'Анна Л.', 'Петя'], 'Marco', true), f: tbd() })}</div>${nav()}${dock(btn('Назначить и выйти'), btn('Отмена', 'txt'))}`;
 const invitePage = () => `<div class="page"><p class="lead" style="padding-top:12px">${T('Любой, у кого есть эта ссылка, сможет вступить в «Квартира». Отправляй её только тем, кому доверяешь.')}</p>
 ${sec({ h: T('Ссылка'), cells: `<div class="cell">${ic('link', 'mut')}<span class="field-v">${T('…/join/7Kq2x9')}</span></div>`,
-  f: `<p>${T('Ссылку видят админ и любой участник, если группа это разрешила.')}</p><p>${T('Старую ссылку можно сбросить в любой момент: она перестанет работать.')}${tbd()}</p>` })}
+  f: `<p>${T('Ссылку видят админ и любой участник, если группа это разрешила.')}</p><p>${T('Старую ссылку можно сбросить в любой момент: она перестанет работать.')}</p>` })}
 ${sec({ cells: `<div class="cell acc">${ic('copy')}<div class="ct"><b>${T('Скопировать ссылку')}</b></div></div><div class="cell acc" style="--sep:52px">${ic('qr')}<div class="ct"><b>${T('Показать QR-код')}</b></div></div>` })}
 ${sec({ cells: `<div class="cell danger">${ic('reset')}<div class="ct"><b>${T('Сбросить ссылку')}</b></div></div>` })}
 </div>${nav({ title: T('Ссылка-приглашение') })}`;
 const swCell = (title, on, dis) => `<div class="cell swr"><div class="ct"><b>${T(title)}</b></div><span class="sw${on ? ' on' : ''}${dis ? ' dis' : ''}" role="switch" aria-checked="${on}"></span></div>`;
 const parrloPage = (off) => `<div class="page">
-${sec({ h: T('Для тебя') + tbd(), cells: swCell('Parrlo в этой группе', !off, off), f: (off ? TT : T)(off ? 'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.' : 'Parrlo читает эту группу только для тебя и пишет по твоей команде от твоего имени. Другим участникам он не виден.') })}
-${sec({ h: T('Для группы') + tbd('не утверждено'), cells: swCell('ИИ-помощники в этой группе', !off), f: T('Админ решает, могут ли участники использовать Parrlo в этой группе.') })}
+${sec({ h: T('Для тебя'), cells: swCell('Parrlo в этой группе', !off, off), f: (off ? TT : T)(off ? 'Админ запретил ИИ-помощников в этой группе. Parrlo здесь не работает.' : 'Parrlo читает эту группу только для тебя и пишет по твоей команде от твоего имени. Другим участникам он не виден.') })}
+${sec({ h: T('Для группы'), cells: swCell('ИИ-помощники в этой группе', !off), f: T('Админ решает, могут ли участники использовать Parrlo в этой группе.') })}
 ${off ? sec({ h: T('Так это видят участники'), f: T('Показывается ли строка, если ИИ-помощники запрещены') + tbd('не утверждено') })
     : sec({ h: T('Кто может вызывать Parrlo'), cells: `<div class="cell" role="radio"><div class="ct"><b>${T('Все участники')}</b></div>${ic('check', 'ck')}</div><div class="cell" role="radio"><div class="ct"><b>${T('Только админ')}</b></div></div>` }) +
-      sec({ h: T('Так это видят участники'), raw: `<div class="cells">${aistrip()}</div>`, f: T('Одна строка в шапке группы, без имён. Она видна всем.') + tbd() })}
+      sec({ h: T('Так это видят участники'), raw: `<div class="cells">${aistrip()}</div>`, f: T('Одна строка в шапке группы, без имён. Она видна всем.') })}
 </div>${nav({ title: T('Parrlo в группе'), sub: T('Группа «Квартира»') })}`;
 
 // ---------- лента чата ----------
@@ -172,7 +180,7 @@ ${sys('Исключение из группы: Петя · кто исключи
   ['group-create', 'Новая группа', 'group-create', () => `<div class="page"><p class="lead" style="padding-top:12px">${T('Назови группу и выбери участников.')}</p>
 ${sec({ h: T('Название группы'), cells: `<div class="cell"><span class="field-v caret" role="textbox">${T('Квартира')}</span></div>` })}
 ${sec({ h: T('Участники · выбрано 2'), cells: [['Marco', 1], ['Мама', 0], ['Анна Л.', 1], ['Петя', 0]].map(([n, on]) => `<div class="cell wsel" role="checkbox" aria-checked="${!!on}"><span class="sel${on ? ' on' : ''}">${on ? ic('check') : ''}</span>${av(n)}<div class="ct"><b>${T(n)}</b></div></div>`).join(''),
-    f: T('Админом группы станешь ты.') + tbd() })}
+    f: T('Админом группы станешь ты.') })}
 </div>${nav({ cls: 'wide', left: `<span class="pbtn">${T('Отмена')}</span>`, title: T('Новая группа') })}${dock(btn('Создать группу'))}`],
   ['group-photo', 'Фото в группе, оригинал открыт', 'group-photo', () => chat({ ai: false, call: false }, `${sys('Новый участник: Анна')}
 ${gin('Лена', [{ text: 'Оплатила свет, чек выше', time: '18:20' }])}
@@ -183,19 +191,19 @@ ${gin('Marco', [{ photo: true, text: 'Вот какая сегодня улиц�
   ['group-invite-reset', 'Сбросить ссылку?', 'group-invite-reset', () => invitePage() + alert({ title: 'Сбросить ссылку?', msg: 'Старая ссылка перестанет работать. Те, кто уже в группе, останутся.', btns: [['Отмена', 'cancel bold'], ['Сбросить', 'danger']] })],
   ['group-join', 'Приглашение: перед вступлением', 'group-join', () => joinPage(false)],
   ['group-join-wait', 'Вступаем…', 'group-join-wait', () => joinPage(true)],
-  ['group-join-done', 'Ты в группе', 'group-join-done', () => chat({ call: false }, sys('Ты теперь в группе «Квартира»', { tbd: true }))],
+  ['group-join-done', 'Ты в группе', 'group-join-done', () => chat({ call: false }, sys('Ты теперь в группе «Квартира»'))],
   ['group-join-declined', 'Не вступать', 'group-join-declined', () => esPage('hand', 'Хорошо, без вступления', 'Ты не в группе «Квартира». Передумаешь — открой приглашение ещё раз.', [btn('Понятно')])],
   ['group-join-invalid', 'Ссылка не работает', 'group-join-invalid', () => esPage('linkoff', 'Ссылка не работает', 'Попроси того, кто пригласил, прислать новое приглашение.', [btn('Понятно')])],
   ['group-members', 'О группе: участники и права', 'group-members', membersPage],
   ['group-members-menu', 'Действия с участником', 'group-members-menu', () => membersPage() + `<div class="ov"></div><div class="asheet" role="dialog"><div class="as-g"><div class="as-t">${T('Marco')}</div><a>${T('Передать роль админа')}</a><a class="danger">${T('Убрать из группы')}</a></div><div class="as-g"><a class="bold">${T('Отмена')}</a></div></div>`],
   ['group-members-remove', 'Убрать участника?', 'group-members-remove', () => membersPage() + alert({ title: 'Убрать Marco из группы?', msg: 'Marco перестанет быть участником группы «Квартира».', btns: [['Отмена', 'cancel bold'], ['Убрать', 'danger']] })],
-  ['group-members-empty', 'Пока только ты', 'group-members-empty', () => `<div class="page">${hero()}${sec({ h: T('Участники'), cells: meCell(), raw: `<div class="es" role="status"><span class="eic">${ic('people')}</span><h2>${T('Пока только ты')}</h2><p>${T('Добавь участников — они появятся здесь.')}</p>${tbd(undefined, true)}</div>` })}</div>${nav({ title: T('Участники и права') })}${dock(btn('Добавить участников'))}`],
-  ['group-admin-you', 'Админ теперь: ты', 'group-admin-you', () => chat({}, `${BASE()}${sys('Админ теперь: ты', { admin: true, tbd: true })}${sys('Петя вышел из группы')}`)],
+  ['group-members-empty', 'Пока только ты', 'group-members-empty', () => `<div class="page">${hero()}${sec({ h: T('Участники'), cells: meCell(), raw: `<div class="es" role="status"><span class="eic">${ic('people')}</span><h2>${T('Пока только ты')}</h2><p>${T('Добавь участников — они появятся здесь.')}</p></div>` })}</div>${nav({ title: T('Участники и права') })}${dock(btn('Добавить участников'))}`],
+  ['group-admin-you', 'Админ теперь: ты', 'group-admin-you', () => chat({}, `${BASE()}${sys('Админ теперь: ты', { admin: true })}${sys('Петя вышел из группы')}`)],
   ['group-admin-changed', 'Админ сменился', 'group-admin-changed', () => chat({}, `${BASE()}${sys('Админ теперь: Marco', { admin: true })}${sys('Петя вышел из группы')}`)],
   ['group-leave-confirm', 'Выйти из группы?', 'group-leave-confirm', () => membersPage() + alert({ title: 'Выйти из группы «Квартира»?', msg: 'Новые сообщения группы перестанут приходить. Вернуться можно по новому приглашению.', btns: [['Отмена', 'cancel bold'], ['Выйти', 'danger']] })],
   ['group-limit', 'Лимит Parrlo: карточка', 'group-limit', () => chat({}, `${BASE()}<section class="lcard" role="status"><h3>${T('Лимит Parrlo на сегодня исчерпан')}</h3><div class="meter" role="img" aria-label="${T('Полоска использования: лимит исчерпан')}"><i></i></div>
-<p class="ink">${ic('clock')}${T('Обнулится завтра в 00:00 по твоему времени')}${tbd('не утверждено')}</p><p>${T('Обычные чаты работают всегда.')}</p><p>${T('Что входит в план:')}${tbd('не утверждено')}</p>${btn('Выбрать тариф')}</section>`)],
-  ['group-limit-inline', 'Лимит Parrlo: строка', 'group-limit-inline', () => chat({}, BASE(), composer(`<div class="limline" role="status"><span>${T('Лимит Parrlo на сегодня закончился. Обычные чаты работают. Сброс: завтра в 00:00 по твоему времени.')}${tbd()}</span><a class="lnk">${T('Выбрать тариф')}</a></div>`))],
+<p class="ink">${ic('clock')}${T('Обнулится завтра в 00:00 по твоему времени')}</p><p>${T('Обычные чаты работают всегда.')}</p><p>${T('Что входит в план:')}</p>${btn('Выбрать тариф')}</section>`)],
+  ['group-limit-inline', 'Лимит Parrlo: строка', 'group-limit-inline', () => chat({}, BASE(), composer(`<div class="limline" role="status"><span>${T('Лимит Parrlo на сегодня закончился. Обычные чаты работают. Сброс: завтра в 00:00 по твоему времени.')}</span><a class="lnk">${T('Выбрать тариф')}</a></div>`))],
   ['group-parrlo', 'Parrlo в группе', 'group-parrlo', () => parrloPage(false)],
   ['group-parrlo-off', 'Parrlo в группе: запрещено', 'group-parrlo-off', () => parrloPage(true)],
   ['group-ai-info', 'Подробнее об ИИ в группе', 'group-ai-info', () => `<div class="page"><h1 class="h1">${T('Если кто-то из твоего чата пользуется Parrlo')}</h1>${legalP()}

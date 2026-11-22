@@ -51,6 +51,7 @@ PNG: `png/<экран>__<se|max>-<n|ax5>-<ru|es|en>.png` — 18 экранов �
 - ru, «Напоминание про Parrlo»: «Сейчас выключено: ты выбрал «Не напоминать»» → «Сейчас выключено: выбрано «Не напоминать»» — правило «не указывать род пользователя». es/en рода не содержат — без изменений.
 - Подсказка на экране языка ссылалась на «Настройки → Parrlo → Ещё». Теперь: ru «вкладка Parrlo → «…» → Язык», es «pestaña Parrlo → «…» → Idioma», en «Parrlo tab → “…” → Language» + пометка «не утверждено».
 - `settings-notifications-blocked`: веб-текст («Браузер блокирует уведомления», шаги про значок у адреса сайта) заменён iOS-текстом от координатора, с пометкой «не утверждено»: ru «Уведомления выключены. Включи их: Настройки iPhone → Parrlo → Уведомления.», es «Las notificaciones están desactivadas. Actívalas en Ajustes del iPhone → Parrlo → Notificaciones.», en «Notifications are off. Turn them on in iPhone Settings → Parrlo → Notifications.» Шаги: 1. Настройки iPhone / Ajustes / Settings · 2. Parrlo · 3. Уведомления / Notificaciones / Notifications.
+- `plans`, текст подписки: вместо «[с налогами/IVA — подтвердить менеджеру Store]» стоит `{price}` (ru «Цена — {price}.», es/en «Precio: {price}.» / «Price: {price}.») — локализованная строка цены из StoreKit, налог уже в ней. Плашка «не утверждено» остаётся. Остальные тексты — по вычитке Переводчика 22.11 (`docs/tbd-texts-review.md`).
 - `settings-about`: «hello@parrlo.com» и «Политика конфиденциальности» в тексте оператора — ссылки зелёным.
 
 ## Dynamic Type (AX5)

@@ -154,8 +154,8 @@ const T = {
   limPT: ['Лимит Parrlo на сегодня закончился', 'El límite de Parrlo de hoy se ha acabado', 'Today’s Parrlo limit has run out'],
   limCT: ['Лимит звонков на сегодня закончился', 'El límite de llamadas de hoy se ha acabado', 'Today’s call limit has run out'],
   limWT: ['Недельный лимит Parrlo закончился', 'El límite semanal de Parrlo se ha acabado', 'The weekly Parrlo limit has run out'],
-  limDay: ['Обычные чаты работают. Сброс: завтра в 00:00 по твоему времени', 'Los chats normales funcionan. Restablecimiento: mañana a las 00:00, hora tuya', 'Regular chats work. Resets: tomorrow at 00:00 your time'],
-  limWeek: ['Обычные чаты работают. Сброс: в понедельник в 00:00 по твоему времени', 'Los chats normales funcionan. Restablecimiento: el lunes a las 00:00, hora tuya', 'Regular chats work. Resets: Monday at 00:00 your time'],
+  limDay: ['Обычные чаты работают. Сброс: завтра в 00:00 по твоему времени', 'Los chats normales funcionan. Se reinicia mañana a las 00:00 (hora local)', 'Regular chats work. Resets: tomorrow at 00:00 your time'],
+  limWeek: ['Обычные чаты работают. Сброс: в понедельник в 00:00 по твоему времени', 'Los chats normales funcionan. Se reinicia el lunes a las 00:00 (hora local)', 'Regular chats work. Resets: Monday at 00:00 your time'],
   plan: ['Выбрать тариф', 'Ver tarifas', 'See plans'],
   gotIt: ['Понятно', 'Entendido', 'Got it'],
   // ошибки
@@ -164,7 +164,7 @@ const T = {
   del: ['Удалить', 'Borrar', 'Delete'],
   edit: ['Изменить', 'Editar', 'Edit'],
   hSend: ['Сообщение не ушло. Когда появится сеть, отправим ещё раз. Можно повторить сразу или удалить.', 'El mensaje no se ha enviado. Lo reintentaremos una vez cuando vuelva la conexión. Puedes reintentarlo ya o borrarlo.', 'The message didn’t go through. We’ll try once more when you’re back online. You can retry now or delete it.'],
-  hBlocked: ['Не удалось доставить сообщение.', 'No se ha podido entregar el mensaje.', 'The message couldn’t be delivered.'],
+  hBlocked: ['Не получилось доставить сообщение.', 'No se ha podido entregar el mensaje.', 'The message couldn’t be delivered.'],
   hLong: ['Сообщение слишком длинное — сократи его и отправь снова.', 'El mensaje es demasiado largo: acórtalo y vuelve a enviarlo.', 'The message is too long — shorten it and send it again.'],
   unsup: ['Сообщение не поддерживается. Обнови приложение, чтобы его увидеть.', 'Mensaje no compatible. Actualiza la app para verlo.', 'Unsupported message. Update the app to see it.'],
   upd: ['Обновить приложение', 'Actualizar la app', 'Update the app'],
@@ -248,7 +248,7 @@ const marcoNav = (off) => navChat({ title: 'Marco', sub: t(off ? 'marcoSubOff' :
 const marcoMsgs = (o = {}) => {
   let h = `<div class="chip">${t('today')}</div>`;
   if (o.off) {
-    h += `<div class="note-card"><b>${t('offH')}</b><p>${t('offP')}</p><span class="tbd blk">${t('tbd')}</span><span class="lnk">${t('offOn')}</span></div>`;
+    h += `<div class="note-card"><b>${t('offH')}</b><p>${t('offP')}</p><span class="lnk">${t('offOn')}</span></div>`;
     h += group(false, [{ text: t('m1off'), time: '09:12' }]) + group(true, [{ text: t('m2'), time: '09:13' }]) + group(false, [{ text: t('m3o'), time: '09:14' }]);
     return h;
   }
@@ -344,7 +344,7 @@ S['chat-photo-sheet'] = {
   old: 'chat-photo-sheet', ttl: 'Лист «Отправить фото»', html: () => marcoChat() + sheet({
     title: t('phT'), left: closeBtn(),
     body: `<div class="tiles"><span class="tile">${ic('photo')}${t('phPhoto')}</span><span class="tile">${ic('camera')}${t('phCam')}</span><span class="tile">${ic('place')}${t('phLoc')}</span></div>
-<p class="lim">${t('phLim')}<br><span class="tbd">${t('tbd')}</span></p>`,
+<p class="lim">${t('phLim')}</p>`,
     foot: `<span class="fbtn">${t('cancel')}</span>`,
   }),
 };
@@ -367,12 +367,12 @@ S['ctx-message'] = {
 ${ctxMenu([['showO', 'tr'], ['rT', 'flag', 1]])}</div>`,
 };
 S['chat-delete-alert'] = { old: 'chat-delete-alert', ttl: 'Диалог «Удалить чат?»', html: () => marcoChat() + dialog(t('delT'), t('delP'), '', [['danger', t('delB')], ['', t('cancel')]]) };
-S['limit-err-parrlo'] = { old: 'limit-err-parrlo', ttl: 'Лимит Parrlo на сегодня', html: () => groupChat() + dialog(t('limPT'), t('limDay'), t('tbd'), [['primary', t('plan')], ['', t('gotIt')]]) };
-S['limit-err-call'] = { old: 'limit-err-call', ttl: 'Лимит звонков на сегодня', html: () => marcoChat({ call: true }) + dialog(t('limCT'), t('limDay'), t('tbd'), [['primary', t('plan')], ['', t('gotIt')]]) };
-S['limit-err-week'] = { old: 'limit-err-week', ttl: 'Недельный лимит Parrlo', html: () => groupChat() + dialog(t('limWT'), t('limWeek'), t('tbd'), [['primary', t('plan')], ['', t('gotIt')]]) };
+S['limit-err-parrlo'] = { old: 'limit-err-parrlo', ttl: 'Лимит Parrlo на сегодня', html: () => groupChat() + dialog(t('limPT'), t('limDay'), '', [['primary', t('plan')], ['', t('gotIt')]]) };
+S['limit-err-call'] = { old: 'limit-err-call', ttl: 'Лимит звонков на сегодня', html: () => marcoChat({ call: true }) + dialog(t('limCT'), t('limDay'), '', [['primary', t('plan')], ['', t('gotIt')]]) };
+S['limit-err-week'] = { old: 'limit-err-week', ttl: 'Недельный лимит Parrlo', html: () => groupChat() + dialog(t('limWT'), t('limWeek'), '', [['primary', t('plan')], ['', t('gotIt')]]) };
 const failed = (hint, acts) => `<div class="grp out"><div class="fail">${bubble({ text: t('m5'), time: '09:33', own: true, tail: true, noTick: true })}<span class="bang" aria-label="${t('notSent')}">!</span></div>
 <div class="failrow"><span class="st">${t('notSent')}</span>${acts.map(k => `<a>${t(k)}</a>`).join('')}</div>
-<p class="failhint">${t(hint)} <span class="tbd">${t('tbd')}</span></p></div>`;
+<p class="failhint">${t(hint)}</p></div>`;
 S['err-send'] = { old: 'err-send', ttl: 'Сообщение не отправлено', html: () => marcoChat({ m3closed: true, after: failed('hSend', ['retry', 'del']) }) };
 S['err-reject-blocked'] = { old: 'err-reject-blocked', ttl: 'Сообщение не доставлено', html: () => marcoChat({ m3closed: true, after: failed('hBlocked', ['retry', 'del']) }) };
 S['err-reject-toolong'] = { old: 'err-reject-toolong', ttl: 'Сообщение слишком длинное', html: () => marcoChat({ m3closed: true, after: failed('hLong', ['edit', 'retry', 'del']) }) };
@@ -383,7 +383,7 @@ S['msg-unsupported'] = {
 };
 S['err-offline-banner'] = {
   old: 'err-offline-banner', ttl: 'Баннер «Нет сети» в «Чатах»', cls: 'has-tabs',
-  html: () => homeList(`<div class="banner" role="status">${ic('nowifi')}<div><b>${t('offT')}</b><p>${t('offB')}</p><span class="tbd blk">${t('tbd')}</span></div></div>`),
+  html: () => homeList(`<div class="banner" role="status">${ic('nowifi')}<div><b>${t('offT')}</b><p>${t('offB')}</p></div></div>`),
 };
 S['home-menu'] = {
   old: 'home-menu', ttl: 'Меню «Быстрые действия» (кнопка нового чата)', cls: 'has-tabs',
@@ -409,7 +409,7 @@ S['draft-edit'] = { old: 'draft-edit', ttl: 'Черновик Parrlo — пра�
 S['chat-photo-viewer'] = {
   old: 'chat-photo-viewer', ttl: 'Просмотр фото', cls: 'black', html: () => `<div class="pv-top"><div class="bar"><span class="cbtn" aria-label="${t('close')}">${ic('x')}</span><div class="who"><b>Marco</b><span>${t('phWhen')}</span></div></div></div>
 <div class="photo">${CAFE}</div>
-<div class="hint"><div>${ic('down')}${t('swipe')}</div><div>${ic('pinch')}${t('pinch')}</div><span class="tbd" style="margin-top:4px">${t('tbd')}</span></div>
+<div class="hint"><div>${ic('down')}${t('swipe')}</div><div>${ic('pinch')}${t('pinch')}</div></div>
 <div class="capt">${trc(false).replace(/ · <a>.*?<\/a>/, '')}<p>${t('capT')}</p><span class="lbo">${t('orig')}</span><p class="o">${t('capO')}</p></div>
 <nav class="pv-bot"><a>${ic('save')}${t('save')}</a><a>${ic('share')}${t('share')}</a><a class="danger">${ic('flag')}${t('repPh')}</a></nav>`,
 };

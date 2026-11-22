@@ -80,9 +80,9 @@ const T = {
     newPhone: 'Новый телефон', newPhoneT: 'Войди тем же Apple или Google — история чатов хранится на сервере и появится на новом телефоне.', del: 'Удалить аккаунт',
     logoutQ: 'Выйти из аккаунта?', logoutM: 'Ты сможешь снова войти через Apple или Google.', logoutB: 'Выйти', cancel: 'Отмена',
     step1: 'Подтверждение, шаг 1', step2: 'Подтверждение, шаг 2', delQ: 'Удалить аккаунт?', delLead: 'Здесь будет описание того, что удаляется и в какие сроки.', cont: 'Продолжить',
-    delQ2: 'Удалить аккаунт насовсем?', delM2: 'Отменить это нельзя.',
+    delQ2: 'Удалить аккаунт навсегда?', delM2: 'Отменить это нельзя.',
     delErr: 'Не получилось удалить аккаунт', delErrS: 'Ничего не удалено. Проверь сеть и попробуй ещё раз.', retry: 'Повторить',
-    deleted: 'Аккаунт удалён', deletedS: 'Твой аккаунт удалён.', close: 'Закрыть',
+    deleted: 'Аккаунт удалён', deletedS: 'Можно закрыть приложение.', close: 'Закрыть',
     nameLead: 'Его видят все твои собеседники и участники групп.', nameLbl: 'Имя', save: 'Сохранить',
     langs: [['Русский', '', true], ['English', 'Английский'], ['Español', 'Испанский']],
     langNote: 'Язык ответов Parrlo настраивается отдельно: вкладка Parrlo → «…» → Язык.',
@@ -99,7 +99,7 @@ const T = {
     plan: 'План', price: 'Цена:', incl: 'Что входит в план', noLim: 'Без лимита:', noLimT: 'обычные чаты, группы, перевод текста', withLim: 'С дневным и недельным лимитом:',
     groups: ['Parrlo', 'Голос', 'Звонки'], amount: 'объём: —', choose: 'Выбрать',
     ph: 'Заглушка: названия, состав и цены определятся позже.',
-    sub: 'Подписка продлевается автоматически, пока ты не отменишь её в настройках Apple ID. Цена — [с налогами/IVA — подтвердить менеджеру Store]. Условия · Политика конфиденциальности.',
+    sub: 'Подписка продлевается автоматически, пока ты не отменишь её в настройках Apple ID. Цена — {price}. Условия · Политика конфиденциальности.',
     stayFree: 'Остаться на бесплатном',
     usageLead: 'Дневной и недельный лимиты Parrlo, голоса и звонков. Обычные чаты работают всегда.',
     today: 'Сегодня', week: 'Эта неделя', resetDay: 'Обнулится завтра в 00:00 по твоему времени', resetWeek: 'Обнулится в понедельник в 00:00 по твоему времени',
@@ -121,9 +121,9 @@ const T = {
     newPhone: 'Teléfono nuevo', newPhoneT: 'Inicia sesión con la misma cuenta de Apple o Google: el historial de chats se guarda en el servidor y aparecerá en el teléfono nuevo.', del: 'Borrar cuenta',
     logoutQ: '¿Cerrar sesión?', logoutM: 'Podrás volver a entrar con Apple o Google.', logoutB: 'Cerrar sesión', cancel: 'Cancelar',
     step1: 'Confirmación, paso 1', step2: 'Confirmación, paso 2', delQ: '¿Borrar tu cuenta?', delLead: 'Aquí se describirá qué se borra y en qué plazo.', cont: 'Continuar',
-    delQ2: '¿Borrar tu cuenta definitivamente?', delM2: 'No se puede deshacer.',
-    delErr: 'No se ha podido borrar la cuenta', delErrS: 'No se ha borrado nada. Comprueba la conexión e inténtalo de nuevo.', retry: 'Reintentar',
-    deleted: 'Cuenta borrada', deletedS: 'Tu cuenta se ha borrado.', close: 'Cerrar',
+    delQ2: '¿Eliminar tu cuenta para siempre?', delM2: 'No se puede deshacer.',
+    delErr: 'No se ha podido eliminar la cuenta', delErrS: 'No se ha eliminado nada. Comprueba la conexión e inténtalo de nuevo.', retry: 'Reintentar',
+    deleted: 'Cuenta eliminada', deletedS: 'Ya puedes cerrar la app.', close: 'Cerrar',
     nameLead: 'Lo ven todas las personas con las que hablas y los miembros de tus grupos.', nameLbl: 'Nombre', save: 'Guardar',
     langs: [['Русский', 'Ruso'], ['English', 'Inglés'], ['Español', '', true]],
     langNote: 'El idioma de las respuestas de Parrlo se ajusta aparte: pestaña Parrlo → «…» → Idioma.',
@@ -140,14 +140,14 @@ const T = {
     plan: 'Plan', price: 'Precio:', incl: 'Qué incluye el plan', noLim: 'Sin límite:', noLimT: 'chats normales, grupos, traducción de texto', withLim: 'Con límite diario y semanal:',
     groups: ['Parrlo', 'Voz', 'Llamadas'], amount: 'cantidad: —', choose: 'Elegir',
     ph: 'Marcador: los nombres, el contenido y los precios se decidirán más adelante.',
-    sub: 'La suscripción se renueva automáticamente hasta que la canceles en los ajustes de tu ID de Apple. Precio: [IVA incluido — confirmar con el gestor de Store]. Condiciones · Política de privacidad.',
+    sub: 'La suscripción se renueva automáticamente hasta que la canceles en los ajustes de tu ID de Apple. Precio: {price}. Condiciones · Política de privacidad.',
     stayFree: 'Seguir con el gratuito',
     usageLead: 'Límites diario y semanal de Parrlo, la voz y las llamadas. Los chats normales siempre funcionan.',
-    today: 'Hoy', week: 'Esta semana', resetDay: 'Se restablece mañana a las 00:00, hora tuya', resetWeek: 'Se restablece el lunes a las 00:00, hora tuya',
+    today: 'Hoy', week: 'Esta semana', resetDay: 'Se reinicia mañana a las 00:00 (hora local)', resetWeek: 'Se reinicia el lunes a las 00:00 (hora local)',
     unlimited: 'Los chats normales, los grupos y la traducción de texto no tienen límite.', pick: 'Ver tarifas', ok: 'Entendido',
     limT: 'Has agotado el límite diario de Parrlo', limS: 'Parrlo volverá a funcionar tras el restablecimiento. La voz y las llamadas se cuentan aparte. Los chats normales, los grupos y la traducción de texto funcionan como siempre.',
-    limWT: 'Has agotado el límite semanal de Parrlo', limWS: 'Parrlo volverá a funcionar el lunes a las 00:00, hora tuya; el restablecimiento diario no lo cambia. La voz y las llamadas se cuentan aparte. Los chats normales, los grupos y la traducción de texto funcionan como siempre.',
-    rstT: 'Límite restablecido', rstS: 'Las barras de hoy se han puesto a cero a las 00:00, hora tuya. Las semanales cuentan desde el lunes.',
+    limWT: 'Has agotado el límite semanal de Parrlo', limWS: 'Parrlo volverá a funcionar el lunes a las 00:00 (hora local); el reinicio diario no lo cambia. La voz y las llamadas se cuentan aparte. Los chats normales, los grupos y la traducción de texto funcionan como siempre.',
+    rstT: 'Límite restablecido', rstS: 'Las barras de hoy se han reiniciado a las 00:00 (hora local). Las semanales cuentan desde el lunes.',
     rstB: 'Parrlo, la voz y las llamadas vuelven a estar disponibles', rstBS: 'El límite diario empieza de nuevo.',
   },
   en: {
@@ -164,7 +164,7 @@ const T = {
     step1: 'Confirmation, step 1', step2: 'Confirmation, step 2', delQ: 'Delete your account?', delLead: 'This will describe what is deleted and within what time.', cont: 'Continue',
     delQ2: 'Delete your account for good?', delM2: 'This can’t be undone.',
     delErr: 'Couldn’t delete your account', delErrS: 'Nothing was deleted. Check your connection and try again.', retry: 'Try again',
-    deleted: 'Account deleted', deletedS: 'Your account has been deleted.', close: 'Close',
+    deleted: 'Account deleted', deletedS: 'You can close the app now.', close: 'Close',
     nameLead: 'Everyone you chat with and your group members see it.', nameLbl: 'Name', save: 'Save',
     langs: [['Русский', 'Russian'], ['English', '', true], ['Español', 'Spanish']],
     langNote: 'Parrlo’s reply language is set separately: Parrlo tab → “…” → Language.',
@@ -181,7 +181,7 @@ const T = {
     plan: 'Plan', price: 'Price:', incl: 'What the plan includes', noLim: 'No limit:', noLimT: 'regular chats, groups, text translation', withLim: 'With a daily and a weekly limit:',
     groups: ['Parrlo', 'Voice', 'Calls'], amount: 'amount: —', choose: 'Choose',
     ph: 'Placeholder: names, contents and prices will be decided later.',
-    sub: 'The subscription renews automatically until you cancel it in your Apple ID settings. Price: [VAT included — confirm with the Store manager]. Terms · Privacy Policy.',
+    sub: 'The subscription renews automatically until you cancel it in your Apple ID settings. Price: {price}. Terms · Privacy Policy.',
     stayFree: 'Stay on free',
     usageLead: 'Daily and weekly limits for Parrlo, voice and calls. Regular chats always work.',
     today: 'Today', week: 'This week', resetDay: 'Resets tomorrow at 00:00 your time', resetWeek: 'Resets on Monday at 00:00 your time',
@@ -198,7 +198,7 @@ const appleImg = '<img src="../../brand/apple-logo-white.svg" alt="">';
 
 const root = (L, l) => `<div class="scroll root"><div class="head"><div class="bar empty"></div><h1 class="large">${L.settings}</h1></div>
 <div style="height:14px"></div>
-${sec({ h: L.parrlo, body: row({ tile: { bg: C.green, ic: 'parrot' }, t: L.parrlo, s: L.parrloMoved, extra: tbd(L.wording), chev: 1 }) })}
+${sec({ h: L.parrlo, body: row({ tile: { bg: C.green, ic: 'parrot' }, t: L.parrlo, s: L.parrloMoved, chev: 1 }) })}
 ${sec({ h: L.tr, body: row({ t: L.trRow, sw: 'on' }), f: nw(L.trFoot) })}
 ${sec({ h: L.app, body: [
   row({ tile: { bg: C.blue, ic: 'person' }, t: L.account, v: 'Apple', chev: 1 }),
@@ -217,7 +217,7 @@ ${sec({ body: [
   row({ tile: { bg: C.teal, ic: 'bubble' }, t: L.contact, s: L.contactS, chev: 1 }),
 ].join('') })}
 ${sec({ body: row({ tile: { bg: C.gray, ic: 'logout' }, t: L.logout }) })}
-${sec({ h: L.newPhone, f: `<p>${nw(L.newPhoneT)}</p>${tbd(L.wording)}` })}
+${sec({ h: L.newPhone, f: `<p>${nw(L.newPhoneT)}</p>` })}
 ${sec({ body: row({ tile: { bg: C.red, ic: 'trash' }, t: L.del, danger: 1 }) })}
 </div>
 ${navSub(L, L.account)}`;
@@ -231,32 +231,32 @@ const remSec = (L) => sec({ h: L.inApp, body: row({ t: L.rem, sw: 'off' }), f: n
 
 const usageSec = (L, h, reset, vals, full) => sec({ h, body: L.groups.map((g, i) =>
   `<div class="ur"><span class="n">${g}</span><div class="mt${full === i ? ' full' : ''}" role="img"><i class="k${i + 1}" style="width:${vals[i]}%"></i></div></div>`).join(''),
-  f: `<div class="rs">${ic('clock')}<div>${nw(reset)}${tbd(L.na)}</div></div>` });
-const inclBlock = (L, cls = '') => `<div class="incl ${cls}"><h4>${nw(L.incl)}${tbd(L.na, 1)}</h4><p><b>${L.noLim}</b> ${nw(L.noLimT)}</p><p><b>${nw(L.withLim)}</b></p>
+  f: `<div class="rs">${ic('clock')}<div>${nw(reset)}</div></div>` });
+const inclBlock = (L, cls = '') => `<div class="incl ${cls}"><h4>${nw(L.incl)}</h4><p><b>${L.noLim}</b> ${nw(L.noLimT)}</p><p><b>${nw(L.withLim)}</b></p>
 <ul>${L.groups.map(g => `<li><span>${g}</span><span class="vv">${L.amount}</span></li>`).join('')}</ul></div>`;
 
 const screens = {
   settings: { tabs: true, body: (L, l) => root(L, l) },
   'settings-account': { body: (L) => accountBody(L) },
-  'settings-account-logout': { body: (L) => accountBody(L) + alert(L.logoutQ, L.logoutM, tbd(L.wording), [['d', L.logoutB], ['c', L.cancel]]) },
+  'settings-account-logout': { body: (L) => accountBody(L) + alert(L.logoutQ, L.logoutM, '', [['d', L.logoutB], ['c', L.cancel]]) },
   'settings-account-delete': { body: (L) => delStep1(L) + acts([['dng', L.cont], ['pl', L.cancel]]) },
   'settings-account-delete-confirm': { body: (L) => delStep1(L) + acts([['dng', L.cont], ['pl', L.cancel]]) +
-    alert(L.delQ2, L.delM2, `<p class="n">${nw(L.step2)}</p>${tbd(L.wording)}`, [['d', L.del], ['c', L.cancel]]) },
-  'settings-account-delete-error': { body: (L) => delStep1(L, sec({ body: banner('err', L.delErr, L.delErrS, L.wording) })) + acts([['dng', L.retry], ['pl', L.cancel]]) },
-  'settings-account-deleted': { body: (L) => `<div class="done" role="status"><span class="ring">${ic('check')}</span><h1>${nw(L.deleted)}</h1><p>${nw(L.deletedS)}</p>${tbd(L.wording)}</div>` + acts([['pri', L.close]], true) },
+    alert(L.delQ2, L.delM2, `<p class="n">${nw(L.step2)}</p>`, [['d', L.del], ['c', L.cancel]]) },
+  'settings-account-delete-error': { body: (L) => delStep1(L, sec({ body: banner('err', L.delErr, L.delErrS) })) + acts([['dng', L.retry], ['pl', L.cancel]]) },
+  'settings-account-deleted': { body: (L) => `<div class="done" role="status"><span class="ring">${ic('check')}</span><h1>${nw(L.deleted)}</h1><p>${nw(L.deletedS)}</p></div>` + acts([['pri', L.close]], true) },
   'settings-name': { body: (L) => `<div class="scroll">${sec({ h: L.nameLbl, body: `<div class="inp" role="textbox">${L.name}<i class="cur"></i></div>`, f: `<span class="cnt">5 / 60</span>${nw(L.nameLead)}` })}</div>
 ${navSub(L, L.nameRow, `<span class="pbtn acc">${L.save}</span>`, true)}` },
-  'settings-language': { body: (L) => `<div class="scroll">${sec({ body: L.langs.map(([t, s, on]) => row({ t: `<span lang="${t === 'Русский' ? 'ru' : t === 'English' ? 'en' : 'es'}">${t}</span>`, s, chk: on })).join(''), f: nw(L.langNote) + tbd(L.wording) })}</div>${navSub(L, L.appLang)}` },
+  'settings-language': { body: (L) => `<div class="scroll">${sec({ body: L.langs.map(([t, s, on]) => row({ t: `<span lang="${t === 'Русский' ? 'ru' : t === 'English' ? 'en' : 'es'}">${t}</span>`, s, chk: on })).join(''), f: nw(L.langNote) })}</div>${navSub(L, L.appLang)}` },
   'settings-notifications': { body: (L) => `<div class="scroll">${notifRows(L, 'on')}${remSec(L)}
 ${sec({ body: row({ tile: { bg: C.gray, ic: 'bellOff' }, t: L.pushOff, s: L.pushOffS, extra: tbd(L.legal), chev: 1 }), f: tbd(L.wording) })}</div>${navSub(L, L.notif)}` },
-  'settings-notifications-blocked': { body: (L) => `<div class="scroll">${sec({ body: banner('off', L.blkT, L.blkS, L.wording) })}${notifRows(L, 'dis')}
+  'settings-notifications-blocked': { body: (L) => `<div class="scroll">${sec({ body: banner('off', L.blkT, L.blkS) })}${notifRows(L, 'dis')}
 ${sec({ h: L.how, body: `<div class="cellp"><ol>${L.steps.map(s => `<li>${nw(s)}</li>`).join('')}</ol></div>`, f: tbd(L.wording) })}${remSec(L)}</div>${navSub(L, L.notif)}` },
-  'settings-save-error': { body: (L) => `<div class="scroll">${sec({ body: banner('err', L.saveErr, L.saveErrS, L.wording) })}${notifRows(L, 'on')}${remSec(L)}</div>${navSub(L, L.notif)}` },
+  'settings-save-error': { body: (L) => `<div class="scroll">${sec({ body: banner('err', L.saveErr, L.saveErrS) })}${notifRows(L, 'on')}${remSec(L)}</div>${navSub(L, L.notif)}` },
   'settings-about': { body: (L) => `<div class="scroll">${sec({ h: L.legalH, body: row({ tile: { bg: C.gray, ic: 'doc' }, t: L.terms, chev: 1 }) + row({ tile: { bg: C.blue, ic: 'shield' }, t: L.privacy, chev: 1 }) })}
 ${sec({ h: L.op, body: `<div class="cellp mut">${nw(L.opT)}</div>`, f: L.ver })}</div>${navSub(L, L.aboutT)}` },
   plans: { body: (L) => `<div class="scroll"><p class="intro">${nw(L.plansLead)}</p>
 ${sec({ body: row({ tile: { bg: C.green, ic: 'check' }, t: `<b style="font-weight:600">${nw(L.nowT)}</b>`, s: L.nowS }) })}
-${[1, 2].map(n => sec({ body: `<div class="plan"><h3>${L.plan} ${n}</h3><p class="pr">${L.price} <b>—</b>${tbd(L.na, 1)}</p>${inclBlock(L)}<span class="bb pri sm">${L.choose}</span></div>` })).join('')}
+${[1, 2].map(n => sec({ body: `<div class="plan"><h3>${L.plan} ${n}</h3><p class="pr">${L.price} <b>—</b></p>${inclBlock(L)}<span class="bb pri sm">${L.choose}</span></div>` })).join('')}
 <p class="ph">${nw(L.ph)}</p>
 <div class="ft" style="padding:12px 32px 0">${nw(L.sub)}${tbd(L.na)}</div><div style="height:140px"></div></div>
 ${navSub(L, L.plans)}${acts([['', L.stayFree]])}` },
@@ -266,10 +266,10 @@ ${usageSec(L, L.today, L.resetDay, [46, 18, 28])}${usageSec(L, L.week, L.resetWe
   'usage-limit': { body: (L) => `<div class="scroll">${hero({ persona: 1, h: L.limT, lead: L.limS })}
 ${usageSec(L, L.today, L.resetDay, [100, 30, 24], 0)}${usageSec(L, L.week, L.resetWeek, [62, 28, 36])}
 ${sec({ body: `<div class="plan plan-only">${inclBlock(L)}</div>` })}<div class="ft" style="padding:16px 32px 0">${nw(L.unlimited)}</div><div style="height:160px"></div></div>${navSub(L, '')}${acts([['pri', L.pick], ['pl', L.ok]])}` },
-  'usage-limit-week': { body: (L) => `<div class="scroll">${hero({ persona: 1, h: L.limWT, lead: L.limWS, tb: L.wording })}
+  'usage-limit-week': { body: (L) => `<div class="scroll">${hero({ persona: 1, h: L.limWT, lead: L.limWS })}
 ${usageSec(L, L.today, L.resetDay, [46, 18, 28])}${usageSec(L, L.week, L.resetWeek, [100, 28, 36], 0)}
 ${sec({ body: `<div class="plan plan-only">${inclBlock(L)}</div>` })}<div class="ft" style="padding:16px 32px 0">${nw(L.unlimited)}</div><div style="height:160px"></div></div>${navSub(L, '')}${acts([['pri', L.pick], ['pl', L.ok]])}` },
-  'usage-reset': { body: (L) => `<div class="scroll">${hero({ h: L.rstT, lead: L.rstS, tb: L.wording })}
+  'usage-reset': { body: (L) => `<div class="scroll">${hero({ h: L.rstT, lead: L.rstS })}
 ${sec({ body: banner('ok', L.rstB, L.rstBS) })}<div style="height:24px"></div>
 ${usageSec(L, L.today, L.resetDay, [0, 0, 0])}${usageSec(L, L.week, L.resetWeek, [34, 20, 42])}
 <div class="ft" style="padding:16px 32px 0">${nw(L.unlimited)}</div></div>${navSub(L, '')}${acts([['pri', L.pick]])}` },
