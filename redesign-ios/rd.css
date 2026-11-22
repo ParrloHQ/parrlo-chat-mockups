@@ -219,6 +219,7 @@ html[data-d="max"] .kb-r.r4 .glb{display:none}
 /* ---------- список чатов ---------- */
 .head{padding-top:var(--safe-top)}
 .head .bar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.head .bar.end{justify-content:flex-end}
 .large{font-size:var(--large);font-weight:700;letter-spacing:-.02em;line-height:1.2;padding:2px 16px 0}
 .search{margin:8px 16px 10px;height:36px;border-radius:18px;background:var(--surface);display:flex;align-items:center;gap:6px;padding:0 10px;color:var(--muted);font-size:var(--field)}
 .search .ic{width:20px;height:20px}
@@ -233,7 +234,8 @@ html[data-t="ax5"] .search{height:44px;border-radius:22px}
 .row .n .ic{width:15px;height:15px;color:var(--muted);stroke-width:2}
 .row .n .cnt{display:inline-flex;align-items:center;gap:2px;font-size:var(--foot);font-weight:400;color:var(--muted)}
 .row .t{grid-area:t;font-size:14px;color:var(--muted);line-height:var(--lh-body);display:flex;align-items:center;gap:3px;white-space:nowrap;letter-spacing:0}
-.row .t .tick{width:17px;height:11px;stroke:var(--acc)}
+.row .t .tick{width:17px;height:11px;stroke:var(--muted)}
+.row .t .tick.rd{stroke:var(--acc)}
 .row .p{grid-area:p;font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .row .p em{font-style:normal;color:var(--ink)}
 .row .x{grid-area:x;display:flex;align-items:flex-end;justify-content:flex-end;gap:6px;padding-bottom:2px}
@@ -251,7 +253,7 @@ html[data-t="ax5"] .row .x{justify-self:end}
 html[data-t="ax5"] .row .n{min-height:60px;flex-wrap:wrap}
 html[data-t="ax5"] .row .n b{white-space:normal}
 html[data-t="ax5"] .row .n .ic{width:34px;height:34px}
-html[data-t="ax5"] .row .p{clear:both;display:block;padding-top:6px}
+html[data-t="ax5"] .row .p{clear:both;display:-webkit-box;-webkit-line-clamp:4;padding-top:6px}
 html[data-t="ax5"] .row .t{font-size:var(--cap);line-height:52px;display:inline-flex;margin-top:4px}
 html[data-t="ax5"] .row .t .tick{width:40px;height:26px}
 html[data-t="ax5"] .row .x{display:inline-flex;vertical-align:middle;margin-left:12px;align-items:center}
