@@ -180,7 +180,7 @@ ${group(false, [{ text: 'Готово. Напомню в пятницу.', time:
 ${group(true, [{ text: 'Спасибо!', time: '10:05' }])}
 ${group(false, [{ text: 'Обращайся 🙂', time: '10:05' }])}
 </div>`;
-const parrloNav = navChat({ left: `<span class="av av36 av-p" aria-label="Parrlo">${parrot()}</span>`, title: 'Parrlo', sub: 'помощник', right: `<span class="cbtn" aria-label="Меню">${ic('more')}</span>` });
+const parrloNav = navChat({ left: `<span class="av av36 av-p" aria-label="Parrlo">${parrot()}</span>`, title: 'Parrlo<i class="ai" data-es="IA" data-en="AI">ИИ</i>', sub: 'помощник', right: `<span class="cbtn" aria-label="Меню">${ic('more')}</span>` });
 const parrloMsgs = `${parrloList}
 ${parrloNav}
 ${composer(true)}
