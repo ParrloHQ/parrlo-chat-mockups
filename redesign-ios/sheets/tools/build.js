@@ -181,7 +181,7 @@ const T = {
   dSe: ['Поправь текст как хочешь — потом отправь.', 'Cambia el texto como quieras y luego envíalo.', 'Change the text however you like, then send it.'],
   send: ['Отправить', 'Enviar', 'Send'],
   // список чатов
-  chats: ['Чаты', 'Chats', 'Chats'], search: ['Поиск', 'Buscar', 'Search'], editL: ['Изменить', 'Editar', 'Edit'],
+  chats: ['Чаты', 'Chats', 'Chats'], search: ['Поиск', 'Buscar', 'Search'],
   quick: ['Быстрые действия', 'Acciones rápidas', 'Quick actions'],
   qNew: ['Новый чат', 'Chat nuevo', 'New chat'], qDict: ['Продиктовать Parrlo', 'Dictar a Parrlo', 'Dictate to Parrlo'], qInv: ['Пригласить по ссылке', 'Invitar con un enlace', 'Invite with a link'],
   offT: ['Нет сети', 'Sin conexión', 'No connection'],
@@ -278,8 +278,8 @@ ${navChat({ title: t('gName'), sub: t('gSub'), av: `<span class="av av36" style=
 <div class="callbar">${ic('calls')}<div class="tx"><b>${t('gCall')}</b><span>${t('gCallS')}</span></div><span class="btn primary">${t('join')}</span></div>
 ${composer()}`;
 
-// фон: вкладка «Чаты» (frames/*-home-menu.html)
-const homeList = (extra = '') => `<div class="head"><div class="bar"><span class="pbtn">${t('editL')}</span><span class="cbtn">${ic('compose')}</span></div>
+// фон: вкладка «Чаты» (frames/*-home-menu.html); шапка как в s1-chats: только круглая кнопка нового чата справа, без «Изменить»
+const homeList = (extra = '') => `<div class="head"><div class="bar end"><span class="cbtn" aria-label="${t('qNew')}">${ic('compose')}</span></div>
 <h1 class="large">${t('chats')}</h1><div class="search">${ic('search')}<span>${t('search')}</span></div></div>
 ${extra}
 <ul class="list">${HOME.map(r => r[L]).map(([av, i, n, tm, p, badge]) => `<li class="row"><span class="av av52" style="background:var(--${av})">${i}</span><div class="rb">
