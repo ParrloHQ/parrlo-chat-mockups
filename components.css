@@ -73,6 +73,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-hero .pc-title,.pc-hero .pc-lead{position:relative}
 .pc-hero .pc-lead{margin-top:0}
 .pc-hero-text{display:flex;flex-direction:column;gap:12px}
+/* блок текста приветствия не шире колонки (иначе склеенная группа раздвигает его за край) */
+.pc-hero-text{max-width:100%}
 .pc-hero-text .pc-lead{margin-top:0}
 /* список выбора языка */
 .pc-radios{display:flex;flex-direction:column;gap:8px;list-style:none}
