@@ -1,7 +1,1 @@
 # Разрывы внутри слова при XL/AX5, оставшиеся на старте проверки. Список только сокращается.
-es search-chat-empty__se-ax5@360 | coincidencias
-es search-chat-empty__se-xl@360 | coincidencias
-ru call-guest-declined__se-ax5@360 | расшифровывается
-ru call-guest-declined__se-xl@360 | расшифровывается
-ru settings-about__se-xl | конфиденциальности
-ru settings-about__se-xl@360 | конфиденциальности

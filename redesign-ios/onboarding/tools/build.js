@@ -73,7 +73,7 @@ const C = {
   na: L('не утверждено', 'no aprobado', 'not approved'),
   cont: L('Продолжить', 'Continuar', 'Continue'),
   si_t: L('Войди в Parrlo Chat', 'Entra en Parrlo Chat', 'Sign in to Parrlo Chat'),
-  si_l: L('Выбери, как войти. Придумывать пароль не нужно.', 'Elige cómo entrar. No hace falta inventar una contraseña.', 'Choose how to sign in. There is no password to invent.'),
+  si_l: L('Выбери, как войти. Придумывать пароль не нужно.', 'Elige cómo entrar. No necesitas contraseña.', 'Choose how to sign in. There is no password to invent.'),
   legal: L('Продолжая, ты принимаешь Условия использования и Политику конфиденциальности.', 'Al continuar, aceptas las Condiciones de uso y la Política de privacidad.', 'By continuing, you accept the Terms of Use and the Privacy Policy.'),
   terms: L('Условия использования', 'Condiciones de uso', 'Terms of Use'),
   privacy: L('Политика конфиденциальности', 'Política de privacidad', 'Privacy Policy'),
@@ -217,14 +217,14 @@ const setupBody = (li, pre = '') => `<div class="body"><h1 class="ttl">${tx(C.se
 <div class="sech">${tx(L('Образ', 'Imagen', 'Look')[li])}</div><div class="glist"><div class="cell"><span class="av av-p" style="background:var(--raised);color:var(--acc)">${parrot()}</span><span class="tx">${L('Образ 1', 'Imagen 1', 'Look 1')[li]}</span>${ic('check', 'mk')}</div></div>
 <div class="sech">${tx(L('Тон общения', 'Tono', 'Tone')[li])}</div><div class="glist" role="radiogroup"><div class="cell" role="radio" aria-checked="true"><span class="tx">${L('Неформальный', 'Informal', 'Casual')[li]}</span>${ic('check', 'mk')}</div><div class="cell" role="radio" aria-checked="false"><span class="tx">${L('Формальный', 'Formal', 'Formal')[li]}</span></div></div>
 <p class="foot">${tx(L('Влияет только на стиль черновиков Parrlo, не на перевод.', 'Solo afecta al estilo de los borradores de Parrlo, no a la traducción.', 'Affects only the style of Parrlo’s drafts, not translation.')[li])}</p>
-<div class="sech">${tx(L('Язык ответов', 'Idioma de las respuestas', 'Reply language')[li])}</div><div class="glist"><div class="cell" role="button"><span class="tx">${tx(L('Как в приложении — Русский', 'Igual que la app — Español', 'Same as the app — English')[li])}</span>${ic('updown', 'chev')}</div></div>
+<div class="sech">${tx(L('Язык ответов', 'Idioma de las respuestas', 'Reply language')[li])}</div><div class="glist"><div class="cell" role="button"><span class="tx">${tx(L('Как в Parrlo — Русский', 'Como en la app — Español', 'Like the app — English')[li])}</span>${ic('updown', 'chev')}</div></div>
 <div class="sech">${tx(L('Память', 'Memoria', 'Memory')[li])}</div><div class="glist"><div class="cell swr"><div class="tx"><h3>${tx(C.remember[li])}</h3><span class="s">${tx(L('По желанию. Можно посмотреть и удалить: Настройки → Parrlo → Память.', 'Opcional. Puedes verlas y borrarlas en Ajustes → Parrlo → Memoria.', 'Optional. View and delete in Settings → Parrlo → Memory.')[li])}</span></div><span class="sw" role="switch" aria-checked="false"></span></div></div></div>`;
 S['ob-parrlo-setup'] = (li) => ob(`${top(li, 7)}${setupBody(li)}
 <div class="acts">${bp(L('Готово', 'Listo', 'Done')[li])}${bt(C.skip[li])}</div>`);
 S['ob-parrlo-setup-skip'] = (li) => { const t = L('Пропустить настройку?', '¿Omitir la configuración?', 'Skip setup?')[li]; return ob(`${top(li, 7)}${setupBody(li)}
 <div class="acts">${bp(L('Готово', 'Listo', 'Done')[li])}${bt(C.skip[li])}</div>
 <div class="scrim" style="background:rgba(0,0,0,.5)"></div><div class="alert" role="alertdialog" aria-label="${t}"><div class="ac"><h2>${tx(t)}</h2><p>${tx(L('Parrlo начнёт с настроек по умолчанию. Память останется выключенной. Поменять можно позже: Настройки → Parrlo.', 'Parrlo empezará con los ajustes por defecto. La memoria seguirá desactivada. Puedes cambiarlo después: Ajustes → Parrlo.', 'Parrlo will start with the default settings. Memory stays off. You can change this later: Settings → Parrlo.')[li])}</p></div>
-<div class="bb">${bp(C.skip[li])}${bs(L('Вернуться к настройке', 'Volver a la configuración', 'Back to setup')[li])}</div>${tbd(C.word[li])}</div>`); };
+<div class="bb">${bp(C.skip[li])}${bs(L('Вернуться к настройке', 'Volver a ajustes', 'Back to setup')[li])}</div>${tbd(C.word[li])}</div>`); };
 S['ob-parrlo-setup-error'] = (li) => ob(`${top(li, 7)}${setupBody(li, errBan(L('Не получилось сохранить настройки', 'No se han podido guardar los ajustes', 'Couldn’t save your settings')[li], L('Попробуй ещё раз или пропусти: настроить Parrlo можно позже.', 'Inténtalo de nuevo u omite este paso: puedes configurar a Parrlo más tarde.', 'Try again or skip: you can set up Parrlo later.')[li], tbd(C.word[li])))}
 <div class="acts">${bp(L('Повторить', 'Reintentar', 'Try again')[li])}${bs(C.skip[li])}</div>`);
 
