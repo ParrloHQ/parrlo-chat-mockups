@@ -33,6 +33,30 @@
     }
     return false;
   }
+  function unglue(e) {
+    let b = e;
+    while (b && getComputedStyle(b).display.startsWith('inline')) b = b.parentElement;
+    const bs = getComputedStyle(b);
+    const avail = b.clientWidth - parseFloat(bs.paddingLeft) - parseFloat(bs.paddingRight);
+    for (const n of e.childNodes) {
+      if (n.nodeType !== 3 || n.textContent.indexOf('\u00a0') < 0) continue;
+      const t = n.textContent, re = /[^\s\u00a0]+(?:\u00a0+[^\s\u00a0]+)+/g, cut = [];
+      const w = (a, z) => { rg.setStart(n, a); rg.setEnd(n, z); return [...rg.getClientRects()].reduce((s, r) => s + r.width, 0); };
+      let m;
+      while ((m = re.exec(t))) {
+        if (w(m.index, m.index + m[0].length) <= avail + 0.5) continue;
+        const parts = [], re2 = /[^\u00a0]+/g;
+        let q;
+        while ((q = re2.exec(m[0]))) parts.push([m.index + q.index, m.index + q.index + q[0].length]);
+        let start = parts[0][0];
+        for (let i = 1; i < parts.length; i++) if (w(start, parts[i][1]) > avail + 0.5) { cut.push(parts[i - 1][1]); start = parts[i][0]; }
+      }
+      if (!cut.length) continue;
+      const c = t.split('');
+      cut.forEach((k) => { for (let j = k; j < t.length && c[j] === '\u00a0'; j++) c[j] = ' '; });
+      n.textContent = c.join('');
+    }
+  }
   window.wordFit = function () {
     document.querySelectorAll('[data-wf]').forEach((e) => { e.style.fontSize = ''; e.removeAttribute('data-wf'); });
     document.querySelectorAll('figure .pc-frame').forEach((fr) => {
@@ -43,6 +67,10 @@
         if (e.closest('.pc-sr')) continue;
         const cs = getComputedStyle(e);
         if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+        if (!broken(e)) continue;
+        // порядок 22.11: раскладка → снять склейку → WordFit. Склеенная цепочка шире строки рвётся там,
+        // где перестаёт помещаться (как redesign-ios/tools/unglue.js); кегль уменьшаем, только если слово не влезает и так.
+        unglue(e);
         if (!broken(e)) continue;
         const base = parseFloat(cs.fontSize), min = base * floor;
         let fs = base;
