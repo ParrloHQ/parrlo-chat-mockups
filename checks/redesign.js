@@ -29,7 +29,7 @@ for (const e of fs.readdirSync(DIR, {withFileTypes: true})) {
 const list = only.length ? pages.filter((p) => only.includes(p)) : pages;
 const DEV = {se: [375, 667], max: [440, 956]};
 
-const probe = ({doHov, doWbr, W}) => {
+const probe = ({doHov, doWbr, W, TOL}) => {
   const res = [];
   const SH = {};
   for (const l of ['ru', 'es', 'en']) SH[l] = new Set((W[l] || []).map((w) => w.toLowerCase()));
@@ -96,7 +96,9 @@ const probe = ({doHov, doWbr, W}) => {
           const avail = b.clientWidth - parseFloat(bs.paddingLeft) - parseFloat(bs.paddingRight);
           let chain = 0;
           for (let q = j; q <= k; q++) chain += rectOf(n, words[q].s, words[q].e).reduce((a, r) => a + r.width, 0) + (q > j ? spaceW(el) : 0);
-          if (chain <= avail + 0.5) res.push('висит: ' + wd + ' ' + words[i + 1].w);
+          // TOL: цепочка впритык к ширине строки (±TOL px) — пограничный случай; метрики шрифта на раннере CI и локально
+          // расходятся на 1–2 px, и unglue может честно снять склейку. Ошибка — только если цепочка заметно короче строки.
+          if (chain <= avail - TOL) res.push('висит: ' + wd + ' ' + words[i + 1].w);
         }
       }
     }
@@ -105,7 +107,7 @@ const probe = ({doHov, doWbr, W}) => {
 };
 
 (async () => {
-  const b = await chromium.launch();
+  const b = await chromium.launch({args: ['--font-render-hinting=none']});
   const found = [];
   for (const [d, [w, h]] of Object.entries(DEV)) {
     const p = await b.newPage({viewport: {width: w, height: h}});
@@ -116,7 +118,7 @@ const probe = ({doHov, doWbr, W}) => {
       await p.waitForFunction(() => (document.body.dataset.ready || !/wordFit|data-ready|dataset\.ready/.test(document.documentElement.innerHTML))
         && (document.documentElement.dataset.unglued || !document.querySelector('script[src$="unglue.js"]')), null, {timeout: 5000}).catch(() => {});
       await p.waitForTimeout(150);
-      for (const x of await p.evaluate(probe, {doHov, doWbr, W})) found.push(`${pg} ${d}-${t}-${l} | ${x}`);
+      for (const x of await p.evaluate(probe, {doHov, doWbr, W, TOL: 3})) found.push(`${pg} ${d}-${t}-${l} | ${x}`);
     }
     await p.close();
   }
