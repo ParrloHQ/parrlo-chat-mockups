@@ -1,0 +1,117 @@
+[
+ {
+  "k": "chat-tr-sheet",
+  "old": "chat-tr-sheet",
+  "ttl": "Лист «Перевод в этом чате» (вкл.)"
+ },
+ {
+  "k": "chat-tr-sheet-off",
+  "old": "chat-tr-sheet-off",
+  "ttl": "Лист «Перевод в этом чате» (выкл.)"
+ },
+ {
+  "k": "chat-tr-sheet-group",
+  "old": "chat-tr-sheet-group",
+  "ttl": "Лист перевода в группе"
+ },
+ {
+  "k": "chat-photo-sheet",
+  "old": "chat-photo-sheet",
+  "ttl": "Лист «Отправить фото»"
+ },
+ {
+  "k": "report-message",
+  "old": "report-message",
+  "ttl": "Жалоба на сообщение (лист)"
+ },
+ {
+  "k": "report-message-illegal",
+  "old": "report-message-illegal",
+  "ttl": "Жалоба: «Что-то незаконное» (прокручено вниз)"
+ },
+ {
+  "k": "report-sent",
+  "old": "report-sent",
+  "ttl": "Жалоба получена"
+ },
+ {
+  "k": "ctx-chat",
+  "old": "ctx-chat",
+  "ttl": "Контекстное меню чата (долгое нажатие на строку)"
+ },
+ {
+  "k": "ctx-message",
+  "old": "ctx-message",
+  "ttl": "Контекстное меню сообщения"
+ },
+ {
+  "k": "chat-delete-alert",
+  "old": "chat-delete-alert",
+  "ttl": "Диалог «Удалить чат?»"
+ },
+ {
+  "k": "limit-err-parrlo",
+  "old": "limit-err-parrlo",
+  "ttl": "Лимит Parrlo на сегодня"
+ },
+ {
+  "k": "limit-err-call",
+  "old": "limit-err-call",
+  "ttl": "Лимит звонков на сегодня"
+ },
+ {
+  "k": "limit-err-week",
+  "old": "limit-err-week",
+  "ttl": "Недельный лимит Parrlo"
+ },
+ {
+  "k": "err-send",
+  "old": "err-send",
+  "ttl": "Сообщение не отправлено"
+ },
+ {
+  "k": "err-reject-blocked",
+  "old": "err-reject-blocked",
+  "ttl": "Сообщение не доставлено"
+ },
+ {
+  "k": "err-reject-toolong",
+  "old": "err-reject-toolong",
+  "ttl": "Сообщение слишком длинное"
+ },
+ {
+  "k": "msg-unsupported",
+  "old": "msg-unsupported",
+  "ttl": "Неподдерживаемое сообщение"
+ },
+ {
+  "k": "err-offline-banner",
+  "old": "err-offline-banner",
+  "ttl": "Баннер «Нет сети» в «Чатах»"
+ },
+ {
+  "k": "home-menu",
+  "old": "home-menu",
+  "ttl": "Меню «Быстрые действия» (кнопка нового чата)"
+ },
+ {
+  "k": "draft",
+  "old": "draft",
+  "ttl": "Черновик Parrlo — ждёт подтверждения"
+ },
+ {
+  "k": "draft-edit",
+  "old": "draft-edit",
+  "ttl": "Черновик Parrlo — правка"
+ },
+ {
+  "k": "chat-photo-viewer",
+  "old": "chat-photo-viewer",
+  "ttl": "Просмотр фото"
+ },
+ {
+  "k": "chat-photo-preview",
+  "old": "chat-photo-preview",
+  "ttl": "Предпросмотр 3 фото перед отправкой"
+ }
+]

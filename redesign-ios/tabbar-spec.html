@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кнопка Parrlo — спека</title><link rel="stylesheet" href="rd.css">
+<style>
+html,body{background:#0B0E12}
+body{width:1720px;padding:48px 56px 64px;color:#E8ECF1;letter-spacing:0}
+h1{font-size:34px;font-weight:700;letter-spacing:-.02em}
+.lead{font-size:17px;color:#9AA4B2;margin:8px 0 8px;line-height:1.45;max-width:1300px}
+h2{font-size:24px;font-weight:600;margin:44px 0 6px}
+h3{font-size:17px;font-weight:600;margin:28px 0 14px;color:#E8ECF1}
+.demo{position:relative;zoom:3;background:var(--bg);--home:0px;overflow:visible}
+.demo .tabs{bottom:0}
+.fig{position:relative;display:inline-block}
+.anat-row{display:flex;gap:40px;align-items:flex-start;margin-top:20px}
+.anat{padding:120px 380px 60px 230px;background:#12161C;border-radius:16px;border:1px solid rgba(255,255,255,.1)}
+svg.ann{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:100}
+svg.ann line,svg.ann rect,svg.ann path{stroke:#F5B83D;fill:none;stroke-width:1.5}
+svg.ann .dash{stroke-dasharray:6 5}
+svg.ann text{fill:#F5B83D;font:500 15px var(--font);letter-spacing:0}
+svg.ann text.b{font-weight:700;font-size:17px}
+.notes{font-size:15px;line-height:1.5;color:#C9D0D9;width:420px;padding-top:8px}
+.notes b{color:#fff;font-weight:600}
+.notes li{margin:0 0 8px 18px}
+.states{display:flex;gap:22px;align-items:flex-start}
+.st{width:300px}
+.st .fig{padding:0;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#12161C}
+.sn{font-size:15px;font-weight:600;margin:10px 0 4px}
+.sv{font-size:13px;line-height:1.6;color:#9AA4B2}
+.sw{display:inline-flex;align-items:center;gap:6px}
+.sw i{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.3)}
+</style></head><body>
+<h1>Кнопка Parrlo в таб-баре — спека для кода</h1>
+<p class="lead">Круг Parrlo лежит поверх системного таб-бара iOS 26 (5 вкладок: Контакты · Звонки · Parrlo · Чаты · Настройки; у системной вкладки под кругом подписи нет). Утверждённый вариант — без подписи, круг 60. Масштаб рисунков ×3, все размеры — в pt. Размеры на рисунках анатомии измерены по самому макету. Круг фиксированный: на AX5 он такой же, подписи таб-бара тоже не растут (10 pt).</p>
+<h2>Анатомия</h2>
+<div class="anat-row"><div class="fig anat"><div class="demo" data-theme="dark" style="width:264px;height:79px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(3,1fr)"><a class=""><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 3.8h3l1.6 4.2-2 1.3a10.5 10.5 0 005.9 5.9l1.3-2 4.2 1.6v3a2 2 0 01-2.2 2A16.5 16.5 0 014.2 6a2 2 0 012-2.2z"/></svg><span data-es="Llamadas" data-en="Calls">Звонки</span></a><a class="pc" aria-label="Parrlo, непрочитанных: 3"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk3" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk3)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg><b class="pc-badge">3</b></i></a><a class=""><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8c4.8 0 8.6 3.3 8.6 7.4s-3.8 7.4-8.6 7.4c-1 0-2-.1-2.9-.4L5 20l1-3.6c-1.6-1.4-2.6-3.2-2.6-5.2 0-4.1 3.8-7.4 8.6-7.4z"/></svg><span data-es="Chats" data-en="Chats">Чаты</span></a></nav></div><svg class="ann"></svg></div><ul class="notes">
+<li><b>Утверждено Муратом 22.11: без подписи, круг 60.</b> Подписи «Parrlo» нет ни под кругом, ни у системной вкладки под ним.</li>
+<li>Круг 60 × 60, фиксированный (на AX5 такой же), по центру 3-й вкладки. Выступает над верхней кромкой панели на 12; низ круга — 48 от верха панели (на 1 pt выше её нижнего края 49).</li>
+<li>Попугай 30 × 32 по центру круга.</li>
+<li>Обводка 1 pt внутрь (входит в 60), только в обычном состоянии.</li>
+<li>Бейдж: системный, 18 × 18 (min-width 18, растёт вправо), r 9, 13 semibold, #FF3B30, цифра белая. Центр бейджа — на окружности под 45°: левый верхний угол бейджа в (+42; 0) от левого верхнего угла круга.</li>
+<li>Подписи остальных вкладок — 10 pt medium, иконки 26; на AX5 не растут.</li>
+</ul></div>
+<h2>Состояния</h2>
+<p class="lead">Нажатие меняет только заливку: без тени, свечения, градиента и масштабирования.</p>
+<h3>Тёмная тема</h3>
+<div class="states"><div class="st"><div class="fig"><div class="demo" data-theme="dark" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk4" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk4)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Обычное</p><p class="sv"><span class="sw"><i style="background:#242B34"></i>фон #242B34</span><br><span class="sw"><i style="background:#2BC48A"></i>обводка 1 pt #2BC48A</span><br><span class="sw"><i style="background:#2BC48A"></i>попугай #2BC48A</span><br><span class="sw"><i style="background:#9AA4B2"></i>подпись #9AA4B2</span></p></div><div class="st"><div class="fig"><div class="demo" data-theme="dark" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc on" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk5" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk5)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Выбрано (открыта вкладка Parrlo)</p><p class="sv"><span class="sw"><i style="background:#00875C"></i>фон #00875C</span><br>обводки нет<br><span class="sw"><i style="background:#FFFFFF"></i>попугай #FFFFFF</span><br><span class="sw"><i style="background:#2BC48A"></i>подпись #2BC48A</span></p></div><div class="st"><div class="fig"><div class="demo" data-theme="dark" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc pressed" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk6" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk6)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Нажато (из обычного)</p><p class="sv"><span class="sw"><i style="background:#1C2026"></i>фон #1C2026</span><br>обводка и попугай — как в обычном</p></div><div class="st"><div class="fig"><div class="demo" data-theme="dark" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc on pressed" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk7" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk7)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Нажато (из выбранного)</p><p class="sv"><span class="sw"><i style="background:#006B48"></i>фон #006B48</span><br>попугай — как в выбранном</p></div><div class="st"><div class="fig"><div class="demo" data-theme="dark" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc" aria-label="Parrlo, непрочитанных: 3"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk8" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk8)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg><b class="pc-badge">3</b></i></a></nav></div></div>
+<p class="sn">С бейджем «3»</p><p class="sv"><span class="sw"><i style="background:#FF3B30"></i>бейдж #FF3B30</span><br><span class="sw"><i style="background:#FFFFFF"></i>цифра #FFFFFF</span><br>18 × 18, r 9, 13 semibold</p></div></div><h3>Светлая тема</h3>
+<div class="states"><div class="st"><div class="fig"><div class="demo" data-theme="light" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk9" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk9)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Обычное</p><p class="sv"><span class="sw"><i style="background:#FFFFFF"></i>фон #FFFFFF</span><br><span class="sw"><i style="background:#00875C"></i>обводка 1 pt #00875C</span><br><span class="sw"><i style="background:#00875C"></i>попугай #00875C</span><br><span class="sw"><i style="background:#5E6773"></i>подпись #5E6773</span></p></div><div class="st"><div class="fig"><div class="demo" data-theme="light" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc on" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk10" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk10)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Выбрано (открыта вкладка Parrlo)</p><p class="sv"><span class="sw"><i style="background:#00875C"></i>фон #00875C</span><br>обводки нет<br><span class="sw"><i style="background:#FFFFFF"></i>попугай #FFFFFF</span><br><span class="sw"><i style="background:#00875C"></i>подпись #00875C</span></p></div><div class="st"><div class="fig"><div class="demo" data-theme="light" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc pressed" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk11" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk11)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Нажато (из обычного)</p><p class="sv"><span class="sw"><i style="background:#EEF1F4"></i>фон #EEF1F4</span><br>обводка и попугай — как в обычном</p></div><div class="st"><div class="fig"><div class="demo" data-theme="light" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc on pressed" aria-label="Parrlo"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk12" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk12)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg></i></a></nav></div></div>
+<p class="sn">Нажато (из выбранного)</p><p class="sv"><span class="sw"><i style="background:#006B48"></i>фон #006B48</span><br>попугай — как в выбранном</p></div><div class="st"><div class="fig"><div class="demo" data-theme="light" style="width:88px;height:81px"><nav class="tabs" aria-label="Разделы" style="grid-template-columns:repeat(1,1fr)"><a class="pc" aria-label="Parrlo, непрочитанных: 3"><i class="disc"><svg class="ic ic-parrot" viewBox="180 140 735 840" aria-hidden="true" focusable="false"><defs><mask id="pc-pmk13" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk13)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg><b class="pc-badge">3</b></i></a></nav></div></div>
+<p class="sn">С бейджем «3»</p><p class="sv"><span class="sw"><i style="background:#FF3B30"></i>бейдж #FF3B30</span><br><span class="sw"><i style="background:#FFFFFF"></i>цифра #FFFFFF</span><br>18 × 18, r 9, 13 semibold</p></div></div>
+<script>
+document.fonts.ready.then(function(){
+  var NS='http://www.w3.org/2000/svg', Z=3;
+  document.querySelectorAll('.anat').forEach(function(fig){
+    var svg=fig.querySelector('svg.ann'), F=fig.getBoundingClientRect();
+    function R(e){var r=e.getBoundingClientRect();return {l:r.left-F.left,t:r.top-F.top,r:r.right-F.left,b:r.bottom-F.top,w:r.width,h:r.height}}
+    function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;svg.appendChild(e);return e}
+    function ln(x1,y1,x2,y2,c){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,'class':c||''})}
+    function tx(x,y,s,a,c){return el('text',{x:x,y:y,'text-anchor':a||'start','class':c||''},s)}
+    function pt(v){return Math.round(v/Z*10)/10}
+    function dimH(x1,x2,y,s){ln(x1,y,x2,y);ln(x1,y-7,x1,y+7);ln(x2,y-7,x2,y+7);tx((x1+x2)/2,y-10,s,'middle','b')}
+    function dimV(y1,y2,x,s,side){ln(x,y1,x,y2);ln(x-7,y1,x+7,y1);ln(x-7,y2,x+7,y2);tx(side==='r'?x+12:x-12,(y1+y2)/2+6,s,side==='r'?'start':'end','b')}
+    var nav=R(fig.querySelector('.tabs')), d=fig.querySelector('.disc'), disc=R(d), gl=R(d.querySelector('.ic-parrot')), bd=R(fig.querySelector('.pc-badge'));
+    var cx=(disc.l+disc.r)/2, right=nav.r+40;
+    // базовая линия подписей: соседняя вкладка и (в варианте 1) подпись Parrlo
+    function base(span){var i=document.createElement('i');i.style.cssText='display:inline-block;width:0;height:0;vertical-align:baseline';span.appendChild(i);var y=R(i).t;i.remove();return y}
+    var spans=fig.querySelectorAll('.tabs a span'), yb=base(spans[0]);
+    // центр вкладки
+    ln(cx,disc.t-24,cx,nav.b,'dash');
+    // ширина круга
+    dimH(disc.l,disc.r,disc.t-52,'⌀ '+pt(disc.w));
+    // выступ над панелью
+    ln(disc.l-70,nav.t,disc.l-4,nav.t,'dash');
+    dimV(disc.t,nav.t,disc.l-56,'выступ '+pt(nav.t-disc.t),'l');
+    ln(disc.l-70,disc.t,cx,disc.t,'dash');
+    // высота панели
+    dimV(nav.t,nav.b,nav.l-40,'панель '+pt(nav.h),'l');
+    // попугай
+    el('rect',{x:gl.l,y:gl.t,width:gl.w,height:gl.h,'class':'dash'});
+    ln(gl.r,gl.t+gl.h*.7,right,gl.t+gl.h*.7);tx(right+8,gl.t+gl.h*.7+5,'попугай '+pt(gl.w)+' × '+pt(gl.h)+', по центру круга');
+    // обводка
+    var ang=-2.3, bx=cx+Math.cos(ang)*disc.w/2, by=(disc.t+disc.b)/2+Math.sin(ang)*disc.w/2;
+    ln(bx,by,disc.l-60,disc.t-60);ln(disc.l-60,disc.t-60,disc.l-90,disc.t-60);tx(disc.l-96,disc.t-55,'обводка 1 pt внутрь (входит в ⌀)','end');
+    // бейдж
+    dimH(bd.l,bd.r,bd.t-14,pt(bd.w)+'');
+    ln(bd.r,bd.t+bd.h/2,right,bd.t+bd.h/2);tx(right+8,bd.t+bd.h/2-4,'бейдж '+pt(bd.w)+' × '+pt(bd.h)+', r 9, 13 semibold');
+    tx(right+8,bd.t+bd.h/2+16,'угол бейджа: +'+pt(bd.l-disc.l)+' / '+pt(bd.t-disc.t)+' от угла круга');
+    // базовая линия подписей
+    ln(nav.l,yb,nav.r+30,yb,'dash');
+    tx(right+8,yb-6,'базовая линия подписей · 10 pt medium');
+    // низ круга
+    ln(disc.r,disc.b,right,disc.b,'dash');tx(right+8,disc.b+22,'низ круга: '+pt(disc.b-nav.t)+' от верха панели');
+  });
+  document.body.dataset.ready='1';
+});
+</script>
+</body></html>
