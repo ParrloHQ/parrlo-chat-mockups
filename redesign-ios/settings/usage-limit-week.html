@@ -6,21 +6,22 @@ var l=q.get('l');if(l!=='es'&&l!=='en')l='ru';h.lang=l;
 document.addEventListener('DOMContentLoaded',function(){var tp=document.querySelector('template[data-l="'+l+'"]');var s=document.querySelector('.screen');
 s.insertBefore(tp.content.cloneNode(true),s.querySelector('.home-ind'));
 document.fonts.ready.then(function(){
- // раскладка → WordFit (склеенная цепочка «con las que hablas» считается одним словом: шрифт блока уменьшается, пока
- // цепочка не поместится в строку, не ниже 28) → unglue (снимает склейку только там, где цепочка не влезает и на 28).
- // Иначе unglue рвёт цепочку и короткое слово повисает, хотя на меньшем шрифте пара бы поместилась.
+ // порядок: раскладка → unglue → WordFit (WordFit — только для отдельных слов, склейку не держит).
+ // Если WordFit уменьшил блок, его склейку считаем заново по новой ширине строки (вернуть исходный текст → unglue).
+ var tw=document.createTreeWalker(s,NodeFilter.SHOW_TEXT),tn,orig=[];while((tn=tw.nextNode()))if(tn.textContent.indexOf(' ')>=0)orig.push([tn,tn.textContent]);
+ if(window.unglue)window.unglue();
  var own=function(e){for(var n=e.firstChild;n;n=n.nextSibling)if(n.nodeType===3&&n.textContent.trim())return true;return false};
  var els=[].slice.call(s.querySelectorAll('*')).filter(function(e){return own(e)&&getComputedStyle(e).display!=='inline'&&!e.closest('.tabs,.sb')});
- // не помещается: блок шире своего бокса или слово / склеенная цепочка шире строки (вылезает и в поле padding)
+ // не помещается: блок шире своего бокса или отдельное слово шире строки (в т. ч. залезает в поле padding)
  var rg=document.createRange();
  var over=function(e){if(e.scrollWidth>e.clientWidth+1)return true;var cs=getComputedStyle(e),a=e.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
-  var w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT),n,m;while((n=w.nextNode())){var re=/[^ 	
-]+/g;while((m=re.exec(n.textContent))){
+  var w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT),n,m;while((n=w.nextNode())){var re=/[^\s\u00a0]+/g;while((m=re.exec(n.textContent))){
    rg.setStart(n,m.index);rg.setEnd(n,m.index+m[0].length);var ww=0;[].forEach.call(rg.getClientRects(),function(r){ww+=r.width});if(ww>a+0.5)return true}}return false};
  els.forEach(function(e){var fs=parseFloat(getComputedStyle(e).fontSize),n=0;
   while(over(e)&&fs>28&&n<20){fs=Math.max(28,fs*0.92);e.style.fontSize=fs+'px';e.style.lineHeight='1.2';n++}
   if(n)e.dataset.fit=n});
- if(window.unglue)window.unglue();
+ var re2=false;orig.forEach(function(o){if(o[0].parentElement&&o[0].parentElement.closest('[data-fit]')&&o[0].textContent!==o[1]){o[0].textContent=o[1];re2=true}});
+ if(re2&&window.unglue)window.unglue();
  document.body.dataset.ready='1';});});})()</script>
 <script src="../tools/unglue.js"></script>
 </head><body><main class="screen" data-screen="usage-limit-week">
