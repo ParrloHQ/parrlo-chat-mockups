@@ -119,15 +119,23 @@ const rows = [
   { av: 'av-1', i: 'Н', n: 'Ник', t: '18.11', own: true, p: '<em>Ты:</em> Ок, до четверга!' },
   { av: 'av-2', i: 'О', n: 'Олег', t: '16.11', p: 'Спасибо за книгу, верну в среду' },
 ];
-const rowHtml = (r) => `<li class="row"><span class="av av52" style="background:var(--${r.av})">${r.i}</span><div class="rb">
+// свайп строки (решение 22.11, iOS #941): влево — «Без звука» и «Удалить» у правого края, вправо — «Прочитано» (полный свайп)
+const SW = {
+  l: `<div class="acts" aria-hidden="false"><b class="mute" role="button" data-es="Silenciar" data-en="Mute">Без звука</b><b class="del" role="button" data-es="Eliminar" data-en="Delete">Удалить</b></div>`,
+  r: `<div class="acts"><b class="read" role="button" data-es="Leído" data-en="Read">Прочитано</b></div>`,
+};
+const rowHtml = (r) => `<li class="row${r.sw ? ' swipe sw-' + r.sw : ''}">${r.sw ? SW[r.sw] + '<div class="rc">' : ''}<span class="av av52" style="background:var(--${r.av})">${r.i}</span><div class="rb">
 <div class="n"><b>${r.n}</b>${r.cnt ? `<span class="cnt">${ic('people')}${r.cnt}</span>` : ''}${r.muted ? ic('mute') : ''}</div>
 <div class="t">${r.own ? TICK2.replace('class="tick"', r.read ? 'class="tick rd"' : 'class="tick"') : ''}${r.t}</div>
 <div class="p">${r.p}</div>
-<div class="x">${r.pin ? ic('pin') : ''}${r.badge ? `<span class="badge${r.muted ? ' mute' : ''}">${r.badge}</span>` : ''}</div></div></li>`;
-const s1 = page('Чаты', 'has-tabs', `<div class="head"><div class="bar end"><span class="cbtn" aria-label="Новый чат">${ic('compose')}</span></div>
+<div class="x">${r.pin ? ic('pin') : ''}${r.badge ? `<span class="badge${r.muted ? ' mute' : ''}">${r.badge}</span>` : ''}</div></div>${r.sw ? '</div>' : ''}</li>`;
+const s1Body = (rs) => `<div class="head"><div class="bar end"><span class="cbtn" aria-label="Новый чат">${ic('compose')}</span></div>
 <h1 class="large">Чаты</h1><div class="search">${ic('search')}<span>Поиск</span></div></div>
-<ul class="list">${rows.map(rowHtml).join('')}</ul>
-${tabs('chats', { badge: '3' })}`);
+<ul class="list">${rs.map(rowHtml).join('')}</ul>
+${tabs('chats', { badge: '3' })}`;
+const s1 = page('Чаты', 'has-tabs', s1Body(rows));
+const s1swL = page('Чаты — свайп влево', 'has-tabs', s1Body(rows.map((r, k) => k === 0 ? { ...r, sw: 'l' } : r)));
+const s1swR = page('Чаты — свайп вправо', 'has-tabs', s1Body(rows.map((r, k) => k === 0 ? { ...r, sw: 'r' } : r)));
 
 // ---------- S2: чат с Lucía ----------
 const bars = [8, 14, 20, 12, 24, 18, 10, 22, 26, 16, 12, 20, 24, 14, 8, 12, 18, 22, 14, 10, 16, 20, 12, 8, 6];
@@ -190,7 +198,7 @@ const menu = `<div class="scrim"></div><div class="menu" role="menu">
 </div>`;
 const s3m = page('Parrlo — меню', 'has-tabs', parrloMsgs + menu);
 
-const pages = { 's1-chats': s1, 's2-chat-A': s2a, 's3-parrlo': s3, 's3-menu': s3m };
+const pages = { 's1-chats': s1, 's1-swipe-l': s1swL, 's1-swipe-r': s1swR, 's2-chat-A': s2a, 's3-parrlo': s3, 's3-menu': s3m };
 
 // ---------- S4: клавиатура открыта (чат Parrlo) — таб-бара и кнопки Parrlo нет ----------
 const KB = [['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'], ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'], ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю']];
