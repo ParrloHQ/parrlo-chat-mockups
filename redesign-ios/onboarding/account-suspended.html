@@ -46,7 +46,7 @@ h.dataset.theme='dark';var l=q.get('l');h.lang=(l==='es'||l==='en')?l:'ru';})()<
 <i class="home-ind"></i></template>
 <script>function wordfit(){
  if(document.documentElement.dataset.t!=='ax5')return;
- var MIN=28, sel='.ttl,.lead,.small,.note,.foot,.sech,.cell .tx,.cell .tx h3,.cell .tx .s,.ban h3,.ban p,.ban .lnk,.tbd,.lnk,.bp>span,.bs>span,.bt,.fact h3,.fact p,.ckl span,.ckh,.ph,.help,.alert h2,.alert p,.es h2,.es p,.gcard .tx,.fld,.b,.trrow,.stl span,.large,.search span,.nav .ttl span';
+ var MIN=28, sel='.gopt b,.gopt span,.ttl,.lead,.small,.note,.foot,.sech,.cell .tx,.cell .tx h3,.cell .tx .s,.ban h3,.ban p,.ban .lnk,.tbd,.lnk,.bp>span,.bs>span,.bt,.fact h3,.fact p,.ckl span,.ckh,.ph,.help,.alert h2,.alert p,.es h2,.es p,.gcard .tx,.fld,.b,.trrow,.stl span,.large,.search span,.nav .ttl span';
  document.querySelectorAll(sel).forEach(function(el){
   for(var k=0;k<30;k++){
    var cs=getComputedStyle(el), fs=parseFloat(cs.fontSize); if(fs<=MIN)break;
