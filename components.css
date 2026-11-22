@@ -73,6 +73,8 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-hero .pc-title,.pc-hero .pc-lead{position:relative}
 .pc-hero .pc-lead{margin-top:0}
 .pc-hero-text{display:flex;flex-direction:column;gap:12px}
+/* блок текста приветствия не шире колонки (иначе склеенная группа раздвигает его за край) */
+.pc-hero-text{max-width:100%}
 .pc-hero-text .pc-lead{margin-top:0}
 /* список выбора языка */
 .pc-radios{display:flex;flex-direction:column;gap:8px;list-style:none}
@@ -872,11 +874,12 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
 /* AX5: выключатель под текстом, как в iOS при крупном шрифте — заголовок строки помещается целиком, без разрыва слова (решение 19.11). Только узкие колонки; на десктопе места хватает */
 /* узкий экран (SE): у шапки чата зазор 8 — заголовок группы не рвётся внутри слова */
 @container (max-width:399px){.pc-pp-bar{gap:8px}}
+@container (max-width:369px){.pc-pp-bar{gap:4px}}
 @container (max-width:699px){
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow{flex-wrap:wrap;align-items:flex-start;row-gap:12px}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow>div{flex:1 1 100%}
- /* баннер при AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
- .pc-frame[data-ts=ax5] .pc-banner>.ico{display:none}
+ /* баннер при XL/AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-banner>.ico{display:none}
  /* AX5, узкий экран: колонка с полями 16, а списки, строки и баннеры — во всю ширину экрана без скругления (как простой список iOS).
     Текст строки получает ширину экрана − 32: слово уже этого больше не рвётся */
  /* шеврон строки настроек при XL/AX5 на узком экране: не растёт (16 px, как в iOS) и стоит у первой строки справа — признак перехода сохраняется */
@@ -884,12 +887,19 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-onb-col{padding-inline:16px}
  /* поля даты при XL/AX5 на узком экране — друг под другом (день, месяц, год), каждое во всю ширину */
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-datefields{flex-direction:column}
+ /* пункты «можно / нельзя» (.pc-chk) при AX5 на узком экране: отметка над текстом, текст на всю ширину */
+ .pc-frame[data-ts=ax5] .pc-chk li{flex-wrap:wrap;row-gap:6px}
+ .pc-frame[data-ts=ax5] .pc-chk li>:not(.m){flex:1 1 100%}
+ /* заголовок диалога при XL/AX5 растёт не больше чем в 1,4 раза (как .pc-title): длинное слово с «?» влезает целиком */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-alert h2{font-size:min(var(--t-lead),calc(var(--fs-lead)*1.4))}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-datefields .pc-field{flex:none}
  /* диалог при AX5 на узком экране: почти во всю ширину (поля 8), внутренние поля 16; строка с выключателем в нём — без своих полей */
  .pc-frame[data-ts=ax5] .pc-alert{width:calc(100% - 16px);padding:16px}
  .pc-frame[data-ts=ax5] .pc-alert .pc-switchrow{padding-inline:12px}
  .pc-frame[data-ts=ax5] :is(.pc-onb-scroll,.pc-onb-body){margin-inline:-16px;padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-setlist,.pc-radios,.pc-checks,.pc-facts,.pc-switchrow,.pc-banner,.pc-reportform>div>.pc-check,.pc-reportform>div>.pc-radio){margin-inline:-16px;border-radius:0}
+ /* пункты согласия во всю ширину: у самого пункта своих полей нет — поле экрана 16 даёт список */
+ .pc-frame[data-ts=ax5] .pc-onb-body .pc-facts{padding-inline:16px}
  .pc-frame[data-ts=ax5] .pc-onb-body .pc-ph{margin-inline:-16px;padding-inline:16px;border-inline:0;border-radius:0;max-width:none}
  .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>*>:is(.pc-radio,.pc-check),.pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>:is(.pc-radio,.pc-check){border-radius:0}
  /* строка настроек при XL/AX5: значок и шеврон — первой строкой, текст на всю ширину под ними, значение — ниже */
