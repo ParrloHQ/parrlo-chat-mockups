@@ -2,7 +2,8 @@
 //   node checks/redesign.js [--hov] [--wbr] [страница …]   — без флагов обе проверки; страница — путь от redesign-ios, напр. s1-chats.html
 // --hov: текст выходит за край экрана (по X).
 // --wbr: слово разорвано между строками (перенос между двумя буквами/цифрами) или короткое служебное слово
-//        (redesign-ios/tools/short-words.json) осталось в конце строки — висячий предлог/союз.
+//        (redesign-ios/tools/short-words.json) осталось в конце строки — висячий предлог/союз. Не считается, если пара
+//        «слово + следующее» шире строки блока: тогда склейку снимает tools/unglue.js (целое слово важнее склейки).
 // Исключений нет: ожидаемый результат — 0. Код выхода 1 при находках.
 const {chromium} = require('playwright');
 const fs = require('fs');
@@ -36,6 +37,8 @@ const probe = ({doHov, doWbr, W}) => {
   const rg = document.createRange();
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   let n;
+  // ширина пробела в шрифте элемента (пробел на месте переноса строки имеет нулевую ширину — меряем отдельно)
+  const spaceW = (el) => { const sp = document.createElement('span'); sp.textContent = '\u00a0'; sp.style.cssText = 'position:absolute;visibility:hidden;white-space:pre'; el.appendChild(sp); const x = sp.getBoundingClientRect().width; sp.remove(); return x; };
   const rectOf = (node, a, b) => { rg.setStart(node, a); rg.setEnd(node, b); return [...rg.getClientRects()].filter((r) => r.width); };
   while ((n = w.nextNode())) {
     const t = n.textContent;
@@ -78,7 +81,15 @@ const probe = ({doHov, doWbr, W}) => {
       if (i + 1 < words.length && short.has(bare) && /[\p{L}\p{N}]$/u.test(wd)) {
         const nx = rectOf(n, words[i + 1].s, words[i + 1].s + 1)[0];
         const last = rs[rs.length - 1];
-        if (nx && nx.top > last.top + 2) res.push('висит: ' + wd + ' ' + words[i + 1].w);
+        if (nx && nx.top > last.top + 2) {
+          // склейка допустима, только если пара целиком помещается в строку блока; иначе целое слово важнее (решение 22.11)
+          let b = el;
+          while (b && getComputedStyle(b).display.startsWith('inline')) b = b.parentElement;
+          const bs = getComputedStyle(b);
+          const avail = b.clientWidth - parseFloat(bs.paddingLeft) - parseFloat(bs.paddingRight);
+          const pair = rs.reduce((a, r) => a + r.width, 0) + spaceW(el) + rectOf(n, words[i + 1].s, words[i + 1].e).reduce((a, r) => a + r.width, 0);
+          if (pair <= avail + 0.5) res.push('висит: ' + wd + ' ' + words[i + 1].w);
+        }
       }
     }
   }
@@ -93,8 +104,9 @@ const probe = ({doHov, doWbr, W}) => {
     for (const pg of list) for (const t of ['n', 'ax5']) for (const l of ['ru', 'es', 'en']) {
       await p.goto('file://' + path.join(DIR, pg) + `?d=${d}&t=${t}&l=${l}`);
       await p.evaluate(() => document.fonts.ready);
-      // страницы с WordFit ставят body[data-ready]; без него — короткая пауза
-      await p.waitForFunction(() => document.body.dataset.ready || !/wordFit|data-ready|dataset\.ready/.test(document.documentElement.innerHTML), null, {timeout: 5000}).catch(() => {});
+      // страницы с WordFit ставят body[data-ready], tools/unglue.js — html[data-unglued]; без них — короткая пауза
+      await p.waitForFunction(() => (document.body.dataset.ready || !/wordFit|data-ready|dataset\.ready/.test(document.documentElement.innerHTML))
+        && (document.documentElement.dataset.unglued || !document.querySelector('script[src$="unglue.js"]')), null, {timeout: 5000}).catch(() => {});
       await p.waitForTimeout(150);
       for (const x of await p.evaluate(probe, {doHov, doWbr, W})) found.push(`${pg} ${d}-${t}-${l} | ${x}`);
     }
