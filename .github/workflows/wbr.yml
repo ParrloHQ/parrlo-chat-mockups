@@ -8,6 +8,8 @@ on:
       - 'frames/**'
       - '*.css'
       - 'fonts/**'
+      - 'redesign-ios/**'
+      - 'checks/redesign.js'
       - 'checks/wbr.js'
       - 'checks/wbr-allow.txt'
       - '.github/workflows/wbr.yml'
@@ -35,3 +37,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: checks/wbr.js — новых разрывов внутри слова быть не должно
         run: node checks/wbr.js
+      - name: checks/redesign.js --wbr — редизайн iOS (разрывы слов и висячие короткие слова), должно быть 0
+        run: node checks/redesign.js --wbr

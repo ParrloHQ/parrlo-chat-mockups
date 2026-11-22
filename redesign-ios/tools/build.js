@@ -2,6 +2,8 @@
 // Страница принимает ?d=se|max и ?t=n|ax5 (устройство и размер текста).
 const fs = require('fs');
 const path = require('path');
+const { glueHtml } = require('./nbsp.js');
+const write = (f, s) => fs.writeFileSync(f, f.endsWith('.html') ? glueHtml(s) : s);
 const OUT = path.resolve(__dirname, '..');
 
 const PARROT_INNER = '<defs><mask id="pc-pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pc-pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/>';
@@ -77,7 +79,7 @@ const bubble = ({ text = '', time, own, ticks = 2, edited, tail, orig, voice, rx
     return `<div class="b ${tail ? 'tail ' + (own ? 'out-t' : 'in-t') : ''}">${body}</div>`;
   }
   if (orig) {
-    body = `${text}<div class="orig"><span class="lb">Оригинал</span><p>${orig}${meta(m)}</p></div>`;
+    body = `${text}<div class="orig"><span class="lb">Оригинал</span><p lang="es">${orig}${meta(m)}</p></div>`;
   } else if (rx) {
     body = `${text}<div><span class="rx"><span class="e">${rx.e}</span><span class="av" style="background:var(${rx.av})">${rx.i}</span></span>${meta(m)}</div>`;
   } else if (card) {
@@ -96,8 +98,8 @@ const page = (title, cls, inner) => `<!doctype html>
 <html lang="ru" data-d="max" data-t="n" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${title}</title><link rel="stylesheet" href="rd.css">
 <script>(function(){var q=new URLSearchParams(location.search),h=document.documentElement;h.dataset.d=q.get('d')||'max';h.dataset.t=q.get('t')||'n';
-h.dataset.theme=q.get('th')==='light'?'light':'dark';var l=q.get('l');if(l==='es'||l==='en'){h.lang=l;document.addEventListener('DOMContentLoaded',function(){
-document.querySelectorAll('[data-'+l+']').forEach(function(e){e.textContent=e.dataset[l]})})}})()</script>
+h.dataset.theme=q.get('th')==='light'?'light':'dark';var l=q.get('l');if(l==='es'||l==='en'){document.addEventListener('DOMContentLoaded',function(){
+document.querySelectorAll('[data-'+l+']').forEach(function(e){e.textContent=e.dataset[l];e.lang=l})})}})()</script>
 </head><body><main class="screen ${cls}" style="--pattern:${PATTERN.replace(/"/g, "'")}">
 ${statusBar()}
 ${inner}
@@ -161,10 +163,10 @@ const s2a = page('Чат с Lucía — фон A', '', lucia);
 const parrloList = `<div class="msgs">
 <div class="chip">Вчера</div>
 ${group(true, [{ text: 'Как сказать «сколько стоит билет?»', time: '19:20' }])}
-${group(false, [{ text: '¿Cuánto cuesta el billete? Читается: «куа́нто куэ́ста эль бильетэ».', time: '19:20' }])}
+${group(false, [{ text: '<span lang="es">¿Cuánto cuesta el billete?</span> Читается: «куа́нто куэ́ста эль бильетэ».', time: '19:20' }])}
 <div class="chip">Сегодня</div>
 ${group(true, [{ text: 'Как по-испански «до субботы»?', time: '10:02' }])}
-${group(false, [{ text: 'Hasta el sábado. Чуть теплее — ¡Nos vemos el sábado!', time: '10:02' }])}
+${group(false, [{ text: '<span lang="es">Hasta el sábado.</span> Чуть теплее — <span lang="es">¡Nos vemos el sábado!</span>', time: '10:02' }])}
 ${group(true, [{ text: 'Напомни в пятницу в 18:00 купить цветы', time: '10:04' }])}
 ${group(false, [{ text: 'Готово. Напомню в пятницу.', time: '10:04', card: { t: 'Купить цветы', s: 'Пт, 18:00' } }])}
 ${group(true, [{ text: 'Спасибо!', time: '10:05' }])}
@@ -204,7 +206,7 @@ const s4 = page('Parrlo — клавиатура', 'kbd-open', `${parrloList}
 ${parrloNav}
 ${composerTyped}
 ${keyboard}`);
-fs.writeFileSync(path.join(OUT, 's4-kbd.html'), s4);
+write(path.join(OUT, 's4-kbd.html'), s4);
 
 // ---------- лист спеки кнопки Parrlo (×3) ----------
 const Z = 3;
@@ -323,8 +325,8 @@ document.fonts.ready.then(function(){
 });
 </script>
 </body></html>`;
-fs.writeFileSync(path.join(OUT, 'tabbar-spec.html'), spec);
-for (const [k, v] of Object.entries(pages)) fs.writeFileSync(path.join(OUT, k + '.html'), v);
+write(path.join(OUT, 'tabbar-spec.html'), spec);
+for (const [k, v] of Object.entries(pages)) write(path.join(OUT, k + '.html'), v);
 
 // ---------- обзор ----------
 const caps = { 's1-chats': 'S1 · Чаты', 's2-chat-A': 'S2 · Чат с Lucía (фон A, ровный)', 's3-parrlo': 'S3 · Вкладка Parrlo', 's3-menu': 'S3 · Parrlo, меню открыто' };
@@ -340,5 +342,5 @@ figcaption{font-size:13px;color:#9AA4B2;margin-top:8px}</style></head><body>
 <h1>Parrlo Chat — редизайн iOS</h1><p class="l">Тёмная тема · iPhone SE (375×667) и Pro Max (440×956) · обычный текст и AX5. Кнопка Parrlo, светлая тема, клавиатура — <a style="color:#2BC48A" href="tabbar-spec.html">спека таб-бара</a> и png/tabbar/</p>
 ${Object.keys(pages).map(k => `<h2>${caps[k]}</h2><div class="g">${vars.map(([v, c]) => `<figure><img src="png/${k}__${v}.png" width="${v.startsWith('se') ? 375 * 0.62 : 440 * 0.62}" alt="${caps[k]} — ${c}"><figcaption>${c}</figcaption></figure>`).join('')}</div>`).join('\n')}
 </body></html>`;
-fs.writeFileSync(path.join(OUT, 'index.html'), idx);
+write(path.join(OUT, 'index.html'), idx);
 console.log('ok');

@@ -149,3 +149,7 @@ iPhone SE 375×667, safe-top 20, без индикатора «домой». Pro
 - `s3__{se|max}-{dark|light}-{n|ax5}.png` — вкладка Parrlo (Parrlo выбран), 8 шт.
 - `kbd__se-dark-n.png`, `kbd__max-light-n.png` — клавиатура открыта.
 - `tabs-ru__se.png`, `tabs-es__se.png`, `tabs-en__se.png` — нижние 140 pt S1 на SE, проверка языков.
+
+## Неразрывные пробелы и проверка в CI
+Короткие служебные слова (предлоги, союзы, артикли — общий список `tools/short-words.json`, копия `shared/short-words.json` из parrlo-app) не остаются в конце строки: `tools/nbsp.js` при сборке ставит U+00A0 после них, перед «же / ли / бы» и перед «—». Язык — по ближайшему `lang` (испанские оригиналы помечены `lang="es"`). Пакеты (`settings/`, `onboarding/` …) подключают тот же `tools/nbsp.js`.
+CI (`hov`, `wbr`) запускает `checks/redesign.js` на всех страницах `redesign-ios/**` × SE/Pro Max × n/AX5 × ru/es/en: вылеты за экран, разрывы слов, висячие короткие слова. Ожидается 0.
