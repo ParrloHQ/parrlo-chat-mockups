@@ -73,7 +73,7 @@ const C = {
   na: L('не утверждено', 'no aprobado', 'not approved'),
   cont: L('Продолжить', 'Continuar', 'Continue'),
   si_t: L('Войди в Parrlo Chat', 'Entra en Parrlo Chat', 'Sign in to Parrlo Chat'),
-  si_l: L('Выбери, как войти. Придумывать пароль не нужно.', 'Elige cómo entrar. No necesitas contraseña.', 'Choose how to sign in. There is no password to invent.'),
+  si_l: L('Выбери, как войти. Придумывать пароль не нужно.', 'Elige cómo entrar. No hace falta clave.', 'Choose how to sign in. There is no password to invent.'),
   legal: L('Продолжая, ты принимаешь Условия использования и Политику конфиденциальности.', 'Al continuar, aceptas las Condiciones de uso y la Política de privacidad.', 'By continuing, you accept the Terms of Use and the Privacy Policy.'),
   terms: L('Условия использования', 'Condiciones de uso', 'Terms of Use'),
   privacy: L('Политика конфиденциальности', 'Política de privacidad', 'Privacy Policy'),
