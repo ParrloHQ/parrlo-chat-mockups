@@ -408,6 +408,7 @@ svg.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-
 .pc-draft .to .lb{display:block;font:var(--fw-reg) var(--t-caption)/1.2 var(--font);color:var(--muted)}.pc-draft .to b{display:block;font:var(--fw-med) var(--t-body)/1.25 var(--font)}
 .pc-draft .st{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:4px 10px;border-radius:var(--r-pill);background:var(--warn-bg);font:var(--fw-med) var(--t-caption)/1.3 var(--font);color:var(--ink)}
 .pc-draft .st .ic{color:var(--beak)}
+.pc-draft .st{max-width:100%}
 .pc-draft--edit{box-shadow:inset 0 0 0 2px var(--focus)}
 .pc-textarea{background:var(--bg);border-radius:var(--r-md);padding:12px 14px;min-height:calc(88px*var(--ts-m));font:var(--fw-reg) var(--t-lead)/1.3 var(--font);box-shadow:inset 0 0 0 1px var(--line)}
 /* сообщения */
@@ -870,11 +871,21 @@ svg.ic.ic-parrot{fill:currentColor;stroke:none}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-switchrow>div{flex:1 1 100%}
  /* баннер при AX5: декоративный значок (aria-hidden) убран — цвет и заголовок уже говорят о сути; текст на всю ширину */
  .pc-frame[data-ts=ax5] .pc-banner>.ico{display:none}
- /* строка настроек при XL/AX5: значок отдельной строкой над текстом, текст на всю ширину */
- .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av)){display:grid;grid-template-columns:minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:center;padding-block:12px}
- .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>:is(.ico,.pc-av){grid-column:1/-1;justify-self:start}
- .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>.t{grid-column:1;grid-row:2}
- .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>:not(.ico,.pc-av,.t){grid-row:2}
+ /* AX5, узкий экран: колонка с полями 16, а списки, строки и баннеры — во всю ширину экрана без скругления (как простой список iOS).
+    Текст строки получает ширину экрана − 32: слово уже этого больше не рвётся */
+ /* шеврон строки настроек при XL/AX5 на узком экране: не растёт (16 px, как в iOS) и стоит у первой строки справа — признак перехода сохраняется */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow>svg.ic{width:16px;height:16px;align-self:flex-start;margin-top:calc((var(--t-row)*1.25 - 16px)/2)}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-onb-col{padding-inline:16px}
+ .pc-frame[data-ts=ax5] :is(.pc-onb-scroll,.pc-onb-body){margin-inline:-16px;padding-inline:16px}
+ .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-setlist,.pc-radios,.pc-checks,.pc-facts,.pc-switchrow,.pc-banner,.pc-reportform>div>.pc-check,.pc-reportform>div>.pc-radio){margin-inline:-16px;border-radius:0}
+ .pc-frame[data-ts=ax5] .pc-onb-body .pc-ph{margin-inline:-16px;padding-inline:16px;border-inline:0;border-radius:0;max-width:none}
+ .pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>*>:is(.pc-radio,.pc-check),.pc-frame[data-ts=ax5] .pc-onb-body :is(.pc-radios,.pc-checks)>:is(.pc-radio,.pc-check){border-radius:0}
+ /* строка настроек при XL/AX5: значок и шеврон — первой строкой, текст на всю ширину под ними, значение — ниже */
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av)){display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:8px;align-items:center;padding-block:12px}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>:is(.ico,.pc-av){grid-row:1;grid-column:1;justify-self:start}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>.t{grid-column:1/-1;grid-row:2}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>svg.ic{grid-row:1;grid-column:2;align-self:center;margin-top:0}
+ .pc-frame:is([data-ts=xl],[data-ts=ax5]) .pc-setrow:has(>:is(.ico,.pc-av))>:not(.ico,.pc-av,.t,svg.ic){grid-row:3;grid-column:1/-1;text-align:left;max-width:none}
  /* строки с отметкой, флажком или значком (выбор, флажок, карточка, пункт согласия) при XL/AX5: отметка/значок первой строкой, текст на всю ширину под ней, кнопка — ниже */
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact){flex-wrap:wrap;row-gap:8px;align-items:flex-start}
  .pc-frame:is([data-ts=xl],[data-ts=ax5]) :is(.pc-radio,.pc-check,.pc-pcard,.pc-fact)>:is(.ico,.mk,.bx,.pc-av,.pc-persona){order:1}

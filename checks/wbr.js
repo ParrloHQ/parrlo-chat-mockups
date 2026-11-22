@@ -1,5 +1,6 @@
 // Разрывы внутри слова: слово перенесено не по пробелу и не по дефису.
 //   node checks/wbr.js [экран ...]             — без аргументов: все экраны frames/{ru,es,en}-*.html
+//   Кадры SE (375) проверяются ещё и на ширине 360 (ключ «…__se-…@360»), как веб.
 //   node checks/wbr.js --write-allow           — переписать checks/wbr-allow.txt текущими местами (только для старта)
 // Разрыв допустим только у слова шире экрана (ширина кадра − 32): так переносит и iOS.
 // Остальные места XL/AX5, что были на старте, перечислены в checks/wbr-allow.txt; список только сокращается:
@@ -18,15 +19,18 @@ const partial = screens.length > 0;
 if (!partial) screens = [...new Set(fs.readdirSync(R + '/frames').filter((f) => /^ru-.*\.html$/.test(f)).map((f) => f.slice(3, -5)))].sort();
 
 const TOL = 3; // px: запас на разницу шрифтов между машинами
-const probe = ([allowKeys, TOL]) => {
+const probe = ([allowKeys, TOL, w360]) => {
   const res = [], fits = [];
+  // второй проход: узкие кадры (SE, 375) сужены до 360 — ширина проверки веба (360/390/1440); ключ кадра с суффиксом @360
+  if (w360) document.querySelectorAll('figure[data-dev="se"] .pc-frame').forEach((fr) => fr.style.setProperty('--W', '360px'));
   const allow = new Set(allowKeys);
   const L = /[\p{L}\p{N}]/u;
   const rg = document.createRange();
   document.querySelectorAll('figure').forEach((fg) => {
     const fr = fg.querySelector('.pc-frame');
     if (!fr) return;
-    const id = fg.dataset.id;
+    if (w360 && fg.dataset.dev !== 'se') return;
+    const id = fg.dataset.id + (w360 ? '@360' : '');
     const screenW = fr.getBoundingClientRect().width - 32;
     const w = document.createTreeWalker(fr, NodeFilter.SHOW_TEXT);
     let n;
@@ -86,9 +90,12 @@ const probe = ([allowKeys, TOL]) => {
     await p.goto('file://' + f);
     await p.waitForTimeout(100);
     const keys = allowAll.filter((x) => x.startsWith(l + ' ' + s + '__')).map((x) => x.slice(3));
-    const {res, fits} = await p.evaluate(probe, [keys, writeAllow ? -1e9 : TOL]);
-    for (const x of res) found.push(l + ' ' + x);
-    for (const x of fits) fitsAll.add(l + ' ' + x);
+    for (const w360 of [false, true]) {
+      if (w360) { await p.goto('file://' + f); await p.waitForTimeout(100); }
+      const {res, fits} = await p.evaluate(probe, [keys, writeAllow ? -1e9 : TOL, w360]);
+      for (const x of res) found.push(l + ' ' + x);
+      for (const x of fits) fitsAll.add(l + ' ' + x);
+    }
   }
   await b.close();
   const uniq = [...new Set(found)].sort();
