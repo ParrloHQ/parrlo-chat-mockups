@@ -2,14 +2,15 @@
 
 Собрано 22.11.2026 из отрисованных страниц `redesign-ios/{onboarding,settings,contacts-calls,groups,sheets}`, в ru, es и en, после вычитки Переводчика (`docs/tbd-texts-review.md`). Утверждённые по вычитке тексты применены, их плашки сняты; ниже — то, что осталось.
 
-**Итого: 69 мест.** Решает Мурат — 48, юрист — 21.
+**Итого: 73 места.** Решает Мурат — 48, юрист — 22, Translate (en) — 3.
 
 - **Решает Мурат** — плашки «не утверждено», «формулировка: не утверждено», «запасной вариант», «кнопка жалобы: формулировка не утверждена». Сюда входят служебные пометки для дизайна («не UI» в вычитке), блокер с ценой подписки (`plans`, цена — `{price}` из StoreKit) и исправленные черновики вычитки.
+- **Решает Translate** — черновики en на экранах `ob-address` и `ob-mic` (ru/es там уже утверждены).
 - **Решает юрист** — плашки «юрист проверит», «на решении юриста», [УТОЧНИТЬ]: меняется только дословной редакцией юриста, потом её утверждает Мурат.
 - «Текст» — то, к чему относится плашка: строка, абзац или кадр целиком. Если плашка стоит отдельной строкой под блоком (список, кнопка, лист), в ячейке — «(блок над плашкой)» и текст этого блока. Плашки сопоставлены по месту в разметке, поэтому сдвига колонок больше нет. Если у ru нет пары в es или en, стоит «—»: плашка есть только в ru (примеры сообщений в листах).
 
 
-## Вход и онбординг (`redesign-ios/onboarding/`) — 7
+## Вход и онбординг (`redesign-ios/onboarding/`) — 11
 
 | № | Экран | Решает | Пометка | ru | es | en |
 |---|---|---|---|---|---|---|
@@ -20,6 +21,10 @@
 | 5 | `ob-consent` | юрист | [УТОЧНИТЬ] | На наших серверах и у поставщиков ИИ, которые работают по нашему поручению; часть — в США. Сообщения шифруются при передаче и хранятся на сервере Parrlo Chat, который их обрабатывает (перевод, диктовка, помощник Parrlo). Доступ сотрудников ограничен и нужен только для жалоб, поддержки и безопасно… | En nuestros servidores y en proveedores de IA que actúan por encargo nuestro; algunos en EE. UU. Los mensajes se cifran durante la transmisión y se guardan en el servidor de Parrlo Chat, que los procesa (traducción, dictado, asistente Parrlo). El acceso del personal es limitado y solo se usa para… | On our servers and with AI providers acting on our behalf; some in the US. Messages are encrypted in transit and stored on Parrlo Chat’s server, which processes them (translation, dictation, the Parrlo assistant). Staff access is limited and used only for reports, support and security. |
 | 6 | `ob-consent` | юрист | на решении юриста | На наших серверах и у поставщиков ИИ, которые работают по нашему поручению; часть — в США. Сообщения шифруются при передаче и хранятся на сервере Parrlo Chat, который их обрабатывает (перевод, диктовка, помощник Parrlo). Доступ сотрудников ограничен и нужен только для жалоб, поддержки и безопасно… | En nuestros servidores y en proveedores de IA que actúan por encargo nuestro; algunos en EE. UU. Los mensajes se cifran durante la transmisión y se guardan en el servidor de Parrlo Chat, que los procesa (traducción, dictado, asistente Parrlo). El acceso del personal es limitado y solo se usa para… | On our servers and with AI providers acting on our behalf; some in the US. Messages are encrypted in transit and stored on Parrlo Chat’s server, which processes them (translation, dictation, the Parrlo assistant). Staff access is limited and used only for reports, support and security. |
 | 7 | `ob-signin-invite` | Мурат | не утверждено | Карточка приглашения: группа, число участников, от кого приглашение. | Tarjeta de invitación: grupo, número de participantes, quién te invita. | Invitation card: group, number of members, who invited you. |
+| 8 | `ob-address` | Translate | en text: not approved | — | — | This helps us get Russian endings right: «я устал» or «я устала». |
+| 9 | `ob-address` | Translate | en: Man / Woman — not approved | Мужчина · Женщина | Hombre · Mujer | Man · Woman |
+| 10 | `ob-mic` | юрист | юрист проверит | Parrlo слушает только после нажатия на кнопку. Звук не сохраняется. | Parrlo solo escucha cuando pulsas el botón. El audio no se guarda. | Parrlo listens only after you tap the button. Audio is never stored. |
+| 11 | `ob-mic` | Translate | en button “Allow microphone”: not approved | Разрешить микрофон | Permitir micrófono | Allow microphone |
 
 
 ## Настройки (`redesign-ios/settings/`) — 7
