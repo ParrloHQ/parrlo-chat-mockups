@@ -230,3 +230,22 @@ html[data-t="ax5"] .susp .ban h3,html[data-t="ax5"] .susp .ban p,html[data-t="ax
 html[data-t="ax5"] .susp .ban .ic{width:28px;height:28px;margin-top:3px}
 /* маркер внутри абзаца: сразу после фразы, к которой относится */
 .tbd.inl{display:inline-block;margin:0 0 0 2px;vertical-align:baseline}
+
+/* ---------- живой путь мессенджера: обращение и микрофон (прогресс 4 шага) ---------- */
+/* значок: круг 96, заливка своего облачка 22 %, знак акцентом 44 */
+.obi{width:96px;height:96px;border-radius:50%;background:rgba(31,107,78,.22);color:var(--acc);display:grid;place-items:center;margin:12px 0 12px}
+.obi .ic{width:44px;height:44px;stroke-width:1.8}
+html[data-d="se"] .obi{width:72px;height:72px;margin:4px 0 8px}
+html[data-d="se"] .obi .ic{width:34px;height:34px}
+html[data-t="ax5"] .obi{display:none}
+/* варианты: две карточки высотой 96, радиус 22; выбранная залита своим облачком; на AX5 — в одну колонку */
+.gcards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.gopt{position:relative;min-height:96px;border-radius:22px;background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.gopt b{font-size:var(--body);line-height:var(--lh-body);font-weight:600}
+.gopt span{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted)}
+.gopt.on{background:var(--own)}
+.gopt.on span{color:var(--own-meta)}
+.gopt .ic.mk{position:absolute;top:12px;right:12px;width:22px;height:22px;color:#fff;stroke-width:2.4}
+html[data-t="ax5"] .gcards{grid-template-columns:1fr}
+html[data-t="ax5"] .gopt{padding:16px 64px 16px 20px}
+html[data-t="ax5"] .gopt .ic.mk{width:34px;height:34px;top:50%;margin-top:-17px;right:18px}
