@@ -1,0 +1,232 @@
+/* Parrlo Chat — редизайн iOS: вход и онбординг. Подключается после ../rd.css (токены, статус-бар, таб-бар, облачка). */
+:root{
+ --btn-f:17px;   /* подпись основной/вторичной кнопки */
+ --tbd:13px;     /* плашка «не утверждено» */
+ --acts-pb:calc(var(--home) + 8px);
+ --tbdc:#FFC247;
+}
+html[data-d="se"]{--acts-pb:16px}
+html[data-t="ax5"]{--btn-f:28px;--tbd:28px}
+
+.nw{white-space:nowrap}
+.screen{letter-spacing:-.01em}
+.ob{display:flex;flex-direction:column}
+
+/* ---------- верх: «Назад» + прогресс 7 шагов ---------- */
+.top{flex:none;position:relative;height:calc(var(--safe-top) + 52px);padding-top:var(--safe-top);display:flex;align-items:center;justify-content:center}
+.top .cbtn{position:absolute;left:12px;top:calc(var(--safe-top) + 8px)}
+/* прогресс плоский: 7 одинаковых сегментов, пройденные и текущий — акцент, без свечения и анимации */
+.prog{display:flex;gap:4px}
+.prog i{display:block;width:20px;height:4px;border-radius:2px;background:#3A424D}
+.prog i.on{background:var(--acc)}
+
+/* ---------- тело и нижняя панель действий ---------- */
+.body{flex:1;min-height:0;overflow:hidden;padding:4px 16px 16px;position:relative}
+.acts{flex:none;display:flex;flex-direction:column;gap:10px;padding:10px 16px var(--acts-pb);background:var(--bg)}
+.acts.line{border-top:.5px solid var(--hair)}
+
+.ttl{font-size:var(--large);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin:8px 0 8px}
+.lead{font-size:var(--body);line-height:var(--lh-body);color:var(--muted)}
+.small{font-size:var(--foot);line-height:1.38;color:var(--muted);margin-top:16px}
+.note{font-size:var(--foot);line-height:1.38;color:var(--muted)}
+.acts .note{text-align:center;padding:0 8px 2px}
+.ctr{text-align:center}
+
+/* ---------- кнопки: плоские. Зелёная — одна на экран ---------- */
+.bp,.bs{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;padding:12px 20px;border-radius:999px;
+ font-size:var(--btn-f);font-weight:600;line-height:1.2;text-align:center;letter-spacing:-.01em}
+.bp{background:var(--btn);color:#fff}
+.bs{background:var(--raised);color:var(--ink)}
+.bt{display:flex;align-items:center;justify-content:center;min-height:44px;padding:4px 12px;color:var(--acc);font-size:var(--btn-f);line-height:1.2;text-align:center}
+.bp .ic,.bs .ic{width:22px;height:22px}
+html[data-t="ax5"] .bp,html[data-t="ax5"] .bs{padding:14px 22px}
+html[data-t="ax5"] .bp .ic,html[data-t="ax5"] .bs .ic{width:30px;height:30px}
+.lnk{color:var(--acc);font-size:var(--sub);line-height:var(--lh-sub);font-weight:600}
+.links{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+
+/* ---------- кнопки входа: brand/README.md ----------
+   высота 50, капсула; заголовок 43 % высоты = 21,5; знак Apple той же высоты, знак G — 45 % = 22,5.
+   Размер НЕ следует за Dynamic Type (на AX5 такие же). Apple — первая и не меньше Google. */
+.sib{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;height:50px;border-radius:25px;
+ font-size:21.5px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;flex:none}
+.sib img{display:block;flex:none}
+.sib.apple{background:#FFFFFF;color:#000000}
+.sib.apple img{height:21.5px;width:auto}
+.sib.google{background:#131314;color:#E3E3E3;border:1px solid #8E918F}
+.sib.google img{width:22.5px;height:22.5px}
+
+/* ---------- плашка «не утверждено» / «на решении юриста» ---------- */
+.tbd{display:table;margin-top:6px;padding:1px 8px;border-radius:999px;border:1px dashed var(--tbdc);color:var(--tbdc);background:rgba(255,194,71,.08);
+ font-size:var(--tbd);font-weight:500;line-height:1.35;letter-spacing:0;max-width:100%}
+.tbd.long{border-radius:10px;padding:4px 10px}
+/* заглушка юридического блока (оператор) — пунктир, как было */
+.ph{margin-top:16px;padding:10px 14px;border-radius:12px;border:1px dashed #6E7782;color:var(--muted);font-size:var(--foot);line-height:1.38}
+
+/* ---------- сгруппированный список (iOS inset grouped) ---------- */
+.sech{font-size:var(--foot);line-height:1.38;color:var(--muted);margin:22px 16px 7px}
+.sech:first-child{margin-top:12px}
+.glist{background:var(--surface);border-radius:14px;overflow:hidden}
+.cell{position:relative;display:flex;align-items:center;gap:12px;min-height:50px;padding:12px 16px;font-size:var(--body);line-height:var(--lh-body)}
+.cell + .cell::before{content:"";position:absolute;top:0;left:16px;right:0;border-top:.5px solid var(--hair)}
+.cell .tx{flex:1;min-width:0}
+.cell .s{display:block;font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted)}
+.cell .ic.mk{color:var(--acc);width:22px;height:22px;stroke-width:2.2}
+.cell .ic.chev{color:var(--muted);width:20px;height:20px}
+.cell .av{width:40px;height:40px}
+.foot{font-size:var(--foot);line-height:1.38;color:var(--muted);margin:7px 16px 0}
+html[data-t="ax5"] .cell .ic.mk,html[data-t="ax5"] .cell .ic.chev{width:34px;height:34px}
+/* переключатель iOS: 51 × 31, выключен — #3A424D */
+.sw{position:relative;flex:none;width:51px;height:31px;border-radius:16px;background:#3A424D}
+.sw::after{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff}
+.sw.on{background:var(--acc)}
+.sw.on::after{left:22px}
+.cell .tx h3{font-size:var(--body);line-height:var(--lh-body);font-weight:400}
+html[data-t="ax5"] .cell.swr{flex-wrap:wrap}
+html[data-t="ax5"] .cell.swr .tx{flex-basis:100%}
+html[data-t="ax5"] .cell.swr .sw{margin-left:auto}
+
+/* ---------- баннер ---------- */
+.ban{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface);margin-top:16px}
+.ban.err{background:rgba(255,107,94,.10);border:1px solid rgba(255,107,94,.32)}
+.ban .ic{flex:none;width:22px;height:22px;margin-top:1px}
+.ban.err > .ic{color:var(--err)}
+.ban.info > .ic{color:var(--muted)}
+.ban .bx{flex:1;min-width:0}
+.ban h3{font-size:var(--body);line-height:var(--lh-body);font-weight:600}
+.ban p{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted)}
+.ban.info p{color:var(--ink)}
+.ban .lnk{display:inline-block;margin-top:6px}
+.acts .ban{margin-top:0}
+html[data-t="ax5"] .ban{flex-direction:column}
+html[data-t="ax5"] .ban .ic{width:34px;height:34px}
+/* строка статуса ожидания входа */
+.stl{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:var(--sub);line-height:var(--lh-sub);color:var(--ink)}
+.stl .spin{flex:none;width:20px;height:20px;margin-top:0;color:var(--muted)}
+html[data-t="ax5"] .stl{flex-direction:column}
+html[data-t="ax5"] .stl .spin{width:34px;height:34px}
+
+/* ---------- приветствие ---------- */
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 24px}
+.pdisc{width:112px;height:112px;border-radius:50%;background:var(--raised);border:1px solid var(--acc);color:var(--acc);display:grid;place-items:center;flex:none}
+.pdisc .ic-parrot{width:54px;height:58px}
+.pdisc.sm{width:64px;height:64px;margin-bottom:6px}
+.pdisc.sm .ic-parrot{width:30px;height:32px}
+.wm{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:14px 0 18px}
+.wm b{color:var(--acc);font-weight:700}
+.hero .ttl{margin-top:0}
+html[data-t="ax5"] .pdisc{width:80px;height:80px}
+html[data-t="ax5"] .pdisc .ic-parrot{width:38px;height:41px}
+html[data-d="se"] .hide-compact,html[data-t="ax5"] .hide-compact{display:none}
+
+/* ---------- приглашение (карточка группы) ---------- */
+.gcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--surface);margin:8px 0 6px}
+.gcard .av{width:52px;height:52px;font-size:21px}
+.gcard .tx{flex:1;min-width:0;font-size:var(--body);line-height:var(--lh-body)}
+.gcard b{font-weight:600;display:block}
+.gcard .s{display:block;font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted)}
+html[data-t="ax5"] .gcard{flex-direction:column;align-items:flex-start}
+
+/* ---------- возраст: колесо года ---------- */
+.wheel{position:relative;background:var(--surface);border-radius:14px;padding:8px 0;text-align:center;letter-spacing:0}
+.wheel .band{position:absolute;left:8px;right:8px;top:50%;height:40px;margin-top:-20px;border-radius:10px;background:var(--raised)}
+.wheel span{position:relative;display:block;height:40px;line-height:40px;font-variant-numeric:tabular-nums}
+.wheel .s2{font-size:18px;color:rgba(154,164,178,.45)}
+.wheel .s1{font-size:20px;color:var(--muted)}
+.wheel .sel{font-size:23px;color:var(--ink);font-weight:500}
+html[data-t="ax5"] .wheel span{height:56px;line-height:56px}
+html[data-t="ax5"] .wheel .band{height:56px;margin-top:-28px}
+html[data-t="ax5"] .wheel .s2{font-size:24px}
+html[data-t="ax5"] .wheel .s1{font-size:26px}
+html[data-t="ax5"] .wheel .sel{font-size:30px}
+/* поля ввода */
+.fld{display:flex;align-items:center;min-height:50px;padding:10px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:var(--field);line-height:1.3;color:var(--ink)}
+.fld.ph-t{color:var(--muted)}
+.fld.focus{border-color:var(--acc)}
+.fld .caret{display:inline-block;width:2px;height:1.15em;margin-left:1px;background:var(--acc);vertical-align:middle}
+.dates{display:flex;gap:8px}
+.dates .fld{flex:1;min-width:0}
+html[data-t="ax5"] .dates{flex-direction:column}
+.help{font-size:var(--foot);line-height:1.38;color:var(--muted);margin:7px 4px 0}
+
+/* ---------- согласие ---------- */
+.facts{list-style:none;margin-top:8px}
+.fact{display:flex;gap:14px;padding-top:18px}
+.fact .fi{flex:none;width:40px;height:40px;border-radius:50%;background:var(--raised);color:var(--ink);display:grid;place-items:center}
+.fact .fi .ic{width:22px;height:22px}
+.fact .fx{flex:1;min-width:0}
+.fact h3{font-size:var(--body);line-height:var(--lh-body);font-weight:600}
+.fact p{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted);margin-top:2px}
+html[data-t="ax5"] .fact{flex-direction:column;gap:8px}
+html[data-t="ax5"] .fact .fi{width:56px;height:56px}
+html[data-t="ax5"] .fact .fi .ic{width:30px;height:30px}
+.ckh{font-size:var(--foot);line-height:1.38;color:var(--muted);margin:22px 0 8px}
+.ckl{list-style:none;background:var(--surface);border-radius:14px;overflow:hidden}
+.ckl li{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px 16px;font-size:var(--sub);line-height:var(--lh-sub)}
+.ckl li + li::before{content:"";position:absolute;top:0;left:50px;right:0;border-top:.5px solid var(--hair)}
+.ckl li>span{flex:1 1 auto;min-width:0;max-width:100%}
+.ckl .ic{flex:none;width:22px;height:22px;stroke-width:2.2}
+.ckl .ok .ic{color:var(--acc)}
+.ckl .no .ic{color:var(--muted)}
+html[data-t="ax5"] .ckl li{flex-direction:column;gap:4px}
+html[data-t="ax5"] .ckl li + li::before{left:16px}
+html[data-t="ax5"] .ckl .ic{width:34px;height:34px}
+.ax5-only{display:none}
+html[data-t="ax5"] .ax5-only{display:block}
+html[data-t="ax5"] .n-only{display:none}
+
+/* ---------- системный алерт ---------- */
+.alert{position:absolute;z-index:60;left:50%;top:50%;width:300px;transform:translate(-50%,-50%);background:var(--raised);border-radius:26px;padding:22px 20px 18px;text-align:center;border:.5px solid var(--line)}
+.alert{display:flex;flex-direction:column;max-height:calc(100% - var(--safe-top) - var(--home) - 32px)}
+/* текст алерта прокручивается, кнопки остаются видны (как у системного алерта на AX5) */
+.alert .ac{flex:1 1 auto;min-height:0;overflow:hidden;-webkit-mask:linear-gradient(#000 calc(100% - 24px),transparent);mask:linear-gradient(#000 calc(100% - 24px),transparent)}
+.alert .bb,.alert .tbd{flex:none}
+html[data-t="n"] .alert .ac{-webkit-mask:none;mask:none}
+.alert h2{font-size:var(--body);line-height:var(--lh-body);font-weight:600}
+.alert p{font-size:var(--sub);line-height:var(--lh-sub);color:var(--muted);margin-top:6px}
+.alert .bb{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.alert .bs{background:rgba(255,255,255,.08)}
+.alert .tbd{margin:12px auto 0}
+html[data-t="ax5"] .alert{left:16px;right:16px;width:auto;top:calc(var(--safe-top) + 16px);bottom:calc(var(--home) + 16px);max-height:none;transform:none}
+
+/* ---------- заблокирован ---------- */
+.es{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 24px}
+.es .ei{width:72px;height:72px;border-radius:50%;background:var(--raised);color:var(--err);display:grid;place-items:center;margin-bottom:18px}
+.es .ei .ic{width:34px;height:34px}
+.es h2{font-size:var(--title2,22px);line-height:1.25;font-weight:700;letter-spacing:-.02em}
+.es p{font-size:var(--body);line-height:var(--lh-body);color:var(--muted);margin-top:8px}
+.es .tbd{margin:10px auto 0}
+html[data-t="ax5"] .es h2{font-size:var(--large)}
+
+/* ---------- первый список чатов (пустой) ---------- */
+.head .bar.r{justify-content:flex-end}
+.empty{padding:20px 16px 0}
+.ep{display:flex;align-items:flex-end;gap:8px}
+.ep .av{width:36px;height:36px;background:var(--raised);color:var(--acc);border:1px solid var(--acc)}
+.ep .av .ic-parrot{width:18px;height:20px}
+.ep .b{max-width:none;flex:1;margin-left:6px}
+.ep .who{font-size:var(--cap);font-weight:600;color:var(--muted);margin:0 0 4px 62px;line-height:16px}
+.empty .eacts{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+html[data-t="ax5"] .ep{flex-direction:column;align-items:flex-start}
+html[data-t="ax5"] .ep .av{width:52px;height:52px}
+html[data-t="ax5"] .ep .av .ic-parrot{width:26px;height:28px}
+html[data-t="ax5"] .ep .b{margin-left:6px;max-width:calc(100% - 6px)}
+html[data-t="ax5"] .ep .who{margin-left:0;line-height:48px}
+
+/* ---------- отправка ограничена (чат с Marco) ---------- */
+.trrow{display:flex;flex-wrap:wrap;align-items:center;column-gap:10px;margin:4px 0 0 20px;font-size:var(--cap);line-height:16px;color:var(--muted);letter-spacing:0}
+.trrow.out{justify-content:flex-end;margin:4px 20px 0 0}
+.trrow .ic{width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:4px}
+.trrow b{color:var(--acc);font-weight:600}
+html[data-t="ax5"] .trrow{line-height:48px}
+html[data-t="ax5"] .trrow .ic{width:34px;height:34px;vertical-align:-6px}
+.susp{position:absolute;z-index:20;left:0;right:0;bottom:0;padding:8px 8px calc(8px + var(--home))}
+.susp::before{content:"";position:absolute;z-index:-2;left:0;right:0;top:-48px;bottom:0;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);-webkit-mask:linear-gradient(transparent 48px,#000 0);mask:linear-gradient(transparent 48px,#000 0)}
+.susp::after{content:"";position:absolute;z-index:-1;inset:0;background:var(--mat);border-top:.5px solid var(--hair)}
+.susp .ban{margin-top:0}
+html[data-t="ax5"] .tbd{border-radius:14px;padding:2px 10px}
+/* AX5: баннер вместо композера — потолок 28 (как у поля ввода), иначе он закрывает весь чат */
+html[data-t="ax5"] .susp .ban{flex-direction:row}
+html[data-t="ax5"] .susp .ban h3,html[data-t="ax5"] .susp .ban p,html[data-t="ax5"] .susp .ban .lnk{font-size:28px;line-height:34px}
+html[data-t="ax5"] .susp .ban .ic{width:28px;height:28px;margin-top:3px}
+/* маркер внутри абзаца: сразу после фразы, к которой относится */
+.tbd.inl{display:inline-block;margin:0 0 0 2px;vertical-align:baseline}
