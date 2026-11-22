@@ -40,6 +40,7 @@ es call-detail-group__se-ax5 | Transcripción
 es call-detail-group__se-ax5@360 | Transcripción
 es call-detail__se-ax5 | Transcripción
 es call-detail__se-ax5@360 | Transcripción
+es call-entry-devices__duoc-ax5 | Micrófono
 es call-protocol-delete__duoc-ax5 | transcripción
 es call-protocol-delete__se-ax5 | transcripción
 es call-protocol-delete__se-ax5@360 | transcripción
@@ -64,10 +65,15 @@ es group-join-error__duoc-ax5 | hello@parrlo.com
 es group-join-wait__duoc-ax5 | hello@parrlo.com
 es group-join__duoc-ax5 | hello@parrlo.com
 es group-leave-confirm__duoc-ax5 | administración
+es group-leave-confirm__pro-ax5 | administración
 es group-members-error__duoc-ax5 | administración
+es group-members-error__pro-ax5 | administración
 es group-members-menu__duoc-ax5 | administración
+es group-members-menu__pro-ax5 | administración
 es group-members-remove__duoc-ax5 | administración
+es group-members-remove__pro-ax5 | administración
 es group-members__duoc-ax5 | administración
+es group-members__pro-ax5 | administración
 es group-successor-confirm__duoc-ax5 | administración
 es group-successor-confirm__duoc-ax5 | automáticamente
 es group-successor-confirm__pro-ax5 | administración
@@ -144,6 +150,8 @@ es settings-notifications-blocked__se-xl | notificaciones
 es settings-notifications-blocked__se-xl@360 | notificaciones
 es settings-notifications__duoc-ax5 | notificaciones
 es settings-notifications__se-ax5 | notificaciones
+es settings__duoc-ax5 | Notificaciones
+es settings__se-ax5 | Notificaciones
 es usage-limit-week__duoc-ax5 | restablecimiento
 es usage-limit__duoc-ax5 | restablecimiento
 es usage-limit__pro-ax5 | restablecimiento
@@ -157,6 +165,8 @@ ru call-entry-devices__duoc-ax5 | Встроенный
 ru call-entry-devices__duoc-ax5 | микрофон
 ru call-entry-devices__pro-ax5 | Встроенная
 ru call-entry-devices__pro-ax5 | Встроенный
+ru call-entry-devices__pro-ax5 | микрофон
+ru call-entry-devices__pro-xl | Встроенный
 ru call-guest-declined__duoc-ax5 | Передумаешь
 ru call-guest-declined__duoc-ax5 | уведомлению
 ru call-guest-declined__pro-ax5 | уведомлению
@@ -416,6 +426,7 @@ ru search-chat-empty__se-ax5@360 | совпадений
 ru search-chat-empty__se-xl@360 | совпадений
 ru search-home-results__se-ax5@360 | твей
 ru settings-about__duoc-ax5 | использования
+ru settings-about__se-xl@360 | использования
 ru settings-account-delete-confirm__duoc-ax5 | Подтверждение
 ru settings-account-delete-confirm__pro-ax5 | Подтверждение
 ru settings-notifications-blocked__se-xl@360 | уведомления
@@ -427,7 +438,11 @@ ru settings-parrlo-more__se-ax5 | приложении
 ru settings-parrlo-more__se-ax5@360 | приложении
 ru settings-parrlo__duoc-ax5 | Неформальный
 ru settings-parrlo__duoc-ax5 | предпочтения
+ru settings__duoc-ax5 | Уведомления
 ru settings__duoc-ax5 | юридическое
+ru settings__se-ax5 | Уведомления
 ru settings__se-ax5 | юридическое
+ru settings__se-ax5@360 | приложении
+ru settings__se-ax5@360 | приложения
 ru stranger__se-ax5 | поговорить
 ru stranger__se-ax5@360 | поговорить
