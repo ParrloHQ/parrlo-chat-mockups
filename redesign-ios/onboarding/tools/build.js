@@ -195,8 +195,8 @@ S['ob-address'] = (li) => {
 };
 S['ob-mic'] = (li) => ob(`${top(li, 3, true, 4)}
 <div class="body">${icHead('mic')}<h1 class="ttl">${tx(L('Разреши микрофон', 'Permite el micrófono', 'Allow microphone access')[li])}</h1>
-<p class="lead">${tx(L('Parrlo слушает только после нажатия на кнопку. Звук не сохраняется.', 'Parrlo solo escucha cuando pulsas el botón. El audio no se guarda.', 'Parrlo listens only after you tap the button. Audio is never stored.')[li])}</p>${tbd(L('юрист проверит', 'lo revisará un abogado', 'lawyer to review')[li])}${li === 2 ? tbd('en button “Allow microphone”: not approved') : ''}</div>
-<div class="acts">${bp(L('Разрешить микрофон', 'Permitir micrófono', 'Allow microphone')[li])}</div>`);
+<p class="lead">${tx(L('Parrlo слушает только после нажатия на кнопку. Звук не сохраняется.', 'Parrlo solo escucha cuando pulsas el botón. El audio no se guarda.', 'Parrlo listens only after you tap the button. Audio is never stored.')[li])}</p>${tbd(L('юрист проверит', 'lo revisará un abogado', 'lawyer to review')[li])}</div>
+<div class="acts">${bp(C.cont[li])}</div>`);
 
 // согласие — текст юриста дословно
 const FACTS = [

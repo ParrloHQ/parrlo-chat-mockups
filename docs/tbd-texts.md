@@ -2,7 +2,7 @@
 
 Собрано 22.11.2026 из отрисованных страниц `redesign-ios/{onboarding,settings,contacts-calls,groups,sheets}`, в ru, es и en, после вычитки Переводчика (`docs/tbd-texts-review.md`). Утверждённые по вычитке тексты применены, их плашки сняты; ниже — то, что осталось.
 
-**Итого: 69 мест.** Решает Мурат — 44, юрист — 22, Translate (en) — 3.
+**Итого: 68 мест.** Решает Мурат — 44, юрист — 22, Translate (en) — 2.
 
 - **Решает Мурат** — плашки «не утверждено», «формулировка: не утверждено», «запасной вариант», «кнопка жалобы: формулировка не утверждена». Сюда входят служебные пометки для дизайна («не UI» в вычитке), блокер с ценой подписки (`plans`, цена — `{price}` из StoreKit) и исправленные черновики вычитки.
 - **Решает Translate** — черновики en на экранах `ob-address` и `ob-mic` (ru/es там уже утверждены).
@@ -10,7 +10,7 @@
 - «Текст» — то, к чему относится плашка: строка, абзац или кадр целиком. Если плашка стоит отдельной строкой под блоком (список, кнопка, лист), в ячейке — «(блок над плашкой)» и текст этого блока. Плашки сопоставлены по месту в разметке, поэтому сдвига колонок больше нет. Если у ru нет пары в es или en, стоит «—»: плашка есть только в ru (примеры сообщений в листах).
 
 
-## Вход и онбординг (`redesign-ios/onboarding/`) — 11
+## Вход и онбординг (`redesign-ios/onboarding/`) — 10
 
 | № | Экран | Решает | Пометка | ru | es | en |
 |---|---|---|---|---|---|---|
@@ -24,7 +24,6 @@
 | 8 | `ob-address` | Translate | en text: not approved | — | — | This helps us get Russian endings right: «я устал» or «я устала». |
 | 9 | `ob-address` | Translate | en: Man / Woman — not approved | Мужчина · Женщина | Hombre · Mujer | Man · Woman |
 | 10 | `ob-mic` | юрист | юрист проверит | Parrlo слушает только после нажатия на кнопку. Звук не сохраняется. | Parrlo solo escucha cuando pulsas el botón. El audio no se guarda. | Parrlo listens only after you tap the button. Audio is never stored. |
-| 11 | `ob-mic` | Translate | en button “Allow microphone”: not approved | Разрешить микрофон | Permitir micrófono | Allow microphone |
 
 
 ## Настройки (`redesign-ios/settings/`) — 7
